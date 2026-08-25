@@ -4,7 +4,7 @@ stage_title: A new machine
 kind: step
 title: Build it — chassis, head, shells, arms
 concept: Building from a printed guide, at scale
-hours: 2
+hours: 5
 goal: The Rover stands complete — chassis, head, body shells and both grip arms — and nothing binds.
 build: A tracked robot, fully assembled, before a single block is written.
 builds_on:
@@ -28,28 +28,28 @@ guide:
 - label: Servos
   value: gripper → S1 · second arm → S2
 steps:
-- time: 35′
+- time: 90′
   text: 'Chassis: join the two track modules to the frame, fit the metal shock absorbers (×4 — the plastic
     ones in the box are spares) and the shaft collars. Check both tracks turn by hand before going on.'
   expect: Both track modules on the frame with the four metal shock absorbers fitted — and both tracks
     turn by hand.
-- time: 20′
+- time: 45′
   text: 'Head: CyberPi and Shield onto the top plate, sensor on the front with the 20 cm mBuild cable.
     Motor cables crossed — left to EM2, right to EM1. Check this twice; it is the error of the year.'
   expect: 'CyberPi and Shield on the top plate, sensor on the front, and the motor cables crossed: left
     to EM2, right to EM1. Checked twice.'
-- time: 20′
+- time: 60′
   text: 'Shells: peel the paper film off Boards 1–8 and fit the body. Tuck every cable as you close it
     up — anything loose now is unreachable in ten minutes.'
   expect: The body closed with every cable tucked where you cannot reach it any more — because now you
     do not need to.
-- time: 20′
+- time: 75′
   text: 'Arms: the two servos and the grip arms, the last phase in the guide. <b>Gripper servo into
     S1, second arm into S2</b> — the ports are printed on the shield, and every program this year expects
     those two. Leave them unpowered; you find their safe range by hand in Step 4.'
   expect: Both servos and the grip arms fitted, left unpowered. You find their safe range by hand in
     Step 4.
-- time: 15′
+- time: 20′
   text: 'Cross-team QC: another team turns both tracks by hand, checks the cables are crossed the right
     way, and shakes it. They sign it off.'
   expect: Another team has turned both tracks, checked the crossed cables and shaken the robot, and signed

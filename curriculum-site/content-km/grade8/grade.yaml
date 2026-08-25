@@ -1,7 +1,7 @@
-# 24 steps = 42 h scheduled (37 h through Checkpoint 4, then the 5 h capstone), delivered weekly. Includes the build:
+# 24 steps = 44 h scheduled (40 h through Checkpoint 4, then the 4 h capstone), delivered weekly. Includes the build:
 # the robot is assembled in the course, not before it.
 per: "2 h"
-total: "42 h"
+total: "44 h"
 num: '8'
 theme: Interaction & AI — Robots That Listen and Work
 form: mBot2 Rover · tracks + grip arms

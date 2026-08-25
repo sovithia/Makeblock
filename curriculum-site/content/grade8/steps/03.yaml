@@ -31,11 +31,11 @@ guide:
 - label: Floor
   value: 1 m clear — it turns on the spot
 steps:
-- time: 25′
-  text: 'Finish the build: chassis, head, shells, cables tucked. Cross-team QC before anything is powered
-    on.'
-  expect: A finished, cable-tucked robot signed off by another team before anything is powered on.
-- time: 15′
+- time: 10′
+  text: 'Pre-power check: use the Step 2 sign-off to confirm the tracks turn freely, cables are tucked,
+    and the crossed motor connections have not moved.'
+  expect: A completed Step 2 sign-off rechecked before anything is powered on.
+- time: 20′
   text: First drive on the floor — never a table. Then spin on the spot and watch a thing last year's
     robot could not do.
   use:
@@ -43,13 +43,13 @@ steps:
   - mbot2_cw_and_ccw_with_angle
   expect: It drives on the floor and spins on the spot — something last year’s wheeled robot could not
     do.
-- time: 20′
+- time: 25′
   text: Run <b>calibrate chassis parameters</b>. Ask what you think it is measuring before you run it.
   use:
   - mbot2_set_para
   - control_wait
   expect: Calibration run, and a team answer to what it was measuring, given before it ran.
-- time: 25′
+- time: 30′
   text: Measure a 90° turn with a protractor, three times. Compare against your Grade 7 numbers. How
     far out were they?
   expect: Three protractor readings of a 90° turn, and the number of degrees your Grade 7 settings were
@@ -88,4 +88,3 @@ parts:
 - id: robot_tank
 - id: protractor
 - id: tape
-

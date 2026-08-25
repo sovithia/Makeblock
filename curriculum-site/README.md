@@ -13,7 +13,7 @@ page too. See **Print checks** below for the current measured counts.
 | Strand | Hardware | Coding | Timings |
 |---|---|---|---|
 | Grade 7 | Box 1 only | blocks | 1–2 h per step (44 h, build included) |
-| Grade 8 | Box 1 → Rover add-on | blocks | 1–2 h per step (42 h, build included) |
+| Grade 8 | Box 1 → Rover add-on | blocks | 1–5 h per step (44 h, including a 7 h build) |
 | Grade 9 | Ranger + robotic arm | Python | 2 h per week (40 h) |
 
 Grades 7–9 run a **single 2 h timing**, declared as `per:`/`total:` in each
@@ -140,7 +140,7 @@ parts:            # icons from generator/parts_catalog.py ICONS
 
 ### Step courses (`steps/`) — Grades 7 and 8
 
-Grades 7 and 8 are **step courses** — 25 steps / 44 h and 24 steps / 42 h — not 20-session ones. A grade with a
+Grades 7 and 8 are **step courses** — 25 steps / 44 h and 24 steps / 44 h — not 20-session ones. A grade with a
 `steps/` directory is built in step mode: `content/gradeN/steps/NN.yaml` →
 `site/gradeN/step-NN.html`, plus a stage-grouped index at `steps.html`. The
 teacher solution follows the lesson on the same page, separated by a forced
@@ -202,11 +202,11 @@ with the usual English fallback.
 
 **Hours are never stored cumulatively.** `build.py` sums `hours` in file order, so
 inserting a step cannot leave a stale "~13 h in" behind. Grade 7 is 40 h of steps
-(the two assembly steps included) + 4×1 h checkpoints = **44 h**; Grade 8 is 38 h
-+ 4 h = **42 h**.
+(the two assembly steps included) + 4×1 h checkpoints = **44 h**; Grade 8 is 40 h
+of steps (including seven hours for the Rover build) + 4 h of checkpoints = **44 h**.
 
 **Everything taught fits inside 40 hours.** The concept ladder and all four gates
-finish at 39 h (G7) and 37 h (G8); Stage E — the capstone — is the declared extra
+finish at 39 h (G7) and 40 h (G8); Stage E — the capstone — is the declared extra
 and introduces no new block, so a 40-hour timetable can stop where it starts.
 `build.py` draws that line on the steps ladder automatically at the Stage E
 boundary (`FORTY`, `forty_line`) rather than from an authored hour number.

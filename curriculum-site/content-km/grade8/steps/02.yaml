@@ -4,7 +4,7 @@ stage_title: A new machine
 kind: step
 title: Build it — chassis, head, shells, arms
 concept: Building from a printed guide, at scale
-hours: 2
+hours: 5
 goal: The Rover stands complete — chassis, head, body shells and both grip arms — and nothing binds.
 build: A tracked robot, fully assembled, before a single block is written.
 builds_on:
@@ -28,25 +28,25 @@ guide:
 - label: សេវ៉ូ
   value: ដៃចាប់ → S1 · ដៃទីពីរ → S2
 steps:
-- time: 35′
+- time: 90′
   text: 'Chassis: join the two track modules to the frame, fit the metal shock absorbers (×4 — the plastic
     ones in the box are spares) and the shaft collars. Check both tracks turn by hand before going on.'
   expect: ម៉ូឌុលខ្សែក្រវាត់ទាំងពីរនៅលើគ្រោង ជាមួយឆ្នុកលោហៈបួន — ហើយខ្សែក្រវាត់ទាំងពីរវិលដោយដៃបាន។
-- time: 20′
+- time: 45′
   text: 'Head: CyberPi and Shield onto the top plate, sensor on the front with a 20 cm mBuild cable.
     Motor cables crossed — left to EM2, right to EM1. Check this twice; it is the error of the year.'
   expect: CyberPi និងខែលនៅលើបន្ទះខាងលើ ឧបករណ៍ចាប់សញ្ញានៅខាងមុខ និងខ្សែម៉ូទ័រឆ្លាស់គ្នា៖ ឆ្វេងទៅ EM2 ស្ដាំទៅ
     EM1។ ពិនិត្យពីរដង។
-- time: 20′
+- time: 60′
   text: 'Shells: peel the paper film off Boards 1–8 and fit the body. Tuck every cable as you close it
     up — anything loose now is unreachable in ten minutes.'
   expect: តួបិទជិតដោយខ្សែទាំងអស់លាក់ក្នុងកន្លែងដែលអ្នកលែងឈោងដល់ — ព្រោះឥឡូវអ្នកលែងត្រូវការ។
-- time: 20′
+- time: 75′
   text: 'Arms: the two servos and the grip arms, the last phase in the guide. <b>Gripper servo into
     S1, second arm into S2</b> — the ports are printed on the shield, and every program this year expects
     those two. Leave them unpowered; you find their safe range by hand in Step 4.'
   expect: សេវ៉ូទាំងពីរ និងដៃចាប់បានតម្កល់ ទុកឲ្យគ្មានថាមពល។ អ្នករកជួរសុវត្ថិភាពដោយដៃក្នុងជំហានទី ៤។
-- time: 15′
+- time: 20′
   text: 'Cross-team QC: another team turns both tracks by hand, checks the cables are crossed the right
     way, and shakes it. They sign it off.'
   expect: ក្រុមផ្សេងបានបង្វិលខ្សែក្រវាត់ទាំងពីរ ពិនិត្យខ្សែឆ្លាស់ និងរញ្ជួយរូបយន្ត ហើយចុះហត្ថលេខា។

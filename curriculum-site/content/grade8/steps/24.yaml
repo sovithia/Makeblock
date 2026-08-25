@@ -4,7 +4,7 @@ stage_title: The mission
 kind: step
 title: Freeze, and show it
 concept: Reliability under pressure
-hours: 2
+hours: 1
 project: G8-E-mission
 goal: Two scored attempts against the team's own criteria, with the configuration frozen beforehand
   and an honest account of what failed.
@@ -27,24 +27,19 @@ guide:
 - label: Score
   value: against your own criteria, by phase
 steps:
-- time: 25′
-  text: 'Reliability block: run it five times and count. Fix only what the count points at.'
-  expect: Five runs, a success count, and repairs aimed only at what that count points at.
-- time: 15′
+- time: 10′
+  text: 'Reliability check: run it twice and count. Fix only what the count points at.'
+  expect: Two runs, a success count, and repairs aimed only at what that count points at.
+- time: 10′
   text: Freeze. Numbers into the log, project saved under its final name, no edits after this line.
   expect: Every number in the log and the project saved under its final name. Nothing is edited after
     this line.
-- time: 45′
+- time: 25′
   text: Official attempts — two per team, scored against that team's own criteria, with pit time between.
   expect: Two scored attempts per team against that team’s own criteria, with pit time between.
-- time: 25′
+- time: 15′
   text: 'Presentations: what the job was, how it works, one honest failure and what it taught you.'
   expect: A presentation covering what the job was, how it works, and one honest failure and what it taught.
-- time: 10′
-  text: 'Final log: your score, and the one thing you would change about how you worked rather than
-    about a number.'
-  expect: A final log entry with your score and one thing you would change about how you worked, not about
-    a number.
 blocks:
 - My Blocks
 - Variables
@@ -71,4 +66,3 @@ parts:
 - id: controller
 - id: timer
   note: and a visible scoreboard
-

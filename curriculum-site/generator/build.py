@@ -961,11 +961,11 @@ window.addEventListener('afterprint', function () {
             if s.get("stage") != seen:
                 seen = s.get("stage")
                 # Where a 40-hour timetable can stop. The concept ladder and its
-                # four gates finish before Stage E, inside 40 h; Stage E is the
+                # four gates finish before Stage E, within 40 h; Stage E is the
                 # capstone, teaches no new block, and is the declared extra.
                 # Anchored on the stage, not on the running total, because the
-                # ladder ends a little under 40 h in both grades.
-                if seen == "E" and run - float(s.get("hours", 0)) < FORTY:
+                # ladder ends at or below 40 h.
+                if seen == "E" and run - float(s.get("hours", 0)) <= FORTY:
                     out.append(f'<div class="fortyline">{t("forty_line")}</div>')
                 out.append(f'<h3 class="dmile" style="color:{c["dark"]}">'
                            f'Stage {seen} · {render.esc(s.get("stage_title",""))}</h3>')
