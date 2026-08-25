@@ -6,8 +6,10 @@ title: It runs by itself
 concept: Forever · start and stop
 hours: 1.5
 project: G7-A-obeys
-goal: A patrol that starts on button A, runs until stopped, and needs no tablet at any point.
-build: A robot that drives the same square over and over, lit up, until you stop it.
+goal: A patrol that starts on button A, stays inside the red-tape arena by sensing its boundary, and
+  runs until stopped without a tablet.
+build: A robot that drives until it sees the red strip, backs away, turns, and continues patrolling
+  until you stop it.
 builds_on:
 - Step 5 · loops
 - Step 3 · events
@@ -18,19 +20,25 @@ teach:
 - Something must be able to stop it. <b>stop all</b> on button B is today's answer — a second event,
   doing the opposite of the first. From now on every program a team writes should be startable and stoppable
   without touching a cable.
+- A measured distance cannot describe this arena because the robot may start anywhere. Let the robot
+  move while its downward-facing <b>Quad RGB sensor</b> watches the floor. <b>wait until red</b> makes
+  the tape—not a guessed number of centimetres—the signal to stop, back away, and turn. Reversing first
+  clears the strip so the next loop does not detect the same edge again.
 steps:
 - time: 10′
-  text: Take the square from Step 5 and wrap it in forever. Watch it never stop. Enjoy it briefly.
+  text: Take the square from Step 5 and wrap it in forever. Watch it never stop. Then explain why fixed
+    30 cm sides cannot keep it inside the arena when it starts from a different place.
   use:
   - control_forever
   expect: The square never stops. You have to press stop to end it.
 - time: 25′
-  text: 'Build the patrol: forward, turn, forward, turn — with the lights changing each lap so you can
-    see the loop going round.'
+  text: 'Build the arena patrol: move forward at 30 RPM, wait until the L1 probe sees red, stop, reverse
+    5 cm, and turn right 90°. Put that sequence inside forever. Start near the middle, pointing toward
+    an edge—not on top of the tape.'
   use:
-  - cyberpi_play_audio_2
-  expect: A robot patrolling a rectangle on its own, changing colour and sound every lap so you can
-    see the loop going round.
+  - mbuild_quad_color_sensor_is_color
+  expect: The robot reaches the red strip, stops before crossing it, backs into the arena, turns, and
+    drives toward another edge.
 - time: 25′
   text: 'Add the stop: button B ends everything. Test it while the robot is moving, not while it is
     parked.'
@@ -38,9 +46,9 @@ steps:
   - control_stop
   expect: Button B stops the robot while it is moving — not only when it is parked.
 - time: 20′
-  text: Unplug and run it on the floor for two minutes. Anything that goes wrong in two minutes will
-    go wrong in the mission later.
-  expect: Two minutes of unplugged running with nothing going wrong, watched the whole time.
+  text: Unplug and run it inside the red-tape arena for two minutes. If it crosses an edge, lower the
+    speed, check that the sensor points straight down, and confirm that L1 reports red over the tape.
+  expect: Two minutes of unplugged running without crossing the red boundary, watched the whole time.
 - time: 10′
   text: 'Log: which of your programs so far could run with no tablet in the room? All of them should.'
   expect: 'A log line answering: which of your programs could run with no tablet in the room?'
@@ -49,7 +57,7 @@ code:
   source: "when CyberPi starts up\n  set print size to  big\n  print  Team Rocket  and move to a newline\n\
     \  LED all displays R 0 G 128 B 255\n  play LED animation  rainbow  until done\n  show label 1 \
     \ press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n  forever\n\
-    \    moves forward  30  cm  until done\n    turns right  90  ° until done\n    LED all displays\
+    \    moves forward  at 30  RPM\n    wait until  quad rgb sensor 1 probe (3) L1 detects  red ?\n    stop encoder motor  all\n    moves backward  5  cm  until done\n    turns right  90  ° until done\n    LED all displays\
     \ R  (pick random 0 to 255)  G 0 B 255\n    play  hi\n\nwhen button A pressed\n  play recording\n\
     \  ultrasonic 2 1 displays emotion  happy\n\nwhen button B pressed\n  clear screen\n  print  bye!\n\
     \  turn off LED all\n  stop all\n\nwhen joystick  middle pressed\n  reset encoder motor  (1) EM1\
@@ -63,25 +71,29 @@ tips:
   script drives now shows <i>press A to start</i> and waits. It is the same idea as this lesson''s stop
   button, one step earlier: a human decides when it begins, and a human decides when it ends.'
 - Clear a floor area. A forever loop on a table is a robot on the floor thirty seconds later.
+- 'Test the colour reading before the full run: hold the robot safely, place L1 over the floor and then
+  over the tape, and watch the Boolean block change. Reflections or a sensor mounted too high can make
+  red detection unreliable.'
 - Agree a volume cap before twelve robots discover the speaker.
 - If a team's stop button does nothing, their stop is inside the forever loop instead of beside it —
   a genuinely useful bug to let them find.
 result:
   scene: patrol
 success:
-- The patrol runs unplugged, from A, and does not stop on its own
+- The patrol runs unplugged from A and remains inside the red-tape arena
+- At every edge it detects red, backs away, turns, and continues
 - Button B stops it mid-movement, every time
 - The team can say when to use forever and when to use repeat
 check:
 - do: A
-  see: It drives a square on its own — 30 cm, turn, beep, new colour — and keeps going.
+  see: It drives until L1 sees the red strip, stops, backs away 5 cm, turns right, and keeps going.
 - do: B
   see: Everything stops, mid-movement.
 parts:
 - id: robot_wheel
 - id: tape
-  note: patrol area
+  note: wide red boundary, pressed flat with no gaps
 
 guide:
 - label: Floor
-  value: 1 m clear — it drives a 30 cm square
+  value: red-tape arena — begin near the middle, facing an edge
