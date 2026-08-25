@@ -1,0 +1,95 @@
+n: 24
+stage: E
+stage_title: The mission
+kind: step
+title: Build the mission
+concept: Integration
+hours: 2
+project: G7-E-mission
+goal: The full mission runs end to end at least once, and the team knows which phase fails most.
+build: The Rescue Run, assembled from your own blocks.
+builds_on:
+- Step 23 · the signed plan
+teach:
+- Build in the order of your diagram and test each arrow before adding the next. The temptation is to
+  build it all and then debug it all, and it never works — when three things are new at once you cannot
+  tell which one is broken.
+- The one genuinely new piece is getting round the obstacle and finding the line again. Back up, arc
+  around it, then creep forward until a probe sees the line and go back to following. A timed arc is
+  fine; tune it with the obstacle in two different places, because an arc that works in one spot has
+  been tuned to a route rather than written as a behaviour.
+guide:
+- label: Order
+  value: one arrow at a time, test each
+- label: New
+  value: back up → arc → creep until line
+- label: Tune
+  value: obstacle in two places, not one
+- label: Floor
+  value: 'the full course: line, obstacle, red zone'
+steps:
+- time: 10′
+  text: 'Diagram on the table. Agree today''s target: follow, stop in the zone, celebrate — obstacle
+    stays off the course.'
+  expect: 'An agreed target for today, written on the diagram: follow, stop in the zone, celebrate.
+    The obstacle stays off the course.'
+- time: 35′
+  text: Build and test phases 1 and 4. Three clean runs before adding anything.
+  use:
+  - my:follow_line
+  - my:celebrate
+  - control_repeat_until
+  expect: Three clean runs of follow-and-celebrate before a single extra block is added.
+- time: 40′
+  text: Now the obstacle. Build avoid-and-refind as its own block and test it with the obstacle in two
+    different positions.
+  use:
+  - my:avoid_and_refind
+  - operator_subtract
+  expect: One block that goes round the obstacle and finds the line again — tested with the obstacle
+    in two different places.
+- time: 25′
+  text: Full runs. Log which phase fails, every time, so the pattern is visible rather than remembered.
+  expect: A run table showing which phase failed each time, so the pattern is on paper instead of in
+    somebody’s memory.
+- time: 10′
+  text: Log the run table and the phase that costs you most. Step 25 scores the run, and this table
+    is what you tune between attempts.
+  expect: The phase that costs you most, named in the log. Step 25 tunes between attempts using this
+    table.
+code:
+  lang: blocks
+  source: "define  avoid_and_refind\n  moves backward  10  cm  until done\n  turn_by  -45\n  moves forward\
+    \  25  cm  until done\n  turn_by  45\n  repeat until  quad rgb sensor 1 probe (3) L1 detects  line\
+    \ ?\n    moves forward  at 20  RPM\n\nwhen button B pressed\n  quad rgb sensor 1 performs calibration\n\
+    \  set  speed  to 40\n  set  mode  to  follow\n  forever\n    if  (mode) = follow  then\n      follow_line\n\
+    \      if  (ultrasonic 2 1 distance to an object (cm)) < 12  then\n        avoid_and_refind\n  \
+    \    if  quad rgb sensor 1 probe (3) L1 detects  red ?  then\n        set  mode  to  arrived\n \
+    \   if  (mode) = arrived  then\n      stop encoder motor  all\n      celebrate\n      stop all"
+tips:
+- Keep the obstacle off the course while phases 1 and 4 are being built. One new variable at a time,
+  or every bug is ambiguous.
+- The arc must clear the obstacle but land near the line. That is pure tuning and it is supposed to
+  take a while.
+- Log every attempt. Under pressure memory lies and paper does not — "we fail at the zone three times
+  in four" is a work item, "it keeps breaking" is a mood.
+result:
+  scene: rescue
+success:
+- The full mission completed end to end at least once
+- Avoid-and-refind works with the obstacle in two different positions
+- A run log showing which phase fails most often
+check:
+- do: B
+  see: It follows the line, goes around the box, finds the line again.
+- do: see
+  see: It stops on the red patch and celebrates. That is the mission.
+parts:
+- id: robot_wheel
+- id: map
+- id: boxes
+  note: obstacle, ON the line
+- id: patches
+  note: red zone
+- id: timer
+

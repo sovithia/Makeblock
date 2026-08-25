@@ -1,0 +1,215 @@
+# One line per block, shown the first time that block appears in a course.
+#
+# Keyed by mBlock opcode (or `my:<name>` for a block the students build). Written
+# for a student meeting the block for the first time: what it DOES, and the one
+# thing about it that is not obvious. Not a restatement of the label — "moves
+# forward moves the robot forward" teaches nobody anything.
+#
+# Optional. A block with no entry here simply gets no line, so an unfamiliar
+# block never breaks a page. Add one when you notice the gap.
+
+# ---------------------------------------------------------------- events
+cyberpi_when_launch: >-
+  Runs the blocks under it the moment the robot powers on, with no tablet
+  attached. This is what makes a program the robot's own rather than the
+  computer's.
+cyberpi_when_button_press: >-
+  Waits for button A or B on the robot and runs what is under it. Several of
+  these can sit in one project, each on a different button.
+cyberpi_when_direction_key_press: >-
+  The joystick counts as five separate events — up, down, left, right, and
+  pressing it in. Each one can start a different script.
+cyberpi_when_sensor_value_bigger_or_smaller_than: >-
+  A sensor reading and a comparison folded into the hat itself, so no
+  <b>forever</b> loop is needed to watch for it.
+
+# ---------------------------------------------------------------- control
+control_forever: >-
+  Repeats what is inside it for as long as the robot is on. Nothing after a
+  forever loop will ever run, so it goes last.
+control_repeat: >-
+  Repeats what is inside it a counted number of times, then carries on to
+  whatever is below.
+control_if: >-
+  Runs what is inside only when the hexagonal condition is true, then carries
+  on either way.
+control_if_else: >-
+  Two mouths, and exactly one of them runs every time. Use it when there is
+  always something to do, not just sometimes.
+control_repeat_until: >-
+  Keeps repeating until the condition becomes true. The check happens before
+  each pass, so it may not run at all.
+control_wait: >-
+  Stops this script for a set time. It does not stop the robot's other scripts.
+control_wait_until: >-
+  Holds the script here until the condition becomes true. The robot keeps doing
+  whatever it was already doing.
+control_for_new: >-
+  A counted loop that hands you the count in a variable, so the body can use
+  which pass it is on — the natural partner to <b>item (i) of</b>.
+control_break_new: >-
+  Leaves the loop immediately. Once you have found what you were looking for,
+  there is no reason to check the rest.
+control_stop: >-
+  Stops scripts on the spot. Which ones depends on the dropdown, so read it
+  before using it.
+
+# ---------------------------------------------------------------- chassis
+mbot2_move_direction_with_rpm: >-
+  Starts the wheels turning at a speed and leaves them turning. Nothing stops
+  them until you say so.
+mbot2_move_straight_with_cm_and_inch: >-
+  Drives a measured distance and waits until it is done before the next block
+  runs. What it actually travels is another matter — that is Step 2.
+mbot2_cw_and_ccw_with_angle: >-
+  Turns by an angle and waits until it is finished. The angle it reaches
+  depends on the floor, which is why it needs calibrating.
+mbot2_encoder_motor_stop: >-
+  Cuts power to the motors. The robot coasts a little before it settles.
+mbot2_encoder_motor_drive_speed: >-
+  Sets the two wheels independently. Different speeds make it curve; opposite
+  speeds spin it on the spot.
+mbot2_encoder_motor_reset_angle: >-
+  Sets the motor's counter back to zero, so the next reading measures from
+  here rather than from power-on.
+mbot2_servo_set_angle: >-
+  Sends a servo to an angle and holds it there. A servo takes a position, not a
+  speed — a different kind of motor from the wheels.
+mbot2_servo_add_angle: >-
+  Nudges the servo by a few degrees from where it is. Without a guard it will
+  happily push past the safe range and strip the gears.
+mbot2_set_para: >-
+  Makes the robot measure its own wheels and geometry. Run it once on the
+  surface you are working on, before you trust any turn.
+
+# ---------------------------------------------------------------- sensing
+mbuild_ultrasonic2_show_emotion: >-
+  The eyes on the ultrasonic sensor are a display of their own. Cheap, obvious
+  feedback about what the robot thinks is going on.
+BLOCK_1663048571053: >-
+  Teaches the line sensor what your line and your floor look like. Redo it
+  whenever the floor or the lighting changes.
+
+# ---------------------------------------------------------------- display
+cyberpi_display_label_show_label_xy_with_size: >-
+  Writes text at a fixed spot on the screen. The label number is a slot, so
+  writing to label 1 again replaces that line instead of scrolling.
+cyberpi_display_label_show_at_somewhere_with_size: >-
+  The same idea with the position chosen from a menu instead of coordinates.
+cyberpi_display_print: >-
+  Adds text to the screen where the last print left off.
+cyberpi_display_println: >-
+  Adds text and moves to the next line, so repeated prints stack down the
+  screen like a list.
+cyberpi_display_clear: >-
+  Wipes the screen. Inside a loop it is what stops old text showing through
+  the new.
+cyberpi_console_set_font: >-
+  Changes the size of printed text.
+cyberpi_display_line_chart_add_data: >-
+  Adds one point to a line chart on the robot's own screen — a sensor's noise
+  becomes visible without a tablet.
+cyberpi_display_bar_chart_add_data: >-
+  Adds one bar per value, so a whole run can be read as a shape.
+
+# ---------------------------------------------------------------- LED & audio
+cyberpi_led_show_single_with_rgb_2: >-
+  Sets one of the five lights, or all of them, by mixing red, green and blue
+  from 0 to 255.
+cyberpi_led_off_2: >-
+  Turns lights off. Worth its own block, because a light left on reads as the
+  program still running.
+cyberpi_play_led_animation_until: >-
+  Plays a built-in light pattern and waits for it to finish.
+mbot2_led_on_with_rgb: >-
+  The same idea for the LED strip plugged into the robot's port rather than
+  the lights on the CyberPi itself.
+cyberpi_play_audio_2: >-
+  Plays one of the built-in sounds.
+cyberpi_play_record: >-
+  Plays back audio you recorded onto the robot yourself.
+
+# ---------------------------------------------------------------- variables
+data_setvariableto: >-
+  Puts a value into a named box, replacing whatever was there. A variable has
+  to be set before anything can read it.
+data_changevariableby: >-
+  Adds to what is already in the box — which means it reads the old value
+  first, so something must have set it.
+data_addtolist: >-
+  Puts an item on the end of a list. A list is a variable that holds many
+  things in order.
+data_deletealloflist: >-
+  Empties the list. It does not delete the list itself.
+data_deleteoflist: >-
+  Removes the item at a position. Deleting item 0 is an error, not a
+  do-nothing — guard it.
+data_itemoflist: >-
+  Reads the item at a position, counting from 1.
+
+# ---------------------------------------------------------------- operators
+operator_subtract: >-
+  Arithmetic. Operators drop into any slot that takes a number, including
+  inside another operator.
+
+# ---------------------------------------------------------------- LAN
+cyberpi_set_wifi_channel: >-
+  Picks which channel this robot listens on. Two pairs on one channel hear
+  each other's messages.
+cyberpi_set_wifi_broadcast_with_value: >-
+  Sends a named message to every robot listening, with a number attached. The
+  name plus the value is what makes it a protocol.
+cyberpi_wifi_broadcast_when_received_message: >-
+  Wakes this robot up when that named message arrives.
+
+# ---------------------------------------------------------------- AI & Wi-Fi
+cyberpi_wifi_set: >-
+  Joins a Wi-Fi network. Speech needs real internet, not just a local network.
+cyberpi_speak_with_some_language_3: >-
+  Says text aloud. The speaking happens on a server, so no network means no
+  voice.
+cyberpi_speech_recognition_with_time_3: >-
+  Listens for a few seconds and sends what it heard away to be recognised.
+  What comes back is text, like any other text.
+
+# ---------------------------------------------------------------- timing
+cyberpi_timer_reset: >-
+  Sets the robot's stopwatch back to zero so the next reading measures this
+  run, not everything since power-on.
+
+# ---------------------------------------------------------------- My Blocks
+# These are not in the palette — the students build them. The note says what
+# the block is FOR, never how to build it.
+my:celebrate: >-
+  Your own block. Name a behaviour once and the name becomes the block, so the
+  main program says what it does instead of how.
+my:scan: >-
+  Your own block, wrapping a look-around into one name. It hands its answer
+  back through a variable, because a My Block cannot return a value.
+my:turn_by: >-
+  Your own block, with an input. One block that turns by whatever number you
+  hand it beats four blocks that each turn by a fixed amount.
+my:drive_square: >-
+  Your own block, built out of another one of your blocks. This is where they
+  start stacking up.
+my:follow_line: >-
+  Your own block holding the whole line-following decision, so the mission can
+  call it without repeating it.
+my:avoid_and_refind: >-
+  Your own block for getting around an obstacle and finding the line again.
+my:grip: >-
+  Your own block for closing the gripper to the safe angle you measured. Every
+  other script uses this instead of a raw servo block.
+my:release: >-
+  Your own block for opening the gripper to your safe angle.
+my:lift: >-
+  Your own block, with a height as its input.
+my:follow_lap: >-
+  Your own block for one lap of the course, so a run can be timed lap by lap.
+my:match_command: >-
+  Your own block holding the whole match-what-you-heard decision, so the
+  listening script stays short.
+my:do_fetch: >-
+  Your own block for the fetch job, called by the job machine.
+my:do_patrol: >-
+  Your own block for the patrol job, called by the job machine.

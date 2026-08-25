@@ -1,0 +1,97 @@
+n: 14
+stage: C
+stage_title: The robot remembers
+kind: step
+title: One number, whole robot
+concept: Variable as a setting
+hours: 2
+project: G7-C-remembers
+goal: Every speed in the program comes from one variable, tunable with the joystick while the robot
+  is running.
+build: A robot you can retune without re-uploading.
+builds_on:
+- Step 13 · variables
+teach:
+- A variable is not only a counter. Put your speed in one, and every place that had 40 typed into it
+  now reads <b>speed</b>. Change it once and the whole robot changes. Teams who have typed 40 into six
+  blocks and then wanted 45 will understand this immediately.
+- 'Then make it live: the joystick nudges the value up and down <i>while the robot drives</i>, so tuning
+  stops being a cycle of edit-upload-watch. And <b>clamp</b> it — without a limit the speed climbs to
+  300 or goes negative, and the robot does something startling.'
+guide:
+- label: Tune live
+  value: joystick up / down, no re-upload
+- label: Clamp
+  value: if speed > 100 → set speed to 100
+- label: Freeze
+  value: write the winning number down
+- label: Floor
+  value: an arena about 1.5 m across, walls on all sides
+steps:
+- time: 15′
+  text: Count how many places you have typed a speed into your program. That number is the problem.
+  expect: 'A number written in the log: how many blocks you would have to edit to change one speed.'
+- time: 25′
+  text: Replace them all with one variable. Prove it works by changing the starting value once and watching
+    everything change.
+  use:
+  - data_setvariableto
+  - mbot2_move_direction_with_rpm
+  expect: You change the one starting number, and every speed in the program changes with it.
+- time: 25′
+  text: Joystick up and down adjust it live while driving. Show the value on screen so you can see what
+    you are doing.
+  use:
+  - cyberpi_when_direction_key_press
+  - data_changevariableby
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: The robot speeds up and slows down while it is still driving, and the number on its screen
+    changes as you push the joystick. No re-upload.
+- time: 20′
+  text: Clamp it between 10 and 100. Then deliberately try to break the limits — hold the joystick down
+    for ten seconds.
+  use:
+  - control_if
+  expect: Holding the joystick down for ten seconds cannot push the speed above 100 or below 10.
+- time: 20′
+  text: Tune on a real course by feel until it drives well, then write the winning number in the log.
+    That number is yours now.
+  expect: One tuned number, written in the log, that drives the course well.
+- time: 10′
+  text: 'Log: which of your programs would be easier to change if they used a variable like this? Step
+    20 feeds that speed straight into the line follower.'
+  expect: A written answer naming one earlier program that a variable would have made easier to change.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  set  speed  to 40\n  show label 1  press A\
+    \ to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n  forever\n    show\
+    \ label 1  join  walls:   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic 2 1 distance\
+    \ to an object (cm)) < 15  then\n      change  walls  by 1\n      turns right  90  ° until done\n\
+    \      wait until  (ultrasonic 2 1 distance to an object (cm)) > 25\n    else\n      moves forward\
+    \  at (speed)  RPM\n\nwhen joystick  pulled↑\n  change  speed  by 5\n  if  (speed) > 100  then\n\
+    \    set  speed  to 100\n\nwhen joystick  pulled↓\n  change  speed  by -5\n  if  (speed) < 10  then\n\
+    \    set  speed  to 10"
+tips:
+- Clamping needs two checks, not one. Teams who clamp only the top end will drive backwards eventually
+  and be very confused.
+- This is the first program where the robot is genuinely nicer to use than the tablet. Say so — it is
+  why professionals build settings.
+- Keep the tuned number. Step 20 and Step 25 both want it.
+result:
+  scene: joystick
+success:
+- Every speed in the program reads from one variable
+- The joystick changes it live, with no re-upload
+- The value cannot be pushed outside its limits
+check:
+- do: up
+  see: It speeds up.
+- do: down
+  see: It slows down.
+- do: see
+  see: The speed number on the screen changes with it.
+parts:
+- id: robot_wheel
+- id: tape
+  note: a course to tune on
+

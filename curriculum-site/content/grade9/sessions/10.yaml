@@ -1,0 +1,120 @@
+n: 10
+title: The Arms, in Python
+goal: Both grip arms moving under Python control, mirrored angles hidden behind a guard that a stranger
+  cannot break.
+builds_on:
+- Grade 8 S4 · one arm, in blocks, with limits
+- S2 · functions
+teach:
+- 'The Rover already has its arms — they went on in Grade 8 and they have not come off. What changes today
+  is that there are <b>two</b> of them and the language is Python. Start ceremonial: open, hold, close,
+  applause. Then meet the problem the second arm creates. The arms are <b>mirror images</b>, on S1 and
+  S2, so "open" is a large angle on one and a small angle on the other — the same physical word, two opposite
+  numbers. That asymmetry is a fact about the metal, and the whole job of today’s code is to make sure
+  no other line in the program ever has to know it. <code>grip_open()</code> knows. Nothing else does.'
+- 'Then the session’s bigger idea: <b>defensive programming</b> — code that assumes mistakes will happen
+  and contains them. Grade 8 measured a safe range and respected it; this year the range is <i>enforced</i>,
+  by a <code>clamp()</code> that every command passes through, so the robot is physically unable to hurt
+  itself no matter what the rest of the file asks for. Test it adversarially and out loud: call <code>arm_to(500,
+  -500)</code> on purpose and watch both arms stop quietly at their limits. Then hand the robot to another
+  pair and invite them to break it, because a guard that has only been tested by the person who wrote
+  it has not been tested.'
+steps:
+- time: 10′
+  text: Re-measure both arms by hand, unpowered. Grade 8’s numbers are a starting guess, not a constant
+    — a year of use moves them.
+- time: 18′
+  text: Build clamp() and arm_to(); wrap grip_open() and grip_close() over the mirrored angles; adversarial
+    tests.
+- time: 12′
+  text: 'Choreography mini-challenge: a 3-pose salute using only the named verbs, with no raw servo call
+    anywhere in the file.'
+- time: 5′
+  text: 'On your lesson sheet: why should the mirror live in ONE function rather than at every call site?'
+code:
+  lang: python
+  source: |-
+    import mbot2, time
+
+    # measured by hand on THIS robot, power off
+    # the arms mirror, so the numbers invert
+    L_SHUT, L_OPEN = 20, 80    # left arm,  S1
+    R_SHUT, R_OPEN = 80, 20    # right arm, S2
+
+    def clamp(v, a, b):
+        lo, hi = min(a, b), max(a, b)
+        return max(lo, min(hi, v))
+
+    # nothing reaches a servo except via here
+    def arm_to(left, right):
+        l = clamp(left,  L_SHUT, L_OPEN)
+        r = clamp(right, R_SHUT, R_OPEN)
+        mbot2.servo_set(l, 'S1')
+        mbot2.servo_set(r, 'S2')
+
+    # the only place the mirror is spelled out
+    def grip_open():
+        arm_to(L_OPEN, R_OPEN)
+
+    def grip_close():
+        arm_to(L_SHUT, R_SHUT)
+
+    grip_open()
+    time.sleep(1)
+    arm_to(500, -500)   # clamped to the limits
+    grip_close()
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete. The servo call especially varies — find it together in autocomplete.'
+- 'Servos are on <b>S1 and S2</b> on this robot. S3 and S4 belong to a different build and a program that
+  addresses them moves nothing at all: a silent failure, and worth naming before anyone loses ten minutes
+  to it.'
+- If an arm judders at the edges of its range, back both constants off 5°. Mechanical margin is wisdom.
+- Never force an arm past resistance. The gear teeth strip silently and there are no spares in the box.
+result:
+  scene: arm
+  params:
+    pose: lift
+success:
+- Both arms move to commanded angles through arm_to() only
+- Guard proven by adversarial calls from another pair
+- 3-pose salute runs with no raw servo call in the file
+parts:
+- id: robot_arm
+  note: from Grade 8 — re-measure today
+- id: tablet
+- id: usb
+- id: protractor
+  note: hand-measuring the range
+long:
+  goal: A guard that cannot be got round — proved by adversarial calls from someone trying to break it, not
+    by reading the code.
+  recap:
+    time: 10′
+    text: Attack your own guard first. Negative angles, absurd angles, the exact boundary values, and the
+      mirrored pair swapped so left gets right's number. A guard that has not been attacked has not been tested,
+      and the servo is the component that pays the difference.
+  extend:
+  - spec: arm_to(500, -500) is safe
+    text: An absurd call delivers both limits quietly, with no juddering and no stall.
+  - spec: limits in one place
+    text: Change a constant once and every call follows. If you have to edit two places, the guard is not a
+      guard.
+  - spec: the mirror is invisible
+    text: No line outside grip_open() and grip_close() knows that the two arms count in opposite directions.
+  log:
+    time: 10′
+    text: 'The four constants with their date and the robot they belong to, plus the adversarial test list:
+      the call made, and what the guard did with it. Grade 8''s numbers go on the same page for comparison
+      — a year of use moves them, and seeing by how much is the argument for re-measuring at all.'
+  review:
+    time: 15′
+    text: Pairs swap robots and attack another pair's guard. Criteria — did anything get through? A guard
+      that survives a stranger actively trying to break it is the only kind worth having on a scored run.
+  parts:
+  - id: robot_arm
+  - id: tablet
+  success:
+  - Another pair failed to break the guard with adversarial calls
+  - The limit constant changed in one place and every call site followed
+

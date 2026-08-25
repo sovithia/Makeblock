@@ -1,0 +1,72 @@
+n: 17
+title: Build Sprint II + Code Review
+goal: Manipulation development advances — and every team’s code survives a peer review.
+builds_on:
+- S16 · navigation milestone
+- S12 · the mission verbs
+teach:
+- 'Build continues (arm behaviors onto the navigation spine), but the hour’s signature event is the <b>cross-team
+  code review</b> — the professional practice, scaled down. Pairs of teams swap tablets and read each
+  other’s code against a four-line checklist: <i>functions with clear names? · constants instead of magic
+  numbers? · comments that say why? · no copy-pasted near-duplicates?</i> Reviewers write two ‘strengths’
+  and two ‘suggestions’ — the discipline of kind precision.'
+- 'Frame it before anyone reads a line: review is about the code, not the coder; every suggestion is a
+  gift that saves a future debugging hour. The checklist is the capstone rubric’s code-quality section
+  verbatim — so today is a free mock exam. Teams then get sprint time to act on what review found; acting
+  on feedback is the half of the skill that classrooms usually skip.'
+steps:
+- time: 5′
+  text: Standup + review protocol and the four-line checklist.
+- time: 12′
+  text: 'Cross-team review: read, checklist, write 2 strengths + 2 suggestions.'
+- time: 23′
+  text: 'Sprint: apply at least one review suggestion, then continue manipulation build.'
+- time: 5′
+  text: 'Milestone pulse: where is each team vs. the plan? Cut lines re-checked aloud.'
+tips:
+- 'Model one review comment style first: ‘pick() is very readable’ / ‘GAIN=0.5 appears 3× — constant?’'
+- A team ‘too busy to review’ is the team that most needs it — the checklist takes 12 minutes, hold firm.
+result:
+  scene: kanban
+success:
+- 'Review exchanged: 2+2 written comments per team'
+- At least one suggestion applied the same hour
+- Manipulation visibly progressed on the mission course
+parts:
+- id: robot_arm
+- id: tablet
+- id: cards
+  note: review checklist ×2 per team
+- id: foam
+  note: 2+2 review notes
+long:
+  goal: Code that survives a stranger reading it against the rubric's own checklist, with at least one suggestion
+    applied the same hour.
+  recap:
+    time: 10′
+    text: 'Set the tone before anyone reads a line: review is about the code, not the coder, and every suggestion
+      is a gift that saves someone a future debugging hour. Model one comment of each kind aloud — a strength
+      and a suggestion — so that nobody''s first attempt at this comes out as a personal remark.'
+  extend:
+  - spec: 2 strengths, 2 suggestions
+    text: Written, specific, and pointed at named functions or lines rather than at the file in general.
+  - spec: one applied this hour
+    text: A suggestion acted on before the session ends — not noted down for a later that never arrives.
+  - spec: all 4 checklist lines
+    text: Clear function names, no repeated magic numbers, comments saying why, dead code removed.
+  log:
+    time: 10′
+    text: The review received and the review given, plus the change made in response. The checklist is the
+      capstone rubric's code-quality section word for word, so this hour is a free mock exam and this page
+      is the mark sheet.
+  review:
+    time: 15′
+    text: Teams report what they actually changed. Criteria — was the suggestion applied or merely acknowledged?
+      The team that says it is too busy to review is reliably the team that most needs it, and the checklist
+      takes twelve minutes.
+  parts:
+  - id: tablet
+  success:
+  - Two strengths and two suggestions written, and the same received
+  - At least one suggestion applied within the hour, not deferred
+

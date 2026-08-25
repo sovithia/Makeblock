@@ -1,0 +1,78 @@
+n: 19
+stage: D
+stage_title: រូបយន្តមានរបៀបរៀបរយ
+kind: step
+title: ប្លុកដែលទទួលលេខ
+concept: អនុគមន៍មានធាតុចូល
+hours: 2
+project: G7-D-organised
+goal: ប្លុកតែមួយធ្វើការងារច្រើន ហើយក្រុមអាចប្រាប់ថាប្លុកបង្វិលដែលភ្ជាប់មកលាក់អ្វី។
+build: turn_by(degrees) — របស់អ្នកផ្ទាល់ ប្រកួតនឹងរបស់ Makeblock។
+builds_on:
+- ជំហានទី ១៦ · អនុគមន៍
+- ជំហានទី ២ · encoder
+teach:
+- ប្លុកដែលមាន <b>ធាតុចូល</b> ធ្វើការងារច្រើន ជំនួសឲ្យមួយ។ <b>drive_square(size)</b> គូរការ៉េណាមួយ។ ធាតុចូលមានបីប្រភេទ
+  — <b>លេខ</b>, <b>អក្សរ</b> និង <b>តក្ក</b> — ហើយប្រភេទតក្កជាការភ្ញាក់ផ្អើលគួរឲ្យចាប់អារម្មណ៍៖ ប្លុកមួយអាចទទួល
+  <i>លក្ខខណ្ឌ</i> ដូច្នេះ <b>park(quietly?)</b> ចតដោយមានឬគ្មានសំឡេង អាស្រ័យលើអ្វីដែលអ្នកប្រគល់ឲ្យវា។
+- រួចមកចំណុចពិត។ <b>turns left 90° until done</b> ខ្លួនវាជាអនុគមន៍ — មាននរណាម្នាក់នៅ Makeblock បានសរសេរវាចេញពីប្លុក
+  encoder ដូចអ្នកនឹងធ្វើបន្តិចទៀត។ សាងសង់របស់អ្នកផ្ទាល់ ប្រកួតវានឹងរបស់គេដោយឧបករណ៍វាស់មុំ ហើយអ្នកនឹងមិនដែលគិតថាប្លុកមួយជាមន្តអាគមទៀតទេ។
+  ជួនកាលរបស់អ្នកនឹងល្អជាង ព្រោះអ្នកស្គាល់ឥដ្ឋរបស់អ្នក។
+guide:
+- label: ធាតុចូល
+  value: លេខ · អក្សរ · តក្ក
+- label: សាងសង់ឡើងវិញ
+  value: turn_by(deg) ពីប្លុក encoder
+- label: ប្រកួតវា
+  value: របស់អ្នក ធៀបនឹង turns … ° — វាស់ទាំងពីរ
+- label: ឥដ្ឋ
+  value: ទំនេរ ១,៥ ម៉ែត្រ — គូរការេ ៣០ និង ៦០ ស.ម.
+steps:
+- time: 15′
+  text: បង្កើតប្លុកមួយមានធាតុចូលជាលេខ ហើយប្រើវាបីដងជាមួយតម្លៃបីខុសគ្នា។ កំណែតូចបំផុតជាមុនសិន។
+  expect: ប្លុកមួយមានលេខនៅក្នុង ប្រើបីដងជាមួយតម្លៃបីខុសគ្នា។
+- time: 25′
+  text: សាងសង់ <b>turn_by(degrees)</b> ដោយខ្លួនឯង៖ កំណត់មុំ encoder ឡើងវិញ បើកបរកង់ទៅទិសផ្ទុយគ្នា រង់ចាំរហូតដល់មុំហួសគោលដៅ។
+  expect: ប្លុក turn_by ផ្ទាល់ខ្លួន បង្វិលរូបយន្តតាមលេខណាដែលអ្នកឲ្យវា។
+- time: 25′
+  text: ប្រកួត៖ turn_by(90) របស់អ្នកធៀបនឹងរបស់ដែលភ្ជាប់មក វាស់ដោយឧបករណ៍វាស់មុំ។ បីដងម្នាក់។ អ្នកណាជិតជាង?
+    អ្នកណាលឿនជាង?
+  expect: លទ្ធផលរង្វាស់មុំបីដងរបស់អ្នក និងបីដងរបស់ប្លុកស្រាប់ និងចម្លើយថាអ្នកណាជិតជាង អ្នកណាលឿនជាង។
+- time: 20′
+  text: <b>drive_square(size)</b> — ប្លុកតែមួយ ទំហំណាក៏បាន។ រួចធាតុចូលតក្ក៖ park(quietly?)។
+  expect: ប្លុកមួយគូរការេគ្រប់ទំហំ និងប្លុកទីពីរដែលទទួលចម្លើយ បាទ/ទេ ជំនួសលេខ។
+- time: 20′
+  text: សាងសង់ម៉ាស៊ីនរូបរាងពីជំហានទី ៣ ឡើងវិញ ដោយប្រើតែប្លុករបស់អ្នកផ្ទាល់។ រាប់ថាកម្មវិធីមេខ្លីជាងប៉ុនណា។
+  expect: ម៉ាស៊ីនរូបរាងនៃជំហានទី ៥ សាងសង់ឡើងវិញពីប្លុករបស់អ្នក និងចំនួនប្លុកដែលកម្មវិធីមេខ្លីជាងមុន។
+- time: 10′
+  text: កត់ត្រា៖ របស់មួយដែលប្លុកបង្វិលភ្ជាប់មកធ្វើបាន តែរបស់អ្នកធ្វើមិនបាន។
+  expect: រឿងមួយក្នុងកំណត់ហេតុដែលប្លុកបង្វិលស្រាប់ធ្វើបាន តែរបស់អ្នកធ្វើមិនបាន។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\nwhen button A pressed\n  scan\n\
+    \  if  (found) = 1  then\n    celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square\
+    \  60"
+tips:
+- មុំ encoder បន្តរាប់ឡើង។ កំណត់វាឡើងវិញមុនការបង្វិល បើមិនដូច្នេះទេ ការបង្វិលទីពីរបញ្ចប់ភ្លាមៗ — កំហុសប្រចាំថ្ងៃ។
+- របស់អ្នកនឹងហួសនៅដំបូង ព្រោះកង់បន្តផ្លាស់ទីបន្ទាប់ពីការពិនិត្យ។ នោះជាវិស្វកម្មពិត ហើយការបន្ថយល្បឿនជាការកែស្មោះត្រង់។
+- ឧបករណ៍វាស់មុំឈ្នះមតិ។ តម្រូវឲ្យវាស់ការបង្វិលទាំងពីរ ជំនួសឲ្យការមើល។
+result:
+  scene: library
+success:
+- ប្លុកមួយមានធាតុចូលជាលេខ ប្រើជាមួយតម្លៃបីខុសគ្នា
+- turn_by(90) វាស់ធៀបនឹងរបស់ដែលភ្ជាប់មក បីដងម្នាក់
+- ប្លុកមួយទទួលធាតុចូលតក្ក ហើយប្រព្រឹត្តខុសគ្នាសម្រាប់ពិត និងមិនពិត
+check:
+- do: B
+  see: It draws a small square, then a big one. Same block, new number.
+parts:
+- id: robot_wheel
+- id: protractor
+- id: tape
+

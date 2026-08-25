@@ -1,0 +1,118 @@
+n: 9
+title: Dead Reckoning
+goal: A calibrated drive_cm() built on the encoders — and the square’s closing error measured over three
+  runs.
+builds_on:
+- S3 · the encoder angle on the dashboard
+- S8 · a controller that trusts a fixed loop
+teach:
+- 'The Rover has no ultrasonic and no GPS. Everything it knows about <i>where it is</i> comes from counting
+  how far its own motors have turned, and that is called <b>dead reckoning</b> — the same method that
+  crossed oceans before satellites. The arithmetic is one line: a wheel of diameter D advances π·D for
+  every full turn, so degrees convert to centimetres. But do not compute the constant from the sprocket
+  — <b>measure it</b>. Command a long straight, lay a tape measure along what the robot actually did, and
+  divide. Theory gives you a number; the floor gives you the right one, and on tracks those two are never
+  the same because rubber slips.'
+- 'Then the hard truth, and it is the one the capstone is built on: <b>error accumulates and never cancels</b>.
+  Drive a 50 cm square four times round and measure the gap between where the robot started and where
+  it finished — distance and heading, three runs, a spread rather than a number. Nothing is broken; skid
+  steering scrubs the tracks sideways on every turn and a little of each turn is simply lost. That spread
+  is the budget every later behaviour must live inside, and it is precisely why the mission ends by stopping
+  on a colour marker rather than by counting centimetres. Dead reckoning gets you <i>near</i>. A sensor
+  gets you <i>there</i>. Write that sentence on the board and leave it up until Session 20.'
+steps:
+- time: 12′
+  text: 'Calibration run: command a long straight, measure the real distance with a tape, compute DEG_PER_CM
+    for this robot on this floor.'
+- time: 18′
+  text: Build drive_cm() closing the loop on the encoder; verify it at 20, 50 and 100 cm against the tape.
+- time: 10′
+  text: 'The square, three times: mark the start pose in tape, measure the closing gap and the heading
+    error each run.'
+- time: 5′
+  text: 'On your lesson sheet: your three closing errors, and the one sentence about what a sensor buys you.'
+code:
+  lang: python
+  source: |-
+    import mbot2, cyberpi, time
+
+    DEG_PER_CM = 12.4   # MEASURED, not copied
+
+    def turned():
+        return abs(mbot2.EM_get_angle('EM1'))
+
+    def drive_cm(cm, speed=40):
+        mbot2.EM_reset_angle('EM1')
+        v = speed * (1 if cm > 0 else -1)
+        while turned() < abs(cm) * DEG_PER_CM:
+            mbot2.drive_speed(v, v)
+            time.sleep(0.01)
+        mbot2.EM_stop()
+
+    for i in range(4):   # the square again
+        drive_cm(50)
+        mbot2.turn(90)
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete.'
+- The Rover’s motor cables are crossed, so EM1 is not necessarily the side you expect. Read the sign once,
+  then let abs() carry it and stop worrying about which is which.
+- Every team gets a different DEG_PER_CM and that is correct. A borrowed constant is the fastest way to
+  lose an afternoon.
+- Re-measure on the venue floor before Demo Day. Tile, carpet and a dusty hall are three different constants.
+- Low battery changes the answer too. Note the charge level next to the number or the calibration expires
+  silently.
+result:
+  scene: path
+  params:
+    shape: square
+    kind: tank
+    caption: four sides, closed loop — and it still does not close
+success:
+- DEG_PER_CM measured on this robot, not computed or copied
+- drive_cm() lands within ±2 cm at 20, 50 and 100 cm
+- Three square runs with closing distance and heading error recorded
+parts:
+- id: robot_tank
+- id: tablet
+- id: ruler
+  note: tape measure for the calibration
+- id: tape
+  note: mark the start pose
+- id: protractor
+  note: heading error
+long:
+  goal: An error budget stated as a number this team measured, and a defended answer to why the mission cannot
+    be built from centimetres alone.
+  recap:
+    time: 10′
+    text: Predict the closing gap before running the square. Most pairs guess a centimetre or two; the real
+      answer is usually far worse, and the gap between the guess and the tape measure is the entire lesson.
+      Then predict again for a square driven at half speed, and find out whether slower really is straighter.
+  extend:
+  - spec: ±2 cm at three distances
+    text: drive_cm() checked at 20, 50 and 100 cm against a tape measure, not just at the distance it was
+      calibrated on.
+  - spec: 3 runs, spread stated
+    text: The closing error given as a range — "between 6 and 11 cm" — because one run is an anecdote.
+  - spec: heading error too
+    text: The final heading measured as well as the position. Heading error is the one that ruins the <i>next</i>
+      leg.
+  log:
+    time: 10′
+    text: DEG_PER_CM with the floor surface, the battery level and the date beside it, then the three closing
+      errors. Session 13 stops the robot at a marker and Session 18 watches drift accumulate over a whole
+      mission; both of them come back to this page, and a constant recorded without its conditions is a constant
+      that will lie in a hall with a different floor.
+  review:
+    time: 15′
+    text: Teams state their error budget and what it forbids. Criteria — can they name one mission design
+      that their own number rules out? A team that has measured 9 cm of drift and still plans to place a block
+      by dead reckoning alone has not finished reading its own data.
+  parts:
+  - id: ruler
+  - id: protractor
+  success:
+  - The closing error stated as a measured range rather than a single lucky run
+  - One mission design the team's own error budget rules out, named
+

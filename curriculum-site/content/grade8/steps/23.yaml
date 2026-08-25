@@ -1,0 +1,75 @@
+n: 23
+stage: E
+stage_title: The mission
+kind: step
+title: Build the job
+concept: Integration
+hours: 2
+project: G8-E-mission
+goal: The full job runs end to end at least once, with a run log showing where it fails.
+build: The mission, assembled from your own library.
+builds_on:
+- Step 22 · the signed spec
+teach:
+- Build in the order of your diagram, testing each arrow before adding the next. The seams are where
+  the failures live — arriving accurately enough for the arm to work, and knowing whether the grip actually
+  got anything — and they are worth more attention than the parts in between.
+- 'Keep a <b>run log on the wall</b>: attempt, phases completed, where it failed. It turns frustration
+  into data. "We fail at the pick three times in four" is something you can work on; "it keeps breaking"
+  is a mood, and under pressure memory lies while paper does not.'
+guide:
+- label: Order
+  value: one arrow at a time, test each
+- label: Seams
+  value: arriving · knowing the grip worked
+- label: Log
+  value: every attempt, on the wall
+steps:
+- time: 10′
+  text: Diagram on the table, run-log sheet on the wall. Agree today's target with the cut line visible.
+  expect: The diagram on the table, the run-log sheet on the wall, and today’s target agreed with the
+    cut line visible.
+- time: 40′
+  text: 'Navigation first: the robot arrives where it needs to be, three times running, before any arm
+    work.'
+  expect: The robot arrives where it needs to be three times running, before anyone touches the arm.
+- time: 35′
+  text: Add the manipulation, then the human instruction. One at a time, each tested before the next.
+  expect: Manipulation added and tested, then the human instruction added and tested. One at a time.
+- time: 25′
+  text: Full attempts, every one logged with the phase it reached.
+  expect: Full attempts, each one logged with the phase it reached.
+- time: 10′
+  text: 'Read your own log: which phase costs you most? That is tomorrow''s work.'
+  expect: The phase that costs you most, read off your own log. That is tomorrow’s work.
+blocks:
+- My Blocks
+- Variables
+- Control
+- AI
+- Bluetooth controller
+- mBot2 Chassis
+- mBot2 Extension Port
+tips:
+- Navigation before manipulation, always. An arm bug on top of an arrival bug is two unknowns, and neither
+  can be diagnosed.
+- If the grip closes on nothing, the robot should know. A check after gripping is worth more than a
+  better grip.
+- Execute the cut line if you need to. A reduced mission that works beats a full one that does not,
+  and the spec said so in advance.
+result:
+  scene: work
+success:
+- The full job completed end to end at least once
+- Both seams identified with their observed failure modes
+- A phase-level run log on the wall
+parts:
+- id: robot_tank
+- id: controller
+  note: if the team drives it
+- id: foam
+- id: patches
+- id: map
+- id: craft
+  note: wall run-log
+

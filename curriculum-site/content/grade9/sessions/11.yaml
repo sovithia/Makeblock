@@ -1,0 +1,88 @@
+n: 11
+title: Pick & Place
+goal: 'The grip earns its keep: hold a block, carry it through a turn, release it in a zone — a challenge
+  ladder.'
+builds_on:
+- S10 · both arms behind a guard
+- S9 · drive_cm() and the error budget
+teach:
+- 'The challenge-ladder format: rungs of increasing difficulty, teams climb at their own pace, each rung
+  demoed to the teacher before the next. <b>Rung 1</b>: close on a foam block and hold it while the robot
+  is lifted and tilted by hand (grip angle tuning — too loose slips, too tight stalls the servo and heats
+  it). <b>Rung 2</b>: grip, drive 30 cm with <code>drive_cm()</code>, release inside a taped zone — arm
+  and motion coordinated, plus the discovery that driving shakes the payload and slower is surer. <b>Rung
+  3</b>: the same delivery with a 90° turn in the middle, released on a target within 3 cm — because a
+  skid-steer turn scrubs sideways and the block rotates in the grip while it does.'
+- 'One mechanical fact shapes the whole ladder and is worth stating before anyone climbs: <b>each arm
+  has exactly one servo</b>, so grip and height are the same number. This robot cannot hold a block at
+  one height and open at another — it releases where it stands. That rules out stacking entirely, and
+  it is not a limitation to apologise for; it is the constraint every mission this year has to be designed
+  around, which is what engineers do with constraints. Let the struggle at rung 3 happen — it is genuinely
+  hard and that is its job. The debug discipline carries: one variable per attempt (grip angle OR approach
+  speed OR turn speed), logged. Teams should end today knowing their grip’s personality: what it holds
+  well, where it fumbles. That self-knowledge writes Session 12’s failure log.'
+steps:
+- time: 8′
+  text: Ladder briefing + demo protocol; blocks and zones distributed.
+- time: 32′
+  text: 'Climb: grip and hold (R1), carry 30 cm and release (R2), carry through a turn onto a 3 cm target
+    (R3); teacher demos at each rung.'
+- time: 5′
+  text: 'Standings + lesson sheet: your highest rung and the single change that unlocked it.'
+tips:
+- Foam blocks only — wooden ones stall the servos and strip gears on a bad grip.
+- R2 zone generous (A5-size) today; R3 tightens it to a 3 cm target and the capstone tightens it again.
+- 'A servo held against a block it cannot close on gets hot: if an arm is warm to the touch, the grip
+  angle is too far past contact. Back it off 5°.'
+- Turn slowly while carrying. The block rotates in the grip during the scrub, and that is Session 9’s
+  drift showing up in a new costume.
+result:
+  scene: arm
+  params:
+    pose: place
+success:
+- Rung 2 (carry & release) reached by every team
+- Rung 3 attempted with logged one-change attempts
+- Grip strengths and weaknesses written down
+parts:
+- id: robot_arm
+- id: tablet
+- id: foam
+  note: NOT wooden blocks
+- id: tape
+  note: placement zones
+long:
+  goal: Rung 2 reached by every team, and the grip's personality known — what it holds, and the condition
+    under which it lets go.
+  recap:
+    time: 10′
+    text: 'Find the failure edges before climbing. Deliberately make the grip fail three ways: too loose, too
+      tight, and approaching off-centre. Knowing all three by sight makes the ladder faster, because from
+      then on a failed rung is diagnosed rather than simply retried.'
+  extend:
+  - spec: 'R2: carry and release'
+    text: Hold the block, drive 30 cm, and release it inside the zone.
+  - spec: R3 attempted and logged
+    text: The carry-through-a-turn attempted with one-change-per-attempt discipline, whether or not it ever
+      lands on the target.
+  - spec: personality written down
+    text: What this grip holds well, and the condition under which it drops.
+  log:
+    time: 10′
+    text: 'One row per attempt — rung, the single change made, outcome. The banned word today is "sometimes":
+      a failure that happens sometimes has a condition attached, and finding that condition is the entire
+      work of the hour.'
+  review:
+    time: 15′
+    text: Teams state their grip's weakness. Criteria — is it stated as a condition ("drops when the block
+      is approached more than about a centimetre off-centre") rather than as a frequency?
+  parts:
+  - id: foam
+    note: foam blocks only — wood stalls the servos
+  - id: robot_arm
+  - id: patches
+    note: the placement zone
+  success:
+  - Rung 2 reached with the carry-and-release complete
+  - The grip's failure stated as a condition, never as "sometimes"
+

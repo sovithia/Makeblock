@@ -1,0 +1,83 @@
+n: 15
+title: Design Sprint
+goal: Each team’s capstone mission fully specified, scoped and signed off.
+builds_on:
+- S13–S14 · proven building blocks to scope against
+teach:
+- 'The brief, in full: design an autonomous mission simulating a real job — warehouse sorting, rescue
+  supply delivery, harvesting, waste collection, or the team’s own pitch. The robot must navigate (line
+  or programmed path), detect a target (marker/color), manipulate (pick and deliver at least one object)
+  — fully autonomously. Demo Day (Session 20): scored runs plus a 5-minute pitch that must include one
+  honest failure story.'
+- 'Today produces four artifacts, in order: <b>problem statement</b> (what real job, why it matters —
+  the pitch’s backbone); <b>success criteria</b> (measurable: ‘delivers 2 blocks to zones in <90 s, 2
+  of 3 runs’); <b>course sketch</b> (top-down, dimensions, line path, marker and zone positions); <b>task
+  breakdown</b> mapped onto Sessions 1–14 (every task should point at a session where its skill was built
+  — anything pointing nowhere is scope risk, cut it or flag it). The sign-off gate is strictest of all
+  three years: ambition is celebrated, unscoped ambition is returned for revision. ‘Impressive and finished’
+  beats ‘amazing and imaginary’ — write it on the board.'
+steps:
+- time: 8′
+  text: Brief + rubric + example missions pitched fast (steal-able starting points).
+- time: 12′
+  text: Problem statement + success criteria drafted; criteria must contain numbers.
+- time: 18′
+  text: Course sketch + task breakdown with session references.
+- time: 7′
+  text: 'Sign-off interviews: scope probe (‘which task is riskiest? what’s your cut line?’).'
+tips:
+- Ban criteria without numbers — ‘works well’ is not a criterion.
+- 'Require a written cut line: the feature they’ll drop first if time runs short. Deciding it now removes
+  the mid-sprint agony.'
+result:
+  scene: worksheet
+  params:
+    caption: the signed mission spec — numbers, sketch, cut line
+    items:
+    - 'job: pharmacy delivery'
+    - 'succeed: 2 zones < 90 s'
+    - 'course: fig. 8 + 2 markers'
+    - 'riskiest: double pick'
+    - 'cut line: 2nd delivery'
+success:
+- All four artifacts complete; criteria numeric
+- Every task maps to a source session
+- Cut line written; sign-off passed
+parts:
+- id: ruler
+  note: course dimensions
+- id: cards
+  note: rubric + example missions
+- id: robot_arm
+  note: feasibility checks only
+long:
+  goal: A mission specified in numbers, with the cut line decided while nobody is yet under any pressure.
+  recap:
+    time: 10′
+    text: Attack the scope. Each team hands its draft criteria to another team whose only job is to find the
+      vaguest one. "Works well" and "delivers reliably" die here, cheaply, instead of dying at the sign-off
+      gate or — far worse — on Demo Day in front of an audience.
+  extend:
+  - spec: criteria contain numbers
+    text: How many, how fast, how many runs out of how many. Every criterion measurable by someone who was
+      not there.
+  - spec: every task traced
+    text: Each task maps to the session that built the capability it depends on.
+  - spec: cut line written
+    text: The feature to be dropped first if time runs short — decided today, in writing, while it is still
+      an abstract decision.
+  log:
+    time: 10′
+    text: The four artifacts — problem statement, numeric success criteria, course sketch with dimensions,
+      task breakdown with session references — plus the cut line. The cut line is the page that matters at
+      the end of Session 18, and deciding it now removes the argument.
+  review:
+    time: 15′
+    text: Sign-off interviews with a scope probe. Criteria — which task is riskiest, and does the cut line
+      remove the riskiest thing, or merely the thing that was easiest to give up?
+  parts:
+  - id: craft
+  - id: cards
+  success:
+  - Every success criterion contains a number a stranger could check
+  - The cut line written down before any time pressure exists

@@ -1,0 +1,98 @@
+n: 18
+stage: D
+stage_title: សំឡេង
+kind: step
+title: វាក្យសព្ទដែលវាស្គាល់
+concept: ការផ្គូផ្គងអក្សរនឹងបញ្ជី
+hours: 2
+project: G8-D-listens
+goal: Rover ធ្វើតាមបញ្ជាសំដី ដោយផ្គូផ្គងអ្វីដែលវាឮនឹងបញ្ជីដែលវាកាន់។
+build: រូបយន្តដែលស្ដាប់បង្គាប់ពាក្យដែលអ្នកបង្រៀនវា។
+builds_on:
+- ជំហានទី ១៦ · សំដី
+- ជំហានទី ៦ · បញ្ជី
+- ជំហានទី ៩ · ការងារ
+teach:
+- រូបយន្តបានឮអក្សរខ្លះ។ ឥឡូវអ្វី? វា <b>ប្រៀបធៀបវានឹងបញ្ជីនៃបញ្ជាដែលវាស្គាល់</b> — ហើយនោះជាការស្វែងរកដដែលដែលអ្នកសាងសង់នៅថ្នាក់ទី
+  ៧ ជាមួយផ្លូវ៖ ដើរតាមបញ្ជី សាកល្បងធាតុនីមួយៗ ធ្វើតាមការត្រូវគ្នា <b>break</b> ពេលរកឃើញ។ គ្មានគំនិតថ្មី
+  ផ្នែករឹងថ្មី។
+- <b>contains</b> ជាកំណែអត់ធ្មត់។ ការសាកល្បងថាតើអក្សរដែលឮ <i>មាន</i> "forward" ដោះស្រាយបាននឹង "go
+  forward please" និង "forwards" ដែលការសាកល្បងស្មើគ្នាបេះបិទមិនអាចទេ។ ជម្រើសនោះ — តឹងរឹង ឬអត់ធ្មត់
+  — ជាការសម្រេចចិត្តរចនាពិតដែលមានផលវិបាកពិត ហើយសិស្សគួរធ្វើវាដោយចេតនា ជាជាងដោយចៃដន្យ។
+guide:
+- label: ស្គាល់
+  value: បញ្ជីនៃពាក្យបញ្ជា
+- label: ផ្គូផ្គង
+  value: heard contains command ?
+- label: ធ្វើ
+  value: កំណត់ការងារ រួច break
+steps:
+- time: 15′
+  text: សម្រេចវាក្យសព្ទ៖ បញ្ជាបួនឬប្រាំដែលរូបយន្តនឹងស្គាល់។ សរសេរពួកវាចុះមុនសរសេរកូដ។
+  expect: បញ្ជាបួន ឬប្រាំសរសេរទុកមុនពេលមានកូដ។
+- time: 25′
+  text: ដាក់ពួកវាក្នុងបញ្ជី ហើយដើរតាមវា ដោយប្រៀបធៀបនីមួយៗនឹងអ្វីដែលឮ។
+  expect: រូបយន្តដើរតាមវាក្យសព្ទរបស់វា ហើយប្រៀបធៀបពាក្យនីមួយៗនឹងអ្វីដែលវាឮ។
+- time: 25′
+  text: ភ្ជាប់ការត្រូវគ្នាទៅការងារដែលអ្នកមានរួច — ទៅយក ល្បាត ប្រគល់ ឈប់។
+  expect: ពាក្យដែលត្រូវគ្នាចាប់ផ្ដើមការងារដែលអ្នកសាងសង់រួច — ហើយការស្វែងរកឈប់ភ្លាមពេលត្រូវគ្នា។
+- time: 25′
+  text: តឹងរឹង ធៀបនឹងអត់ធ្មត់៖ សាកល្បងស្មើគ្នាបេះបិទ រួច contains។ និយាយ "go forward please" ទៅទាំងពីរ
+    ហើយជ្រើសមួយណាដែលអ្នកចង់បាន។
+  expect: «ទៅមុខសិន» សាកនឹងទាំង «ស្មើពិតប្រាកដ» និង «មានផ្ទុក» និងចម្លើយជ្រើសរើសថាអ្នកចង់បានមួយណា។
+- time: 20′
+  text: រង្វង់បង្ហាញ៖ ក្រុមនីមួយៗឲ្យបញ្ជាបីដល់រូបយន្តខ្លួននៅចំពោះមុខអ្នកគ្រប់គ្នា។ រាប់ថាប៉ុន្មានចូល។
+  expect: បញ្ជាបីក្នុងមួយក្រុមនៅមុខគ្រប់គ្នា ជាមួយចំនួនរាប់ថាប៉ុន្មានបានសម្រេច។
+- time: 10′
+  text: កត់ត្រាវាក្យសព្ទរបស់អ្នក និងជម្រើសផ្គូផ្គង ជាមួយហេតុផល។ ជំហានទី ២០ ត្រូវការវា។
+  expect: វាក្យសព្ទរបស់អ្នក និងជម្រើសផ្គូផ្គងក្នុងកំណត់ហេតុ ជាមួយហេតុផល។ ជំហានទី ២០ បញ្ចូលវាទៅក្នុងម៉ាស៊ីនការងារ។
+code:
+  lang: blocks
+  source: |-
+    when CyberPi starts up
+      connect to Wi-Fi  ssid  password  password
+      wait until  network connected?
+      speak  auto  I am awake
+      delete all of  commands
+      add  forward  to  commands
+      add  stop  to  commands
+      add  fetch  to  commands
+
+    when button A pressed
+      recognize  (4) English  3  secs
+      set  heard  to  (speech recognition result)
+      show label 1  join  heard:   (heard)  at x: 0 y: 0  by small pixel
+      set  stop  to  ((length of commands) + 1)
+      count with  i  from 1 to (stop) by step 1 repeat
+        if  ((heard) contains  (item (i) of commands) ?)  then
+          set  job  to  (item (i) of commands)
+          speak  auto  join  ok,   (item (i) of commands)
+          break
+
+    when button B pressed
+      speak  auto  (translate  (heard)  into  French)
+tips:
+- ពាក្យបញ្ជាខ្លី និងខុសគ្នាច្បាស់ ដំណើរការល្អជាងពាក្យវែងច្រើន។ "Fetch" និង "stretch" ជាគូអាក្រក់;
+  ទុកឲ្យក្រុមរកឃើញវាដោយខ្លួនឯង។
+- Break សំខាន់ — បើគ្មានវា ប្រយោគដែលមានបញ្ជាពីរនឹងដំណើរការទាំងពីរ តាមលំដាប់បញ្ជី ដែលកម្រជាអ្វីដែលនរណាម្នាក់ចង់បាន។
+- ការបន្ថែមបញ្ជាឥឡូវជាការកែទិន្នន័យ មិនមែនកូដទេ។ ចង្អុលបង្ហាញរឿងនោះ; វាជាផលចំណេញនៃដំណាក់កាលបញ្ជីទាំងមូល។
+result:
+  scene: screen
+  params:
+    lines:
+    - ["heard: fetch", "#7dd3fc", 10, true]
+    - ["match: fetch", "#facc15", 10, false]
+    - ["job: FETCH", "#22c55e", 10, false]
+    caption: a spoken word matches the vocabulary and starts a job
+success:
+- វាក្យសព្ទយ៉ាងតិចបួនបញ្ជា ផ្ទុកក្នុងបញ្ជី
+- បញ្ជាសំដីកំណត់ការងារ ហើយរូបយន្តធ្វើតាម
+- ជម្រើសដោយចេតនា និងការពារបាន រវាងការផ្គូផ្គងបេះបិទ និង contains
+check:
+- do: "A"
+  see: Say fetch. It answers ok, fetch.
+- do: "see"
+  see: Say something else and nothing happens yet. That is Step 19.
+parts:
+- id: robot_tank
+- id: router

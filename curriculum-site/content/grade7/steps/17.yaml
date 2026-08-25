@@ -1,0 +1,61 @@
+n: 17
+stage: C
+stage_title: The robot remembers
+kind: checkpoint
+title: Checkpoint 3 — variable, list
+concept: Catch-up gate
+hours: 1
+project: G7-C-remembers
+goal: Every student can make the robot remember a number and an ordered set of things — before Stage
+  D asks them to organise a program.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 11–14
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches build a robot that records its route, finds the first left turn in it, and replays only the part after that.'
+- Stage D is about naming and organising what the robot already does, and half of what it organises
+  is memory. A student who cannot yet make a counter behave will not enjoy wrapping one in a function.
+- 'Same rules as before: hands-on, coaches keep their hands off other people''s robots, buffer hour
+  goes wherever the class needs it.'
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up three stations. Remind everyone the gate holds.
+  expect: Three stations ready, and a class that knows the gate holds until everyone is through.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> count something the robot has no built-in block for, and show
+    it labelled on screen — counting once per event, not once per loop. <b>(2)</b> record at least five
+    moves into a list and replay them. <b>(3)</b> remove the last item from a list <i>without</i> knowing
+    how long the list is.'
+  expect: 'Three challenges demonstrated: a labelled count of something with no built-in block, five moves
+    recorded and replayed, and the last item removed without knowing the list length.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- Variables
+- Control
+- Display
+tips:
+- Challenge 1 separates understanding from copying. If their counter jumps by twenty they have not passed,
+  however good the rest looks.
+- Challenge 3 is the one that proves they understand length-of rather than having memorised a number.
+- Rotate the coaching pairs from Checkpoint 2 — different pairings surface different gaps.
+result:
+  scene: healthcheck
+  params:
+    checks: [one count per event, route stored and replayed, last list item removed]
+    caption: every student clears all three memory challenges
+success:
+- Every student demonstrated all three challenges
+- Every counter counts once per event, not once per loop
+- The class starts Stage D together
+parts:
+- id: robot_wheel
+- id: boxes

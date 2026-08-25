@@ -1,0 +1,88 @@
+n: 15
+stage: C
+stage_title: រូបយន្តចងចាំ
+kind: step
+title: ផ្លូវដែលអ្នកអាចចាក់ឡើងវិញ
+concept: បញ្ជី · count with i
+hours: 2
+project: G7-C-remembers
+goal: រូបយន្តកត់ត្រាចលនាដែលអ្នកបើកបរដោយដៃ ហើយបើកបរពួកវាម្ដងទៀតដោយខ្លួនឯង។
+build: រូបយន្តកត់ត្រា-និង-ចាក់ឡើងវិញ។
+builds_on:
+- ជំហានទី ១២ · អថេរផ្ទុកការកំណត់
+- ជំហានទី ៤ · ព្រឹត្តិការណ៍
+teach:
+- អថេរផ្ទុករបស់មួយ។ <b>បញ្ជី</b> ផ្ទុករបស់ច្រើន តាមលំដាប់ — ហើយលំដាប់គឺពិតជាអ្វីដែលផ្លូវមួយជា។ <b>add
+  … to</b> ដាក់ចលនាមួយនៅចុង, <b>length of</b> ប្រាប់ថាអ្នកមានប៉ុន្មាន, <b>item n of</b> យកចលនាទី n។
+- ការចាក់វាឡើងវិញត្រូវការរង្វិលជុំដែលដើរតាមបញ្ជីម្ដងមួយកន្លែង ហើយមានប្លុកសាងសង់សម្រាប់រឿងនោះ៖ <b>count
+  with i from 1 to (length of route)</b>។ <b>i</b> គឺជាទីតាំង ដូច្នេះ <b>item (i) of route</b> គឺ "ចលនាដែលខ្ញុំកំពុងដល់"។
+  ប្លុកពីរ ហើយរូបយន្តមួយដែលធ្វើម្ដងទៀតនូវអ្វីក៏ដោយដែលអ្នកបង្រៀនវា។
+guide:
+- label: សាកល្បង
+  value: joystick ← / → record · button A replays
+- label: កត់ត្រា
+  value: joystick បើកបរ ចលនានីមួយៗត្រូវបានបន្ថែម
+- label: ចាក់ឡើងវិញ
+  value: count with i · item (i) of route
+- label: សម្អាត
+  value: delete all of route — មុនកត់ត្រា
+- label: ឥដ្ឋ
+  value: ទំនេរ ១,៥ ម៉ែត្រ ដើម្បីបើកផ្លូវ
+steps:
+- time: 15′
+  text: បើកបររូបយន្តជុំវិញដោយ joystick។ ឥឡូវធ្វើវាម្ដងទៀត <i>ដូចគ្នាបេះបិទ</i>។ អ្នកមិនអាចទេ — ហើយនោះជាបញ្ហាដែលត្រូវដោះស្រាយ។
+  expect: ការបើកពីរដងនៃ «ផ្លូវដដែល» ដែលមើលឃើញច្បាស់ថាមិនដដែល។ គម្លាតនោះជាបញ្ហាដែលមេរៀននេះដោះស្រាយ។
+- time: 25′
+  text: កត់ត្រា៖ រាល់ចលនា joystick ក៏បន្ថែមពាក្យមួយទៅបញ្ជីដែរ។ ដាក់ <b>length of route</b> លើអេក្រង់
+    ហើយមើលវាកើនពេលអ្នកបើកបរ។
+  expect: បើករូបយន្ត ហើយលេខលើអេក្រង់កើនឡើង — មួយធាតុក្នុងមួយចលនា កើនតាមពេលអ្នកបញ្ជា។
+- time: 25′
+  text: ចាក់ឡើងវិញដោយ count with i។ ចុច B ហើយមើលវាតាមដានផ្លូវរបស់អ្នក។
+  expect: ចុច B ហើយរូបយន្តដើរតាមផ្លូវដែលអ្នកបានបើក ដោយខ្លួនឯង។
+- time: 20′
+  text: ផ្លូវវែងជាង — យ៉ាងតិចដប់ចលនា។ តើវានៅតែចាក់ឡើងវិញបានទេ? វាចាប់ផ្ដើមខុសពីដើមនៅត្រង់ណា?
+  expect: ផ្លូវដប់ចលនាចាក់ឡើងវិញ និងចំណុចលើឥដ្ឋដែលវាចាប់ផ្ដើមរសាត់ចេញពីផ្លូវដើម។
+- time: 20′
+  text: ប្ដូរគ្នា៖ កត់ត្រាផ្លូវលើរូបយន្តរបស់អ្នក ប្រគល់ទៅក្រុមផ្សេង ហើយមើលថារូបយន្តគេបញ្ចប់នៅកន្លែងដែលរូបយន្តអ្នកបញ្ចប់ឬអត់។
+  expect: រូបយន្តក្រុមផ្សេងដំណើរការផ្លូវថតរបស់អ្នក ហើយបញ្ចប់នៅកន្លែងដែលអ្នកអាចវាស់ធៀបនឹងរបស់អ្នក។
+- time: 10′
+  text: កត់ត្រា៖ ចលនាប៉ុន្មានមុនពេលការចាក់ឡើងវិញខុសឲ្យឃើញ ហើយហេតុអ្វី។
+  expect: លេខមួយក្នុងកំណត់ហេតុ៖ ចលនាប៉ុន្មានមុនពេលការចាក់ឡើងវិញខុសឲ្យឃើញ និងហេតុផលរបស់អ្នក។
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  set  speed  to 40\n  delete all of  route\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 1  join  walls:   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 15  then\n      change  walls  by 1\n      turns right  90 \
+    \ ° until done\n      wait until  (ultrasonic 2 1 distance to an object (cm)) > 25\n    else\n \
+    \     moves forward  at (speed)  RPM\n\nwhen joystick  pulled↑\n  change  speed  by 5\n  if  (speed)\
+    \ > 100  then\n    set  speed  to 100\n\nwhen joystick  pulled↓\n  change  speed  by -5\n  if  (speed)\
+    \ < 10  then\n    set  speed  to 10\n\nwhen joystick  pulled→\n  add  fwd  to  route\n  moves forward\
+    \  10  cm  until done\n\nwhen joystick  pulled←\n  add  left  to  route\n  turns left  90  ° until\
+    \ done\n\nwhen button A pressed\n  set  stop  to  ((length of route) + 1)\n  count with  i  from\
+    \ 1 to (stop) by step 1 repeat\n    if  (item (i) of route) = fwd  then\n      moves forward  10\
+    \  cm  until done\n    else\n      turns left  90  ° until done"
+tips:
+- សម្អាតបញ្ជីមុនកត់ត្រា បើមិនដូច្នេះទេ ផ្លូវទីពីរត្រូវបានផ្សាភ្ជាប់ទៅផ្លូវទីមួយ — កំហុសដែលមើលទៅដូចមន្តអាគម
+  រហូតដល់ពួកគេរកឃើញ។
+- ចាប់ផ្ដើមរាប់ពី 1 មិនមែន 0។ Item 0 នៃបញ្ជីមិនមែនជារបស់ទេ។
+- ការខុសពេលចាក់ឡើងវិញជារឿងពិត ហើយវាមិនមែនកំហុសក្នុងកូដរបស់ពួកគេទេ — វាជាគម្លាតបញ្ជា-ធៀប-ជាក់ស្តែងដដែលពីជំហានទី
+  ២ ឥឡូវជាន់គ្នាដប់ដង។
+result:
+  scene: path
+success:
+- ផ្លូវយ៉ាងតិចដប់ចលនា កត់ត្រា និងចាក់ឡើងវិញបាន
+- ប្រវែងបញ្ជីឃើញលើអេក្រង់ពេលកត់ត្រា
+- ក្រុមអាចពន្យល់ថា i កំពុងធ្វើអ្វីក្នុងរង្វិលជុំចាក់ឡើងវិញ
+check:
+- do: right
+  see: It steps forward and the list gets one longer.
+- do: left
+  see: It turns left and the list gets one longer.
+- do: A
+  see: It drives your whole route again, by itself.
+parts:
+- id: robot_wheel
+- id: tape
+  note: a route to drive
+

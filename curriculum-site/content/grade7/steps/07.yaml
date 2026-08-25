@@ -1,0 +1,62 @@
+n: 7
+stage: A
+stage_title: The robot obeys
+kind: checkpoint
+title: Checkpoint 1 — sequence, event, loop
+concept: Catch-up gate
+hours: 1
+project: G7-A-obeys
+goal: Every student can start a program three ways, order instructions deliberately, and use a loop
+  — before anyone moves to Stage B.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 1–4
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches take a program where one number changes the shape, the speed and the colour at once.'
+- This is a <b>gate</b>, not a test. Nobody moves on until the class is level, because Stage B builds
+  directly on all three ideas and a student who is shaky on loops will be lost inside two steps.
+- 'Run it as three hands-on challenges, not a written paper. Students who clear all three become <b>coaches</b>
+  — and coaching is not doing it for them: hands off the other team''s robot, questions only. A student
+  who can get someone else there understands it better than one who just finished first.'
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Explain the gate and the coaching rule. Nobody is behind; the class moves together.
+  expect: Everyone knows what the gate is for and that coaching means questions, not hands.
+- time: 30′
+  text: 'The three challenges, in any order, demonstrated to the teacher or to a coach: <b>(1)</b> make
+    the robot do three things in an order you chose, then swap two and predict what changes. <b>(2)</b>
+    start the same program three different ways — power-up, button A, button B. <b>(3)</b> draw a shape
+    the teacher names, using a loop, first try.'
+  expect: Three challenges demonstrated on a real robot — ordering, three ways to start, and a named shape
+    drawn with a loop on the first try.
+- time: 20′
+  text: 'Pairing: everyone who cleared all three takes one student who has not. Hands off the robot,
+    questions only.'
+  expect: 'Nobody left behind: every student who cleared all three is sitting with one who has not.'
+blocks:
+- Events
+- Control
+- mBot2 Chassis
+tips:
+- Resist letting fast teams race ahead into Stage B. The gate only works if it holds.
+- If more than a third of the class is stuck on the same thing, it is a teaching problem, not a student
+  problem — reteach it to everyone rather than pairing round it.
+- Write down who coached whom. Over four checkpoints the pattern tells you a lot about the class.
+result:
+  scene: healthcheck
+  params:
+    checks: [ordered sequence, three start events, shape built with a loop]
+    caption: every student clears all three programming challenges
+success:
+- Every student demonstrated all three challenges
+- Every student who was behind was coached by a peer, not rescued by an adult
+- The class starts Stage B together
+parts:
+- id: robot_wheel

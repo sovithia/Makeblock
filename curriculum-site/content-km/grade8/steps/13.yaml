@@ -1,0 +1,84 @@
+n: 13
+stage: C
+stage_title: អន្តរកម្ម
+kind: step
+title: ម៉ឺនុយលើរូបយន្ត
+concept: បញ្ជី + អថេរ + ព្រឹត្តិការណ៍ ជាចំណុចប្រទាក់
+hours: 2
+project: G8-C-connects
+goal: Rover ផ្ដល់ម៉ឺនុយលើអេក្រង់ខ្លួនឯង រុករកដោយ joystick ដែលដំណើរការការងារដែលបានជ្រើស។
+build: រូបយន្តដែលមានចំណុចប្រទាក់អ្នកប្រើ។
+builds_on:
+- ជំហានទី ១១ · ធាតុចូល
+- ជំហានទី ៦ · បញ្ជី
+- ជំហានទី ៩ · ការងារ
+teach:
+- ម៉ឺនុយគឺជារបស់បីដែលអ្នកមានរួច ដាក់បញ្ចូលគ្នា៖ <b>បញ្ជី</b> នៃជម្រើស, <b>អថេរ</b> ផ្ទុកថាមួយណាត្រូវបានបន្លិច
+  និង <b>ព្រឹត្តិការណ៍</b> ដែលរំកិលការបន្លិច និងជ្រើស។ គ្មានអ្វីថ្មីនៅទីនេះទេ — ដែលជាចំណុចសំខាន់ ហើយគួរនិយាយ
+  ព្រោះសិស្សកម្រកត់សម្គាល់ពេលពួកគេឆ្លងកាត់ពីការចម្លងទៅការតែង។
+- ការរុំការបន្លិចពីក្រោមត្រឡប់មកលើវិញ ជាផ្នែកគួរឲ្យចាប់អារម្មណ៍ ហើយវាជាការសម្រេចចិត្ត មិនមែនច្បាប់ទេ៖
+  តើអ្វី <i>គួរ</i> កើតឡើងនៅចុងបញ្ជី? ការឈប់ និងការរុំ ទាំងពីរអាចការពារបាន។ ធ្វើឲ្យពួកគេជ្រើស ហើយការពារវា។
+guide:
+- label: ជម្រើស
+  value: បញ្ជីនៃឈ្មោះការងារ
+- label: ការបន្លិច
+  value: អថេរតែមួយ ជាសន្ទស្សន៍
+- label: ជ្រើស
+  value: joystick កណ្ដាល → កំណត់ការងារ
+- label: ឥដ្ឋ
+  value: ទំនេរ ៣ ម៉ែត្រ — ស្គ្រីបបើកបរនៅតែមាន
+steps:
+- time: 15′
+  text: រាយការងាររបស់រូបយន្តអ្នក។ បញ្ជីនោះជាម៉ឺនុយរបស់អ្នក — គ្មានកូដថ្មីត្រូវការដើម្បីមានមួយទេ។
+  expect: បញ្ជីសរសេរនៃការងាររូបយន្តរបស់អ្នក — ដែលជាម៉ឺនុយរួចទៅហើយ មុនកូដថ្មីណាមួយ។
+- time: 25′
+  text: បង្ហាញជម្រើសទាំងអស់លើអេក្រង់ ដោយសម្គាល់មួយបច្ចុប្បន្ន។ រំកិលការបន្លិចដោយ joystick។
+  expect: ជម្រើសទាំងអស់លើអេក្រង់ដោយមានមួយសម្គាល់ ហើយឧបករណ៍បញ្ជាផ្លាស់ទីសញ្ញាសម្គាល់ឡើងចុះ។
+- time: 25′
+  text: សម្រេចថាកើតអ្វីនៅចុងបញ្ជី។ អនុវត្តជម្រើសរបស់អ្នក ហើយការពារវាចំពោះក្រុមផ្សេង។
+  expect: ចម្លើយសម្រេច និងអនុវត្តរួច ថាមានអ្វីកើតឡើងនៅចុងបញ្ជី — និងការការពារវាដល់ក្រុមផ្សេង។
+- time: 25′
+  text: ភ្ជាប់ការជ្រើស៖ ការចុច joystick កំណត់អថេរការងារ ហើយរង្វិលជុំជំហានទី ៩ ទទួលយក។
+  expect: ការចុចឧបករណ៍បញ្ជាកំណត់ការងារ ហើយរង្វិលជុំជំហានទី ១០ បន្តពីទីនោះ។
+- time: 20′
+  text: ប្រគល់វាទៅអ្នកដែលមិនធ្លាប់ឃើញវា ហើយមើលពួកគេប្រើវាដោយគ្មានការណែនាំ។ នោះជាការសាកល្បងតែមួយគត់ដែលរាប់។
+  expect: នរណាម្នាក់ដែលមិនធ្លាប់ឃើញរូបយន្តប្រើម៉ឺនុយបានដោយគ្មានការណែនាំពីអ្នក។ នោះជាការសាកល្បងតែមួយគត់ដែលរាប់។
+- time: 10′
+  text: កត់ត្រាថាផ្នែកណានៃម៉ឺនុយជាកូដថ្មី និងផ្នែកណាប្រើឡើងវិញ។
+  expect: បន្ទាត់កំណត់ហេតុបែងចែកម៉ឺនុយជាកូដថ្មី និងអ្វីដែលប្រើឡើងវិញ។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\nwhen button A pressed\n  forever\n    encoder motor EM1 rotates at\
+    \ ((joystick LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n    if  button\
+    \  L1  pressed  then\n      grip\n    if  button  R1  pressed  then\n      release\n    if  button\
+    \  1  pressed  then\n      celebrate\n\nwhen CyberPi starts up\n  delete all of  menu\n  add  fetch\
+    \  to  menu\n  add  patrol  to  menu\n  add  dance  to  menu\n  set  pick  to 1\n  forever\n   \
+    \ clear screen\n    set  stop  to  ((length of menu) + 1)\n    count with  i  from 1 to (stop) by\
+    \ step 1 repeat\n      if  (i) = (pick)  then\n        print  join  PICK   (item (i) of menu)  and\
+    \ move to a newline\n      else\n        print  (item (i) of menu)  and move to a newline\n\nwhen\
+    \ joystick  pulled↓\n  change  pick  by 1\n  if  (pick) > (length of menu)  then\n    set  pick\
+    \  to 1\n\nwhen joystick  middle pressed\n  set  job  to  (item (pick) of menu)"
+tips:
+- ការគូរស្លាកឡើងវិញរាល់ជុំរង្វិលជុំគឺល្អ និងសាមញ្ញ។ បើវាភ្លឹបភ្លែត សម្អាតតិចជាង ជាជាងគូរតិចជាង។
+- ការសម្រេចចិត្តរុំ ជាជម្រើសរចនាពិត។ កុំប្រាប់ពួកគេចម្លើយ។
+- ម៉ឺនុយដែលគ្មាននរណាអាចប្រើដោយគ្មានការណែនាំ គឺជាម៉ឺនុយបរាជ័យ ទោះកូដល្អយ៉ាងណា។
+result:
+  scene: screen
+  params:
+    lines:
+    - ["> fetch", "#7dd3fc", 11, true]
+    - ["  patrol", "#facc15", 10, false]
+    - ["  deliver", "#22c55e", 10, false]
+    caption: the joystick moves a highlight and selects a job
+success:
+- ម៉ឺនុយយ៉ាងតិចបីជម្រើស អាចរុករក និងជ្រើសបាន
+- ការសម្រេចចិត្តដោយចេតនា និងការពារបាន អំពីអ្វីដែលកើតឡើងនៅចុងបញ្ជី
+- មនុស្សចម្លែកបានប្រើវាដោយគ្មានការប្រាប់ថាធ្វើដូចម្ដេច
+check:
+- do: down
+  see: The arrow moves to the next job on the screen.
+- do: mid
+  see: The job you picked becomes the robot's job.
+parts:
+- id: robot_tank

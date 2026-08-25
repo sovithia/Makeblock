@@ -1,0 +1,103 @@
+n: 12
+title: Reusable Arm Code
+goal: pick(), place(), carry_to() — the mission’s verbs, plus an honest failure log.
+builds_on:
+- S11 · a grip whose personality is known
+- S9 · drive_cm(), the ruler everything else is built on
+teach:
+- 'Yesterday’s working sequences become a library: <code>pick()</code> (open, close the last centimetres,
+  grip, settle), <code>place()</code> (release, retreat before turning), <code>carry_to(cm)</code> (a
+  slower <code>drive_cm</code>, because a carried block slips). The capstone mission will then read like
+  English: <code>follow_line() … pick() … carry_to(30) … place()</code>. When top-level code reads like
+  the mission description, the decomposition is right — that’s the design smell to teach. Note what each
+  verb is really hiding: <code>pick()</code> hides the mirrored servo angles from Session 10, <code>carry_to()</code>
+  hides Session 9’s calibration constant. Three sessions of work, four words of code.'
+- 'Second deliverable: the <b>failure log</b>. Run pick() twenty times; count successes; describe every
+  failure precisely (‘block rotated in the grip during the turn’, not ‘it dropped it’). An 85% grip
+  is fine — an <i>unknown</i>-% grip is a time bomb in a scored mission. Reliability engineering in
+  one lunch-sized lesson: measure it, then decide whether to fix it or design around it (e.g. re-grip
+  attempt on failure — which is Session 19’s recovery topic, seeded today).'
+steps:
+- time: 18′
+  text: Extract pick(), place(), carry_to() from yesterday’s code; parameters where useful.
+- time: 15′
+  text: 'Failure log: 20 pick() runs, success count + precise failure notes.'
+- time: 8′
+  text: 'Library swap-test (the Session 2 ritual): another pair runs your pick() cold.'
+- time: 4′
+  text: 'On your lesson sheet: your reliability %, and fix-it vs. design-around-it — which will you choose?'
+code:
+  lang: python
+  source: |-
+    def pick():
+        grip_open()
+        # creep the last few centimetres
+        drive_cm(6, speed=20)
+        grip_close()
+        time.sleep(0.3)   # servos need a beat
+
+    def place():
+        grip_open()
+        time.sleep(0.2)
+        # retreat BEFORE turning, or the arms
+        # sweep the block out of the zone again
+        drive_cm(-8, speed=20)
+
+    def carry_to(cm):
+        # slower: a carried block slips
+        drive_cm(cm, speed=25)
+tips:
+- The sleep after grip_close matters — servos need a beat; its absence is the ghost bug of the week.
+- 'place() retreats before it turns. Skip that and the arms sweep the block out of the zone they just
+  put it in: a bug that looks like a grip failure and is not.'
+- Failure descriptions must name conditions; ‘sometimes’ is banned vocabulary.
+result:
+  scene: worksheet
+  params:
+    caption: the failure log — reliability measured, not assumed
+    items:
+    - 'pick() runs: 20'
+    - 'success: 17  (85%)'
+    - 'fail: rotates in the turn'
+    - 'fail: edge grip on tilt'
+    - 'plan: slower turn, 20 RPM'
+success:
+- pick()/place()/carry_to() pass the swap-test
+- 20-run failure log with precise descriptions
+- A reliability decision made and written down
+parts:
+- id: robot_arm
+- id: tablet
+- id: foam
+  note: failure log — 20 runs
+long:
+  goal: A known reliability percentage for pick(), and a written decision about what to do with that number.
+  recap:
+    time: 10′
+    text: Twenty runs, counted honestly, before improving anything. Whatever number comes out is the number
+      the mission has to be designed around — and a team that does not know its own number will discover it
+      during a scored run in Session 20 instead, which is the expensive way.
+  extend:
+  - spec: swap test passed
+    text: Another pair runs your pick() cold, with no explanation.
+  - spec: 20 runs, precise failures
+    text: Every failure described by its condition — "the block rotated in the grip during the 90° turn",
+      not "it dropped it".
+  - spec: decision written
+    text: Fix it, or design around it. Chosen, justified from the number, and written down.
+  log:
+    time: 10′
+    text: The failure log with conditions named, and the reliability percentage stated plainly. An 85% grip
+      is entirely workable; an unknown-percentage grip is a time bomb in a scored mission, and saying so
+      now is what saves Session 18.
+  review:
+    time: 15′
+    text: Pairs present their percentage and their decision. Criteria — does the decision follow from the
+      number? Designing around a 60% grip is engineering; hoping about it is not, and the two look identical
+      until Demo Day.
+  parts:
+  - id: foam
+  - id: tablet
+  success:
+  - A reliability percentage measured over 20 runs and stated plainly
+  - A fix-it or design-around-it decision written and justified by the number

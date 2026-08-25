@@ -1,0 +1,431 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>G7 Step 20 · ការដើរតាមខ្សែ</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "mBot2 Rover Program · ថ្នាក់ទី ៧ · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #0a5c8c 70%, #0e7fc1 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #7dd3fc; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #7dd3fc; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #7dd3fc; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #0e7fc1; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #e3f1fa; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #0a5c8c; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #e3f1fa; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #0a5c8c; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #0a5c8c;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #0e7fc1; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #0a5c8c; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #0e7fc1;
+  border-radius: 8px; background: #e3f1fa; font-size: 8.4pt; font-weight: bold;
+  color: #0a5c8c; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #e3f1fa; border-left: 3px solid #0e7fc1;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #0a5c8c; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #0a5c8c; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #0a5c8c; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #0e7fc1; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #0a5c8c; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #0a5c8c; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #0e7fc1; background: #e3f1fa; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #0e7fc1; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #0a5c8c; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #0e7fc1; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #e3f1fa; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #0a5c8c; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #0a5c8c; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #e3f1fa; border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #0e7fc1; }
+.result li.xtra { color: #0a5c8c; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+body, .chrome, .buildson {
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN", Helvetica, Arial, sans-serif;
+  line-height: 1.62;
+}
+/* headings carry coeng too, and were tuned tight for Latin caps */
+.cover h1 { line-height: 1.35; font-size: 24pt; }
+.shead h2 { font-size: 13.5pt; line-height: 1.4; }
+h2.section { line-height: 1.4; }
+/* uppercase/letter-spacing are meaningless in Khmer and actively break clusters
+   by pulling diacritics away from their base consonant */
+.shead .sno, h4.blk, .codelabel, .guidebox b.h, .result .rk, .mats .mhead, .badge span,
+.cover .kicker, .vtag {
+  text-transform: none; letter-spacing: 0;
+}
+/* buy back the vertical space the extra leading costs, so a session still fits
+   one A4 page — measured against the English layout, not guessed */
+body { font-size: 8.8pt; }
+.teach p, table.flow td, .tips, .result li, .lane p { font-size: 8.3pt; }
+.goal { font-size: 8.9pt; }
+.guidebox { font-size: 7.6pt; line-height: 1.5; }
+.chal li { font-size: 8pt; }
+/* the code box stays Latin monospace — mBlock block names are not translated */
+.codebox { font-family: "DejaVu Sans Mono", monospace; line-height: 1.45; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style><style>
+@page { size: A4; margin: 12mm 13mm; }
+/* Each lesson is a table so that its heading lives in a <thead>, which the
+   print engine repeats on every page the lesson spills onto. Late lessons
+   carry a whole stage's cumulative script and genuinely need two sheets;
+   without this, sheet two is a page of anonymous blocks. */
+.tsheet { width: 100%; border-collapse: collapse; break-after: page;
+  padding-bottom: 4mm; }
+.tsheet:last-child { break-after: auto; }
+.tsheet > thead > tr > td { padding: 0; }
+.tsheet > tbody > tr > td { padding: 0 0 4mm 0; }
+.thead { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 1.5mm;
+  padding-bottom: 1.2mm; border-bottom: 1.5px solid #e2e8f0; }
+.tno { font-size: 8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; }
+.tti { font-size: 12pt; font-weight: bold; }
+.tmeta { font-size: 8.4pt; color: #64748b; margin-bottom: 2.5mm; }
+.tmeta code { background: #f1f5f9; border-radius: 3px; padding: 0 1.2mm;
+  font-size: 8pt; }
+.trow { display: flex; flex-wrap: wrap; gap: 2mm 4mm; align-items: center;
+  margin-bottom: 2.5mm; font-size: 8.6pt; }
+.tdl { display: inline-block; font-weight: bold; text-decoration: none;
+  border: 1.2px solid currentColor; border-radius: 5px; padding: 0.8mm 2.4mm; }
+.tnew { font-size: 8.4pt; color: #334155; margin: 0 0 2.5mm 0; }
+.tnew b { color: #16a34a; }
+.tlist { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.tlist th { text-align: left; font-size: 7.4pt; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #64748b; padding: 1.4mm 2mm; }
+.tlist td { padding: 1.6mm 2mm; border-top: 1px solid #eef2f7;
+  vertical-align: baseline; }
+.tlist tr.cp td { background: #fffbeb; }
+.tlist code { font-size: 8.4pt; background: #f1f5f9; border-radius: 3px;
+  padding: 0 1.2mm; }
+.tnote { border-left: 3px solid #f59e0b; background: #fffbeb; padding: 2mm 3mm;
+  border-radius: 0 6px 6px 0; font-size: 8.8pt; margin-bottom: 4mm; }
+.tgrid { display: flex; flex-wrap: wrap; gap: 4mm; }
+.tcard { flex: 1 1 78mm; border: 1px solid #e2e8f0; border-radius: 9px;
+  padding: 3mm 3.5mm; }
+.tcard h3 { margin: 0 0 1mm 0; font-size: 12pt; }
+@media print { .noprint { display: none } }
+.inline-solution { break-before: page; page-break-before: always; margin-top: 8mm; }
+.inline-solution .tsheet { break-after: auto; }
+.solution-head { border-left: 4px solid #f59e0b; background: #fffbeb;
+  border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 4mm; }
+.solution-head h2 { margin: 0 0 1mm 0; font-size: 16pt; }
+.solution-head p { margin: 0; font-size: 8.8pt; color: #64748b; }
+@media print {
+  html.student-copy .inline-solution { display: none !important; }
+  html.solution-copy body > :not(.inline-solution) { display: none !important; }
+  html.solution-copy .inline-solution { break-before: auto; page-break-before: auto;
+    margin-top: 0; }
+}
+</style>
+<script>
+function printStudentLesson() {
+  document.documentElement.classList.add('student-copy');
+  window.print();
+}
+function printTeacherSolution() {
+  document.documentElement.classList.add('solution-copy');
+  window.print();
+}
+window.addEventListener('afterprint', function () {
+  document.documentElement.classList.remove('student-copy');
+  document.documentElement.classList.remove('solution-copy');
+});
+</script>
+</head><body><div class="chrome"><a href="../index.html">គ្រប់ថ្នាក់</a><span class="dim">·</span><a href="steps.html">ថ្នាក់ទី ៧</a><span class="dim">·</span><span>ការដើរតាមខ្សែ · ~36 h</span><span class="spacer"></span><a href="step-19.html">← ជំហានទី ១៩</a><a href="step-21.html">ជំហានទី ២១ →</a><a href="#" onclick="printStudentLesson();return false">🖨 បោះពុម្ពតែមេរៀន</a><a href="#" onclick="printTeacherSolution();return false">🖨 បោះពុម្ពតែចម្លើយ</a><a class="glossary-link" href="../glossary.html" target="_blank" rel="noopener noreferrer">បើកសទ្ទានុក្រមក្នុងផ្ទាំងថ្មី</a><span class="langtog" role="group" aria-label="ភាសា"><a href="../../grade7/step-20.html" lang="en" hreflang="en">EN</a><span class="on" lang="km">ខ្មែរ</span></span></div>
+<div class="sess">
+  <div class="shead" style="background: linear-gradient(110deg, #0a5c8c, #f59e0b)">
+    <div class="sno">ជំហានទី ២០ &nbsp;·&nbsp; ~36 ម៉ោង &nbsp;·&nbsp; រូបយន្តមានរបៀបរៀបរយ</div>
+    <h2>ការដើរតាមខ្សែ</h2>
+  </div>
+  <div class="goal"><b>គោលដៅនៃពីរម៉ោងនេះ៖</b> កម្មវិធីដើរតាមខ្សែសរសេរជាប្លុកមានឈ្មោះតែមួយ ជាមួយកំហុសឃើញលើអេក្រង់ — ហើយការរញ្ជួយត្រូវដាក់ឈ្មោះតែមិនកែ។ </div>
+  <div class="stripbox"><span class="k">ឈ្មោះគម្រោង</span> <code class="proj">G7-D-20</code><br/><span class="k">គំនិតថ្មី</span> <b>លក្ខខណ្ឌលើបញ្ហាបញ្ជាពិត</b><br/><span class="k">អ្នកសាងសង់</span> follow_line — បេះដូងនៃបេសកកម្ម។<br/><span class="k">ប្លុក</span> <span class="bpill" style="background:#ffbf00;border-color:#ffbf00;color:#1e293b">Events</span><span class="bpill" style="background:#ffab19;border-color:#ffab19;color:#1e293b">Control</span><span class="bpill" style="background:#ff8c1a;border-color:#ff8c1a;color:#1e293b">Variables</span><span class="bpill" style="background:#ff6680;border-color:#ff6680;color:#1e293b">My Blocks</span><span class="bpill" style="background:#8b3fc6;border-color:#8b3fc6;color:#ffffff">Display</span><span class="bpill" style="background:#9966ff;border-color:#9966ff;color:#ffffff">LED</span><span class="bpill" style="background:#cf63cf;border-color:#cf63cf;color:#ffffff">Audio</span><span class="bpill" style="background:#4c97ff;border-color:#4c97ff;color:#ffffff">mBot2 Chassis</span><span class="bpill" style="background:#3fa373;border-color:#3fa373;color:#ffffff">Quad RGB Sensor</span></div>
+  
+  <div class="mats"><div class="mhead">You need — pieces &amp; materials</div><div class="mat"><div class="mimg"><img src="../assets/parts/robot_wheel.png" alt="mBot2 ដែលផ្គុំរួច"/></div><div class="mlbl">mBot2 ដែលផ្គុំរួច</div><div class="pill" style="background:#2563eb">ប្រអប់ mBot2</div></div><div class="mat"><div class="mimg"><img src="../assets/parts/quadrgb.png" alt="Quad RGB Sensor"/></div><div class="mlbl">Quad RGB Sensor</div><div class="pill" style="background:#2563eb">ប្រអប់ mBot2</div></div><div class="mat"><div class="mimg"><img src="../assets/parts/map.png" alt="ផែនទីដើរតាមខ្សែ"/></div><div class="mlbl">ផែនទីដើរតាមខ្សែ</div><div class="pill" style="background:#2563eb">ប្រអប់ mBot2</div></div><div class="mat"><svg viewBox="0 0 64 44" width="52"><g><circle cx="28" cy="20" r="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><circle cx="28" cy="20" r="5" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><rect x="38" y="26" width="18" height="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/></g></svg><div class="mlbl">កាសែតបិទ</div><div class="mnote">to tape the map flat</div><div class="pill" style="background:#64748b">ថ្នាក់រៀន</div></div><div class="mat"><svg viewBox="0 0 64 44" width="52"><g><circle cx="32" cy="24" r="14" fill="#fff" stroke="#475569" stroke-width="2.5"/><rect x="29" y="5" width="6" height="5" rx="1" fill="#475569"/><line x1="32" y1="24" x2="32" y2="14" stroke="#ef4444" stroke-width="2"/><line x1="32" y1="24" x2="39" y2="27" stroke="#475569" stroke-width="2"/></g></svg><div class="mlbl">នាឡិកាចាប់ម៉ោង</div><div class="pill" style="background:#64748b">ថ្នាក់រៀន</div></div></div>
+  
+  <table class="cols"><tr>
+    <td class="l">
+      <h4 class="blk">បង្រៀន — គំនិតគោល</h4>
+      <div class="teach"><p>ក្រិតជាមុនសិន គ្រប់ដងតែម្ដង៖ <b>quad rgb sensor performs calibration</b> បង្រៀនឧបករណ៍ចាប់សញ្ញាថាឥដ្ឋនេះ និងពន្លឺនេះមើលទៅយ៉ាងណា។ រំលងវា ហើយគ្មានអ្វីដំណើរការ; ធ្វើវាដោយស្មោះ ហើយទុក្ខព្រួយភាគច្រើននៃការដើរតាមខ្សែបាត់។ ធ្វើវាជាពិធី ដូចការពិនិត្យការតភ្ជាប់។</p><p>កម្មវិធីដើរតាមខ្សែខ្លួនវាគឺជាការសម្រេចចិត្តបី — ខ្សែនៅក្រោមឧបករណ៍ឆ្វេង ក្រោមស្ដាំ ឬត្រង់ទៅមុខ — រុំក្នុងប្លុកឈ្មោះ <b>follow_line</b>។ ដាក់ <b>deviation</b> របស់ឧបករណ៍ចាប់សញ្ញាលើអេក្រង់ពេលវាដំណើរការ ហើយមើលលេខយោលពីអវិជ្ជមាន ទៅសូន្យ ទៅវិជ្ជមាន ពេលរូបយន្តរាវរកឆ្លងកាត់ខ្សែ។ ការយោលនោះគឺ <b>ការរញ្ជួយ</b>។ ដាក់ឈ្មោះវា សរសេរសំណួរលើក្ដារ ហើយ <i>កុំឆ្លើយវា</i> — ថ្នាក់ទី ៩ ចំណាយពីរវគ្គដើម្បីសម្លាប់វា ហើយការរៀបចំមានតម្លៃជាងការកែរហ័សឥឡូវនេះ។</p></div>
+    </td>
+    <td class="r">
+      <div class="guidebox"><b class="h">មគ្គុទ្ទេសក៍ចាប់ផ្ដើមរហ័ស — មេរៀននេះ</b><table><tr><td class="k">សាកល្បង</td><td>joystick middle → calibrate, then follow</td></tr><tr><td class="k">ជាមុនគ្រប់ដង</td><td>performs calibration</td></tr><tr><td class="k">មើល</td><td>deviation (-100…100) លើអេក្រង់</td></tr><tr><td class="k">ទុកចំហ</td><td>ការរញ្ជួយ — ថ្នាក់ទី ៩ ឆ្លើយវា</td></tr><tr><td class="k">ឥដ្ឋ</td><td>វគ្គខ្សែបិទកាសែត ប្រហែល ២ ម៉ែត្រ</td></tr></table></div>
+      
+      <div class="tips"><b>ប្រយ័ត្ន</b><ul><li>ក្រិតឡើងវិញរាល់ពេលឥដ្ឋឬពន្លឺប្ដូរ — រួមទាំងពេលព្រះអាទិត្យផ្លាស់ទី។ នេះមិនមែនជាជំនឿទេ វាជារបៀបដែលឧបករណ៍ចាប់សញ្ញាដំណើរការ។</li><li>កាសែតដែលកោង និងក្រដាសរលោង បញ្ឆោតឧបករណ៍ចាប់សញ្ញាទាំងពីរ។ បិទផែនទីឲ្យរាបគ្រប់គែម។</li><li><b>កុំឲ្យនរណាប្រើ deviation ដើម្បីបញ្ជាទិសនៅឡើយ</b> ទោះល្បួងយ៉ាងណា។ ការមើលវាជាចំណុចទាំងមូលនៃថ្ងៃនេះ; ថ្នាក់ទី ៩ ប្រែវាទៅជាការបញ្ជា ហើយមេរៀននោះគួរការពារ។</li></ul></div>
+    </td>
+  </tr></table>
+  <h4 class="blk">លំដាប់មេរៀន — មួយនាទី‑មួយនាទី</h4>
+  <div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">15′</span><span class="phx">ក្រិត។ រួចរំលងការក្រិតដោយចេតនាម្ដង ហើយដំណើរការវា — មើលវាបរាជ័យ។ ឥឡូវគ្មាននរណាភ្លេចទេ។</span></div><div class="phblocks"><div class="hnew"><div class="hchip"><svg class="bsvg" width="57.56mm" height="8.54mm" viewBox="0 0 297 44"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 288.72 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#3fa373" stroke="#32825c"/><text class="bl" x="16.0" y="20.0">quad rgb sensor</text><rect class="bm" x="118.0" y="8.0" width="34.7" height="24" rx="4"/><text class="bl" x="126.0" y="20.0">1</text><path class="bc" d="M 140.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="160.7" y="20.0">performs calibration</text></g></svg></div><div class="hnote"><span class="newtag">ថ្មី</span>Teaches the line sensor what your line and your floor look like. Redo it whenever the floor or the lighting changes.</div></div></div><div class="phexp"><span class="phk">✓</span>ឧបករណ៍ចាប់សញ្ញាបានក្រិត និងការចងចាំពីអ្វីដែលកើតឡើងពេលអ្នករំលងការក្រិតដោយចេតនា។</div></div><div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">25′</span><span class="phx">សាងសង់ follow_line ជាប្លុករបស់វាផ្ទាល់៖ ឧបករណ៍ឆ្វេង ឧបករណ៍ស្ដាំ បើមិនដូច្នេះទេ ត្រង់។</span></div><div class="phblocks"><div class="hnew"><div class="hchip"><svg class="bsvg" width="19.02mm" height="7.76mm" viewBox="0 0 98 40"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 90.01599999999999 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">follow_line</text></g></svg></div><div class="hnote"><span class="newtag">ថ្មី</span>Your own block holding the whole line-following decision, so the mission can call it without repeating it.</div></div><div class="hchips"><div class="hchip"><svg class="bsvg" width="21.08mm" height="26.38mm" viewBox="0 0 109 136"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 100.664 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 56 a 4,4 0 0 0 4,4 H 100.664 a 4,4 0 0 1 4,4 V 88 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 108 a 4,4 0 0 0 4,4 H 100.664 a 4,4 0 0 1 4,4 V 128 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">if</text><rect class="bf" x="31.3" y="8.0" width="24.0" height="24" rx="4"/><text class="bft" x="43.3" y="20.0"></text><text class="bl" x="63.3" y="20.0">then</text><text class="bl" x="16.0" y="76.0">else</text></g></svg></div></div></div><div class="phexp"><span class="phk">✓</span>ប្លុក follow_line ដែលឆែកឆ្វេង ឆែកស្ដាំ ហើយបើមិនដូច្នេះទេ បើកត្រង់។</div></div><div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">25′</span><span class="phx">រត់ជុំលើផ្លូវ។ ដាក់ deviation លើអេក្រង់ ហើយមើលវាយោលពេលរូបយន្តបើកបរ។</span></div><div class="phblocks"><div class="hchips"><div class="hchip"><svg class="bsvg" width="79.04mm" height="8.54mm" viewBox="0 0 407 44"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 399.40799999999996 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#8b3fc6" stroke="#6f329e"/><text class="bl" x="16.0" y="20.0">show label</text><rect class="bm" x="85.4" y="8.0" width="34.7" height="24" rx="4"/><text class="bl" x="93.4" y="20.0">1</text><path class="bc" d="M 108.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="128.0" y="8.0" width="24.0" height="24" rx="4"/><text class="bft" x="140.0" y="20.0"></text><text class="bl" x="160.0" y="20.0">at x:</text><rect class="bf" x="192.7" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="204.7" y="20.0"></text><text class="bl" x="224.7" y="20.0">y</text><rect class="bf" x="239.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="251.4" y="20.0"></text><text class="bl" x="271.4" y="20.0">by</text><rect class="bm" x="293.4" y="8.0" width="58.7" height="24" rx="4"/><text class="bl" x="301.4" y="20.0">small</text><path class="bc" d="M 340.1,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="360.1" y="20.0">pixel</text></g></svg></div></div></div><div class="phexp"><span class="phk">✓</span>ជុំពេញមួយ ដោយលេខគម្លាតយោលលើអេក្រង់ខណៈរូបយន្តកំពុងបើក។</div></div><div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">20′</span><span class="phx">គូរការរញ្ជួយក្នុងកំណត់ហេតុ។ ហេតុអ្វីវាដើរវៀច? ប្រមូលសម្មតិកម្មលើក្ដារ ហើយទុកពួកវានៅទីនោះ។</span></div><div class="phexp"><span class="phk">✓</span>រូបគូរនៃការយោលក្នុងកំណត់ហេតុ និងសម្មតិកម្មរបស់ថ្នាក់ថាហេតុអ្វី ទុកនៅលើក្ដារ។</div></div><div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">25′</span><span class="phx">ជុំចាប់ម៉ោង។ ប្ដូរលេខមួយក្នុងមួយដង — ល្បឿនគោល ឬល្បឿនបញ្ជាទិសទាំងពីរ — ហើយកត់ត្រាអ្វីដែលវាធ្វើ។</span></div><div class="phexp"><span class="phk">✓</span>ជុំកំណត់ម៉ោង ដែលមានលេខតែមួយប្ដូរក្នុងមួយជុំ សរសេរទុករាល់ដងជាមួយលទ្ធផល។</div></div><div class="ph" style="border-left-color:#0e7fc1"><div class="phhead"><span class="pht">10′</span><span class="phx">កត់ត្រាជុំល្អបំផុតរបស់អ្នក និងលេខដែលបង្កើតវា។ ជំហានទី ២២ ត្រូវការពួកវា។</span></div><div class="phexp"><span class="phk">✓</span>ជុំល្អបំផុតរបស់អ្នក និងលេខដែលបង្កើតវា។ ជំហានទី ២៤ ត្រូវការវា។</div></div>
+  
+  
+  <div class="result">
+    <span class="rk">◉ លទ្ធផលរំពឹងទុកនៅចុងបញ្ចប់មេរៀននេះ</span>
+    <table><tr>
+      <td class="img"><svg viewBox="0 0 315 148" width="268"><g font-family="Helvetica"><path d="M 20,110 C 90,110 90,45 160,45 C 230,45 230,95 295,95" fill="none" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/><path d="M 20,104 C 55,118 75,88 100,102 C 125,116 130,40 160,55 C 195,68 205,80 240,102 C 260,112 275,86 295,90" fill="none" stroke="#0e7fc1" stroke-width="2" stroke-dasharray="4,3"/><g transform="translate(160,45) rotate(8) scale(0.95)"><rect x="-16" y="-13" width="32" height="26" rx="6" fill="#0e7fc1"/><rect x="-19" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-19" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-9" y="-8" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-3" r="2" fill="#facc15"/><circle cx="4" cy="-3" r="2" fill="#facc15"/><path d="M -4,1 Q 0,4 4,1" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#0a5c8c"/></g><text x="157" y="140" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">robot follows the line — notice the zig-zag “wobble”</text></g></svg></td>
+      <td class="crit"><div class="checks"><div class="ckrow"><div class="cktrig" style="background:#ffbf00"><span class="ckg">●</span><span class="ckk">PUSH IN</span></div><div class="cksee">It follows the black line and shows how far off it is.</div></div></div><div class="tcheck"><span class="tck">ការត្រួតពិនិត្យរបស់គ្រូ</span>
+        <ul><li>ជុំពេញមួយដោយគ្មានជំនួយ ជាមួយ follow_line ជាប្លុកមានឈ្មោះ</li><li>លេខ deviation នៅលើអេក្រង់ ហើយយោលឲ្យឃើញ</li><li>ការរញ្ជួយត្រូវបានគូរ សន្មត់ ហើយទុកមិនឆ្លើយ</li></ul></div></td>
+    </tr></table>
+  </div>
+  <div class="nextlesson"><span class="nlk">មេរៀនបន្ទាប់</span><a href="step-21.html">ជំហានទី ២១ · រូបយន្តមានរបៀប &nbsp;→</a></div>
+</div><section class="inline-solution"><div class="solution-head"><h2>ចម្លើយសម្រាប់គ្រូ</h2><p>បោះពុម្ពច្បាប់ពេញលេញមួយសម្រាប់គ្រូ។ ប្រើ «បោះពុម្ពតែមេរៀន» សម្រាប់ច្បាប់សិស្ស។</p></div><table class="tsheet"><thead><tr><td><div class="thead"><span class="tno" style="color:#0a5c8c">ជំហានទី ២០</span><span class="tti">ការដើរតាមខ្សែ</span><span class="tno">G7-D-20</span></div></td></tr></thead><tbody><tr><td><div class="tmeta">លក្ខខណ្ឌលើបញ្ហាបញ្ជាពិត</div><div class="trow noprint"><a class="tdl" style="color:#0a5c8c" href="../assets/projects/G7-D-20.mblock">ទាញយក .mblock</a></div><p class="tnew"><b>ថ្មី</b> <code>follow_line</code> — Your own block holding the whole line-following decision, so the mission can call it without repeating it. · <code>quad rgb sensor 1 performs calibration</code> — Teaches the line sensor what your line and your floor look like. Redo it whenever the floor or the lighting changes.</p><div class="blockstack"><svg class="bsvg" width="61.96mm" height="39.58mm" viewBox="0 0 319 204"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 140.032 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF6680" stroke="#cc5166"/><text class="bl" x="16.0" y="20.0">define</text><rect class="bf" x="59.3" y="8.0" width="68.7" height="24" rx="4"/><text class="bft" x="93.7" y="20.0">celebrate</text></g><g transform="translate(1.0,41.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 311.384 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#9300D8" stroke="#7500ac"/><text class="bl" x="16.0" y="20.0">LED</text><rect class="bm" x="48.0" y="8.0" width="41.3" height="24" rx="4"/><text class="bl" x="56.0" y="20.0">all</text><path class="bc" d="M 77.3,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="97.3" y="20.0">displays R</text><rect class="bf" x="165.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="177.4" y="20.0">0</text><text class="bl" x="197.4" y="20.0">G</text><rect class="bf" x="214.7" y="8.0" width="36.0" height="24" rx="12.0"/><text class="bft" x="232.7" y="20.0">255</text><text class="bl" x="258.7" y="20.0">B</text><rect class="bf" x="275.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="287.4" y="20.0">0</text></g><g transform="translate(1.0,81.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 98.68 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#AB47BC" stroke="#883896"/><text class="bl" x="16.0" y="20.0">play</text><rect class="bm" x="48.0" y="8.0" width="38.7" height="24" rx="4"/><text class="bl" x="56.0" y="20.0">hi</text><path class="bc" d="M 74.7,18.0 l 8,0 l -4,5 Z"/></g><g transform="translate(1.0,121.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 235.88799999999998 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="88.0" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns right</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="112.0" y="8.0" width="36.0" height="24" rx="12.0"/><text class="bft" x="130.0" y="20.0">360</text><text class="bl" x="156.0" y="20.0">° until done</text></g><g transform="translate(1.0,161.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 146.668 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#9300D8" stroke="#7500ac"/><text class="bl" x="16.0" y="20.0">turn off LED</text><rect class="bm" x="93.3" y="8.0" width="41.3" height="24" rx="4"/><text class="bl" x="101.3" y="20.0">all</text><path class="bc" d="M 122.7,18.0 l 8,0 l -4,5 Z"/></g></svg><svg class="bsvg" width="92.16mm" height="58.20mm" viewBox="0 0 475 300"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 114.688 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF6680" stroke="#cc5166"/><text class="bl" x="16.0" y="20.0">define</text><rect class="bf" x="59.3" y="8.0" width="43.3" height="24" rx="4"/><text class="bft" x="81.0" y="20.0">scan</text></g><g transform="translate(1.0,41.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 165.99200000000002 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">set</text><rect class="bm" x="41.3" y="8.0" width="61.3" height="24" rx="4"/><text class="bl" x="49.3" y="20.0">found</text><path class="bc" d="M 90.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="110.7" y="20.0">to</text><rect class="bf" x="130.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="142.0" y="20.0">0</text></g><g transform="translate(1.0,81.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 96.012 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 192 a 4,4 0 0 0 4,4 H 96.012 a 4,4 0 0 1 4,4 V 212 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">repeat</text><rect class="bf" x="60.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="72.0" y="20.0">4</text></g><g transform="translate(17.0,121.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 229.216 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="88.0" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns right</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="112.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="126.7" y="20.0">90</text><text class="bl" x="149.3" y="20.0">° until done</text></g><g transform="translate(17.0,161.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 451.07599999999996 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 92 a 4,4 0 0 0 4,4 H 451.07599999999996 a 4,4 0 0 1 4,4 V 112 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="28.0">if</text><g transform="translate(31.3,8.0)"><path d="M 20.0,0 H 354.412 L 374.412,20.0 L 354.412,40 H 20.0 L 0,20.0 Z" fill="#59c059" stroke="#479947"/><g transform="translate(16.0,4.0)"><path d="M 16.0,0 H 274.06 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#0AAD80" stroke="#088a66"/><text class="bl" x="12.0" y="16.0">ultrasonic 2</text><rect class="bm" x="87.4" y="4.0" width="34.7" height="24" rx="4"/><text class="bl" x="95.4" y="16.0">1</text><path class="bc" d="M 110.0,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="130.0" y="16.0">distance to an object (cm)</text></g><text class="bl" x="314.1" y="20.0">&lt;</text><rect class="bf" x="329.1" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="343.7" y="20.0">30</text></g><text class="bl" x="413.7" y="28.0">then</text></g><g transform="translate(33.0,217.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 165.99200000000002 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">set</text><rect class="bm" x="41.3" y="8.0" width="61.3" height="24" rx="4"/><text class="bl" x="49.3" y="20.0">found</text><path class="bc" d="M 90.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="110.7" y="20.0">to</text><rect class="bf" x="130.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="142.0" y="20.0">1</text></g></svg><svg class="bsvg" width="104.52mm" height="44.23mm" viewBox="0 0 539 228"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 208.67999999999998 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF6680" stroke="#cc5166"/><text class="bl" x="16.0" y="24.0">define</text><g transform="translate(59.3,8.0)"><path d="M 16.0,0 H 121.33999999999997 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#ff6680" stroke="#cc5166"/><rect class="bf" x="12.0" y="4.0" width="60.0" height="24" rx="4"/><text class="bft" x="42.0" y="16.0">turn_by</text><g transform="translate(80.0,4.0)"><path d="M 12.0,0 H 33.336 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">deg</text></g></g></g><g transform="translate(1.0,49.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 306.048 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="16.0" y="20.0">reset encoder motor</text><rect class="bm" x="140.0" y="8.0" width="70.7" height="24" rx="4"/><text class="bl" x="148.0" y="20.0">(1) EM1</text><path class="bc" d="M 198.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="218.7" y="20.0">rotated angle</text></g><g transform="translate(1.0,89.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 530.7479999999999 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="16.0" y="20.0">encoder motor EM1</text><text class="bl" x="136.0" y="20.0">rotates at</text><rect class="bf" x="198.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="212.7" y="20.0">30</text><text class="bl" x="235.4" y="20.0">RPM, encoder motor EM2</text><text class="bl" x="388.7" y="20.0">rotates at</text><rect class="bf" x="450.7" y="8.0" width="33.3" height="24" rx="12.0"/><text class="bft" x="467.4" y="20.0">-30</text><text class="bl" x="492.1" y="20.0">RPM</text></g><g transform="translate(1.0,129.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 476.912 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="28.0">wait until</text><g transform="translate(76.0,8.0)"><path d="M 20.0,0 H 368.904 L 388.904,20.0 L 368.904,40 H 20.0 L 0,20.0 Z" fill="#59c059" stroke="#479947"/><g transform="translate(16.0,4.0)"><path d="M 16.0,0 H 272.56 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="12.0" y="16.0">encoder motor</text><rect class="bm" x="104.0" y="4.0" width="70.7" height="24" rx="4"/><text class="bl" x="112.0" y="16.0">(1) EM1</text><path class="bc" d="M 162.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="182.7" y="16.0">rotated angle (°)</text></g><text class="bl" x="312.6" y="20.0">&gt;</text><g transform="translate(327.6,8.0)"><path d="M 12.0,0 H 33.336 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">deg</text></g></g></g><g transform="translate(1.0,185.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 190.024 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="16.0" y="20.0">stop encoder motor</text><rect class="bm" x="136.7" y="8.0" width="41.3" height="24" rx="4"/><text class="bl" x="144.7" y="20.0">all</text><path class="bc" d="M 166.0,18.0 l 8,0 l -4,5 Z"/></g></svg><svg class="bsvg" width="65.71mm" height="36.47mm" viewBox="0 0 339 188"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 240.72 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF6680" stroke="#cc5166"/><text class="bl" x="16.0" y="24.0">define</text><g transform="translate(59.3,8.0)"><path d="M 16.0,0 H 153.38 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#ff6680" stroke="#cc5166"/><rect class="bf" x="12.0" y="4.0" width="90.7" height="24" rx="4"/><text class="bft" x="57.4" y="16.0">drive_square</text><g transform="translate(110.7,4.0)"><path d="M 12.0,0 H 34.68 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">size</text></g></g></g><g transform="translate(1.0,49.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 96.012 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 112 a 4,4 0 0 0 4,4 H 96.012 a 4,4 0 0 1 4,4 V 132 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">repeat</text><rect class="bf" x="60.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="72.0" y="20.0">4</text></g><g transform="translate(17.0,89.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 314.712 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="113.4" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">moves forward</text><path class="bc" d="M 117.4,18.0 l 8,0 l -4,5 Z"/><g transform="translate(137.4,8.0)"><path d="M 12.0,0 H 34.68 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">size</text></g><rect class="bm" x="192.0" y="8.0" width="45.3" height="24" rx="4"/><text class="bl" x="200.0" y="20.0">cm</text><path class="bc" d="M 225.4,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="245.4" y="20.0">until done</text></g><g transform="translate(17.0,129.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 92.02 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">turn_by  90</text></g></svg><svg class="bsvg" width="109.95mm" height="70.62mm" viewBox="0 0 567 364"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 149.356 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF6680" stroke="#cc5166"/><text class="bl" x="16.0" y="20.0">define</text><rect class="bf" x="59.3" y="8.0" width="78.0" height="24" rx="4"/><text class="bft" x="98.3" y="20.0">follow_line</text></g><g transform="translate(1.0,41.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 476.71599999999995 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 84 a 4,4 0 0 0 4,4 H 476.71599999999995 a 4,4 0 0 1 4,4 V 116 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 296 a 4,4 0 0 0 4,4 H 476.71599999999995 a 4,4 0 0 1 4,4 V 316 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="24.0">if</text><g transform="translate(31.3,8.0)"><path d="M 16.0,0 H 384.05199999999996 L 400.05199999999996,16.0 L 384.05199999999996,32 H 16.0 L 0,16.0 Z" fill="#0AAD80" stroke="#088a66"/><text class="bl" x="16.0" y="16.0">quad rgb sensor</text><rect class="bm" x="118.0" y="4.0" width="34.7" height="24" rx="4"/><text class="bl" x="126.0" y="16.0">1</text><path class="bc" d="M 140.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="160.7" y="16.0">probe</text><rect class="bm" x="202.0" y="4.0" width="60.0" height="24" rx="4"/><text class="bl" x="210.0" y="16.0">(3) L1</text><path class="bc" d="M 250.0,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="270.0" y="16.0">detects</text><rect class="bm" x="320.0" y="4.0" width="48.7" height="24" rx="4"/><text class="bl" x="328.0" y="16.0">line</text><path class="bc" d="M 356.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="376.7" y="16.0">?</text></g><text class="bl" x="439.4" y="24.0">then</text><text class="bl" x="16.0" y="104.0">else</text></g><g transform="translate(17.0,89.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 526.752 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="16.0" y="20.0">encoder motor EM1</text><text class="bl" x="136.0" y="20.0">rotates at</text><rect class="bf" x="198.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="212.7" y="20.0">15</text><text class="bl" x="235.4" y="20.0">RPM, encoder motor EM2</text><text class="bl" x="388.7" y="20.0">rotates at</text><rect class="bf" x="450.7" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="465.4" y="20.0">55</text><text class="bl" x="488.1" y="20.0">RPM</text></g><g transform="translate(17.0,161.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 478.048 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 84 a 4,4 0 0 0 4,4 H 478.048 a 4,4 0 0 1 4,4 V 116 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 156 a 4,4 0 0 0 4,4 H 478.048 a 4,4 0 0 1 4,4 V 176 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="24.0">if</text><g transform="translate(31.3,8.0)"><path d="M 16.0,0 H 385.384 L 401.384,16.0 L 385.384,32 H 16.0 L 0,16.0 Z" fill="#0AAD80" stroke="#088a66"/><text class="bl" x="16.0" y="16.0">quad rgb sensor</text><rect class="bm" x="118.0" y="4.0" width="34.7" height="24" rx="4"/><text class="bl" x="126.0" y="16.0">1</text><path class="bc" d="M 140.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="160.7" y="16.0">probe</text><rect class="bm" x="202.0" y="4.0" width="61.3" height="24" rx="4"/><text class="bl" x="210.0" y="16.0">(2) R1</text><path class="bc" d="M 251.4,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="271.4" y="16.0">detects</text><rect class="bm" x="321.4" y="4.0" width="48.7" height="24" rx="4"/><text class="bl" x="329.4" y="16.0">line</text><path class="bc" d="M 358.1,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="378.1" y="16.0">?</text></g><text class="bl" x="440.7" y="24.0">then</text><text class="bl" x="16.0" y="104.0">else</text></g><g transform="translate(33.0,209.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 526.752 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="16.0" y="20.0">encoder motor EM1</text><text class="bl" x="136.0" y="20.0">rotates at</text><rect class="bf" x="198.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="212.7" y="20.0">55</text><text class="bl" x="235.4" y="20.0">RPM, encoder motor EM2</text><text class="bl" x="388.7" y="20.0">rotates at</text><rect class="bf" x="450.7" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="465.4" y="20.0">15</text><text class="bl" x="488.1" y="20.0">RPM</text></g><g transform="translate(33.0,281.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 261.368 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="113.4" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">moves forward</text><path class="bc" d="M 117.4,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="137.4" y="20.0">at</text><g transform="translate(156.0,8.0)"><path d="M 12.0,0 H 46.68 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">speed</text></g><text class="bl" x="222.7" y="20.0">RPM</text></g></svg><svg class="bsvg" width="42.87mm" height="38.80mm" viewBox="0 0 221 200"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">A</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 60 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">scan</text></g><g transform="translate(1.0,93.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 212.99599999999998 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 80 a 4,4 0 0 0 4,4 H 212.99599999999998 a 4,4 0 0 1 4,4 V 100 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="24.0">if</text><g transform="translate(31.3,8.0)"><path d="M 16.0,0 H 120.332 L 136.332,16.0 L 120.332,32 H 16.0 L 0,16.0 Z" fill="#59c059" stroke="#479947"/><g transform="translate(16.0,4.0)"><path d="M 12.0,0 H 45.324 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">found</text></g><text class="bl" x="81.3" y="16.0">=</text><rect class="bf" x="96.3" y="4.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="108.3" y="16.0">1</text></g><text class="bl" x="175.7" y="24.0">then</text></g><g transform="translate(17.0,141.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 80.69200000000001 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">celebrate</text></g></svg><svg class="bsvg" width="39.97mm" height="25.61mm" viewBox="0 0 206 132"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">B</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 122.716 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">drive_square  30</text></g><g transform="translate(1.0,93.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 122.716 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">drive_square  60</text></g></svg><svg class="bsvg" width="151.41mm" height="55.87mm" viewBox="0 0 780 288"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 230.728 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when joystick</text><rect class="bm" x="102.7" y="24.0" width="116.0" height="24" rx="4"/><text class="bl" x="110.7" y="36.0">middle pressed</text><path class="bc" d="M 206.7,34.0 l 8,0 l -4,5 Z"/></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 172.692 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">set</text><rect class="bm" x="41.3" y="8.0" width="62.7" height="24" rx="4"/><text class="bl" x="49.3" y="20.0">speed</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="112.0" y="20.0">to</text><rect class="bf" x="131.3" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="146.0" y="20.0">40</text></g><g transform="translate(1.0,97.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 288.72 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#0AAD80" stroke="#088a66"/><text class="bl" x="16.0" y="20.0">quad rgb sensor</text><rect class="bm" x="118.0" y="8.0" width="34.7" height="24" rx="4"/><text class="bl" x="126.0" y="20.0">1</text><path class="bc" d="M 140.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="160.7" y="20.0">performs calibration</text></g><g transform="translate(1.0,137.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 68.68 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 124 a 4,4 0 0 0 4,4 H 68.68 a 4,4 0 0 1 4,4 V 144 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="18.0">forever</text></g><g transform="translate(17.0,173.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 90.01599999999999 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">follow_line</text></g><g transform="translate(17.0,209.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 756.484 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#6739B6" stroke="#522d91"/><text class="bl" x="16.0" y="28.0">show label</text><rect class="bm" x="85.4" y="16.0" width="34.7" height="24" rx="4"/><text class="bl" x="93.4" y="28.0">1</text><path class="bc" d="M 108.0,26.0 l 8,0 l -4,5 Z"/><g transform="translate(128.0,8.0)"><path d="M 20.0,0 H 361.076 a 20.0,20.0 0 0 1 0,40 H 20.0 a 20.0,20.0 0 0 1 0,-40 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="20.0">join</text><rect class="bf" x="41.3" y="8.0" width="36.0" height="24" rx="4"/><text class="bft" x="59.3" y="20.0">err:</text><g transform="translate(85.3,4.0)"><path d="M 16.0,0 H 267.736 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#0AAD80" stroke="#088a66"/><text class="bl" x="12.0" y="16.0">quad rgb sensor</text><rect class="bm" x="114.0" y="4.0" width="34.7" height="24" rx="4"/><text class="bl" x="122.0" y="16.0">1</text><path class="bc" d="M 136.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="156.7" y="16.0">deviation (-100~100)</text></g></g><text class="bl" x="517.1" y="28.0">at x:</text><rect class="bf" x="549.8" y="16.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="561.8" y="28.0">0</text><text class="bl" x="581.8" y="28.0">y</text><rect class="bf" x="596.4" y="16.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="608.4" y="28.0">0</text><text class="bl" x="628.4" y="28.0">by</text><rect class="bm" x="650.5" y="16.0" width="58.7" height="24" rx="4"/><text class="bl" x="658.5" y="28.0">small</text><path class="bc" d="M 697.1,26.0 l 8,0 l -4,5 Z"/><text class="bl" x="717.1" y="28.0">pixel</text></g></svg></div></td></tr></tbody></table></section></body></html>

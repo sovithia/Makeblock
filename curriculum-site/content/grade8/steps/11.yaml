@@ -1,0 +1,61 @@
+n: 11
+stage: B
+stage_title: Algorithms on new hardware
+kind: checkpoint
+title: Checkpoint 2 — list, loop, operator, state
+concept: Catch-up gate
+hours: 1
+project: G8-B-thinks
+goal: Every student can store a sequence, predict a nested loop, calculate from a sensor, and say what
+  decides the robot's current job.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 6–9
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches add a fifth job of their own design, update the diagram, then hand the robot to another team to try to jam it.'
+- 'Stage C hands the robot a controller, a menu, a second robot and a data log — and every one of those
+  is built on what this gate checks. The state machine especially: Stage C adds inputs to it, and Stage
+  D adds a voice to it.'
+- Coaches, hands off, buffer where it is needed.
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up three stations.
+  expect: Three stations ready, one per challenge.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> store at least five arm poses in a list and play them back.
+    <b>(2)</b> predict the inner-loop count of a nested loop the teacher writes, before it runs. <b>(3)</b>
+    show your job diagram and answer what happens if the grip closes on nothing.'
+  expect: 'Three challenges shown: five arm poses stored and played back, a nested-loop count predicted
+    before it ran, and the job diagram answering what happens when the grip closes on nothing.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- Variables
+- Control
+- My Blocks
+tips:
+- Challenge 3 is the one that matters. A student who cannot answer the failure case has a diagram, not
+  a state machine.
+- For challenge 2, write a nested loop with unequal numbers — 3 × 5, not 4 × 4 — so the answer cannot
+  be guessed from symmetry.
+- Rotate coaching pairs from Checkpoint 1.
+result:
+  scene: healthcheck
+  params:
+    checks: [pose list replays, nested-loop count predicted, failure has an exit state]
+    caption: every student clears all three algorithm challenges
+success:
+- Every student demonstrated all three challenges
+- Every job diagram has an arrow out of failure
+- The class starts Stage C together
+parts:
+- id: robot_tank
+- id: foam

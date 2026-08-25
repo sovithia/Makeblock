@@ -1,0 +1,107 @@
+n: 18
+stage: D
+stage_title: Voice
+kind: step
+title: A vocabulary it knows
+concept: Matching text against a list
+hours: 2
+project: G8-D-listens
+goal: The Rover acts on spoken commands by matching what it heard against a list it holds.
+build: A robot that obeys the words you taught it.
+builds_on:
+- Step 17 · speech
+- Step 7 · lists
+- Step 10 · jobs
+teach:
+- 'The robot heard some text. Now what? It <b>compares it against a list of commands it knows</b> —
+  and that is exactly the search you built in Grade 7 with routes: walk the list, test each item, act
+  on the match, <b>break</b> when found. No new idea, new hardware.'
+- <b>contains</b> is the forgiving version. Testing whether the heard text <i>contains</i> "forward"
+  copes with "go forward please" and "forwards", where testing for an exact match would not. That choice
+  — strict or forgiving — is a real design decision with real consequences, and the students should
+  make it deliberately rather than by accident.
+guide:
+- label: Know
+  value: a list of command words
+- label: Match
+  value: heard contains command ?
+- label: Act
+  value: set the job, then break
+steps:
+- time: 15′
+  text: 'Decide the vocabulary: four or five commands the robot will know. Write them down before coding.'
+  expect: Four or five commands written down before any code exists.
+- time: 25′
+  text: Put them in a list and walk it, comparing each against what was heard.
+  use: [data_deletealloflist, data_addtolist, control_for_new, control_if]
+  expect: The robot walks its vocabulary and compares each word against what it heard.
+- time: 25′
+  text: Wire the matches to jobs you already have — fetch, patrol, deliver, stop.
+  use: [control_break_new]
+  expect: A matched word starts a job you already built — and the search stops as soon as it matches.
+- time: 25′
+  text: 'Strict versus forgiving: try exact equals, then contains. Say "go forward please" to both and
+    pick which you want.'
+  expect: “Go forward please” tried against both exact and contains, and a chosen answer to which you
+    want.
+- time: 20′
+  text: 'Demo circle: each team gives its robot three commands in front of everyone. Count how many
+    land.'
+  expect: Three commands per team in front of everyone, with a count of how many landed.
+- time: 10′
+  text: Log your vocabulary and your matching choice, with the reason. Step 20 folds this vocabulary
+    into the job machine.
+  expect: Your vocabulary and your matching choice in the log, with the reason. Step 20 folds it into
+    the job machine.
+code:
+  lang: blocks
+  source: |-
+    when CyberPi starts up
+      connect to Wi-Fi  ssid  password  password
+      wait until  network connected?
+      speak  auto  I am awake
+      delete all of  commands
+      add  forward  to  commands
+      add  stop  to  commands
+      add  fetch  to  commands
+
+    when button A pressed
+      recognize  (4) English  3  secs
+      set  heard  to  (speech recognition result)
+      show label 1  join  heard:   (heard)  at x: 0 y: 0  by small pixel
+      set  stop  to  ((length of commands) + 1)
+      count with  i  from 1 to (stop) by step 1 repeat
+        if  ((heard) contains  (item (i) of commands) ?)  then
+          set  job  to  (item (i) of commands)
+          speak  auto  join  ok,   (item (i) of commands)
+          break
+
+    when button B pressed
+      speak  auto  (translate  (heard)  into  French)
+tips:
+- Short, distinct command words work far better than long ones. "Fetch" and "stretch" is a bad pair;
+  let a team discover that themselves.
+- The break matters — without it a sentence containing two commands runs both, in list order, which
+  is rarely what anyone wants.
+- Adding commands is now editing data, not code. Point that out; it is the payoff for the whole list
+  stage.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["heard: fetch", "#7dd3fc", 10, true]
+    - ["match: fetch", "#facc15", 10, false]
+    - ["job: FETCH", "#22c55e", 10, false]
+    caption: a spoken word matches the vocabulary and starts a job
+success:
+- A vocabulary of at least four commands, held in a list
+- Spoken commands set the job and the robot acts
+- A deliberate, defended choice between exact matching and contains
+check:
+- do: "A"
+  see: Say fetch. It answers ok, fetch.
+- do: "see"
+  see: Say something else and nothing happens yet. That is Step 19.
+parts:
+- id: robot_tank
+- id: router

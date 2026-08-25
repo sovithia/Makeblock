@@ -1,0 +1,99 @@
+n: 20
+stage: D
+stage_title: សំឡេង
+kind: step
+title: សំឡេងក្លាយជាធាតុចូលមួយទៀត
+concept: ការរួមបញ្ចូល AI ទៅក្នុងស្ថានភាព
+hours: 2
+project: G8-D-listens
+goal: សំដី ឧបករណ៍បញ្ជា និងឧបករណ៍ចាប់សញ្ញា ទាំងអស់ផ្ដល់ទៅម៉ាស៊ីនការងារតែមួយ ហើយក្រុមអាចប្រាប់ថាមួយណាឈ្នះពេលពួកវាមិនស្របគ្នា។
+build: Rover ដែលទទួលបញ្ជាពីកន្លែងបីក្នុងពេលតែមួយ។
+builds_on:
+- ជំហានទី ១៨ · ការស្ដាប់រឹងមាំ
+- ជំហានទី ១១ · ឧបករណ៍បញ្ជា
+- ជំហានទី ៩ · ការងារ
+teach:
+- ឥឡូវរូបយន្តមានវិធីបីដើម្បីត្រូវបានប្រាប់ថាធ្វើអ្វី៖ ឧបករណ៍បញ្ជា ម៉ឺនុយ និងសំឡេង។ ពួកវាទាំងអស់ធ្វើរបស់ដដែល
+  — <b>កំណត់អថេរការងារ</b> — ដែលមានន័យថាម៉ាស៊ីនស្ថានភាពដែលអ្នកសាងសង់នៅជំហានទី ៩ បានរង់ចាំរឿងនេះស្ងាត់ៗតាំងពីដើមមក។
+  AI មិនមែនជាករណីពិសេសទេ; វាជាធាតុចូលមួយទៀតដែលមានរូបរាងដូចធាតុចូលផ្សេង។
+- ដែលបង្កើតសំណួរសំខាន់៖ <b>កើតអ្វីបើពីរក្នុងចំណោមពួកវាមិនស្របគ្នា?</b> បើនរណាម្នាក់ស្រែក "ឈប់" ខណៈពេលមេដៃមួយនៅលើដងបើកបរ
+  តើអ្នកណាឈ្នះ? គ្មានចម្លើយត្រឹមត្រូវទេ តែមានចម្លើយ <i>ដែលបានសម្រេច</i> ហើយរូបយន្តដែលគ្មានវា ប្រព្រឹត្តមិនអាចទាយបាន។
+  ប្រព័ន្ធពិតភាគច្រើនផ្ដល់អាទិភាពដល់បញ្ជាសុវត្ថិភាព — សម្រេចរបស់អ្នក ហើយសរសេរវាចុះ។
+guide:
+- label: ធាតុចូលទាំងអស់
+  value: ឧបករណ៍បញ្ជា · ម៉ឺនុយ · សំឡេង → កំណត់ការងារ
+- label: ការប៉ះទង្គិច
+  value: សម្រេចថាអ្នកណាឈ្នះ ហើយសរសេរវាចុះ
+- label: ជាធម្មតា
+  value: ការឈប់ឈ្នះលើអ្វីៗទាំងអស់
+- label: ឥដ្ឋ
+  value: ២ ម៉ែត្រ មានបំណះក្រហម និងកន្លែងល្បាត
+steps:
+- time: 15′
+  text: រាយរាល់វិធីដែលរូបយន្តរបស់អ្នកអាចទទួលការងារ។ គួរតែមានយ៉ាងតិចបីហើយឥឡូវ។
+  expect: បញ្ជីសរសេរនៃគ្រប់មធ្យោបាយដែលរូបយន្តអាចទទួលការងារ — គួរមានយ៉ាងហោចបីរួចហើយ។
+- time: 25′
+  text: ធ្វើឲ្យពួកវាទាំងអស់កំណត់អថេរដដែល ដើម្បីឲ្យរង្វិលជុំការងារមិនខ្វល់ថាបញ្ជាមកពីណា។
+  expect: ប៊ូតុង ឧបករណ៍បញ្ជា និងសំឡេង ទាំងអស់កំណត់អថេរដដែល ហើយរង្វិលជុំការងារមិនដឹងថាមួយណាត្រូវប្រើទេ។
+- time: 25′
+  text: ឥឡូវការប៉ះទង្គិច៖ បើកបរដោយដង ខណៈពេលនរណាម្នាក់និយាយ "ឈប់"។ សម្រេចថាអ្វីគួរឈ្នះ ហើយអនុវត្តវា។
+  expect: នរណាម្នាក់និយាយ «ឈប់» ខណៈអ្នកកំពុងបើកដោយដង ហើយរូបយន្តធ្វើតាមអ្វីដែលអ្នកសម្រេចថាគួរឈ្នះ។
+- time: 25′
+  text: សាកល្បងធាតុចូលទាំងបីក្នុងការសាកល្បងបន្តតែមួយ ដោយប្ដូររវាងពួកវាដោយមិនចាប់ផ្ដើមឡើងវិញ។
+  expect: ការសាកល្បងជាប់មួយដោយប្ដូររវាងធាតុចូលទាំងបី ដោយគ្មានការចាប់ផ្ដើមឡើងវិញ។
+- time: 20′
+  text: ប្រគល់វាទៅក្រុមផ្សេង ហើយសុំពួកគេធ្វើឲ្យវាប្រព្រឹត្តអាក្រក់។ កែអ្វីក៏ដោយដែលពួកគេរកឃើញ។
+  expect: ក្រុមផ្សេងព្យាយាមធ្វើឲ្យរូបយន្តអ្នកប្រព្រឹត្តខុស ហើយអ្វីដែលគេរកឃើញត្រូវបានកែ។
+- time: 10′
+  text: កត់ត្រាច្បាប់អាទិភាពរបស់អ្នកក្នុងប្រយោគមួយ។ ជំហានទី ២២ ត្រូវការវា។
+  expect: ច្បាប់អាទិភាពរបស់អ្នកជាឃ្លាតែមួយក្នុងកំណត់ហេតុ។ ជំហានទី ២២ ប្ដូរច្បាប់នេះទៅជាការងារដែលអ្នករចនា។
+code:
+  lang: blocks
+  source: "define  match_command\n  set  heard  to  (speech recognition result)\n  set  matched  to\
+    \ 0\n  set  stop  to  ((length of commands) + 1)\n  count with  i  from 1 to (stop) by step 1 repeat\n\
+    \    if  ((heard) contains  (item (i) of commands) ?)  then\n      set  job  to  (item (i) of commands)\n\
+    \      set  matched  to 1\n      speak  auto  join  ok,   (item (i) of commands)\n      break\n\
+    \  if  (matched) = 0  then\n    stop encoder motor  all\n    speak  auto  I did not catch that\n\
+    \ndefine  do_fetch\n  moves forward  at 40  RPM\n  if  quad rgb sensor 1 probe (3) L1 detects  red\
+    \ ?  then\n    stop encoder motor  all\n    grip\n    set  job  to  idle\n\ndefine  do_patrol\n\
+    \  moves forward  at 30  RPM\n  if  quad rgb sensor 1 probe (3) L1 detects  line ?  then\n    turns\
+    \ right  90  ° until done\n\nwhen CyberPi starts up\n  connect to Wi-Fi  ssid  password  password\n\
+    \  wait until  network connected?\n  speak  auto  I am awake\n  delete all of  commands\n  add \
+    \ forward  to  commands\n  add  stop  to  commands\n  add  fetch  to  commands\n  add  patrol  to\
+    \  commands\n  set  job  to  idle\n  forever\n    show label 2  join  job:   (job)  at x: 0 y: 20\
+    \  by small pixel\n    if  button  R2  pressed  then\n      set  job  to  idle\n    if  (job) =\
+    \ fetch  then\n      do_fetch\n    if  (job) = patrol  then\n      do_patrol\n\nwhen button A pressed\n\
+    \  recognize  (4) English  3  secs\n  match_command\n  show label 1  join  heard:   (heard)  at\
+    \ x: 0 y: 0  by small pixel\n\nwhen button B pressed\n  speak  auto  (translate  (heard)  into \
+    \ French)"
+tips:
+- ធាតុចូលគ្រប់មួយកំណត់អថេរដដែល គឺជាការរចនាទាំងមូល។ បើក្រុមណាមានរង្វិលជុំបីដាច់ដោយឡែកប្រយុទ្ធគ្នា នោះជាកំហុសដែលត្រូវកែថ្ងៃនេះ។
+- សុវត្ថិភាពមុនគេ ជាចម្លើយធម្មតាចំពោះសំណួរប៉ះទង្គិច តែធ្វើឲ្យពួកគេប្រកែកវា ជាជាងប្រគល់វាឲ្យពួកគេ។
+- នេះជាជំហានសាងសង់ចុងក្រោយមុនបេសកកម្ម។ រូបយន្តដែលដំណើរការជឿជាក់ត្រង់នេះ ត្រូវការស្ទើរតែគ្មានអ្វីថ្មីនៅដំណាក់កាល
+  E ទេ។
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits for a word]
+    - [FETCH, '#16a34a', 'grips red, then idle']
+    - [PATROL, '#0891b2', turns at every line]
+    trans:
+    - [0, 1, 'say “fetch”']
+    - [0, 2, 'say “patrol”']
+    caption: three inputs set one variable — R2 always returns it to idle
+success:
+- ធាតុចូលបីខុសគ្នា ទាំងអស់កំណត់អថេរការងារដដែល
+- ច្បាប់សរសេរ និងអនុវត្តរួច សម្រាប់ពេលពីរមិនស្របគ្នា
+- ទាំងបីប្រើក្នុងការសាកល្បងបន្តតែមួយ ដោយគ្មានការចាប់ផ្ដើមឡើងវិញ
+check:
+- do: 'on'
+  see: The screen shows the job it is doing right now.
+- do: A
+  see: Say fetch and it starts fetching.
+- do: see
+  see: Press R2 on the controller and it goes back to idle.
+parts:
+- id: robot_tank
+- id: router
+

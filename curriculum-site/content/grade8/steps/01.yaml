@@ -1,0 +1,86 @@
+n: 1
+stage: A
+stage_title: A new machine
+kind: step
+title: Teardown, and the tracks
+concept: Mirrored assemblies
+hours: 2
+project: G8-A-rebuilt
+goal: Both track modules built, mirrored correctly, spinning freely and tensioned — checked by a team
+  that did not build them.
+build: Two track-wheel modules that are mirror images, not twins.
+builds_on:
+- Grade 7 · a robot you knew how to drive
+teach:
+- 'Take last year''s robot apart properly. Teardown is a skill, not destruction: a part only leaves
+  the robot if it lands in the right labelled tray. Reading the build guide backwards is the same diagram
+  literacy as reading it forwards, and next week you will be glad the screws are sorted.'
+- 'Then the one error that costs a whole session if it survives: the two track modules <b>mirror</b>
+  each other. Building two identical ones feels right and is wrong, and it is not obvious until the
+  Rover drives in a circle. Check each module against the guide page before you finish it — and get
+  another team to check it too, because you stop seeing your own work after twenty minutes.'
+guide:
+- label: Guide
+  value: printed booklet · brackets → left wheel → right wheel
+- label: Nut
+  value: back off 90° counter-clockwise — must spin free
+- label: Check
+  value: finger-press deflection, signed by another team
+steps:
+- time: 15′
+  text: 'Quick recap in teams: name five things last year''s robot could do. Keep the list — Step 2
+    asks which of them still work.'
+  expect: A written list of five things last year’s robot could do, kept for Step 2.
+- time: 20′
+  text: Structured teardown into labelled trays. Electronics padded and separate. Photograph the full
+    trays.
+  expect: Every part in a labelled tray, electronics padded and apart, and a photograph of the full trays.
+- time: 45′
+  text: Build both track-wheel modules from the guide. Check each against the page <i>before</i> you
+    finish it, not after.
+  expect: Two track-wheel modules built, each checked against the page before it was finished.
+- time: 20′
+  text: 'Cross-check: another team holds your two modules side by side against the guide and signs that
+    they mirror.'
+  expect: Another team has held your two modules side by side against the guide and signed that they mirror.
+- time: 15′
+  text: Free-spin and tension test on both. Back the nut off 90° and feel the difference between bound
+    and free.
+  expect: Both modules spin freely, and you can feel the difference between a bound nut and a free one.
+- time: 5′
+  text: Trays back in order. Log which parts you could not name.
+  expect: Trays back in order, and a log line naming the parts you could not name.
+blocks: []
+build_images:
+- g8-07.jpg
+- g8-11.jpg
+- g8-15.jpg
+- g8-19.jpg
+- g8-24.jpg
+build_caption: printed booklet · wheel brackets, left wheel, right wheel, track grain
+tips:
+- 'The Rover guide is the <b>printed booklet in the add-on box</b>, front to back. There is no digital
+  version — the pages above are photographs of it. Build from the booklet in your hands; the photographs
+  only show where you are in it. Do not use <code>mbot2_addons.pdf</code>: despite its cover title that
+  file is the <b>Ranger</b> guide, a different robot, with the motor cables straight instead of crossed
+  and the servos on S3/S4 instead of S1.'
+- The mirror error is the classic one and it is nearly invisible until the robot drives. Insist on the
+  cross-check — a builder cannot see their own mistake by this point.
+- After tightening each hub screw, back the nut off 90° counter-clockwise. The wheel must spin freely
+  or the motors strain all year.
+- Track grain direction matters; both tracks point the same way. There is a magnified inset in the guide
+  showing it.
+result:
+  scene: roverbuild
+  params: {stage: modules}
+success:
+- Both modules complete and verified as mirrored by another team
+- Every hub spins freely after the 90° back-off
+- Trays sorted and photographed, nothing unaccounted for
+parts:
+- id: trays
+- id: track
+- id: trackhubs
+- id: socket
+- id: guide
+  note: printed booklet from the add-on box

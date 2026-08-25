@@ -1,0 +1,106 @@
+n: 2
+stage: A
+stage_title: A new machine
+kind: step
+title: Build it — chassis, head, shells, arms
+concept: Building from a printed guide, at scale
+hours: 2
+goal: The Rover stands complete — chassis, head, body shells and both grip arms — and nothing binds.
+build: A tracked robot, fully assembled, before a single block is written.
+builds_on:
+- Step 1 · the two track modules
+teach:
+- 'This is the longest build in the whole programme, and it is worth naming that out loud: the printed
+  guide runs to seventy pages and the Rover has more parts than the whole of last year''s robot. Work
+  in phases and finish each one before starting the next — chassis, then head, then shells, then arms.
+  A phase left half-done is where parts go missing.'
+- 'Two things are not obvious and both cost a session if they survive. The motor cables are <b>crossed
+  on the Rover — left to EM2, right to EM1</b>, the opposite of last year''s robot, so anyone copying
+  from memory gets it backwards. And after tightening a wheel-hub screw you back the nut off <b>90°
+  counter-clockwise</b>: the wheel has to spin free or the track binds and the robot crawls.'
+guide:
+- label: Guide
+  value: សៀវភៅបោះពុម្ព · Build the chassis → Build the arms
+- label: Cables
+  value: CROSSED — left ↔ right, unlike last year
+- label: Nut
+  value: back off 90° counter-clockwise, must spin free
+- label: សេវ៉ូ
+  value: ដៃចាប់ → S1 · ដៃទីពីរ → S2
+steps:
+- time: 35′
+  text: 'Chassis: join the two track modules to the frame, fit the metal shock absorbers (×4 — the plastic
+    ones in the box are spares) and the shaft collars. Check both tracks turn by hand before going on.'
+  expect: ម៉ូឌុលខ្សែក្រវាត់ទាំងពីរនៅលើគ្រោង ជាមួយឆ្នុកលោហៈបួន — ហើយខ្សែក្រវាត់ទាំងពីរវិលដោយដៃបាន។
+- time: 20′
+  text: 'Head: CyberPi and Shield onto the top plate, sensor on the front with a 20 cm mBuild cable.
+    Motor cables crossed — left to EM2, right to EM1. Check this twice; it is the error of the year.'
+  expect: CyberPi និងខែលនៅលើបន្ទះខាងលើ ឧបករណ៍ចាប់សញ្ញានៅខាងមុខ និងខ្សែម៉ូទ័រឆ្លាស់គ្នា៖ ឆ្វេងទៅ EM2 ស្ដាំទៅ
+    EM1។ ពិនិត្យពីរដង។
+- time: 20′
+  text: 'Shells: peel the paper film off Boards 1–8 and fit the body. Tuck every cable as you close it
+    up — anything loose now is unreachable in ten minutes.'
+  expect: តួបិទជិតដោយខ្សែទាំងអស់លាក់ក្នុងកន្លែងដែលអ្នកលែងឈោងដល់ — ព្រោះឥឡូវអ្នកលែងត្រូវការ។
+- time: 20′
+  text: 'Arms: the two servos and the grip arms, the last phase in the guide. <b>Gripper servo into
+    S1, second arm into S2</b> — the ports are printed on the shield, and every program this year expects
+    those two. Leave them unpowered; you find their safe range by hand in Step 4.'
+  expect: សេវ៉ូទាំងពីរ និងដៃចាប់បានតម្កល់ ទុកឲ្យគ្មានថាមពល។ អ្នករកជួរសុវត្ថិភាពដោយដៃក្នុងជំហានទី ៤។
+- time: 15′
+  text: 'Cross-team QC: another team turns both tracks by hand, checks the cables are crossed the right
+    way, and shakes it. They sign it off.'
+  expect: ក្រុមផ្សេងបានបង្វិលខ្សែក្រវាត់ទាំងពីរ ពិនិត្យខ្សែឆ្លាស់ និងរញ្ជួយរូបយន្ត ហើយចុះហត្ថលេខា។
+- time: 10′
+  text: 'On your lesson sheet: which phase took longest, and what you would tell a team starting it tomorrow.'
+  expect: បន្ទាត់កំណត់ហេតុដាក់ឈ្មោះដំណាក់កាលយូរបំផុត និងអ្វីដែលអ្នកនឹងប្រាប់ក្រុមចាប់ផ្ដើមថ្ងៃស្អែក។
+build_images:
+- g8-27.jpg
+- g8-43.jpg
+- g8-50.jpg
+- g8-53.jpg
+- g8-54.jpg
+- g8-55.jpg
+- g8-70.jpg
+- g8-76.jpg
+build_caption: សៀវភៅបោះពុម្ព · តួ · ក្បាល · ការតភ្ជាប់ និងខ្សែឆ្លាស់ · សំបក · ដៃ
+tips:
+- សាងសង់ពី <b>សៀវភៅបោះពុម្ព</b> — មិនមែនពី <code>mbot2_addons.pdf</code> ដែលសាងសង់ Ranger
+  ទេ។ ខ្សែម៉ូទ័រឆ្លាស់ខាងក្រោមជារបស់ Rover; Ranger ភ្ជាប់ត្រង់ ហើយរូបយន្តដែលសាងសង់ពីមគ្គុទ្ទេសក៍ខុស
+  នឹងមិនដំណើរការកម្មវិធីវគ្គសិក្សានេះទេ។
+- The motor cables are CROSSED on the Rover. If you built last year's mBot2, your hands will do it wrong
+  from memory — check the page, not your memory.
+- Back the wheel-hub nuts off 90° after tightening. A bound track looks like a weak motor and wastes an
+  afternoon.
+- Metal shock absorbers, not the plastic ones. The plastic ones are spares.
+- Peel the film off the boards while you sort, not while you build.
+- Do not power the servos yet. Their safe range gets measured by hand, unpowered, in Step 4.
+result:
+  scene: roverbuild
+  params: {stage: full}
+success:
+- Both tracks turn freely by hand, neither binding
+- Motor cables crossed correctly, checked by another team
+- All eight body boards fitted, film peeled, cables tucked
+check:
+- do: "see"
+  see: Turn both tracks by hand. They move freely and feel the same as each other.
+- do: "see"
+  see: The left motor goes to EM2 and the right to EM1. Crossed, on purpose.
+- do: "see"
+  see: Shake it. Nothing rattles, and no cable is trapped under a track.
+parts:
+- id: robot_tank
+  note: being built
+- id: track
+- id: trackhubs
+- id: damper
+  note: metal ×4, plastic are spares
+- id: collarflange
+- id: bracket
+- id: beamplate
+- id: boards
+- id: servopack
+- id: screwsR
+- id: socket
+- id: guide
+  note: តួ → ដៃ

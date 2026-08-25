@@ -1,0 +1,95 @@
+n: 19
+stage: D
+stage_title: The robot is organised
+kind: step
+title: Blocks that take a number
+concept: Function inputs
+hours: 2
+project: G7-D-organised
+goal: One block does many jobs, and the team can say what the built-in turn block is hiding.
+build: turn_by(degrees) — your own, racing Makeblock's.
+builds_on:
+- Step 18 · functions
+- Step 4 · encoders
+teach:
+- 'A block with an <b>input</b> does many jobs instead of one. <b>drive_square(size)</b> draws any square.
+  Inputs come in three kinds — <b>number</b>, <b>text</b> and <b>boolean</b> — and the boolean one is
+  the interesting surprise: a block can take a <i>condition</i>, so <b>park(quietly?)</b> parks with
+  or without the sound depending on what you hand it.'
+- Then the real point. <b>turns left 90° until done</b> is itself a function — somebody at Makeblock
+  wrote it out of encoder blocks, exactly the way you are about to. Build your own, race it against
+  theirs with a protractor, and you will never again think of a block as magic. Sometimes yours will
+  be better, because you know your floor.
+guide:
+- label: Inputs
+  value: number · text · boolean
+- label: Rebuild
+  value: turn_by(deg) from encoder blocks
+- label: Race it
+  value: yours vs turns … ° — measure both
+- label: Floor
+  value: 1.5 m clear — it draws a 30 cm and a 60 cm square
+steps:
+- time: 15′
+  text: Make a block with a number input and use it three times with three different values. Smallest
+    possible version first.
+  expect: One block with a number in it, used three times with three different values.
+- time: 25′
+  text: 'Build <b>turn_by(degrees)</b> yourself: reset the encoder angle, drive the wheels opposite
+    ways, wait until the angle passes the target.'
+  use:
+  - my:turn_by
+  - mbot2_encoder_motor_reset_angle
+  - mbot2_encoder_motor_drive_speed
+  - control_wait_until
+  expect: Your own turn_by block turning the robot by whatever number you hand it.
+- time: 25′
+  text: 'Race: your turn_by(90) against the built-in, measured with a protractor. Three runs each. Who
+    is closer? Who is faster?'
+  expect: Protractor readings for three runs of yours and three of the built-in, and an answer to who
+    is closer and who is faster.
+- time: 20′
+  text: '<b>drive_square(size)</b> — one block, any size. Then a boolean input: park(quietly?).'
+  use:
+  - my:drive_square
+  expect: One block that draws any size of square, and a second that takes a yes/no answer instead of
+    a number.
+- time: 20′
+  text: Rebuild Step 5's shape machine using only your own blocks. Count how much shorter the main program
+    gets.
+  expect: Step 5’s shape machine rebuilt from your own blocks, and a count of how many blocks shorter
+    the main program got.
+- time: 10′
+  text: 'Log: one thing the built-in turn block does that yours does not.'
+  expect: One thing in the log that the built-in turn block does and yours does not.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\nwhen button A pressed\n  scan\n\
+    \  if  (found) = 1  then\n    celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square\
+    \  60"
+tips:
+- The encoder angle keeps counting up. Reset it before the turn or the second turn ends instantly —
+  the bug of the day.
+- Yours will overshoot at first because the wheels keep moving after the check. That is real engineering,
+  and lowering the speed is the honest fix.
+- A protractor beats an opinion. Insist on measuring both turns rather than watching them.
+result:
+  scene: library
+success:
+- A block with a number input, used with three different values
+- turn_by(90) measured against the built-in, three runs each
+- One block takes a boolean input and behaves differently for true and false
+check:
+- do: B
+  see: It draws a small square, then a big one. Same block, new number.
+parts:
+- id: robot_wheel
+- id: protractor
+- id: tape
+

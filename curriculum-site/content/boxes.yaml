@@ -1,0 +1,106 @@
+mbot2:
+  title: BOX 1 · “mBot2”
+  color: '#2563eb'
+  note: Quantities from the official packing list. A Bluetooth dongle is NOT included and this
+    program does not use one — it is only needed by computers with no built-in Bluetooth, and
+    USB pairing is the documented fallback in every session that connects a robot.
+  items:
+  - name: CyberPi
+    qty: ×1
+  - name: mBot2 Shield
+    qty: ×1 · battery built in
+  - name: Chassis
+    qty: ×1
+  - name: Encoder motor
+    qty: ×2
+  - name: Wheel hub
+    qty: ×2
+  - name: Slick tyre
+    qty: ×2
+  - name: Mini wheel
+    qty: ×1
+  - name: Ultrasonic Sensor 2
+    qty: ×1
+  - name: Quad RGB Sensor
+    qty: ×1
+  - name: Motor cable
+    qty: ×2
+  - name: mBuild cable 10 cm
+    qty: ×2
+  - name: mBuild cable 20 cm
+    qty: ×1
+  - name: M4×25 mm screw
+    qty: ×6
+  - name: M4×14 mm screw
+    qty: ×6
+  - name: M4×8 mm screw
+    qty: ×6
+  - name: M2.5×12 mm screw
+    qty: ×4
+  - name: Line-following track map
+    qty: ×1
+  - name: USB cable
+    qty: ×1
+  - name: Screwdriver
+    qty: ×1
+rover:
+  title: BOX 2 · “Rover Robotics Add-on Pack”
+  color: '#7c3aed'
+  note: 'As printed on the box (no quantities given). Online docs: search “mBot2 Rover” at support.makeblock.com.'
+  items:
+  - name: Servo pack
+    qty: ×2 used
+  - name: Bluetooth Controller
+    qty: ×1
+  - name: Track
+    qty: ×2
+  - name: Wheel hub
+    qty: ×4 halves used
+  - name: Small wheel hub
+    qty: ×2 used
+  - name: D shaft
+    qty: ≥×6
+  - name: Bracket 90° 3×3
+    qty: ≥×6
+  - name: Bracket 120° 3×3
+    qty: ≥×3
+  - name: U bracket
+    qty: ≥×4
+  - name: T plate
+    qty: ×2 used
+  - name: Slide beam 2×4
+    qty: ≥×1
+  - name: Slide beam 2×6
+    qty: ≥×1
+  - name: Plate 3×8
+    qty: ≥×1
+  - name: Shaft collar
+    qty: ×12 used
+  - name: Flange bearing
+    qty: ≥×4
+  - name: Socket wrench
+    qty: ×1
+  - name: Screw M3×6 mm
+    qty: ×12 used
+  - name: Screw M4×10 mm
+    qty: ≥×30
+  - name: Screw M4×22 mm
+    qty: ≥×14
+  - name: Screw M4×30 mm
+    qty: ≥×8
+  - name: Nut
+    qty: ≥×30
+  - name: Plastic shock absorber
+    qty: spares — unused in build
+  - name: Metal shock absorber
+    qty: ×4 used
+  - name: Long plastic ring
+    qty: ≥×2
+  - name: Short plastic ring
+    qty: ≥×8
+  - name: Rubber band
+    qty: ≥×6
+  - name: Board 1–8 (body shells)
+    qty: peel paper film
+  - name: Quick Start Guide
+    qty: ×1

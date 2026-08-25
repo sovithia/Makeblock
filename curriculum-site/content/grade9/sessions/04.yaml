@@ -1,0 +1,102 @@
+n: 4
+title: Logic & Refactor
+goal: Grade 7’s wander rebuilt in Python on a sensor it never had — then refactored into clean functions.
+builds_on:
+- S3 · sensor reads in Python
+- Grade 7 S12 · wander logic
+teach:
+- 'Full control flow: <code>if / elif / else</code> and <code>while</code>. The vehicle is deliberately
+  nostalgic — rewrite Grade 7’s wander mode in Python. But Grade 7’s robot escaped from a <i>distance</i>,
+  and this one has no ultrasonic, so the same behaviour has to be built on a different sense: a taped
+  boundary on the floor, and the Quad RGB probes that see it. Say that out loud as the day’s real lesson
+  — <b>the behaviour is not the sensor</b>. Roam, notice the edge, back off, turn away, roam again: that
+  shape is unchanged since Grade 7, and only one line of it knows what a sensor is.'
+- 'Then introduce <b>refactoring</b>: improving code’s shape without changing its behaviour. Extract the
+  escape manoeuvre into <code>escape()</code>, extract the sensing into <code>on_edge()</code>, name the
+  magic numbers as constants (<code>BACK_CM = 10</code>), and re-run — identical robot behaviour, radically
+  clearer code. Then land the point: because the sensing lives in <code>on_edge()</code>, swapping the
+  robot’s eyes again would touch two lines. That “same behaviour, better shape” discipline is the heart
+  of code quality, and it is a rubric line in the capstone code review.'
+steps:
+- time: 15′
+  text: 'Rewrite wander in Python: while True + edge check + escape.'
+- time: 15′
+  text: 'Refactor: extract on_edge() and escape(), name constants, add two comments that say WHY not what.'
+- time: 10′
+  text: 'Arena test: does refactored wander behave identically? (It must — that’s the definition.)'
+- time: 5′
+  text: 'On your lesson sheet: before/after code snippets — which would you rather debug at 11 pm?'
+code:
+  lang: python
+  source: |-
+    import mbot2, cyberpi, random
+
+    CRUISE  = 40    # RPM: quick, but stoppable
+    BACK_CM = 10    # far enough to clear tape
+
+    def sees(probe):
+        return cyberpi.quad_rgb_sensor.is_color(
+            'black', probe)
+
+    def on_edge():
+        # no ultrasonic: the edge is a colour
+        return sees('l1') or sees('r1')
+
+    def escape():
+        mbot2.straight(-BACK_CM)
+        mbot2.turn(random.randint(60, 120))
+
+    while True:
+        if on_edge():
+            escape()
+        else:
+            mbot2.drive_speed(CRUISE, CRUISE)
+tips:
+- random.randint needs the import — a good ‘read the error’ moment.
+- '‘Why not what’ comments: # far enough to clear the tape, not # set BACK_CM to 10.'
+- If the robot reverses onto the boundary and sticks there, BACK_CM is smaller than the wheelbase behind
+  the probes. Measure it rather than guessing.
+- Tape the boundary wide — a thin line at speed is crossed between two sensor reads, and that is a genuine
+  sampling lesson, not a bug.
+result:
+  scene: wander
+success:
+- Python wander roams the arena and turns back at the boundary reliably
+- on_edge() and escape() extracted; constants named; behaviour unchanged
+- Comments explain why, not what
+parts:
+- id: robot_tank
+- id: tablet
+- id: tape
+  note: arena boundary
+long:
+  goal: Refactored code whose behaviour is proved unchanged by measurement rather than asserted by the people
+    who changed it.
+  recap:
+    time: 10′
+    text: Record the behaviour before touching it — three arena runs with the original code, timed, boundary
+      crossings counted. Without that baseline, "behaviour unchanged" is an opinion, and the whole point of
+      the word refactoring is that the claim can be checked.
+  extend:
+  - spec: identical, measured
+    text: The same three-run measurement after refactoring, landing inside the spread of the before.
+  - spec: 0 magic numbers
+    text: Every threshold a named constant, defined in exactly one place.
+  - spec: sensing in one function
+    text: Exactly one function knows what the robot senses with. Change the colour of the tape and only that
+      function needs reading.
+  log:
+    time: 10′
+    text: 'Before-and-after measurements side by side, with the before-and-after code snippets beneath them.
+      The question on the lesson sheet is the honest one: which of these two would you rather be debugging at 11 pm?'
+  review:
+    time: 15′
+    text: Another pair reads the refactored version cold and states what the robot does. Criteria — could
+      they say it without seeing the original, and did the named constants help, or did they just add a layer
+      to chase?
+  parts:
+  - id: tape
+  - id: timer
+  success:
+  - Behaviour proved unchanged by measurement rather than by claim
+  - No magic numbers survive anywhere in the file

@@ -1,0 +1,3 @@
+pyyaml
+# weasyprint is only needed for tools/verify_print.py (print-parity checks)
+weasyprint

@@ -1,0 +1,97 @@
+n: 10
+stage: B
+stage_title: The robot decides
+kind: step
+title: Zones, and creeping up
+concept: if / else nesting · repeat until
+hours: 2
+project: G7-B-decides
+goal: Three distance zones with different behaviour, and a creep that stops at exactly 5 cm.
+build: A robot that slows down as it gets close, instead of slamming on the brakes.
+builds_on:
+- Step 9 · if
+teach:
+- 'One decision gives two outcomes. Two decisions, nested, give three: <b>far</b> → full speed, <b>near</b>
+  → creep, <b>too close</b> → stop. Real robots almost never have two states, and students should feel
+  the difference between a robot that brakes and one that approaches.'
+- Then a different kind of loop. <b>repeat until</b> keeps going until something becomes true — not
+  a count, a <b>condition</b>. "Creep forward until the distance is 5" is one block that says exactly
+  what you mean, and it is the natural way to write an approach.
+guide:
+- label: Try it
+  value: button B → approach, creep, arrive
+- label: Far
+  value: '> 25 cm — full speed'
+- label: Near
+  value: 10–25 cm — creep
+- label: Stop
+  value: ≤ 5 cm — halt
+- label: Floor
+  value: 2 m clear, three zones taped on the floor
+steps:
+- time: 15′
+  text: Sketch the three zones on paper with the numbers in them, then tape them on the floor so the
+    zones are real.
+  expect: Three zones drawn on paper with their numbers, then taped on the floor where the robot will
+    actually drive.
+- time: 30′
+  text: Build the nested if/else. Drive it through all three zones and watch the speed change.
+  use:
+  - control_if_else
+  expect: Drive it through all three zones and the speed visibly changes at each boundary.
+- time: 25′
+  text: Rewrite the last part with repeat until. Same behaviour, one block, and it reads like the sentence
+    you would say out loud.
+  use:
+  - control_repeat_until
+  expect: The same behaviour as before, but the program now reads like the sentence you would say out
+    loud.
+- time: 25′
+  text: 'Precision contest: stop at exactly 5 cm, three runs, measured. Nearest average wins.'
+  expect: Three measured runs stopping at 5 cm, and an average you can compare with another team’s.
+- time: 15′
+  text: Show the current zone on the screen as a word, not a number. A watcher should know what the
+    robot is thinking from across the room.
+  use:
+  - cyberpi_display_label_show_at_somewhere_with_size
+  expect: A word on the screen — not a number — that tells a watcher across the room which zone the
+    robot thinks it is in.
+- time: 10′
+  text: Log the thresholds you chose and why. Step 24 drives at a box sitting on the line, and needs
+    a threshold you trust.
+  expect: Your chosen thresholds and the reason for each in the log. Step 24 needs a threshold you trust.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  forever\n    show label 1  join  dist:   (ultrasonic 2 1 distance\
+    \ to an object (cm))  at x: 0 y: 0  by small pixel\n    show label 2  join  light:  (ambient light\
+    \ intensity)  at x: 0 y: 20  by small pixel\n    show label 3  join  loud:   (loudness)  at x: 0\
+    \ y: 40  by small pixel\n    line chart, add data  (ultrasonic 2 1 distance to an object (cm))\n\
+    \nwhen button A pressed\n  forever\n    if  (ultrasonic 2 1 distance to an object (cm)) < 15  then\n\
+    \      stop encoder motor  all\n      ultrasonic 2 1 displays emotion  dizzy\n    else\n      moves\
+    \ forward  at 50  RPM\n      ultrasonic 2 1 displays emotion  standby\n\nwhen button B pressed\n\
+    \  repeat until  (ultrasonic 2 1 distance to an object (cm)) < 25\n    moves forward  at 60  RPM\n\
+    \    show label 4  approaching  at center of screen  by small pixel\n  repeat until  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 5\n    moves forward  at 15  RPM\n    show label 4  creeping\
+    \  at center of screen  by small pixel\n  stop encoder motor  all\n  show label 4  arrived  at center\
+    \ of screen  by small pixel"
+tips:
+- Two thresholds, not one, is what makes the approach smooth. Teams who use one will get there and overshoot.
+- repeat until is easy to confuse with repeat n. Ask "how many times does this run?" — if the answer
+  is "until something happens", it is the right block.
+- The word on the screen makes debugging enormously easier. Insist on it.
+result:
+  scene: ifelse
+success:
+- Three distinct behaviours over three taped zones
+- The creep stops within 1 cm of the 5 cm mark, three runs running
+- The robot names its current zone on screen
+check:
+- do: B
+  see: It hurries up close, then creeps, then stops and says arrived.
+parts:
+- id: robot_wheel
+- id: boxes
+- id: tape
+  note: zone lines
+- id: ruler
+

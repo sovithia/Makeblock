@@ -1,0 +1,94 @@
+n: 1
+title: Same Robot, New Language
+goal: Every student writes and runs a Python program that drives a square — in pairs.
+builds_on:
+- Grades 7–8 · two block-coding years
+teach:
+- 'Open with the Grade 8 fair photos, then the year’s premise: same robot, professional tools. mBlock’s
+  Python mode is a real editor — text, autocomplete, error messages. The first program is deliberately
+  familiar: the square. They’ve built it in blocks (Grade 7) and read it in Python (Grade 8, Session 17);
+  today they type it from a blank file. Familiar problem + new medium = confidence, not overwhelm.'
+- 'Institute <b>pair programming</b> as this year’s standard: driver types, navigator reads ahead and
+  catches errors; swap every 10 minutes. It’s how professionals work and it halves the syntax frustration
+  of week one. Also set the error-message culture: an error message is information, not an insult — read
+  it aloud, bottom line first.'
+steps:
+- time: 8′
+  text: 'Editor tour: file, run, stop, console, autocomplete. Break something on purpose; read the error
+    together.'
+- time: 20′
+  text: Pairs type the square from scratch; run on the robot; swap roles halfway.
+- time: 12′
+  text: 'Extension ladder: triangle → hexagon → any-N polygon (the 360/N insight, now as code).'
+- time: 5′
+  text: 'On your lesson sheet: one error message you met and what it was telling you.'
+code:
+  lang: python
+  source: |-
+    import cyberpi
+    import mbot2
+
+    # our old friend, typed from scratch
+    for i in range(4):
+        mbot2.straight(30)    # cm forward
+        mbot2.turn(90)        # degrees right
+
+    cyberpi.display.show_label(
+        'done!', 24, 'center')
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete.'
+- IndentationError and missing colons will dominate today — predict it aloud so nobody feels alone.
+- Pairs stay together for the whole Python Bootcamp unit.
+result:
+  scene: pyeditor
+  params:
+    shape: square
+    caption: typed Python drives the same square as Grade 7’s blocks
+    code_lines:
+    - import mbot2
+    - ''
+    - 'for i in range(4):'
+    - '    mbot2.straight(30)'
+    - '    mbot2.turn(90)'
+success:
+- Square runs from hand-typed Python
+- Pair-programming roles practiced with a swap
+- At least one error message read, decoded, and fixed by the pair
+parts:
+- id: robot_tank
+  note: from Grade 8
+- id: tablet
+  note: mBlock Python mode
+long:
+  goal: Both partners write and fix Python unaided, and an error message is read as information rather than
+    as a wall.
+  recap:
+    time: 10′
+    text: Build an error museum. Each pair deliberately produces three different errors — a missing colon,
+      a bad indent, an undefined name — and writes down what each message actually says. Collect them on the
+      board. A class that has met the three commonest messages on purpose will not lose twenty minutes to
+      them in week four.
+  extend:
+  - spec: any-N polygon, typed
+    text: One function, three shapes, written as text rather than dragged.
+  - spec: roles swapped, both fluent
+    text: The navigator takes the keyboard and the pair's speed does not collapse. If it does, the navigator
+      was watching rather than reading.
+  - spec: 3 errors decoded
+    text: Three different messages read, explained in the pair's own words, and fixed.
+  log:
+    time: 10′
+    text: An error page — message, what it means, what fixed it. It grows all year and becomes the fastest
+      debugging asset the class owns, because the second time a message appears it costs thirty seconds instead
+      of ten minutes.
+  review:
+    time: 15′
+    text: Pairs teach one error message to a pair that has not met it. Criteria — is the explanation about
+      what Python was trying to say, or is it "add a colon here"? Only the first transfers to the next error.
+  parts:
+  - id: tablet
+  success:
+  - The navigator produced working code after the swap
+  - Three error messages explained in the pair's own words
+

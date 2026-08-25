@@ -1,0 +1,102 @@
+n: 20
+stage: D
+stage_title: The robot is organised
+kind: step
+title: Following the line
+concept: Conditionals on a real control problem
+hours: 2
+project: G7-D-organised
+goal: A line follower written as one named block, with the error visible on screen — and the wobble
+  named but not fixed.
+build: follow_line — the heart of the mission.
+builds_on:
+- Step 18 · functions
+- Step 10 · nested decisions
+teach:
+- 'Calibrate first, every single time: <b>quad rgb sensor performs calibration</b> teaches the sensor
+  what this floor and this light look like. Skip it and nothing works; do it religiously and most line-following
+  misery disappears. Make it a ritual, like the connection check.'
+- The follower itself is three decisions — line under the left probe, under the right, or straight ahead
+  — wrapped in a block called <b>follow_line</b>. Put the sensor's <b>deviation</b> on the screen while
+  it runs and watch the number swing negative, zero, positive as the robot hunts across the line. That
+  swinging is <b>the wobble</b>. Name it, write the question on the board, and <i>do not answer it</i>
+  — Grade 9 spends two sessions killing it, and the setup is worth more than a quick fix now.
+guide:
+- label: Try it
+  value: joystick middle → calibrate, then follow
+- label: Always first
+  value: performs calibration
+- label: Watch
+  value: deviation (-100…100) on screen
+- label: Leave open
+  value: the wobble — Grade 9 answers it
+- label: Floor
+  value: the taped line course, about 2 m of track
+steps:
+- time: 15′
+  text: Calibrate. Then deliberately skip calibration and run it — watch it fail. Now nobody will forget.
+  use:
+  - BLOCK_1663048571053
+  expect: A calibrated sensor, and the memory of what happened when you skipped calibration on purpose.
+- time: 25′
+  text: 'Build follow_line as its own block: left probe, right probe, else straight.'
+  use:
+  - my:follow_line
+  - control_if_else
+  expect: A follow_line block that probes left, probes right, and otherwise drives straight.
+- time: 25′
+  text: Lap the track. Put deviation on the screen and watch it swing while the robot drives.
+  use:
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: A completed lap, with the deviation number swinging on the screen while the robot drives.
+- time: 20′
+  text: Sketch the wobble in the log. Why does it zig-zag? Collect hypotheses on the board and leave
+    them there.
+  expect: A drawing of the wobble in the log, and the class’s hypotheses for why, left up on the board.
+- time: 25′
+  text: Timed laps. Change one number per run — base speed, or the two steering speeds — and log what
+    it did.
+  expect: Timed laps where exactly one number changed per run, each one logged with what it did.
+- time: 10′
+  text: Log your best lap and the numbers that produced it. Step 24 needs them.
+  expect: Your best lap time and the numbers that produced it. Step 24 needs them.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\ndefine  follow_line\n  if  quad\
+    \ rgb sensor 1 probe (3) L1 detects  line ?  then\n    encoder motor EM1 rotates at 15 RPM, encoder\
+    \ motor EM2 rotates at 55 RPM\n  else\n    if  quad rgb sensor 1 probe (2) R1 detects  line ?  then\n\
+    \      encoder motor EM1 rotates at 55 RPM, encoder motor EM2 rotates at 15 RPM\n    else\n    \
+    \  moves forward  at (speed)  RPM\n\nwhen button A pressed\n  scan\n  if  (found) = 1  then\n  \
+    \  celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square  60\n\nwhen joystick \
+    \ middle pressed\n  set  speed  to 40\n  quad rgb sensor 1 performs calibration\n  forever\n   \
+    \ follow_line\n    show label 1  join  err:   (quad rgb sensor 1 deviation (-100~100))  at x: 0\
+    \ y: 0  by small pixel"
+tips:
+- Recalibrate whenever the floor or the light changes — including when the sun moves. This is not superstition,
+  it is how the sensor works.
+- Curled tape and glossy paper both fool the sensor. Tape the map flat at every edge.
+- <b>Do not let anyone use deviation to steer yet</b>, however tempting. Watching it is the whole point
+  today; Grade 9 turns it into control and that lesson is worth protecting.
+result:
+  scene: line
+success:
+- A full lap unassisted, with follow_line as a named block
+- The deviation number is on screen and visibly swings
+- The wobble is sketched, hypothesised about, and left unanswered
+check:
+- do: mid
+  see: It follows the black line and shows how far off it is.
+parts:
+- id: robot_wheel
+- id: quadrgb
+- id: map
+- id: tape
+  note: to tape the map flat
+- id: timer
+

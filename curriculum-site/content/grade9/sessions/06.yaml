@@ -1,0 +1,91 @@
+n: 6
+title: P-Control
+goal: Proportional line following implemented and tuned — the wobble visibly defeated.
+builds_on:
+- S5 · the P-control concept
+teach:
+- 'Implementation day: read the offset, multiply by gain, split the result across the two tracks. The
+  core is genuinely three lines — emphasize that a big idea can be small code. Then tuning: start with
+  a low gain, raise it until the robot hugs curves, and keep going until it wobbles again (yesterday’s
+  prediction comes true — applaud it, it means the model is right).'
+- 'Tuning protocol is Session 15/13 discipline: one gain value → one timed lap → log it → change once.
+  Teams produce a small gain table (gain / lap time / observation) and pick their champion value. Vocabulary
+  upgrade: they are tuning a <b>control loop</b> — the same mathematics that keeps drones level and cruise
+  control steady. They should know the thing they built today is not a toy idea.'
+steps:
+- time: 12′
+  text: Type the P-follower; first run at gain ≈ 0.3 — expect lazy curve-cutting.
+- time: 22′
+  text: 'Tuning sprints: gain table with 5+ values, timed laps, one change at a time.'
+- time: 8′
+  text: 'Champion runs: best gain, three laps, best time recorded next to Grade 7’s bang-bang times.'
+- time: 3′
+  text: 'On your lesson sheet: your gain table + the value where wobble returned.'
+code:
+  lang: python
+  source: |-
+    import mbot2, cyberpi
+
+    BASE = 45      # cruise RPM
+    GAIN = 0.5     # tune me!
+
+    while True:
+        err = cyberpi.quad_rgb_sensor.get_offset_track()
+        steer = err * GAIN   # the whole idea
+        mbot2.drive_speed(BASE + steer,
+                          BASE - steer)
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete.'
+- If the robot flees the line instantly, the offset sign is inverted — flip the +/− and move on.
+- Same track and battery across tuning laps, or the table lies.
+result:
+  scene: line
+  params:
+    wobble: false
+    kind: tank
+    caption: 'P-control: the trajectory finally hugs the line'
+success:
+- P-follower completes laps visibly smoother than bang-bang
+- Gain table with 5+ tested values, one-change discipline
+- Wobble-returns gain found, matching the prediction
+parts:
+- id: robot_tank
+- id: tablet
+- id: map
+  note: same track all laps
+- id: timer
+  note: lap times
+- id: shield
+  note: same battery level across laps
+long:
+  goal: A champion gain chosen from a table, and the gain at which the wobble returns found and checked against
+    yesterday's prediction.
+  recap:
+    time: 10′
+    text: Run yesterday's predictions. Set the gain deliberately too low, then deliberately too high, and
+      compare the real trajectories against the sketches drawn when no code existed. Predictions that held
+      are satisfying; predictions that failed are where the mental model needs repair, and that is the more
+      valuable of the two.
+  extend:
+  - spec: 5+ gains, one change each
+    text: A gain table with timed laps and one change per row.
+  - spec: beat bang-bang both ways
+    text: Smoother <i>and</i> faster than the Grade 7 times written on the earlier lesson sheets.
+  - spec: wobble-return gain found
+    text: The value at which instability comes back, located and recorded rather than avoided.
+  log:
+    time: 10′
+    text: The gain table — gain, lap time, observation — champion value circled, wobble-return value marked.
+      Same track and same battery across the whole table, or it lies; note the battery level so a future reader
+      can tell whether it did.
+  review:
+    time: 15′
+    text: Pairs defend their champion gain. Criteria — is the choice supported by the table, and can they
+      say what goes wrong on each side of it? A champion value with no neighbours tested is a lucky guess.
+  parts:
+  - id: timer
+  - id: map
+  success:
+  - Wobble-return gain found and compared against the Session 5 prediction
+  - Champion gain defended from the table rather than from feel

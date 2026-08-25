@@ -1,0 +1,113 @@
+n: 10
+stage: B
+stage_title: ក្បួនដោះស្រាយលើផ្នែករឹងថ្មី
+kind: step
+title: Rover មានការងារ
+concept: ម៉ាស៊ីនស្ថានភាព
+hours: 2
+project: G8-B-thinks
+goal: អថេរតែមួយសម្រេចថា Rover កំពុងធ្វើអ្វី ដោយរាល់ការផ្លាស់ប្ដូរគូរមុនវាត្រូវបានសាងសង់។
+build: រូបយន្តដែលទៅយក ដឹក និងប្រគល់។
+builds_on:
+- ជំហានទី ៨ · ការចូលមកជិតរលូន
+- ជំហានទី ៤ · ប្លុកដៃចាប់
+- ថ្នាក់ទី ៧ · របៀប
+teach:
+- ឥឡូវ Rover អាចបើកបរ ចូលមកជិតដោយរលូន និងចាប់។ វាត្រូវដឹងថា <b>វាកំពុងធ្វើការងារណា</b> — ទំនេរ ទៅយក
+  ដឹក ប្រគល់ — ហើយនោះជាអថេរតែមួយផ្ទុកពាក្យ ជាមួយរង្វិលជុំមេខ្លីដែលអានវា ហើយដំណើរការប្លុកដែលត្រូវគ្នា។
+- ការងារគួរឲ្យចាប់អារម្មណ៍គឺ <b>ព្រួញ</b>៖ អ្វីបញ្ចប់ការទៅយក ហើយចាប់ផ្ដើមការដឹក? ការចាប់អ្វីមួយបាន។
+  អ្វីបញ្ចប់ការដឹក? ការមកដល់។ គូរពួកវាលើក្រដាសជាមុន រួចរកមើលពួកដែលអ្នកមិនបានគូរ — ព្រួញចេញពី "ខ្ញុំព្យាយាមចាប់
+  ហើយខកខាន" គឺជាព្រួញដែលក្រុមគ្រប់ក្រុមភ្លេច ហើយវាជាព្រួញដែលធ្វើឲ្យរូបយន្តជាប់គាំងក្នុងបេសកកម្ម។
+guide:
+- label: សាកល្បង
+  value: joystick ← → set the job to fetch
+- label: ស្ថានភាព
+  value: ទំនេរ · ទៅយក · ដឹក · ប្រគល់
+- label: គូរជាមុន
+  value: ព្រួញលើក្រដាស រួចប្លុក
+- label: រក
+  value: ព្រួញចេញពីការបរាជ័យ
+- label: ឥដ្ឋ
+  value: ២ ម៉ែត្រ បំណះយក និងតំបន់ដាក់ចុះ
+steps:
+- time: 20′
+  text: លើក្រដាស៖ ប្រអប់បួន ព្រួញរវាងពួកវា លក្ខខណ្ឌលើព្រួញនីមួយៗ។ មិនទាន់មានប្លុកទេ។
+  expect: ប្រអប់បួនលើក្រដាស មានលក្ខខណ្ឌសរសេរលើព្រួញនីមួយៗ។ នៅមិនទាន់មានប្លុកទេ។
+- time: 25′
+  text: សាងសង់អថេររបៀប និងរង្វិលជុំមេ។ ការងារនីមួយៗហៅប្លុកដែលអ្នកមានរួច។
+  expect: អថេរតែមួយកាន់ការងារបច្ចុប្បន្ន និងរង្វិលជុំមេដែលប្រគល់ការងារនីមួយៗទៅប្លុកដែលអ្នកមានស្រាប់។
+- time: 25′
+  text: ភ្ជាប់ការផ្លាស់ប្ដូរ ហើយបង្ហាញការងារបច្ចុប្បន្នលើអេក្រង់ជាពាក្យ។
+  expect: គ្រប់ព្រួញដំណើរការលើរូបយន្ត ហើយអេក្រង់ប្រាប់ជាពាក្យថាវាកំពុងធ្វើការងារណា។
+- time: 25′
+  text: ឥឡូវបំបែកវា៖ កើតអ្វីបើដៃចាប់បិទលើអ្វីទាំងអស់? បន្ថែមព្រួញដែលអ្នកមិនបានគូរ។
+  expect: អ្នកបិទដៃចាប់លើអវត្តមាន ហើយរូបយន្តងើបវិញជំនួសឲ្យការជាប់គាំង — ព្រួញដែលអ្នកមិនបានគូរ។
+- time: 15′
+  text: វដ្តពេញលេញ៖ ទៅយកដុំហ្វូម ដឹកវាមួយម៉ែត្រ ប្រគល់វា ត្រឡប់ទៅទំនេរវិញ។ បីដងជាប់គ្នា។
+  expect: យកឥវ៉ាន់ ដឹកមួយម៉ែត្រ ដាក់ចុះ ត្រឡប់ទៅទំនេរ — បីដងជាប់គ្នាដោយគ្មានជំនួយ។
+- time: 10′
+  text: កត់ត្រាដ្យាក្រាម ដោយសម្គាល់ព្រួញដែលអ្នកបន្ថែមតែក្រោយសាកល្បង។ ជំហានទី ២២ ត្រូវការវា។
+  expect: ដ្យាក្រាមក្នុងកំណត់ហេតុ ដោយសម្គាល់ព្រួញដែលអ្នករកឃើញតែពេលសាកល្បង។ ជំហានទី ២២ ចាប់ផ្ដើមពីវា។
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  delete all of  poses\n  set  speed  to 40\n  set  job  to  idle\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 4  join  job:   (job)  at x: 0 y: 60  by small pixel\n    if  (job) =\
+    \ fetch  then\n      moves forward  at (speed)  RPM\n      if  quad rgb sensor 1 probe (3) L1 detects\
+    \  red ?  then\n        stop encoder motor  all\n        grip\n        set  job  to  carry\n   \
+    \ if  (job) = carry  then\n      lift  60\n      moves forward  100  cm  until done\n      set \
+    \ job  to  deliver\n    if  (job) = deliver  then\n      lift  20\n      release\n      set  job\
+    \  to  idle\n\nwhen joystick  middle pressed\n  add  (servo (1) S1 current angle (°))  to  poses\n\
+    \  show label 1  join  poses:   (length of poses)  at x: 0 y: 0  by small pixel\n\nwhen button A\
+    \ pressed\n  set  stop  to  ((length of poses) + 1)\n  count with  i  from 1 to (stop) by step 1\
+    \ repeat\n    lift  (item (i) of poses)\n    wait 0.4 seconds\n\nwhen button B pressed\n  set  sides\
+    \  to 0\n  repeat 3\n    repeat 4\n      moves forward  20  cm  until done\n      turns right  90\
+    \  ° until done\n      change  sides  by 1\n    LED strip all LED all displays R  (pick random 0\
+    \ to 255)  G 0 B 120\n  show label 2  join  sides driven:   (sides)  at x: 0 y: 20  by small pixel\n\
+    \nwhen joystick  pulled↑\n  reset encoder motor  (1) EM1  rotated angle\n  set  target  to 1200\n\
+    \  forever\n    set  left  to  ((target) - (encoder motor (1) EM1 rotated angle (°)))\n    set \
+    \ speed  to  ((left) * 0.06)\n    if  (speed) > 80  then\n      set  speed  to 80\n    if  (speed)\
+    \ < 15  then\n      set  speed  to 15\n    show label 3  join  spd:   (speed)  at x: 0 y: 40  by\
+    \ small pixel\n    moves forward  at (speed)  RPM\n    if  (left) < 40  then\n      stop encoder\
+    \ motor  all\n      stop  this script\n\nwhen joystick  pulled←\n  set  job  to  fetch"
+tips:
+- ការងារដែលគ្មានផ្លូវចេញគឺជាអន្ទាក់ ហើយថ្នាក់គ្រប់ថ្នាក់សាងសង់មួយ។ ការរកឃើញវាដោយព្យាយាមធ្វើឲ្យរូបយន្តជាប់គាំង
+  គឺជាមេរៀន មិនមែនការបរាជ័យទេ។
+- ឈ្មោះការងារលើអេក្រង់ធ្វើឲ្យរាល់កំហុសក្រោយឃើញពីម្ខាងបន្ទប់។ កុំឲ្យនរណារំលងវា។
+- ដុំហ្វូម និងតំបន់ដាក់ធំទូលាយថ្ងៃនេះ។ ភាពជាក់លាក់មកនៅដំណាក់កាល E។
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits]
+    - [FETCH, '#16a34a', 'drives, finds red']
+    - [CARRY, '#0891b2', 'arm up, 100 cm']
+    - [DELIVER, '#7c3aed', 'arm down, lets go']
+    trans:
+    - [0, 1, 'joystick ←']
+    - [1, 2, 'gripped it']
+    - [2, 3, arrived]
+    - [3, 0, 'let go']
+    caption: one variable holds the job — every arrow is a thing that happens
+success:
+- ការងារបួន នីមួយៗមានស្លាកលើអេក្រង់ និងអាចចេញបាន
+- វដ្តទៅយក-ដឹក-ប្រគល់ពេញលេញ បីដងជាប់គ្នា
+- យ៉ាងតិចព្រួញមួយបន្ថែមក្រោយសាកល្បង ដែលមិនមាននៅលើដ្យាក្រាមដើម
+check:
+- do: A
+  see: The press A to start message goes, and the screen shows job idle instead. Idle is a job like
+    any other — having nothing to do is a state, not a bug.
+- do: left
+  see: The word on screen changes from idle to fetch and it drives off hunting for the red patch. One
+    push of the joystick moved it along one arrow of the diagram.
+- do: see
+  see: On the patch it stops, grips, and the screen says carry; it drives a metre, says deliver, lowers
+    the arm, lets go, and comes back to idle. Four jobs, four arrows, nobody touching it.
+parts:
+- id: robot_tank
+- id: foam
+- id: patches
+  note: drop zone
+- id: craft
+  note: paper for the diagram
+

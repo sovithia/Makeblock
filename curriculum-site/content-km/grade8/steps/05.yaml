@@ -1,0 +1,73 @@
+n: 5
+stage: A
+stage_title: ម៉ាស៊ីនថ្មី
+kind: step
+title: ប្លុកសម្រាប់ដៃចាប់
+concept: អនុគមន៍មានធាតុចូល
+hours: 1
+project: G8-A-rebuilt
+goal: ដៃចាប់ត្រូវបានបញ្ជាតែតាមរយៈប្លុកមានឈ្មោះ — មិនដែលមានបញ្ជា servo ឆៅនៅកន្លែងណាផ្សេងក្នុងកម្មវិធីទេ។
+build: grip, release, lift(height) — វាក្យសព្ទរបស់ដៃចាប់។
+builds_on:
+- ជំហានទី ៣ · ព្រំដែន servo
+- ថ្នាក់ទី ៧ · My Blocks
+teach:
+- អ្នកបានជួបអនុគមន៍ឆ្នាំមុន; ឥឡូវពួកវាមានតម្លៃភ្លាមៗ។ <b>grip</b>, <b>release</b> និង <b>lift(height)</b>
+  លាក់មុំ និងការរង់ចាំ ដូច្នេះផ្នែកផ្សេងនៃកម្មវិធីនិយាយអ្វីដែលវាមានន័យ។ ចាប់ពីទីនេះទៅ <b>គ្មានប្លុក
+  servo ឆៅលេចឡើងកន្លែងណាក្រៅពីខាងក្នុងទាំងនេះទេ</b> — កន្លែងតែមួយដើម្បីកែ កន្លែងតែមួយដើម្បីធ្វើឲ្យព្រំដែនត្រឹមត្រូវ។
+- <b>ការរង់ចាំ</b> ខាងក្នុងពួកវាមិនមែនជាការតុបតែងទេ។ Servo ត្រូវការមួយភ្លែតដើម្បីទៅដល់ ហើយកម្មវិធីដែលចាប់រួចបើកបរចេញភ្លាម
+  នឹងធ្វើឲ្យដុំធ្លាក់។ កន្លះវិនាទីខាងក្នុងអនុគមន៍ មានន័យថាគ្មាននរណាត្រូវចាំវានៅកន្លែងហៅទេ។
+guide:
+- label: សាកល្បង
+  value: joystick middle → the whole pick-and-place
+- label: វិន័យ
+  value: ប្លុក servo ឆៅរស់តែខាងក្នុងទាំងនេះ
+- label: រង់ចាំ
+  value: 0.5 វិ ខាងក្នុង — servo ត្រូវការមួយភ្លែត
+- label: ធាតុចូល
+  value: lift(height) — ប្លុកតែមួយ កម្ពស់ច្រើន
+- label: ឥដ្ឋ
+  value: ទំនេរ ១ ម៉ែត្រ — ចាប់ លើក ដឹក ២០ ស.ម.
+steps:
+- time: 15′
+  text: កំណត់ grip និង release ចេញពីអ្វីដែលអ្នកសាងសង់នៅជំហានទី ៣។ ហៅពួកវាពីប៊ូតុង ជំនួសឲ្យប្លុកឆៅ។
+  expect: ប៊ូតុងហៅ grip និង release តាមឈ្មោះ។ គ្មានប្លុកសេវ៉ូឆៅនៅលើប៊ូតុងទៀតទេ។
+- time: 20′
+  text: បន្ថែម <b>lift(height)</b> ជាមួយធាតុចូលជាលេខ ហើយប្រើវាជាមួយកម្ពស់បីខុសគ្នា។
+  expect: ប្លុក lift តែមួយប្រើនៅកម្ពស់បីខុសគ្នា។
+- time: 15′
+  text: ដកការរង់ចាំចេញពីខាងក្នុង grip ហើយមើលរូបយន្តធ្វើឲ្យដុំធ្លាក់។ ដាក់វាវិញ។ ឥឡូវអ្នកដឹងថាហេតុអ្វីវានៅទីនោះ។
+  expect: រូបយន្តធ្លាក់ដុំពេលដក wait ចេញ ហើយកាន់ជាប់ពេលដាក់វិញ។ ឥឡូវអ្នកដឹងថា wait មានសម្រាប់អ្វី។
+- time: 10′
+  text: ស្វែងរកកម្មវិធីរបស់អ្នករកប្លុក servo ឆៅដែលនៅសល់ក្រៅអនុគមន៍ទាំងបី។ ផ្លាស់វាចូលខាងក្នុង។
+  expect: គ្រប់ប្លុកសេវ៉ូឆៅនៅក្នុងអនុគមន៍ណាមួយក្នុងបីរបស់អ្នក គ្មានមួយនៅខាងក្រៅទេ។
+code:
+  lang: blocks
+  source: "define  grip\n  set servo  S1  angle to (ARM_SHUT)  °\n  wait 0.5 seconds\n\ndefine  release\n\
+    \  set servo  S1  angle to (ARM_OPEN)  °\n  wait 0.5 seconds\n\ndefine  lift (height)\n  set servo\
+    \  S2  angle to (height)  °\n  wait 0.5 seconds\n\nwhen CyberPi starts up\n  set  ARM_OPEN  to 20\n\
+    \  set  ARM_SHUT  to 75\n\nwhen button A pressed\n  calibrate  chassis parameters\n\nwhen button\
+    \ B pressed\n  turns right  90  ° until done\n  wait 1 seconds\n  turns left  90  ° until done\n\
+    \nwhen joystick  pulled←\n  set servo  S1  angle to (ARM_SHUT)  °\n\nwhen joystick  pulled→\n  set\
+    \ servo  S1  angle to (ARM_OPEN)  °\n\nwhen joystick  pulled↑\n  increase servo  S1  angle by 5\
+    \  °\n  if  (servo (1) S1 current angle (°)) > (ARM_SHUT)  then\n    set servo  S1  angle to (ARM_SHUT)\
+    \  °\n\nwhen joystick  middle pressed\n  grip\n  lift  60\n  moves forward  20  cm  until done\n\
+    \  lift  20\n  release"
+tips:
+- ការដកការរង់ចាំចេញដោយចេតនា ជារបៀបលឿនបំផុតដើម្បីបង្រៀនថាហេតុអ្វីវាមាន។ ទុកឲ្យវាបរាជ័យម្ដង។
+- ដាក់ឈ្មោះពួកវាតាមការងារ មិនមែនតាមយន្តការទេ។ <b>grip</b> រស់រានពីការសាងសង់ឡើងវិញ; <b>servo_to_75</b>
+  មិនរស់ទេ។
+- ប្លុកទាំងបួននេះជាវាក្យសព្ទសម្រាប់ដំណាក់កាល E។ អ្វីដែលដាក់ឈ្មោះមិនល្អឥឡូវ នឹងដាក់ឈ្មោះមិនល្អក្នុងបេសកកម្ម។
+result:
+  scene: arm
+  params: {pose: place}
+success:
+- grip, release និង lift(height) ដំណើរការទាំងអស់
+- lift ប្រើជាមួយតម្លៃបីខុសគ្នា
+- គ្មានប្លុក servo ឆៅនៅកន្លែងណាក្រៅអនុគមន៍ទាំងបី
+check:
+- do: mid
+  see: 'One press: it grips, lifts, carries, puts down, lets go.'
+parts:
+- id: robot_tank
+- id: foam

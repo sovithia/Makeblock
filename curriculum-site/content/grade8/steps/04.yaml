@@ -1,0 +1,110 @@
+n: 4
+stage: A
+stage_title: A new machine
+kind: step
+title: The arms move
+concept: Servos · limits as constants
+hours: 2
+project: G8-A-rebuilt
+goal: The grip opens and closes on command, and cannot be driven outside the range the team measured
+  by hand.
+build: A gripper with limits it cannot break.
+builds_on:
+- Step 3 · the Rover drives
+- Grade 7 · variables
+build_images:
+- servo-concept.png
+build_caption: The arm servo — a geared motor, position sensor and controller in one housing
+teach:
+- A servo goes to an <b>angle</b> and holds it — not a speed, a position. <b>set servo S1 angle to 80°</b>
+  and it goes there and stays. That is a different kind of motor from the wheels and it wants a different
+  kind of thinking.
+- 'Find the safe range <b>by hand, unpowered, first</b>. Move the grip gently and feel where it stops
+  wanting to go. Those two numbers are yours, for this robot — and they go straight into two variables,
+  <b>ARM_OPEN</b> and <b>ARM_SHUT</b>, which every other block reads. Never drive a servo past resistance:
+  the gear teeth strip silently, they are not in the spare bag, and no amount of clever code fixes a
+  stripped gear.'
+guide:
+- label: Try it
+  value: joystick ← shut · → open · ↑ nudge
+- label: First
+  value: find the range by hand, power off
+- label: Then
+  value: two variables hold the limits
+- label: Never
+  value: force past resistance — gears strip
+- label: Floor
+  value: a clear 50 cm — the arm swings, the robot turns
+steps:
+- time: 20′
+  text: Power off. Move the grip by hand and find where it stops moving freely. Write both angles down
+    — they are yours, not the class's.
+  expect: Two angles written down, found by hand with the power off — your robot’s numbers, not the
+    class’s.
+- time: 20′
+  text: Power on. Send the servo to each of your two angles and check they match what your hand found.
+  use:
+  - cyberpi_when_launch
+  - mbot2_servo_set_angle
+  expect: The servo drives to each of your two angles and lands where your hand said it would.
+- time: 25′
+  text: Put the limits into ARM_OPEN and ARM_SHUT, and make every block read the variables instead of
+    a typed number.
+  use:
+  - data_setvariableto
+  expect: 'No typed angle left anywhere: every block reads ARM_OPEN or ARM_SHUT.'
+- time: 25′
+  text: 'Adversarial test: try to send the servo somewhere silly. Add the guard that stops it. Then
+    try again and fail.'
+  use:
+  - control_if
+  - cyberpi_when_direction_key_press
+  - mbot2_servo_add_angle
+  expect: You try to send the servo somewhere silly and the guard refuses. Try again and it refuses
+    again.
+- time: 20′
+  text: Grip something — a foam block. Too loose drops it, too tight bends it. Find the number in between
+    and write it down.
+  expect: A foam block held without dropping and without bending — and the number that does it, written
+    down.
+- time: 10′
+  text: Log both angles, dated, with the robot's name on them. Step 5 puts both numbers into ARM_OPEN
+    and ARM_SHUT, and every gripper block after that reads them.
+  expect: Both angles in the log, dated, with the robot’s name on them. Step 5 turns them into ARM_OPEN
+    and ARM_SHUT.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  ARM_OPEN  to 20\n  set  ARM_SHUT  to 75\n\nwhen button A pressed\n\
+    \  calibrate  chassis parameters\n\nwhen button B pressed\n  turns right  90  ° until done\n  wait\
+    \ 1 seconds\n  turns left  90  ° until done\n\nwhen joystick  pulled←\n  set servo  S1  angle to\
+    \ (ARM_SHUT)  °\n\nwhen joystick  pulled→\n  set servo  S1  angle to (ARM_OPEN)  °\n\nwhen joystick\
+    \  pulled↑\n  increase servo  S1  angle by 5  °\n  if  (servo (1) S1 current angle (°)) > (ARM_SHUT)\
+    \  then\n    set servo  S1  angle to (ARM_SHUT)  °"
+tips:
+- The arm no longer moves itself when the robot powers on. It used to snap to ARM_OPEN at start-up,
+  which is a servo swinging on a crowded desk before anyone is ready; the joystick right does the same
+  thing on demand. Nothing on this robot should move until a person asks it to.
+- Hand-measure the range before powering the servo, every time, on every robot. They differ, and a number
+  borrowed from the next table will strip a gear.
+- If the arm judders at the edges of its range, back both constants off 5°. Mechanical margin is wisdom,
+  not cowardice.
+- Foam blocks only. A wooden block plus an over-tight grip is how gears die.
+result:
+  scene: arm
+success:
+- Safe range measured by hand and recorded for this robot
+- Both limits held in variables that every block reads
+- A deliberate out-of-range command is stopped by the guard
+check:
+- do: left
+  see: The gripper closes.
+- do: right
+  see: The gripper opens.
+- do: up
+  see: It opens a little more each push, and refuses to go too far.
+parts:
+- id: robot_tank
+- id: servopack
+- id: foam
+- id: protractor
+

@@ -1,0 +1,107 @@
+n: 17
+stage: D
+stage_title: Voice
+kind: step
+title: The Rover speaks and listens
+concept: Speech in, speech out
+hours: 2
+project: G8-D-listens
+goal: The Rover repeats back what you said to it, and can say it in another language.
+build: A robot you can talk to.
+builds_on:
+- Step 13 · the screen
+- Step 16 · inputs are all the same shape
+teach:
+- Three blocks and the robot has a voice. <b>speak</b> says something aloud. <b>recognize</b> listens
+  for a few seconds. <b>speech recognition result</b> hands you what it heard, as <b>text</b> — the
+  same kind of thing you have been putting in lists all year. That is the whole interface.
+- 'It needs <b>Wi-Fi</b>, because the listening and the speaking happen on a server, not on the robot.
+  Say that plainly: the robot is not clever, it is <i>connected</i>. Check <b>network connected?</b>
+  before anything else, and show it on screen — a robot that seems deaf is usually a robot that is offline.'
+guide:
+- label: Before that
+  value: sign in to mBlock · Upload mode
+- label: First
+  value: connect to Wi-Fi · network connected?
+- label: Listen
+  value: recognize … for 3 secs
+- label: Read it
+  value: speech recognition result — it is text
+steps:
+- time: 20′
+  text: Sign in to mBlock and switch to Upload mode, then connect to Wi-Fi and put <b>network connected?</b>
+    on the screen. Nothing in this stage works without all three.
+  use:
+  - cyberpi_wifi_set
+  - control_wait_until
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: The screen says the robot is on the network. Nothing else in this stage works until it does.
+- time: 20′
+  text: Make the robot speak. Have it introduce itself in its own voice — the class will not be quiet
+    for a while, and that is fine.
+  use:
+  - cyberpi_speak_with_some_language_3
+  expect: The robot introduces itself out loud, in its own voice.
+- time: 25′
+  text: 'Now listen: recognize for three seconds and show what it heard on the screen. Say the same
+    thing three times and compare.'
+  use:
+  - cyberpi_speech_recognition_with_time_3
+  expect: What it heard, on the screen — and three tries at the same sentence to compare.
+- time: 25′
+  text: 'Repeat-after-me: it hears you and says it back. Then translate it and say it in another language.'
+  expect: It hears you and says it back, then says it again in another language.
+- time: 20′
+  text: Test it on three different people. Note whose words come back right and whose do not — you will
+    need these notes in Step 19.
+  expect: 'Notes on three different people: whose words come back right and whose do not. Step 19 needs
+    these notes.'
+- time: 10′
+  text: Log three phrases it got right and three it did not. Step 19 breaks the robot on purpose using
+    exactly these phrases.
+  expect: Three phrases it got right and three it did not, in the log. Step 19 breaks the robot on purpose
+    with exactly these.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  connect to Wi-Fi  ssid  password  password\n  wait until  network\
+    \ connected?\n  speak  auto  I am awake\n\nwhen button A pressed\n  recognize  (4) English  3  secs\n\
+    \  set  heard  to  (speech recognition result)\n  show label 1  join  heard:   (heard)  at x: 0\
+    \ y: 0  by small pixel\n  speak  auto  (heard)\n\nwhen button B pressed\n  speak  auto  (translate\
+    \  (heard)  into  French)"
+tips:
+- 'If <b>recognize</b> and <b>speak</b> appear greyed out with a hatched pattern, nobody is signed in.
+  mBlock says it plainly if you hover: <i>the block is available only after you sign in and open the
+  Upload mode</i>. These four blocks are cloud services on Makeblock''s servers, not code running on
+  the robot — which is also why this stage needs the internet and not just a local network.'
+- The translate block offers twelve languages and <b>Khmer is not one of them</b> — Chinese, English,
+  Japanese, French, German, Spanish, Portuguese, Russian, Korean, Italian, Dutch and Traditional Chinese.
+  Pick one of those and say so out loud; a class that discovers the gap by typing their own language
+  in has learned something true about whose languages get built for.
+- Check the network first, always. Nine times in ten a robot that will not listen is a robot that is
+  not connected, and teams will debug their blocks for twenty minutes instead.
+- Twelve robots listening at once is chaos. Agree a taking-turns protocol before anyone presses the
+  button.
+- Keep the per-person notes from the last activity. Step 19 is built on them and they cannot be recreated
+  afterwards.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["heard: hello", "#7dd3fc", 10, true]
+    - ["says: hello", "#facc15", 10, false]
+    - ["French: bonjour", "#22c55e", 9, false]
+    caption: the Rover shows, repeats, and translates what it heard
+success:
+- The robot speaks and shows the network state on screen
+- It repeats back what it heard, correctly, at least sometimes
+- It says something in a second language
+- Notes recorded on whose speech it handled well
+check:
+- do: A
+  see: Say something. It writes it on the screen and says it back.
+- do: B
+  see: It says the same thing again in French.
+parts:
+- id: robot_tank
+- id: router
+  note: Wi-Fi with internet

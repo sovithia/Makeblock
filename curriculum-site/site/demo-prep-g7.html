@@ -1,0 +1,477 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Demo run-of-show · Grade 7 · Rescue Run</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "mBot2 Rover Robotics Program · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #0a5c8c 70%, #0e7fc1 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #7dd3fc; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #7dd3fc; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #7dd3fc; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #0e7fc1; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #e3f1fa; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #0a5c8c; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #e3f1fa; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #0a5c8c; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #0a5c8c;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #0e7fc1; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #0a5c8c; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #0e7fc1;
+  border-radius: 8px; background: #e3f1fa; font-size: 8.4pt; font-weight: bold;
+  color: #0a5c8c; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #e3f1fa; border-left: 3px solid #0e7fc1;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #0a5c8c; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #0a5c8c; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #0a5c8c; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #0e7fc1; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #0a5c8c; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #0a5c8c; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #0e7fc1; background: #e3f1fa; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #0e7fc1; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #0a5c8c; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #0e7fc1; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #e3f1fa; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #0a5c8c; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #0a5c8c; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #e3f1fa; border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #0e7fc1; }
+.result li.xtra { color: #0a5c8c; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style>
+<style>
+.dp h3 { font-size: 12.5pt; margin: 7mm 0 2mm 0; }
+.dp .lede { color: #475569; font-size: 9.6pt; margin-bottom: 4mm; }
+.dp table { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+.dp td, .dp th { border-bottom: 1px solid #e8edf3; padding: 1.8mm 2mm; vertical-align: top;
+  font-size: 8.8pt; text-align: left; }
+.dp th { background: #f8fafc; color: #475569; font-size: 8pt; text-transform: uppercase;
+  letter-spacing: 1px; }
+.dp td.n { width: 8mm; font-weight: bold; color: var(--dpc, #0e7fc1); }
+.dp td.t { width: 16mm; font-weight: bold; white-space: nowrap; }
+.dp .say { display: block; color: #475569; font-style: italic; margin-top: 1mm; }
+.dp .risk { border-left: 4px solid #d97706; background: #fef9ec; border-radius: 0 8px 8px 0;
+  padding: 2.5mm 3.5mm; margin-bottom: 2.5mm; font-size: 8.8pt; }
+.dp .risk b { color: #9a4f08; }
+.dp .fix { display: block; margin-top: 1mm; color: #475569; }
+.dp .chk { list-style: none; padding-left: 0; }
+.dp .chk li { font-size: 9pt; margin-bottom: 1.6mm; padding-left: 6mm; text-indent: -6mm; }
+.dp .chk li::before { content: "\2610  "; color: var(--dpc, #0e7fc1); font-size: 11pt; }
+.dp .dpmat { text-align: center; margin: 3mm 0 4mm 0; }
+.dp .warn { border: 2px solid #dc2626; border-radius: 10px; padding: 3mm 4mm; margin-bottom: 4mm;
+  font-size: 9pt; }
+.dp .warn b { color: #dc2626; }
+.dp .kit { border: 2px solid var(--dpc, #0e7fc1); background: #fff; border-radius: 10px;
+  padding: 3mm 4mm; margin-bottom: 4mm; font-size: 9pt; }
+.dp .kit b { color: var(--dpc, #0e7fc1); }
+.dp .pair { border-top: 1px solid #e8edf3; margin-top: 7mm; padding-top: 3mm;
+  color: #475569; font-size: 8.8pt; }
+@media print { .dp { font-size: 9pt; } }
+</style>
+</head><body><div class="chrome"><a href="index.html">All grades</a>&nbsp;·&nbsp;<a href="demo-prep-g8.html">Grade 8 demo →</a><span class="spacer"></span><a href="javascript:window.print()">🖨 Print this session</a><a class="glossary-link" href="glossary.html" target="_blank" rel="noopener noreferrer">Open glossary in new tab</a><span class="langtog" role="group" aria-label="Language"><span class="on" lang="en">EN</span><a href="km/demo-prep-g7.html" lang="km" hreflang="km">ខ្មែរ</a></span></div>
+<div class="dp" style="--dpc:#0e7fc1">
+<h2 class="section">Demo run-of-show — Grade 7 · Rescue Run</h2>
+<p class="lede"><b>The story in one line: nine months of Grade 7 turn into forty seconds where nobody
+touches the robot.</b> One mat, one wheeled mBot2, three moments, about ten minutes. This demo proves
+the word managers actually care about — <i>reliable</i>.</p>
+
+<div class="kit"><b>Box 1 only.</b> Everything on this page runs on the base mBot2 kit. The Rover
+add-on box stays sealed and out of the room — a manager can watch a complete Grade 7 year without a
+second purchase ever appearing on the table. If they ask what the next year needs, that is the cue
+for the Grade 8 demo, not an interruption to this one.</div>
+
+<div class="dpmat">
+<svg viewBox="0 0 640 250" width="620" style="max-width:100%">
+  <rect x="8" y="8" width="624" height="234" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <!-- calibration strip -->
+  <line x1="45" y1="45" x2="185" y2="45" stroke="#0e7fc1" stroke-width="3"/>
+  <line x1="45" y1="38" x2="45" y2="52" stroke="#0e7fc1" stroke-width="3"/>
+  <line x1="185" y1="38" x2="185" y2="52" stroke="#0e7fc1" stroke-width="3"/>
+  <text x="115" y="32" font-size="11" fill="#0e7fc1" text-anchor="middle" font-weight="bold">50 cm strip</text>
+  <text x="115" y="66" font-size="10" fill="#64748b" text-anchor="middle">moment 1 · calibration</text>
+  <!-- line loop -->
+  <path d="M 70,150 L 300,150 Q 340,150 340,120 L 340,100 Q 340,78 375,78 L 430,78"
+        stroke="#1e293b" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <text x="140" y="172" font-size="10" fill="#64748b">line-following map</text>
+  <circle cx="70" cy="150" r="7" fill="#16a34a"/>
+  <text x="70" y="192" font-size="10" fill="#16a34a" text-anchor="middle" font-weight="bold">START</text>
+  <!-- obstacle, two positions: the autonomy proof -->
+  <rect x="232" y="137" width="26" height="26" fill="#d97706" rx="2"/>
+  <text x="245" y="130" font-size="10" fill="#9a4f08" text-anchor="middle">run 1</text>
+  <rect x="327" y="88" width="26" height="26" fill="none" stroke="#d97706" stroke-width="2.5"
+        stroke-dasharray="5,3" rx="2"/>
+  <text x="300" y="106" font-size="10" fill="#9a4f08" text-anchor="end">run 2</text>
+  <path d="M 262,150 Q 300,150 325,112" stroke="#d97706" stroke-width="1.6" fill="none"
+        stroke-dasharray="4,3" marker-end="url(#dparr)"/>
+  <defs><marker id="dparr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+    <path d="M0,0 L7,3.5 L0,7 z" fill="#d97706"/></marker></defs>
+  <text x="245" y="215" font-size="10" fill="#9a4f08" text-anchor="middle" font-weight="bold">
+    obstacle MOVES between runs</text>
+  <!-- rescue zone -->
+  <rect x="450" y="45" width="130" height="70" fill="#dcfce7" stroke="#16a34a"
+        stroke-width="2.5" stroke-dasharray="7,5" rx="4"/>
+  <text x="515" y="74" font-size="11" fill="#166534" text-anchor="middle" font-weight="bold">RESCUE</text>
+  <text x="515" y="90" font-size="11" fill="#166534" text-anchor="middle" font-weight="bold">ZONE</text>
+  <text x="515" y="130" font-size="10" fill="#64748b" text-anchor="middle">moments 2 &amp; 3</text>
+  <text x="515" y="180" font-size="10" fill="#94a3b8" text-anchor="middle">no tablet on this mat</text>
+  <text x="575" y="30" font-size="10" fill="#94a3b8" text-anchor="middle">≈120 × 80 cm</text>
+</svg></div>
+
+<h3>The three moments</h3>
+<table>
+<tr><th>#</th><th>Session</th><th>What they see</th><th>Why it lands</th></tr>
+<tr><td class="n">1</td><td><a href="./grade7/step-02.html">G7 Step 2</a><br/>Calibration</td>
+    <td>Robot drives 50 cm three times, inside ±1 cm; the team's measurement table on screen
+    <span class="say">"Nine months earlier they could not do this. That is a tolerance, and they
+    met it."</span></td>
+    <td>Answers "is this real STEM?" before it gets asked. Cut this one first if time is short —
+    it can be told rather than shown</td></tr>
+<tr><td class="n">2</td><td><a href="./grade7/step-23.html">G7 Step 23</a><br/>Rescue Run</td>
+    <td>Follows the line, meets the obstacle, arcs around it, re-finds the line, stops inside the
+    rescue zone, celebrates
+    <span class="say">"Nobody is touching it. That is a whole year of skills in forty seconds."</span></td>
+    <td>The year's payoff, and the most legible autonomy moment in the program</td></tr>
+<tr><td class="n">3</td><td><a href="./grade7/step-22.html">G7 Step 22</a><br/>Run it again, moved</td>
+    <td><b>Move the obstacle to a different spot in front of them</b>, then run the identical program
+    again
+    <span class="say">"Same code. I just moved the box. It is not following a memorised route —
+    it is following a rule."</span></td>
+    <td>The single cheapest proof that this is programming and not choreography. Most adults
+    silently assume the robot is replaying a recording until this moment</td></tr>
+</table>
+
+<h3>Timing — about 10 minutes</h3>
+<table>
+<tr><td class="t">0–3′</td><td>Moment 1 — calibration. Short, factual, sets credibility</td></tr>
+<tr><td class="t">3–7′</td><td>Moment 2 — Rescue Run. The curriculum scores two official attempts,
+  so a first-run miss is on-message, not a failure. Say that <i>before</i> you press start</td></tr>
+<tr><td class="t">7–10′</td><td>Moment 3 — move the obstacle, run again. End here, on the rule</td></tr>
+</table>
+
+<h3>What to build</h3>
+<table>
+<tr><th>From the kit</th><th>Classroom</th></tr>
+<tr><td>One wheeled mBot2 (Box 1). Ultrasonic and Quad RGB mounted and straight. A second built
+  robot as hot spare if you have one. Charged the night before — the shield battery level changes
+  the calibration numbers.</td>
+  <td>Line-following map, or black tape on light card · masking tape · one cardboard box as the
+  obstacle · matte <b>red</b> paper for the rescue zone (glossy tape reads badly) · ruler ·
+  stopwatch · a tablet only if you want to show the code — the runs themselves need no tablet</td></tr>
+</table>
+
+<h3>Prep week</h3>
+<table>
+<tr><td class="t">Mon</td><td>Assemble and charge. Write and save the program:
+  <a href="./grade7/step-18.html">S15</a> three-state follower →
+  <a href="./grade7/step-19.html">S16</a> zone stop and button start →
+  <a href="./grade7/step-22.html">S19</a> obstacle detour and line re-find.</td></tr>
+<tr><td class="t">Tue</td><td>Tape the mat <b>in the actual demo room</b>. Calibrate the Quad RGB on
+  that floor, under that light. Tune the detour arc with the obstacle at <b>both</b> marked
+  positions. Photograph the taped layout so you can rebuild it exactly.</td></tr>
+<tr><td class="t">Wed–Thu</td><td>Two clean run-throughs end to end, in order, including the
+  obstacle move. Then freeze the parameters and save as <b>demo-g7-rescue-final</b>.</td></tr>
+<tr><td class="t">Fri AM</td><td>Pre-flight checklist below. One silent full run before anyone
+  arrives.</td></tr>
+</table>
+
+<h3>What will go wrong, and what to do</h3>
+
+<div class="risk"><b>Floor surface and light change everything.</b> Numbers tuned on one floor will
+not hold on another, and direct sun or a shiny floor wrecks line following.
+<span class="fix">→ Calibrate on Tuesday, in the room, at the demo's time of day. Recalibrate on
+Friday morning. The calibration ritual is 80% of line-following reliability.</span></div>
+
+<div class="risk"><b>Calibration is distance-based, so battery level changes it.</b> A robot that ran
+all morning will undershoot the 50 cm and may stop short of the zone.
+<span class="fix">→ Full charge, and do not leave the robot running while people arrive.</span></div>
+
+<div class="risk"><b>The moved obstacle is a live variable.</b> An arc tuned at one position can miss
+the line at another, which turns your best moment into your worst.
+<span class="fix">→ Tune at both marked positions and demo <b>only</b> those two. Mark them on the
+mat with tape so you cannot improvise under pressure.</span></div>
+
+<div class="risk"><b>A curled or taped-over map gives false readings.</b> Curled edges and glossy
+tape both fool the Quad RGB.
+<span class="fix">→ Tape the map flat at every edge; matte paper for the red zone.</span></div>
+
+<h3>Friday morning pre-flight</h3>
+<ul class="chk">
+<li>Robot fully charged, and the spare too</li>
+<li>Mat taped down flat, matching Tuesday's photo</li>
+<li>Quad RGB recalibrated this morning, in this room, under this light</li>
+<li>Program uploaded in <b>Upload mode</b> and run once, silently</li>
+<li>Button start confirmed — B starts, A stops, no re-flashing between runs</li>
+<li>Both obstacle positions taped and both tested</li>
+<li>Rescue zone patch and start line down</li>
+<li>Printed leave-behinds: the demo tour and the Grade 7 materials page</li>
+</ul>
+
+<h3>Leave-behind</h3>
+<p class="lede">Print these and have them on the table — they answer the two questions managers ask
+after the robot stops moving: what does the year look like, and what do we have to buy.
+<br/>· <a href="./demo.html">The demo tour</a> — milestone cards for each grade
+<br/>· <a href="./grade7/materials.html">Grade 7 materials</a> — Box 1, nothing sold separately</p>
+
+<p class="pair"><b>Running both demos back-to-back?</b> Do Grade 7 first, exactly as above, then
+clear the mat and move to <a href="./demo-prep-g8.html">Grade 8 · A Job Worth Doing</a>. The
+handover line is the whole pitch: <i>"That one is reliable. Now let me show you the one that is
+likeable."</i> Budget about 20 minutes for the pair, plus two minutes to reset the floor.</p>
+</div>
+</body></html>

@@ -1,0 +1,76 @@
+n: 25
+stage: E
+stage_title: The mission
+kind: step
+title: Freeze, and run it for real
+concept: Reliability under pressure
+hours: 2
+project: G7-E-mission
+goal: Two scored attempts under event conditions, with the configuration frozen before the first one.
+build: The finished robot — and this project is the demo.
+builds_on:
+- Step 24 · the mission runs
+teach:
+- Reliability is not the same as working. One clean run is a demonstration; three in a row is a machine.
+  Spend the first half of today running the mission repeatedly and counting, and fix only what the count
+  tells you to fix.
+- 'Then <b>freeze</b>: write every speed, threshold and arc value into the log, save the project under
+  its final name, and stop editing. Tinkering in the minutes before an official run is how good robots
+  die, and the rule is easier to keep if it was agreed before anyone was nervous.'
+guide:
+- label: Freeze
+  value: write the numbers down, then stop editing
+- label: Save as
+  value: G7-rescue-run-<team> — this is the demo
+- label: Score
+  value: by phase, so a partial run still counts
+steps:
+- time: 30′
+  text: 'Reliability block: run the mission five times and count the successes. Fix only what the count
+    points at.'
+  expect: Five runs, a success count, and repairs aimed only at what that count points at.
+- time: 15′
+  text: 'Freeze: every number into the log, project saved under its final name. No edits after this
+    line.'
+  expect: Every number in the log and the project saved under its final name. Nothing is edited after
+    this line.
+- time: 40′
+  text: Official attempts — two per team, scored by phase, with pit time in between. Best attempt counts.
+  expect: Two scored attempts per team with pit time between them. The better one counts.
+- time: 25′
+  text: 'Two minutes per team: what worked, what failed, what you would do next. The team whose robot
+    failed but who can explain why gets the applause.'
+  expect: Two minutes per team on what worked, what failed and what is next — and applause for the team
+    that can explain a failure.
+- time: 10′
+  text: 'Final log entry: your score, and the one thing you would change about how you worked — not
+    about a number.'
+  expect: A final log entry with your score and one thing you would change about how you worked, not about
+    a number.
+blocks:
+- My Blocks
+- Variables
+- Control
+- Quad RGB Sensor
+- Ultrasonic Sensor 2
+tips:
+- Score phases, not just full success. A robot that avoids the obstacle but misses the zone has earned
+  most of the marks and the team should feel it.
+- Recalibrate on the actual floor before the first official run, and not again between attempts unless
+  the light changes.
+- Photograph the scoreboard and the frozen numbers. Grade 8 opens by asking what this robot could not
+  do.
+result:
+  scene: rescue
+success:
+- Two official attempts completed and scored phase by phase
+- The configuration was frozen in writing before the first attempt
+- Every student can say what their robot did and why it failed where it did
+parts:
+- id: robot_wheel
+- id: map
+- id: boxes
+- id: patches
+- id: timer
+  note: and a visible scoreboard
+

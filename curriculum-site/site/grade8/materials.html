@@ -1,0 +1,341 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Grade 8 · Classroom materials</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "mBot2 Rover Program · Grade 8 · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #5f2b8a 70%, #8b3fc6 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #d8b4fe; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #d8b4fe; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #d8b4fe; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #8b3fc6; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #8b3fc6; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #f2e8fa; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #5f2b8a; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #f2e8fa; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #5f2b8a; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #5f2b8a;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #8b3fc6; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #5f2b8a; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #8b3fc6;
+  border-radius: 8px; background: #f2e8fa; font-size: 8.4pt; font-weight: bold;
+  color: #5f2b8a; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #f2e8fa; border-left: 3px solid #8b3fc6;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #5f2b8a; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #8b3fc6; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #5f2b8a; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #5f2b8a; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #8b3fc6; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #5f2b8a; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #5f2b8a; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #8b3fc6; background: #f2e8fa; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #8b3fc6; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #5f2b8a; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #8b3fc6; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #f2e8fa; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #5f2b8a; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #5f2b8a; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #f2e8fa; color: #5f2b8a;
+  border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #8b3fc6; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #f2e8fa; border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #f2e8fa; color: #5f2b8a;
+  border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #8b3fc6; }
+.result li.xtra { color: #5f2b8a; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style>
+<style>
+.mtot { color: #475569; font-size: 9pt; margin-bottom: 5mm; }
+/* groups may split across pages — forcing a 15-row group to stay whole leaves a
+   near-empty page before it. Keep the heading attached to its first rows and
+   never split an individual item instead. */
+.mgrp { margin-bottom: 7mm; }
+.mgrp h3 { margin: 0 0 0.6mm 0; font-size: 12pt;
+  page-break-after: avoid; break-after: avoid; }
+.mgrp .sub { color: #64748b; font-size: 8.6pt; margin: 0 0 3mm 0;
+  page-break-after: avoid; break-after: avoid; }
+table.mtab tr, table.sess tr { page-break-inside: avoid; break-inside: avoid; }
+table.mtab { width: 100%; border-collapse: collapse; }
+table.mtab td { border-bottom: 1px solid #eef2f7; padding: 1.6mm 2mm; vertical-align: middle; }
+table.mtab td.ic { width: 16mm; text-align: center; }
+table.mtab td.ic img { max-width: 50px; max-height: 34px; }
+table.mtab td.nm { font-weight: bold; }
+table.mtab td.nm .nt { display: block; font-weight: normal; color: #64748b; font-size: 8.2pt; }
+table.mtab td.nm .pg { display: block; font-weight: normal; color: #475569;
+  font-size: 8.2pt; line-height: 1.42; margin-top: 1mm; padding-left: 2.4mm;
+  border-left: 2px solid #e2e8f0; }
+table.mtab td.us { width: 46mm; color: #475569; font-size: 8.4pt; }
+.lo { display: inline-block; background: #fde9c8; color: #92510a; border-radius: 5px;
+  padding: 0.2mm 1.6mm; font-size: 7.4pt; font-weight: bold; margin-left: 1.5mm; }
+table.kits { border-collapse: collapse; margin: 2mm 0 0 0; }
+table.kits td, table.kits th { border: 1px solid #e2e8f0; padding: 1.4mm 4mm; font-size: 9pt;
+  text-align: center; }
+table.kits th { background: #f8fafc; color: #475569; font-size: 8.2pt; font-weight: bold; }
+table.sess { width: 100%; border-collapse: collapse; }
+table.sess td { border-bottom: 1px solid #eef2f7; padding: 1.2mm 2mm; font-size: 8.4pt;
+  vertical-align: top; }
+table.sess td.sn { width: 12mm; font-weight: bold; white-space: nowrap; }
+table.sess td.st { width: 42mm; }
+</style>
+</head><body><div class="chrome"><a href="../index.html">All grades</a><span class="dim">·</span><a href="steps.html">Grade 8</a><span class="spacer"></span><a href="javascript:window.print()">🖨 Print this session</a><a class="glossary-link" href="../glossary.html" target="_blank" rel="noopener noreferrer">Open glossary in new tab</a><span class="langtog" role="group" aria-label="Language"><span class="on" lang="en">EN</span><a href="../km/grade8/materials.html" lang="km" hreflang="km">ខ្មែរ</a></span></div>
+<h2 class="section">Grade 8 — what the classroom needs</h2>
+<p class="muted">Everything the 24 sessions of this year call for, gathered from the per-session parts lists. Items are grouped by where they come from.</p>
+<p class="mtot"><b>14 pieces from the kit · 11 classroom supplies</b></p>
+<div class="mgrp"><h3 style="color:#5f2b8a">Robot kits</h3><p class="sub">1 mBot2 kit per 2–3 students</p><table class="kits"><tr><th>Class size</th><th>Kits needed</th></tr><tr><td>12 students</td><td><b>4–6</b></td></tr><tr><td>18 students</td><td><b>6–9</b></td></tr><tr><td>24 students</td><td><b>8–12</b></td></tr><tr><td>30 students</td><td><b>10–15</b></td></tr></table></div>
+<div class="mgrp"><h3 style="color:#5f2b8a">From the mBot2 box</h3><p class="sub">already in the kit — nothing to buy, but these are the pieces this year actually uses</p><table class="mtab"><tr><td class="ic"><img src="../assets/parts/map.png" alt="Line-following map"></td><td class="nm">Line-following map</td><td class="us">Used in S15, S23</td></tr></table></div><div class="mgrp"><h3 style="color:#5f2b8a">From the Rover add-on box</h3><p class="sub">already in the add-on kit — nothing to buy, but these are the pieces this year actually uses</p><table class="mtab"><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><g transform="translate(32,21) rotate(0) scale(1.05)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#8b3fc6"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#5f2b8a"/></g></g></svg></td><td class="nm">Rover, assembled<span class='nt'>being built · two of them, paired teams</span></td><td class="us">Used in 22 sessions</td></tr><tr><td class="ic"><img src="../assets/parts/controller.png" alt="Bluetooth Controller"></td><td class="nm">Bluetooth Controller<span class='nt'>if the team drives it</span></td><td class="us">Used in 8 sessions</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="16" y="8" width="32" height="30" rx="2" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><line x1="21" y1="15" x2="43" y2="15" stroke="#475569" stroke-width="1.5"/><line x1="21" y1="21" x2="43" y2="21" stroke="#94a3b8" stroke-width="1.2"/><rect x="21" y="25" width="12" height="9" fill="#7eb3e8"/></g></svg></td><td class="nm">Quick Start Guide<span class='nt'>chassis → arms · printed booklet from the add-on box</span></td><td class="us">Used in S1, S2, S6</td></tr><tr><td class="ic"><img src="../assets/parts/servopack.png" alt="Servo pack"></td><td class="nm">Servo pack</td><td class="us">Used in S2, S4, S7</td></tr><tr><td class="ic"><img src="../assets/parts/socket.png" alt="Socket wrench"></td><td class="nm">Socket wrench</td><td class="us">Used in S1, S2</td></tr><tr><td class="ic"><img src="../assets/parts/track.png" alt="Track ×2"></td><td class="nm">Track ×2</td><td class="us">Used in S1, S2</td></tr><tr><td class="ic"><img src="../assets/parts/trackhubs.png" alt="Wheel hubs (large + small)"></td><td class="nm">Wheel hubs (large + small)</td><td class="us">Used in S1, S2</td></tr><tr><td class="ic"><img src="../assets/parts/boards.png" alt="Boards 1–8"></td><td class="nm">Boards 1–8</td><td class="us">Used in S2</td></tr><tr><td class="ic"><img src="../assets/parts/bracket.png" alt="Brackets 90° / 120° / U"></td><td class="nm">Brackets 90° / 120° / U</td><td class="us">Used in S2</td></tr><tr><td class="ic"><img src="../assets/parts/screwsR.png" alt="Rover screws + nuts"></td><td class="nm">Rover screws + nuts</td><td class="us">Used in S2</td></tr><tr><td class="ic"><img src="../assets/parts/collarflange.png" alt="Shaft collar + flange bearing"></td><td class="nm">Shaft collar + flange bearing</td><td class="us">Used in S2</td></tr><tr><td class="ic"><img src="../assets/parts/damper.png" alt="Shock absorbers"></td><td class="nm">Shock absorbers<span class='nt'>metal ×4, plastic are spares</span></td><td class="us">Used in S2</td></tr><tr><td class="ic"><img src="../assets/parts/beamplate.png" alt="Slide beams + plates"></td><td class="nm">Slide beams + plates</td><td class="us">Used in S2</td></tr></table></div><div class="mgrp"><h3 style="color:#5f2b8a">Classroom supplies</h3><p class="sub">you provide these — not in the kit</p><table class="mtab"><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><polygon points="20,14 40,14 48,20 28,20" fill="#fde68a"/><polygon points="20,14 28,20 28,36 20,30" fill="#facc15"/><polygon points="28,20 48,20 48,30 28,36" fill="#fbbf24"/></g></svg></td><td class="nm">Foam blocks<span class='pg'>The things the gripper actually holds — small enough to fit between the arms and light enough to lift. <b>Foam only.</b> Wooden or hard plastic blocks strip the servo gears when the grip closes too far, and that damage is permanent.</span></td><td class="us">Used in 8 sessions</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="10" y="22" width="34" height="12" rx="3" fill="#475569"/><circle cx="17" cy="28" r="1.8" fill="#22c55e"/><circle cx="23" cy="28" r="1.8" fill="#94a3b8"/><line x1="36" y1="22" x2="40" y2="10" stroke="#1e293b" stroke-width="2"/><path d="M 44,20 A 6,6 0 0 1 44,28" fill="none" stroke="#8b3fc6" stroke-width="1.6" opacity="0.9"/><path d="M 48,17 A 10,10 0 0 1 48,31" fill="none" stroke="#8b3fc6" stroke-width="1.6" opacity="0.68"/><path d="M 52,14 A 14,14 0 0 1 52,34" fill="none" stroke="#8b3fc6" stroke-width="1.6" opacity="0.46"/></g></svg></td><td class="nm">Wi-Fi router / hotspot<span class='nt'>Wi-Fi with internet</span></td><td class="us">Used in S17, S18, S19, S20, S21</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="14" y="12" width="16" height="16" rx="2" fill="#ef4444"/><rect x="34" y="16" width="16" height="16" rx="2" fill="#22c55e"/></g></svg></td><td class="nm">Color patches<span class='nt'>drop zone</span></td><td class="us">Used in S10, S22, S23, S24</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="8" y="16" width="22" height="20" rx="1.5" fill="#e7d193" stroke="#b49b55" stroke-width="1.3"/><polygon points="34,36 38,18 42,18 38,36" fill="#ef4444"/><polygon points="34,36 38,32 42,36" fill="#1e293b"/><path d="M 46,14 L 54,22 M 54,14 L 46,22" stroke="#475569" stroke-width="2"/><circle cx="50" cy="30" r="4.5" fill="#fff" stroke="#1e293b" stroke-width="1.2"/><circle cx="50" cy="30" r="2" fill="#1e293b"/></g></svg></td><td class="nm">Craft kit (card, markers, tape)<span class='nt'>paper for the diagram · wall run-log</span></td><td class="us">Used in S10, S22, S23</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><circle cx="28" cy="20" r="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><circle cx="28" cy="20" r="5" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><rect x="38" y="26" width="18" height="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/></g></svg></td><td class="nm">Masking tape<span class='nt'>a finish line to stop on · patrol area</span><span class='pg'>Masking tape, not electrical or duct tape: it must lift off the floor without leaving glue, and the Quad RGB sensor needs a matt surface. Shiny tape reflects unpredictably and the line follower loses the line.</span></td><td class="us">Used in S3, S8, S9</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="12" y="14" width="26" height="18" rx="2" fill="#fff" stroke="#94a3b8" stroke-width="1.4" transform="rotate(-6 25 23)"/><rect x="22" y="12" width="26" height="18" rx="2" fill="#fff" stroke="#475569" stroke-width="1.4" transform="rotate(5 35 21)"/><line x1="27" y1="18" x2="43" y2="19" stroke="#94a3b8" stroke-width="1.2"/><line x1="27" y1="23" x2="40" y2="24" stroke="#94a3b8" stroke-width="1.2"/></g></svg></td><td class="nm">Printed cards</td><td class="us">Used in S12, S14, S22</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><path d="M 12,30 A 20,20 0 0 1 52,30 Z" fill="#e0f2fe" stroke="#475569" stroke-width="1.6"/><line x1="32" y1="30" x2="17.3" y2="21.5" stroke="#94a3b8" stroke-width="1"/><line x1="32" y1="30" x2="23.5" y2="15.3" stroke="#94a3b8" stroke-width="1"/><line x1="32" y1="30" x2="32.0" y2="13.0" stroke="#94a3b8" stroke-width="1"/><line x1="32" y1="30" x2="40.5" y2="15.3" stroke="#94a3b8" stroke-width="1"/><line x1="32" y1="30" x2="46.7" y2="21.5" stroke="#94a3b8" stroke-width="1"/><line x1="12" y1="30" x2="52" y2="30" stroke="#475569" stroke-width="1.6"/></g></svg></td><td class="nm">Protractor</td><td class="us">Used in S3, S4, S6</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><circle cx="32" cy="24" r="14" fill="#fff" stroke="#475569" stroke-width="2.5"/><rect x="29" y="5" width="6" height="5" rx="1" fill="#475569"/><line x1="32" y1="24" x2="32" y2="14" stroke="#ef4444" stroke-width="2"/><line x1="32" y1="24" x2="39" y2="27" stroke="#475569" stroke-width="2"/></g></svg></td><td class="nm">Stopwatch<span class='nt'>and a visible scoreboard</span></td><td class="us">Used in S15, S24</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="16" y="16" width="32" height="20" fill="#d6bb6f"/><polygon points="16,16 24,10 56,10 48,16" fill="#e7d193"/><line x1="32" y1="16" x2="32" y2="36" stroke="#b49b55" stroke-width="1.5"/></g></svg></td><td class="nm">Boxes / obstacles<span class='nt'>a slalom</span><span class='pg'>Obstacles and walls, never something the robot picks up. Cardboard cartons, shoebox size or bigger. Two things matter more than size: the face must be <b>tall enough to cover the ultrasonic window</b> at the front of the robot — anything shorter is driven straight over — and it must be <b>heavy enough not to slide</b> when nudged, or every distance the class measures is fiction. Weight them with a book. A flat face reads cleanly; round or angled surfaces scatter the ping and come back as "nothing there".</span></td><td class="us">Used in S12</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="9" y="15" width="46" height="15" rx="2" fill="#fde68a" stroke="#ca8a04" stroke-width="1.2"/><line x1="14" y1="16" x2="14" y2="25" stroke="#1e293b" stroke-width="1.3"/><line x1="20" y1="16" x2="20" y2="22" stroke="#1e293b" stroke-width="1.3"/><line x1="26" y1="16" x2="26" y2="25" stroke="#1e293b" stroke-width="1.3"/><line x1="32" y1="16" x2="32" y2="22" stroke="#1e293b" stroke-width="1.3"/><line x1="38" y1="16" x2="38" y2="25" stroke="#1e293b" stroke-width="1.3"/><line x1="44" y1="16" x2="44" y2="22" stroke="#1e293b" stroke-width="1.3"/><line x1="50" y1="16" x2="50" y2="25" stroke="#1e293b" stroke-width="1.3"/></g></svg></td><td class="nm">Ruler / tape measure</td><td class="us">Used in S9</td></tr><tr><td class="ic"><svg viewBox="0 0 64 44" width="52"><g><rect x="10" y="14" width="44" height="20" rx="3" fill="#f1f5f9" stroke="#475569" stroke-width="1.6"/><line x1="21" y1="14" x2="21" y2="34" stroke="#94a3b8" stroke-width="1.3"/><line x1="32" y1="14" x2="32" y2="34" stroke="#94a3b8" stroke-width="1.3"/><line x1="43" y1="14" x2="43" y2="34" stroke="#94a3b8" stroke-width="1.3"/><circle cx="15.5" cy="24" r="1.6" fill="#475569"/><circle cx="26" cy="22" r="1.6" fill="#475569"/><rect x="34" y="21" width="7" height="4" rx="1" fill="#475569"/></g></svg></td><td class="nm">Sorting trays</td><td class="us">Used in S1</td></tr></table></div>
+<div class="mgrp"><h3 style="color:#5f2b8a">Session by session</h3>
+<p class="sub">for weekly prep — what to put on the table before each session</p>
+<table class="sess"><tr><td class="sn">S1</td><td class="st">Teardown, and the tracks</td><td>Sorting trays · Track ×2 · Wheel hubs (large + small) · Socket wrench · Quick Start Guide</td></tr><tr><td class="sn">S2</td><td class="st">Build it — chassis, head, shells, arms</td><td>Rover, assembled · Track ×2 · Wheel hubs (large + small) · Shock absorbers · Shaft collar + flange bearing · Brackets 90° / 120° / U · Slide beams + plates · Boards 1–8 · Servo pack · Rover screws + nuts · Socket wrench · Quick Start Guide</td></tr><tr><td class="sn">S3</td><td class="st">The Rover drives</td><td>Rover, assembled · Protractor · Masking tape</td></tr><tr><td class="sn">S4</td><td class="st">The arms move</td><td>Rover, assembled · Servo pack · Foam blocks · Protractor</td></tr><tr><td class="sn">S5</td><td class="st">Blocks for the arm</td><td>Rover, assembled · Foam blocks</td></tr><tr><td class="sn">S6</td><td class="st">Checkpoint 1 — the rebuild</td><td>Rover, assembled · Protractor · Quick Start Guide</td></tr><tr><td class="sn">S7</td><td class="st">A list of poses</td><td>Rover, assembled · Servo pack · Foam blocks</td></tr><tr><td class="sn">S8</td><td class="st">A loop inside a loop</td><td>Rover, assembled · Masking tape</td></tr><tr><td class="sn">S9</td><td class="st">Smooth, not stepped</td><td>Rover, assembled · Masking tape · Ruler / tape measure</td></tr><tr><td class="sn">S10</td><td class="st">The Rover has jobs</td><td>Rover, assembled · Foam blocks · Color patches · Craft kit (card, markers, tape)</td></tr><tr><td class="sn">S11</td><td class="st">Checkpoint 2 — list, loop, operator, state</td><td>Rover, assembled · Foam blocks</td></tr><tr><td class="sn">S12</td><td class="st">Driving it yourself</td><td>Rover, assembled · Bluetooth Controller · Boxes / obstacles · Printed cards</td></tr><tr><td class="sn">S13</td><td class="st">A menu on the robot</td><td>Rover, assembled · Bluetooth Controller</td></tr><tr><td class="sn">S14</td><td class="st">Two robots, one job</td><td>Rover, assembled · Bluetooth Controller · Printed cards</td></tr><tr><td class="sn">S15</td><td class="st">A run you can read</td><td>Rover, assembled · Bluetooth Controller · Stopwatch</td></tr><tr><td class="sn">S16</td><td class="st">Checkpoint 3 — interfaces and messages</td><td>Rover, assembled · Bluetooth Controller</td></tr><tr><td class="sn">S17</td><td class="st">The Rover speaks and listens</td><td>Rover, assembled · Wi-Fi router / hotspot</td></tr><tr><td class="sn">S18</td><td class="st">A vocabulary it knows</td><td>Rover, assembled · Wi-Fi router / hotspot</td></tr><tr><td class="sn">S19</td><td class="st">When it does not understand</td><td>Rover, assembled · Wi-Fi router / hotspot</td></tr><tr><td class="sn">S20</td><td class="st">Voice becomes one more input</td><td>Rover, assembled · Bluetooth Controller · Wi-Fi router / hotspot</td></tr><tr><td class="sn">S21</td><td class="st">Checkpoint 4 — voice and integration</td><td>Rover, assembled · Wi-Fi router / hotspot</td></tr><tr><td class="sn">S22</td><td class="st">Design a job worth doing</td><td>Craft kit (card, markers, tape) · Printed cards · Foam blocks · Color patches</td></tr><tr><td class="sn">S23</td><td class="st">Build the job</td><td>Rover, assembled · Bluetooth Controller · Foam blocks · Color patches · Craft kit (card, markers, tape)</td></tr><tr><td class="sn">S24</td><td class="st">Freeze, and show it</td><td>Rover, assembled · Foam blocks · Color patches · Bluetooth Controller · Stopwatch</td></tr></table></div>
+</body></html>

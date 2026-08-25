@@ -1,0 +1,3979 @@
+# Block glossary — what each block does, when to reach for it, and a worked
+# example. Keyed by the palette key (ext.opcode) so an entry can never drift onto
+# the wrong block. Examples are authored in the same block source language the
+# lessons use; generator/glossary.py refuses any line the resolver cannot place.
+#
+# The recurring distinction worth making everywhere it applies: a block that
+# WAITS (its label usually says "until done" or "for … secs") holds the script
+# until it finishes, and a block that does not wait starts something and lets the
+# next block run immediately.
+
+# ---------------------------------------------------------------- mBot2 Chassis
+mbot2.mbot2_move_direction_with_time:
+  what: >
+    Drives the whole robot in one of four directions — forward, backward, turning
+    left, turning right — at a speed you choose, for a number of seconds, and
+    then stops the motors on its own.
+  when: >
+    This is the simplest way to make one measured move. Reach for it when you
+    want a definite movement and then the next thing: one side of a square, a
+    nudge into position, a reverse out of a corner. Because it stops itself, you
+    can never forget to switch the motors off.
+  example: |
+    when button  A  pressed
+      moves forward at  50  RPM for  1  secs
+      turns right  90  ° until done
+  caption: >
+    One corner of a square: drive for a second, then turn a right angle.
+  watch: >
+    The script waits here. Nothing else in this script runs until the seconds are
+    up, so you cannot watch a sensor while this block is driving.
+  see: [mbot2.mbot2_move_direction_with_rpm, mbot2.mbot2_move_straight_with_cm_and_inch]
+
+mbot2.mbot2_move_direction_with_rpm:
+  what: >
+    Starts the robot moving and lets the script carry straight on. The wheels keep
+    turning at that speed until some other block changes them or stops them.
+  when: >
+    Whenever the robot has to move and watch at the same time — drive forward
+    while checking the distance sensor, follow a line, answer a joystick. This is
+    the block for "keep going while I think about something else".
+  example: |
+    when button  A  pressed
+      moves forward at  50  RPM
+      wait until  ultrasonic 2  1  distance to an object (cm) < 15
+      stop encoder motor  all
+  caption: >
+    Creep forward and stop when something is closer than 15 cm.
+  watch: >
+    Nothing stops this by itself. If the script reaches its end the wheels keep
+    turning, so finish with stop encoder motor, or set the speed to 0.
+  see: [mbot2.mbot2_encoder_motor_stop, mbot2.mbot2_move_direction_with_time]
+
+mbot2.mbot2_move_straight_with_cm_and_inch:
+  what: >
+    Drives straight forward or backward by a measured distance in centimetres,
+    and waits until the robot has covered it.
+  when: >
+    When the distance matters more than the timing — a 30 cm side of a square, a
+    20 cm reverse. It counts wheel turns rather than seconds, so a low battery or
+    a slightly grippier floor does not change how far the robot goes.
+  example: |
+    when button  A  pressed
+      count with  i  from  1  to  4  by step  1  repeat
+        moves forward  30  cm until done
+        turns right  90  ° until done
+  caption: >
+    A 30 cm square: the same side and the same corner, four times.
+  watch: >
+    The centimetres are only as honest as the chassis settings. If your squares
+    come out as rectangles, run calibrate chassis parameters once.
+  see: [mbot2.mbot2_cw_and_ccw_with_angle, mbot2.mbot2_set_para]
+
+mbot2.mbot2_cw_and_ccw_with_angle:
+  what: >
+    Spins the robot on the spot by a number of degrees — left or right — and waits
+    until the turn is finished.
+  when: >
+    Any time you want a repeatable corner. 90° for a square, 120° for a triangle,
+    180° to come back the way you came, 360° for a celebration spin.
+  example: |
+    when button  A  pressed
+      turns right  180  ° until done
+      moves forward  20  cm until done
+  caption: >
+    Turn around, then drive away from where you were pointing.
+  watch: >
+    Degrees depend on the wheels gripping. On a slippery floor the robot
+    under-turns; the fix is a slower turn or a grippier surface, not a bigger
+    number, because the wrong number breaks on the next floor.
+  see: [mbot2.mbot2_move_straight_with_cm_and_inch, mbot2.mbot2_set_para]
+
+mbot2.mbot2_encoder_motor_set_with_time:
+  what: >
+    Turns ONE wheel — left, right, or both — at a chosen speed for a number of
+    seconds, then stops it. Speed is in RPM, and a negative number runs the wheel
+    backwards.
+  when: >
+    When the two wheels need different orders. Driving one wheel alone swings the
+    robot around the other one, which is a much tighter turn than a spin on the
+    spot.
+  example: |
+    when button  A  pressed
+      encoder motor  left wheel(EM1)  rotates at  60  rotational speed (RPM)  for  1  secs
+  caption: >
+    The left wheel alone drives for a second, so the robot pivots around the
+    right wheel.
+  see: [mbot2.mbot2_encoder_motor_set, mbot2.mbot2_encoder_motor_drive_speed2]
+
+mbot2.mbot2_encoder_motor_set:
+  what: >
+    Sets one wheel turning at a speed and lets the script carry on. The wheel keeps
+    going until something changes or stops it.
+  when: >
+    The one-wheel version of "keep going while I think". Useful when only one side
+    needs to change — nudging a curve wider while the other wheel holds its speed.
+  example: |
+    when button  A  pressed
+      encoder motor  left wheel(EM1)  rotates at  60  rotational speed (RPM)
+      encoder motor  right wheel(EM2)  rotates at  30  rotational speed (RPM)
+      wait  2  seconds
+      stop encoder motor  all
+  caption: >
+    Two different wheel speeds make a long curve to the right.
+  watch: >
+    Like all the non-waiting movement blocks, this leaves the wheels running.
+  see: [mbot2.mbot2_encoder_motor_drive_speed2, mbot2.mbot2_encoder_motor_stop]
+
+mbot2.mbot2_encoder_motor_set_with_time_angle_and_circle:
+  what: >
+    Turns one wheel by an exact number of degrees of its own rotation, and waits
+    until it has finished. This is the wheel turning, not the robot turning.
+  when: >
+    When you are driving something built onto the wheel shaft, or want a precise
+    fraction of a wheel turn. For moving the robot a distance, the centimetre
+    block is easier to reason about.
+  example: |
+    when button  A  pressed
+      encoder motor  left wheel(EM1)  rotates by  360  °
+  caption: >
+    Exactly one full turn of the left wheel.
+  see: [mbot2.mbot2_encoder_motor_get_angle]
+
+mbot2.mbot2_encoder_motor_drive_speed2:
+  what: >
+    Gives both wheels a speed in one block: left wheel at one RPM, right wheel at
+    another. The script carries straight on.
+  when: >
+    This is the steering block. Equal speeds drive straight, a difference curves,
+    and opposite signs spin on the spot. Every line follower and every joystick
+    driver is built on it, because one block sets the whole state of the chassis.
+  example: |
+    when button  A  pressed
+      forever
+        encoder motor EM1 rotates at  ((joystick  LY ) / 3)  RPM, encoder motor EM2 rotates at  ((joystick  RY ) / 3)  RPM
+  caption: >
+    Tank steering: each stick drives the wheel on its own side, divided by 3 so
+    full stick is a sensible speed rather than a bolt.
+  watch: >
+    On the standard mBot2, EM1 is the left wheel and EM2 the right. The Rover
+    build used later in this course is wired the opposite way: left to EM2 and
+    right to EM1. If the robot turns when both sides should drive forward, check
+    which physical motor is connected to each port.
+  see: [mbot2.mbot2_encoder_motor_drive_power, firefly_bluetoothcontroller.getBluetoothJoystickValue]
+
+mbot2.mbot2_encoder_motor_drive_power:
+  what: >
+    The same two-wheel block, but asking for a percentage of motor power instead
+    of a target speed.
+  when: >
+    Rarely, in this course. Power says how hard to push; RPM says how fast to go
+    and lets the robot push harder by itself when a wheel meets carpet or a
+    slope. Prefer the RPM block unless you have a reason.
+  example: |
+    when button  A  pressed
+      encoder motor EM1 rotates at  40  % power, encoder motor EM2 rotates at  40  % power
+  caption: >
+    Both wheels at 40% power — the same effort, whatever the floor does to the
+    actual speed.
+  see: [mbot2.mbot2_encoder_motor_drive_speed2]
+
+mbot2.mbot2_encoder_motor_stop:
+  what: >
+    Stops one wheel, or both, at once.
+  when: >
+    At the end of anything that used a non-waiting movement block. Choose "all"
+    unless you really do mean one side.
+  example: |
+    when button  B  pressed
+      stop encoder motor  all
+  caption: >
+    A panic button: B stops the robot whatever it was doing.
+  watch: >
+    A stop hat like this only works if the script that is driving lets the
+    CyberPi answer the button — in a forever loop, it does.
+  see: [mbot2.mbot2_move_direction_with_rpm, control_stop]
+
+mbot2.mbot2_encoder_motor_get_speed:
+  what: >
+    Reports how fast a wheel is actually turning right now, in RPM.
+  when: >
+    For checking rather than commanding. Show it on the screen to see whether the
+    robot is really reaching the speed you asked for — a wheel jammed against a
+    wall reports far less than it was told.
+  example: |
+    when button  A  pressed
+      forever
+        print  (encoder motor  (1) EM1  's rotational speed(RPM))
+  caption: >
+    Watch the left wheel's real speed on the CyberPi screen.
+  see: [mbot2.mbot2_encoder_motor_get_angle]
+
+mbot2.mbot2_encoder_motor_get_angle:
+  what: >
+    Reports how far a wheel has turned in degrees, counting up as it goes, since
+    the last reset.
+  when: >
+    When you want to measure a journey rather than time it. Reset the count, drive,
+    and read the angle to know how far a wheel went.
+  example: |
+    when button  A  pressed
+      reset encoder motor  EM1  rotated angle
+      moves forward at  50  RPM for  2  secs
+      print  (encoder motor  (1) EM1  rotated angle (°))
+  caption: >
+    Measure how many degrees the left wheel turned during a two-second drive.
+  watch: >
+    The count keeps growing until you reset it, so reset first or you will read
+    this run plus every run before it.
+  see: [mbot2.mbot2_encoder_motor_reset_angle]
+
+mbot2.mbot2_encoder_motor_reset_angle:
+  what: >
+    Sets a wheel's rotation count back to zero.
+  when: >
+    Immediately before a movement you intend to measure.
+  example: |
+    when button  A  pressed
+      reset encoder motor  EM1  rotated angle
+  caption: >
+    Zero the left wheel's counter so the next reading starts from here.
+  see: [mbot2.mbot2_encoder_motor_get_angle]
+
+mbot2.mbot2_encoder_motor_lock_and_unlock:
+  what: >
+    Turns a wheel's autolock on or off. Locked, the motor actively holds its
+    position and resists being pushed; unlocked, the wheel spins freely.
+  when: >
+    Lock when the robot must hold still on a slope or against a push. Unlock when
+    you want to roll the robot by hand without fighting the motors.
+  example: |
+    when CyberPi starts up
+      encoder motor  (1) EM1  enables autolock
+  caption: >
+    Hold the left wheel in place from the moment the robot boots.
+  see: [mbot2.mbot2_encoder_motor_stop]
+
+mbot2.mbot2_set_para:
+  what: >
+    Runs the chassis calibration routine, which teaches the robot its own wheel
+    size and how far apart the wheels sit.
+  when: >
+    Once, after building the robot, and again if you change the wheels. Everything
+    measured in centimetres or degrees is computed from these numbers, so a wrong
+    setting makes every square a rectangle and every 90° corner a near-miss.
+  example: |
+    when button  B  pressed
+      calibrate chassis parameters
+  caption: >
+    Put the robot on a clear floor and press B once.
+  watch: >
+    Give it space — it drives itself around while calibrating.
+  see: [mbot2.mbot2_move_straight_with_cm_and_inch, mbot2.mbot2_cw_and_ccw_with_angle]
+
+# ---------------------------------------------------------------------- Events
+cyberpi.cyberpi_when_launch:
+  what: >
+    A hat block. Everything under it runs the moment the CyberPi powers on or is
+    reset — and, because an upload restarts the robot, the moment a program
+    finishes uploading.
+  when: >
+    For setup that should happen once and for anything the robot should do
+    unattended. In this course it usually carries a single line telling the driver
+    what to press, because a program that drives the moment it boots is a program
+    that drives off the table during an upload.
+  example: |
+    when CyberPi starts up
+      show label 1  press A to start  at center of screen  by small pixel
+  caption: >
+    On power-up, print the instruction and wait. Nothing moves until a person
+    decides it should.
+  watch: >
+    Only one script may sit under any one hat. Two "when CyberPi starts up" hats
+    in the same project is not two programs — it is a crash.
+  see: [cyberpi.cyberpi_when_button_press]
+
+cyberpi.cyberpi_when_button_press:
+  what: >
+    A hat block that runs its script when button A or button B on the CyberPi is
+    pressed.
+  when: >
+    This is the course's standard start button. Uploading always runs the program
+    immediately, so putting the moving part under button A is what keeps the robot
+    still until somebody is ready.
+  example: |
+    when button  A  pressed
+      moves forward  20  cm until done
+  caption: >
+    The robot waits, however long it takes, until a person presses A.
+  watch: >
+    A and B are the two round buttons beside the screen, not the joystick.
+  see: [cyberpi.cyberpi_when_launch, cyberpi.cyberpi_when_direction_key_press]
+
+cyberpi.cyberpi_when_direction_key_press:
+  what: >
+    A hat block for the CyberPi's own five-way joystick — the little stick on the
+    board itself. It fires when the stick is pushed up, down, left or right, or
+    pressed in the middle.
+  when: >
+    For choosing between things without extra hardware: a menu, a mode switch, a
+    nudge in one direction. Handy when every group has a robot but not every group
+    has a gamepad.
+  example: |
+    when joystick  pulled↑
+      moves forward at  40  RPM for  1  secs
+  caption: >
+    Push the onboard stick up and the robot takes one step forward.
+  watch: >
+    This is the stick built into the CyberPi, not the Bluetooth gamepad. The
+    gamepad has its own blocks in the Bluetooth controller drawer.
+  see: [firefly_bluetoothcontroller.getBluetoothJoystickValue]
+
+cyberpi.cyberpi_when_detect_attitude:
+  what: >
+    A hat block that fires when the CyberPi is being held at a particular angle —
+    tilted left, right, forward, back, or lying screen up or screen down.
+  when: >
+    When the robot itself is the controller, or to notice that something has gone
+    wrong: a robot that reports "screen faces down" has been knocked over.
+  example: |
+    when CyberPi  tilted left
+      play  hi
+  caption: >
+    Tip the robot to the left and it answers with a sound.
+  see: [cyberpi.cyberpi_when_detect_action]
+
+cyberpi.cyberpi_when_detect_action:
+  what: >
+    A hat block that fires when the CyberPi itself is moved quickly in the chosen
+    direction, or twisted clockwise or anticlockwise. Here, "wave left" means
+    flicking the CyberPi to the left; it does not mean waving your hand in front
+    of the robot.
+  when: >
+    When you want the CyberPi's internal motion sensor to react to a physical
+    gesture. It detects a sharp movement, so it suits "flick left to switch off"
+    better than it suits precise control.
+  example: |
+    when  wave left  detected
+      turn off LED  all
+  caption: >
+    Quickly move the CyberPi to the left to switch the lights off.
+  see: [cyberpi.cyberpi_when_detect_attitude]
+
+cyberpi.cyberpi_when_sensor_value_bigger_or_smaller_than:
+  what: >
+    A hat block that watches one built-in sensor — light, sound, shaking or the
+    timer — and fires the instant it crosses a number you set.
+  when: >
+    When you want a reaction without writing the watching yourself. It replaces a
+    forever loop with an if inside it, and it keeps running in the background
+    while your main script does something else.
+  example: |
+    when  sound  value  >  60
+      LED  all  displays R  255  G  0  B  0
+  caption: >
+    A loud clap turns the ring red, whatever else the robot is doing.
+  watch: >
+    It fires on the crossing, not while the value stays high — a continuous loud
+    noise triggers it once, not over and over.
+  see: [cyberpi.cyberpi_loudness, cyberpi.cyberpi_brightness]
+
+event_whenflagclicked:
+  ide_image: assets/ui/green-flag-ide.png
+  ide_image_alt: Green flag button in the mBlock IDE
+  what: >
+    The Scratch green-flag hat. It runs when you click the green flag button in
+    the mBlock IDE (the programming screen), above the stage on the computer.
+  when: >
+    Only in Live mode, where the program runs on the computer and the robot is a
+    puppet on the end of a cable. An uploaded program has no flag to click, so
+    this hat never fires on the robot.
+  example: |
+    when green flag clicked
+      show label 1  hello  at center of screen  by small pixel
+  caption: >
+    In Live mode, clicking the flag writes on the robot's screen.
+  watch: >
+    If your program does nothing after an upload, check that its hat is not this
+    one. Use "when CyberPi starts up" or "when button A pressed" instead.
+  see: [cyberpi.cyberpi_when_launch]
+
+event_whenkeypressed:
+  what: >
+    A hat block that fires when a key on the computer keyboard is pressed.
+  when: >
+    Live mode only, for the same reason as the green flag — an uploaded robot is
+    not attached to your keyboard. Useful for quick testing at the desk.
+  example: |
+    when  space  key pressed
+      stop encoder motor  all
+  caption: >
+    A space bar panic button while you are testing in Live mode.
+  see: [event_whenflagclicked]
+
+event_whenbroadcastreceived:
+  what: >
+    A hat block that runs when it receives a broadcast: a named signal sent from
+    another part of the same program. A broadcast does not contain code itself;
+    it simply tells every matching "when I receive" script to start.
+  when: >
+    To split a program into named parts that call each other, and to let one event
+    start several scripts at once. Every script with the same "when I receive"
+    runs together. Broadcasts are introduced later in the course, so it is fine
+    if you have not used this idea yet.
+  example: |
+    when I receive  go
+      moves forward  20  cm until done
+  caption: >
+    Anything that broadcasts "go" sets this script running.
+  see: [event_broadcast, event_broadcastandwait]
+
+event_broadcast:
+  what: >
+    Sends a named message, and carries straight on without waiting for anything
+    that answers it.
+  when: >
+    When one thing should trigger another but the two do not have to take turns —
+    starting the lights while the driving continues.
+  example: |
+    when button  A  pressed
+      broadcast  go
+      show label 1  sent  at center of screen  by small pixel
+  caption: >
+    The message goes out and this script keeps moving immediately.
+  see: [event_whenbroadcastreceived, event_broadcastandwait]
+
+event_broadcastandwait:
+  what: >
+    Sends a named message and then holds this script until every script listening
+    for that message has finished.
+  when: >
+    When order matters — do that, and only when it is completely done, do this.
+  example: |
+    when button  A  pressed
+      broadcast  park  and wait
+      play  hi
+  caption: >
+    Park first; only when parking is finished does the robot chirp.
+  see: [event_broadcast]
+
+# --------------------------------------------------------------------- Control
+control_forever:
+  what: >
+    A loop with no end. Everything inside it runs, then runs again, for as long as
+    the program lives.
+  when: >
+    For anything the robot must keep doing: watching a sensor, following a line,
+    answering a controller. Almost every robot program has one at its heart.
+  example: |
+    when button  A  pressed
+      forever
+        moves forward at  40  RPM
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          turns right  90  ° until done
+  caption: >
+    Drive and keep looking. Every time a wall comes close, turn away from it.
+  watch: >
+    Nothing after a forever loop ever runs, because the loop never ends. If you
+    have blocks below one, they are dead.
+  see: [control_repeat, control_repeat_until]
+
+control_repeat:
+  what: >
+    Runs everything inside it a fixed number of times, then carries on to whatever
+    comes next.
+  when: >
+    When you know the count in advance — four sides of a square, three beeps, ten
+    steps.
+  example: |
+    when button  A  pressed
+      repeat  4
+        moves forward  30  cm until done
+        turns right  90  ° until done
+  caption: >
+    A square, written once and run four times.
+  see: [control_for_new, control_forever]
+
+control_repeat_until:
+  what: >
+    Keeps looping until a condition becomes true. It checks BEFORE each pass, so
+    if the condition is already true the inside never runs at all.
+  when: >
+    When the count is unknown but the finish line is clear: keep creeping forward
+    until the wall is close, keep turning until the line is found.
+  example: |
+    when button  A  pressed
+      repeat until  ultrasonic 2  1  distance to an object (cm) < 20
+        moves forward at  30  RPM
+      stop encoder motor  all
+  caption: >
+    Creep forward for as long as the way is clear, and stop when it is not.
+  see: [control_wait_until, control_forever]
+
+control_if:
+  what: >
+    Runs the blocks inside it once, but only if the condition is true right now.
+    If it is false, they are skipped.
+  when: >
+    For a decision with nothing to do on the other side. Inside a forever loop it
+    becomes "check this, every time round".
+  example: |
+    when button  A  pressed
+      forever
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          play  hi
+  caption: >
+    Beep whenever something is close. Say nothing when it is not.
+  watch: >
+    It tests once, at the moment the script reaches it. To keep testing, put it
+    inside a loop.
+  see: [control_if_else, control_repeat_until]
+
+control_if_else:
+  what: >
+    Two paths, one decision. The top half runs when the condition is true, the
+    bottom half when it is false — always one, never both.
+  when: >
+    When there is genuinely something to do either way: go left or go right, green
+    light or red light.
+  example: |
+    when button  A  pressed
+      forever
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          LED  all  displays R  255  G  0  B  0
+        else
+          LED  all  displays R  0  G  255  B  0
+  caption: >
+    Red when the way is blocked, green when it is clear — and never neither.
+  see: [control_if]
+
+control_wait:
+  what: >
+    Holds the script still for a number of seconds, then carries on.
+  when: >
+    To let something finish that has no "until done" of its own, to space out a
+    display so a person can read it, or to slow a loop that is spinning far faster
+    than anything can react to.
+  example: |
+    when button  A  pressed
+      moves forward at  40  RPM
+      wait  2  seconds
+      stop encoder motor  all
+  caption: >
+    Drive for exactly two seconds, then stop. The wait is what makes it two.
+  see: [control_wait_until, mbot2.mbot2_move_direction_with_time]
+
+control_wait_until:
+  what: >
+    Holds the script still until a condition becomes true, however long that takes,
+    then carries on.
+  when: >
+    When you want to wait for a thing rather than for a time — until a button is
+    pressed, until a wall is close, until a line appears.
+  example: |
+    when CyberPi starts up
+      show label 1  press A to start  at center of screen  by small pixel
+      wait until  button  A  pressed?
+      moves forward  20  cm until done
+  caption: >
+    The pattern that stops an uploaded program driving off the table: it waits for
+    a person before it moves.
+  watch: >
+    If the condition is never true, the script waits for ever. Give yourself a way
+    out.
+  see: [control_repeat_until, control_wait]
+
+control_for_new:
+  what: >
+    A counting loop. It makes a variable, counts it from a start to an end in
+    steps you choose, and runs the inside once per count — so the blocks inside
+    can use the number.
+  when: >
+    When the repeat number is also useful inside the loop: walking through a list
+    item by item, drawing a shape whose sides grow, printing a numbered sequence.
+  example: |
+    when button  A  pressed
+      count with  i  from  1  to  4  by step  1  repeat
+        print  (i)
+        moves forward  10  cm until done
+  caption: >
+    Four legs, and the loop knows which leg it is on.
+  watch: >
+    The end number is not included. To walk a whole list, count to one past its
+    length.
+  see: [control_repeat, data_itemoflist]
+
+control_stop:
+  what: >
+    Stops running scripts. "all" stops the entire program, "this script" stops
+    only the one the block sits in.
+  when: >
+    To end a program deliberately — a finish line reached, a task complete.
+  example: |
+    when button  B  pressed
+      stop encoder motor  all
+      stop  all
+  caption: >
+    B is the emergency stop: cut the motors, then stop the program.
+  watch: >
+    Stopping the program does not stop the wheels. Motors keep their last order,
+    so stop them first.
+  see: [mbot2.mbot2_encoder_motor_stop, control_break_new]
+
+control_break_new:
+  what: >
+    Leaves the loop it is inside immediately and carries on after it.
+  when: >
+    When something inside a loop decides there is no point going round again — the
+    thing was found, the limit was hit.
+  example: |
+    when button  A  pressed
+      repeat  10
+        moves forward  10  cm until done
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          break
+      play  hi
+  caption: >
+    Up to ten steps, but stop early if a wall turns up — and chirp either way.
+  see: [control_continue_new, control_stop]
+
+control_continue_new:
+  what: >
+    Skips the rest of this time round the loop and starts the next one.
+  when: >
+    When one case has nothing to do but the loop should carry on — stepping past
+    an item you do not care about.
+  example: |
+    when button  A  pressed
+      repeat  5
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          continue
+        moves forward  10  cm until done
+  caption: >
+    Take a step, unless the way is blocked, in which case just look again.
+  see: [control_break_new]
+
+cyberpi.cyberpi_restart:
+  what: >
+    Reboots the CyberPi, as though it had been switched off and on again.
+  when: >
+    Rarely. To return to a clean state after something has gone wrong, or to
+    restart a program from its very beginning.
+  example: |
+    when button  B  pressed
+      restart CyberPi
+  caption: >
+    A software reset button.
+  watch: >
+    Everything in memory is lost — every variable goes back to its starting value.
+  see: [control_stop]
+
+cyberpi.cyberpi_python_insert:
+  what: >
+    Lets you type a line of Python straight into a block program, which runs where
+    the block sits.
+  when: >
+    When you need something the palette does not offer. It is the bridge between
+    the block course and the Python course, and it is how a Grade 8 class peeks at
+    what Grade 9 does.
+  example: |
+    when button  A  pressed
+      insert code
+  caption: >
+    One block, holding whatever line of Python you type into it.
+  watch: >
+    Upload mode only, and a mistyped line fails on the robot rather than in the
+    editor.
+  see: []
+
+# ------------------------------------------------------------------- My Blocks
+procedures_definition:
+  what: >
+    Starts a block of your own. You give it a name, and everything under the
+    define hat becomes what that name does. The new block then appears in the My
+    Blocks drawer for you to use like any other.
+  when: >
+    As soon as a script gets long enough to lose your place in, or as soon as you
+    want to do the same thing from two places. A well-named block turns six lines
+    of driving into one line that says what the driving was FOR.
+  example: |
+    define  celebrate
+      LED all displays R 0 G 255 B 0
+      play  hi
+      turns right  360  ° until done
+      turn off LED  all
+  caption: >
+    Four blocks, given the name "celebrate" — and from now on, one block.
+  watch: >
+    A define is not a script that runs. Nothing inside it happens until something
+    else uses the block by name.
+  see: []
+
+# ------------------------------------------------------------------- Operators
+operator_add:
+  what: >
+    Adds two numbers and reports the answer. It is a reporter, so it does not do
+    anything by itself — you drop it into another block's slot.
+  when: >
+    Wherever a number has to be worked out rather than typed. Steering is the
+    common case: a base speed plus a correction.
+  example: |
+    when button  A  pressed
+      set  speed  to  (40 + 10)
+  caption: >
+    The slot is filled with a sum instead of a fixed number.
+  see: [operator_subtract, operator_multiply]
+
+operator_subtract:
+  what: >
+    Takes one number away from another and reports the answer.
+  when: >
+    For differences — how far off a target you are, how much is left. A steering
+    correction is usually one wheel plus the error and the other wheel minus it.
+  example: |
+    when button  A  pressed
+      encoder motor EM1 rotates at  (40 + 10)  RPM, encoder motor EM2 rotates at  (40 - 10)  RPM
+  caption: >
+    Same base speed, opposite corrections: the robot curves.
+  see: [operator_add]
+
+operator_multiply:
+  what: >
+    Multiplies two numbers and reports the answer.
+  when: >
+    For scaling. A sensor reading rarely arrives in the units you want; multiplying
+    turns it into a speed, an angle, or a brightness.
+  example: |
+    when button  A  pressed
+      set  speed  to  ((quad rgb sensor  1  deviation (-100~100)) * 2)
+  caption: >
+    Take the line sensor's error and make the response twice as strong.
+  see: [operator_divide]
+
+operator_divide:
+  what: >
+    Divides the first number by the second and reports the answer.
+  when: >
+    To shrink something that is too big. A joystick reading runs to about 100,
+    which is a wild speed for a wheel, so it is nearly always divided down.
+  example: |
+    when button  A  pressed
+      forever
+        encoder motor EM1 rotates at  ((joystick  LY ) / 3)  RPM, encoder motor EM2 rotates at  ((joystick  RY ) / 3)  RPM
+  caption: >
+    Full stick becomes a sensible speed rather than a bolt across the room.
+  watch: >
+    Dividing by zero has no answer. If the divisor comes from a sensor, make sure
+    it can never be zero.
+  see: [operator_multiply]
+
+operator_mod:
+  what: >
+    Reports the remainder after dividing — 7 mod 3 is 1, and 8 mod 4 is 0.
+  when: >
+    For "every so often" and for wrapping round. A counter mod 4 cycles 0, 1, 2, 3,
+    0, 1 … which is exactly what you want for stepping through four colours or
+    four sides.
+  example: |
+    when button  A  pressed
+      count with  i  from  1  to  12  by step  1  repeat
+        if  ((i mod 3) = 0)  then
+          play  hi
+  caption: >
+    A beep on every third pass, and silence on the other two.
+  see: [operator_round]
+
+operator_round:
+  what: >
+    Rounds a number to the nearest whole number.
+  when: >
+    When a calculation gives a long decimal and only a whole number makes sense —
+    a count, an index into a list, a number to show on the screen.
+  example: |
+    when button  A  pressed
+      print  (round (10 / 3))
+  caption: >
+    3.333… shown as 3.
+  see: [operator_mathop]
+
+operator_random:
+  what: >
+    Picks a whole number at random between the two you give, including both ends,
+    and reports it. A new number every time it runs.
+  when: >
+    To make behaviour unpredictable: a random turn when a wall appears, a random
+    colour, a random wait. It is what turns a robot that repeats into a robot that
+    explores.
+  example: |
+    when button  A  pressed
+      forever
+        moves forward  20  cm until done
+        turns right  (pick random  60  to  120 )  ° until done
+  caption: >
+    A wander: every corner is a different corner.
+  see: [operator_mathop]
+
+operator_lt:
+  what: >
+    Reports true when the left number is smaller than the right, and false
+    otherwise. It has a pointed shape because it belongs in a question slot.
+  when: >
+    The everyday sensor test. "Closer than 15 cm" is a distance reading less than
+    15.
+  example: |
+    when button  A  pressed
+      forever
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          stop encoder motor  all
+  caption: >
+    A wall is anything nearer than fifteen centimetres.
+  see: [operator_gt, operator_equals]
+
+operator_gt:
+  what: >
+    Reports true when the left number is bigger than the right.
+  when: >
+    The other half of a threshold. Loud is a sound reading above a number; bright
+    is a light reading above a number.
+  example: |
+    when button  A  pressed
+      forever
+        if  (loudness > 60)  then
+          LED  all  displays R  255  G  0  B  0
+  caption: >
+    Flash red on any noise louder than 60.
+  see: [operator_lt]
+
+operator_equals:
+  what: >
+    Reports true when the two things are exactly the same. It works on words as
+    well as numbers.
+  when: >
+    For matching an exact value — a command word that was heard, a mode number, a
+    counter reaching its target.
+  example: |
+    when button  A  pressed
+      if  ((speech recognition result) = go)  then
+        moves forward  20  cm until done
+  caption: >
+    Move only if the word heard was exactly "go".
+  watch: >
+    Exactly means exactly. A sensor reading that drifts by a hair will never equal
+    a fixed number — use less-than or greater-than for those.
+  see: [operator_contains, operator_lt]
+
+operator_and:
+  what: >
+    Reports true only when BOTH questions inside it are true.
+  when: >
+    When two things have to hold at once — close enough AND on the line, button
+    held AND moving.
+  example: |
+    when button  A  pressed
+      forever
+        if  <<ultrasonic 2  1  distance to an object (cm) < 30> and <(loudness > 50)>>  then
+          play  hi
+  caption: >
+    Only answers when something is both near and noisy.
+  see: [operator_or, operator_not]
+
+operator_or:
+  what: >
+    Reports true when EITHER question inside it is true — or both.
+  when: >
+    When any one of several things should trigger the same response. Two bump
+    sensors, either side.
+  example: |
+    when button  A  pressed
+      forever
+        if  <<button  L1  pressed> or <button  R1  pressed>>  then
+          stop encoder motor  all
+  caption: >
+    Either shoulder button stops the robot.
+  see: [operator_and]
+
+operator_not:
+  what: >
+    Flips a question over: true becomes false, false becomes true.
+  when: >
+    When the thing you can ask about is the opposite of the thing you care about.
+    "Not on the line" is easier to write than a list of every way to be off it.
+  example: |
+    when button  A  pressed
+      forever
+        if  not (quad rgb sensor  1  probe  (1) R2  detects  line  ?)  then
+          turns left  10  ° until done
+  caption: >
+    Hunt for the line whenever the probe cannot see it.
+  see: [operator_and]
+
+operator_join:
+  what: >
+    Sticks two pieces of text together and reports the result.
+  when: >
+    For building a message out of a label and a value, so a screen reads
+    "dist=23" instead of a bare 23.
+  example: |
+    when button  A  pressed
+      print  (join  dist=  (ultrasonic 2  1  distance to an object (cm)))
+  caption: >
+    A reading with its name attached, which is a great deal easier to read across
+    a classroom.
+  see: [cyberpi.cyberpi_console_print]
+
+operator_letter_of:
+  what: >
+    Reports a single character out of a piece of text, counting from 1.
+  when: >
+    Rarely in this course. It matters when a command arrives as text and only the
+    first letter decides what to do.
+  example: |
+    when button  A  pressed
+      print  (letter  1  of  forward )
+  caption: >
+    The first letter of "forward" is f.
+  see: [operator_length]
+
+operator_length:
+  what: >
+    Reports how many characters are in a piece of text.
+  when: >
+    When you need the size of a word rather than its content.
+  example: |
+    when button  A  pressed
+      print  (length of  forward )
+  caption: >
+    "forward" is seven characters long.
+  watch: >
+    This is the TEXT one. There is a second block worded almost identically in
+    this same drawer, "length of my list", which counts list items. Putting the
+    text block on a list name measures the NAME — a list called route reports 5,
+    every time, whatever is in it.
+  see: [data_lengthoflist]
+
+operator_contains:
+  what: >
+    Reports true when the first piece of text has the second somewhere inside it.
+  when: >
+    For loose matching, where equals is too strict — checking whether a heard
+    sentence contains the word "stop" without demanding it be the only word.
+  example: |
+    when button  A  pressed
+      if  <(speech recognition result) contains  stop  ?>  then
+        stop encoder motor  all
+  caption: >
+    "please stop now" contains "stop", so this triggers where equals would not.
+  see: [operator_equals, data_listcontainsitem]
+
+operator_mathop:
+  what: >
+    A whole family of maths functions in one block — absolute value, floor,
+    ceiling, square root, and the trigonometry ones — chosen from its dropdown.
+  when: >
+    Mostly "abs", which throws away the minus sign. A line sensor reporting -40 and
+    one reporting 40 are equally far off; abs lets you ask "how far off" without
+    caring which side.
+  example: |
+    when button  A  pressed
+      forever
+        if  ((abs of (quad rgb sensor  1  deviation (-100~100))) > 50)  then
+          stop encoder motor  all
+  caption: >
+    Stop when the robot is badly off the line, whichever side it has drifted to.
+  see: [operator_round]
+
+cyberpi.cyberpi_operator_casts:
+  what: >
+    Converts a value from one kind to another — text into a whole number, a number
+    into text.
+  when: >
+    Only when something arrives as text but has to be used as a number. If you
+    already have a numeric value, put it directly into the other block; no
+    conversion is needed. Speech recognition, for example, returns text even
+    when that text looks like a number.
+  example: |
+    when button  A  pressed
+      recognize  (2) English  3  secs
+      set  speed  to  (read  (speech recognition result)  in  integer )
+      moves forward at  (speed)  RPM
+  caption: >
+    Say "50". Speech recognition returns the text "50"; read converts it to the
+    number 50 before the motor uses it as a speed.
+  see: [operator_join]
+
+# ------------------------------------------------------------------- Variables
+data_setvariableto:
+  what: >
+    Puts a value into a variable, throwing away whatever was there before. A
+    variable is a named box holding one thing. Use "set" when you know the exact
+    value you want: setting speed to 40 makes it 40, whatever it was before.
+  when: >
+    To give a variable its starting value, reset it, or replace it with a new
+    measurement — a chosen speed, a threshold, a count, or the latest sensor
+    reading.
+  example: |
+    when button  A  pressed
+      set  speed  to  40
+      moves forward at  (speed)  RPM
+  caption: >
+    Name the speed once, then use the name. Changing it later means changing one
+    number in one place.
+  watch: >
+    Variables start empty each time an uploaded program runs. Set them before you
+    read them.
+  see: [data_changevariableby]
+
+data_changevariableby:
+  what: >
+    Adds a number to what is already in a variable instead of replacing it. If
+    speed is 40, "change speed by 5" makes it 45, while "set speed to 5" makes
+    it exactly 5. A negative change subtracts: "change speed by -5" turns 40
+    into 35.
+  when: >
+    When the new value depends on the old one: counting laps, counting how many
+    times a sensor fired, or nudging a speed up or down while a button is held.
+    Use "set" for a starting value, a reset, or an exact value; use "change by"
+    for a counter or a gradual adjustment.
+  example: |
+    when button  A  pressed
+      set  laps  to  0
+      forever
+        moves forward  100  cm until done
+        change  laps  by  1
+        print  (laps)
+  caption: >
+    A lap counter: start at nothing, add one each time round, show the total.
+  see: [data_setvariableto]
+
+data_showvariable:
+  ide_image: assets/ui/show-variable-stage.png
+  ide_image_alt: mBlock IDE with a variable value monitor visible on the stage
+  ide_image_wide: true
+  ide_image_caption: >
+    The variable monitor appears in the upper-left corner of the mBlock IDE stage.
+  ide_image_source: https://support.makeblock.com/hc/en-us/articles/12797662557719-About-Me-Ultrasonic-Sensor-for-mBot
+  what: >
+    Shows the variable as a small value monitor on the stage inside the mBlock
+    IDE on your computer. It does not appear on the CyberPi's physical screen.
+  when: >
+    Live mode only, for debugging on the computer. An uploaded robot has no IDE
+    stage, so use a Display "print" or "show label" block when you need to see
+    the value on the CyberPi itself.
+  example: |
+    when green flag clicked
+      show variable  speed
+  caption: >
+    Watch a variable change in real time while testing at the desk.
+  see: [data_hidevariable, cyberpi.cyberpi_console_print]
+
+data_hidevariable:
+  what: >
+    Removes a variable's value monitor from the stage in the mBlock IDE. It does
+    not affect the value stored in the variable.
+  when: >
+    Live mode only, to tidy the IDE stage after debugging.
+  example: |
+    when green flag clicked
+      hide variable  speed
+  caption: >
+    Clear the stage of readouts.
+  see: [data_showvariable]
+
+data_addtolist:
+  what: >
+    Puts a new item on the end of a list. A list is a numbered row of boxes rather
+    than a single one.
+  when: >
+    Whenever you are collecting rather than replacing — a route being recorded, a
+    series of readings, a set of commands heard.
+  example: |
+    when button  A  pressed
+      add  left  to  route
+      add  right  to  route
+      print  (length of  route )
+  caption: >
+    Two moves recorded, and the list now reports its own length.
+  see: [data_itemoflist, data_lengthoflist]
+
+data_itemoflist:
+  what: >
+    Reports one item out of a list, chosen by its position. The first item is 1,
+    not 0.
+  when: >
+    To play back what was collected — walking a stored route, reading a saved
+    reading.
+  example: |
+    when button  A  pressed
+      count with  i  from  1  to  ((length of  route ) + 1)  by step  1  repeat
+        print  (item  (i)  of  route )
+  caption: >
+    Walk the whole list, one item at a time.
+  watch: >
+    The counting loop's end number is not included, so to reach the last item you
+    count to the length PLUS ONE. Counting to the length alone silently misses the
+    final item.
+  see: [data_lengthoflist, control_for_new]
+
+data_lengthoflist:
+  what: >
+    Reports how many items are in a list.
+  when: >
+    To walk a list without knowing in advance how long it is, and to check whether
+    anything was collected at all.
+  example: |
+    when button  A  pressed
+      if  ((length of  route ) = 0)  then
+        show label 1  nothing recorded  at center of screen  by small pixel
+  caption: >
+    Notice an empty list before trying to play it back.
+  watch: >
+    There is a block in the Operators drawer worded almost the same, "length of",
+    which counts the letters in a piece of text. Dropping a list name into THAT
+    one measures the name: a list called route reports 5, always.
+  see: [operator_length, data_itemoflist]
+
+data_deleteoflist:
+  what: >
+    Removes one item from a list by its position. Everything after it shuffles up.
+  when: >
+    To take the item you have just dealt with off a queue.
+  example: |
+    when button  A  pressed
+      delete  1  of  route
+  caption: >
+    Drop the first item; what was second becomes first.
+  see: [data_deletealloflist]
+
+data_deletealloflist:
+  what: >
+    Empties a list completely.
+  when: >
+    Before recording a new run. Without it, a second recording is added to the end
+    of the first and the robot replays both.
+  example: |
+    when button  A  pressed
+      delete all of  route
+      add  left  to  route
+  caption: >
+    Clear the slate, then start recording.
+  watch: >
+    An uploaded program does not start with empty lists if it saved anything
+    before. Clear them yourself.
+  see: [data_addtolist]
+
+data_insertatlist:
+  what: >
+    Puts an item into the middle of a list at a position you choose, pushing the
+    rest down.
+  when: >
+    When order matters and the new thing does not belong at the end — inserting a
+    correction into a recorded route.
+  example: |
+    when button  A  pressed
+      insert  stop  at  1  of  route
+  caption: >
+    A new first item; everything else moves down one.
+  see: [data_addtolist]
+
+data_replaceitemoflist:
+  what: >
+    Overwrites the item at one position with something else. The list stays the
+    same length.
+  when: >
+    To correct or update a stored value in place.
+  example: |
+    when button  A  pressed
+      replace item  1  of  route  with  right
+  caption: >
+    The first move was wrong; put the right one in its place.
+  see: [data_itemoflist]
+
+data_itemnumoflist:
+  what: >
+    Reports the position of the first item matching what you give it, or 0 when
+    the list does not contain it.
+  when: >
+    To find where something is, not just whether it is there.
+  example: |
+    when button  A  pressed
+      print  (item #  of  left  in  route )
+  caption: >
+    Where in the route is the first left turn?
+  see: [data_listcontainsitem]
+
+data_listcontainsitem:
+  what: >
+    Reports true when the list holds the item, false when it does not.
+  when: >
+    For checking membership — is this a word we know? has this place been visited?
+  example: |
+    when button  A  pressed
+      if  <route contains  left  ?>  then
+        play  hi
+  caption: >
+    Answer only if a left turn was recorded at some point.
+  see: [data_itemnumoflist, operator_contains]
+
+data_showlist:
+  what: >
+    Shows a list on the stage while the program runs.
+  when: >
+    Live mode debugging, to watch a list fill up.
+  example: |
+    when green flag clicked
+      show list  route
+  caption: >
+    Watch the route being recorded, item by item.
+  see: [data_hidelist]
+
+data_hidelist:
+  what: >
+    Takes a list's readout back off the stage.
+  when: >
+    To clear the stage once you have finished watching.
+  example: |
+    when green flag clicked
+      hide list  route
+  caption: >
+    Tidy the stage.
+  see: [data_showlist]
+
+# ------------------------------------------------------------- Quad RGB Sensor
+mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_off_track:
+  what: >
+    Reports how far the robot has drifted off the line, as a number from -100 to
+    +100. Zero means dead centre; the sign says which way it has wandered.
+  when: >
+    This is the line-following block. One number carries both how far off and
+    which side, which is exactly what a steering correction needs — no chain of
+    ifs, just arithmetic.
+  example: |
+    when button  A  pressed
+      forever
+        set  err  to  (quad rgb sensor  1  deviation (-100~100))
+        encoder motor EM1 rotates at  (40 + (err))  RPM, encoder motor EM2 rotates at  (40 - (err))  RPM
+  caption: >
+    Drift left and the left wheel speeds up while the right slows, which steers
+    back. The bigger the drift, the harder the correction.
+  watch: >
+    If the robot wobbles violently, the correction is too strong — divide the
+    error before using it. If it drifts off corners, it is too weak.
+  see: [mbuild_quad_color_sensor.mbuild_quad_color_sensor_is_line_and_background, operator_mathop]
+
+mbuild_quad_color_sensor.mbuild_quad_color_sensor_is_line_and_background:
+  what: >
+    Asks one of the four probes a yes-or-no question: are you over the line? over
+    the background? over a particular colour?
+  when: >
+    When you want a decision rather than a measurement — "have we reached the red
+    patch", "has the outer probe fallen off the line". Easier to reason about than
+    the deviation number when the answer is genuinely yes or no.
+  example: |
+    when button  A  pressed
+      forever
+        if  not (quad rgb sensor  1  probe  (1) R2  detects  line  ?)  then
+          turns left  10  ° until done
+  caption: >
+    Hunt left whenever the right-hand probe loses the line.
+  watch: >
+    The probes are numbered from the right: R2, R1, L1, L2. Facing the same way as
+    the robot, R2 is the outer right one.
+  see: [mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_off_track]
+
+mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_sta_with_inputMenu:
+  what: >
+    Asks whether the two middle probes together are in one exact pattern — both
+    miss the selected condition, left only, right only, or both detect it. The
+    digits are ordered L1 then R1; 10 means L1 yes and R1 no.
+  when: >
+    When the pair of readings matters as a pair. "Both on the line" means straight
+    ahead; "left only" means drifting right.
+  example: |
+    when button  A  pressed
+      forever
+        if  quad rgb sensor  1  L1, R1's  line  in status  (0) 00  ?  then
+          stop encoder motor  all
+  caption: >
+    Both middle probes have lost the line, so stop rather than guess.
+  see: [mbuild_quad_color_sensor.BLOCK_1618397596925]
+
+mbuild_quad_color_sensor.BLOCK_1618397596925:
+  what: >
+    Reports the two middle probes as a single number from 0 to 3 instead of a
+    yes-or-no.
+  when: >
+    When you would rather compare a number than write out four separate questions.
+  example: |
+    when button  A  pressed
+      print  (quad rgb sensor  1  L1, R1's  line  status (0~3))
+  caption: >
+    Watch the pair of middle probes as one changing number.
+  see: [mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_sta_with_inputMenu]
+
+mbuild_quad_color_sensor.BLOCK_1618364921511:
+  what: >
+    Asks whether all FOUR probes are in one exact pattern, written in physical
+    left-to-right order: L2, L1, R1, R2. Each 1 means that probe detects the
+    selected condition; each 0 means it does not.
+  when: >
+    For reading marks on the floor rather than following a line. A wide band under
+    all four probes is a different pattern from a thin line under the middle two,
+    so the robot can tell a junction from a track.
+  example: |
+    when button  A  pressed
+      forever
+        if  quad rgb sensor  1  line in status  (0) 0000  ？  then
+          stop encoder motor  all
+  caption: >
+    No probe can see the line at all — the robot has come right off the track.
+  see: [mbuild_quad_color_sensor.BLOCK_1618397679204]
+
+mbuild_quad_color_sensor.BLOCK_1618397679204:
+  what: >
+    Reports all four probes as one number from 0 to 15.
+  when: >
+    Same idea as the four-digit pattern, as a number you can compare or store.
+    Sixteen values cover every combination of four probes.
+  example: |
+    when button  A  pressed
+      forever
+        print  (quad rgb sensor  1  line status (0~15))
+  caption: >
+    The whole sensor as one number, changing as the robot crosses the track.
+  see: [mbuild_quad_color_sensor.BLOCK_1618364921511]
+
+mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_rgb_gray_light:
+  what: >
+    Reports one measurement from the selected probe. “object's R value”, G value
+    and B value report the strength of reflected red, green and blue light from 0
+    to 255; a larger number means more of that colour channel. “object's
+    grayscale” reports reflected-light strength from 0 to 100 without naming a
+    colour: dark, weakly reflecting surfaces tend toward the low end and bright,
+    strongly reflecting surfaces toward the high end. “ambient light intensity”
+    reports the light reaching the probe from 0 to 100; the sensor's fill light
+    contributes unless it is turned off. “color” reports the measured colour as
+    one hexadecimal RGB value from 0x000000 (black) to 0xFFFFFF (white), rather
+    than returning a colour name.
+  when: >
+    For telling colours apart rather than following a line, and for finding out
+    why a line follower is failing. Printing the grey value over black tape and
+    over white paper shows you the gap the sensor has to work with.
+  example: |
+    when button  A  pressed
+      forever
+        print  (quad rgb sensor  1  probe  (1)R2  detects  object's R value)
+  caption: >
+    Watch the raw red reading change as different colours pass under the probe.
+  watch: >
+    Raw values depend on the surface, sensor height, room lighting and fill-light
+    setting. Compare readings under the same conditions rather than treating one
+    number as a universal definition of a colour.
+  see: [mbuild_quad_color_sensor.BLOCK_1626250042594]
+
+mbuild_quad_color_sensor.BLOCK_1626250042594:
+  what: >
+    Teaches the sensor a colour: you give it red, green and blue values plus a
+    tolerance for how close a match has to be.
+  when: >
+    When the surface you care about is not one of the built-in colours, or when
+    the classroom's paper is a shade the sensor keeps mistaking.
+  example: |
+    when CyberPi starts up
+      quad rgb sensor  1  define color to R  200  G  30  B  30  with tolerance  50
+  caption: >
+    Teach it your particular red, with room for the light to change.
+  watch: >
+    A big tolerance matches too much, a small one matches nothing. Start around 50
+    and adjust while watching the raw values.
+  see: [mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_rgb_gray_light]
+
+mbuild_quad_color_sensor.BLOCK_1663048571053:
+  what: >
+    Runs the sensor's own calibration. The line is the path the robot follows;
+    the background is the surrounding track surface. Calibration measures both
+    and stores their difference, so later blocks can decide which one each probe
+    sees. You can also start this action by double-pressing the button on the
+    Quad RGB Sensor.
+  when: >
+    Once at the start of a session, and again whenever the room or the track
+    changes. Sunlight through a window in the afternoon is not the light the
+    sensor was calibrated in that morning.
+  example: |
+    when button  B  pressed
+      quad rgb sensor  1  performs calibration
+  caption: >
+    Press B, then move the sensor across both the line and the background while
+    it learns the two surfaces.
+  watch: >
+    Calibrate over the real track, not over the desk. Repeat it if the track,
+    room lighting, sensor height or fill-light setting changes.
+  see: [mbuild_quad_color_sensor.mbuild_quad_color_sensor_get_off_track]
+
+mbuild_quad_color_sensor.BLOCK_1663048571165:
+  what: >
+    Switches the sensor between Standard and Color enhanced detection.
+  when: >
+    Enhanced mode when you are separating similar colours; standard mode for
+    plain line following, where it is faster.
+  example: |
+    when CyberPi starts up
+      sets color detection mode to  Color enhanced
+  caption: >
+    Trade a little speed for a better eye for colour.
+  see: [mbuild_quad_color_sensor.BLOCK_1626250042594]
+
+mbuild_quad_color_sensor.BLOCK_1618382823173:
+  what: >
+    Sets the colour of the sensor's own lamp — the light it shines on the floor to
+    read by.
+  when: >
+    When the track colour and the lamp colour fight each other. Red tape under a
+    red lamp looks the same as white paper.
+  example: |
+    when CyberPi starts up
+      quad rgb sensor  1  set fill light color of line-following to  green
+  caption: >
+    A green lamp makes red tape stand out sharply.
+  see: [mbuild_quad_color_sensor.BLOCK_1620904215289]
+
+mbuild_quad_color_sensor.BLOCK_1620904215289:
+  what: >
+    Switches the sensor's lamp off.
+  when: >
+    To read the room's own light rather than the robot's, or to save power.
+  example: |
+    when button  B  pressed
+      quad rgb sensor  1  turns off fill light
+  caption: >
+    Lamp off — now the probes see only what the room lights show them.
+  watch: >
+    Line following with the lamp off is unreliable, because the readings then
+    change with every shadow.
+  see: [mbuild_quad_color_sensor.BLOCK_1618382823173]
+
+# --------------------------------------------------------- Ultrasonic Sensor 2
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_get_distance:
+  what: >
+    Reports how far away the nearest thing in front of the sensor is, in
+    centimetres.
+  when: >
+    Any time the robot must not hit something, or must stop a set distance from
+    it. It is the robot's only forward-looking sense of space.
+  example: |
+    when button  A  pressed
+      moves forward at  40  RPM
+      wait until  ultrasonic 2  1  distance to an object (cm) < 15
+      stop encoder motor  all
+  caption: >
+    Drive up to a wall and stop a hand's width from it.
+  watch: >
+    This sensor belongs to the standard mBot2. The Rover build does not have one,
+    which is why the Grade 8 course never uses it.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_out_of_range, operator_lt]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_out_of_range:
+  what: >
+    Reports true when there is nothing in range to measure.
+  when: >
+    To tell "far away" apart from "no reading at all". Soft or angled surfaces
+    bounce the sound away instead of back, and an empty corridor gives the same
+    silence as a cushion.
+  example: |
+    when button  A  pressed
+      forever
+        if  ultrasonic 2  1  out of range？  then
+          show label 1  no reading  at center of screen  by small pixel
+  caption: >
+    Say so, rather than acting on a distance that was never measured.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_get_distance]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_show_emotion:
+  what: >
+    Plays one of the sensor's built-in faces on its two ring lights — standby,
+    happy, dizzy, raised eyebrows, thinking.
+  when: >
+    To give the robot an expression the whole room can read from a distance. The
+    eyes are on the front of the robot, which is where people look.
+  example: |
+    when button  A  pressed
+      ultrasonic 2  1  displays emotion  happy
+  caption: >
+    The robot's face lights up.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_set_bri]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_set_bri:
+  what: >
+    Sets how bright the sensor's ring lights are, as a percentage.
+  when: >
+    To dim the eyes in a dark room, or use brightness itself as a signal — brighter
+    as an obstacle gets nearer.
+  example: |
+    when button  A  pressed
+      ultrasonic 2  1  sets ambient light  all  brightness to  30  %
+  caption: >
+    Both rings at a third brightness.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_add_bri]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_add_bri:
+  what: >
+    Raises or lowers the ring brightness by a step, rather than setting it
+    outright.
+  when: >
+    For a fade, or for a brightness that responds to something without your having
+    to track the current level.
+  example: |
+    when button  A  pressed
+      repeat  10
+        ultrasonic 2  1  increases ambient light  all  brightness by  10  %
+        wait  0.2  seconds
+  caption: >
+    The eyes fade up over two seconds.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_set_bri]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_get_bri:
+  what: >
+    Reports how bright one of the rings is set to right now.
+  when: >
+    When a fade needs to know where it has got to.
+  example: |
+    when button  A  pressed
+      print  (ultrasonic 2  1  ambient light  1  brightness)
+  caption: >
+    Read the current brightness back off the sensor.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_set_bri]
+
+cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_off_led:
+  what: >
+    Turns the sensor's ring lights off.
+  when: >
+    At the end of a program, or when the eyes are distracting from something else.
+  example: |
+    when button  B  pressed
+      ultrasonic 2  1  turns off ambient light  all
+  caption: >
+    Eyes off.
+  see: [cyberpi_mbuild_ultrasonic2.mbuild_ultrasonic2_show_emotion]
+
+# -------------------------------------------------------- Bluetooth controller
+firefly_bluetoothcontroller.getBluetoothJoystickValue:
+  what: >
+    Reports how far one stick on the Bluetooth gamepad is pushed, on one axis, as
+    a number either side of zero. LX and LY are the left stick, RX and RY the
+    right.
+  when: >
+    For driving by hand. Feeding the two vertical axes to the two wheels gives
+    tank steering, which is the arrangement this course uses.
+  example: |
+    when button  A  pressed
+      forever
+        encoder motor EM1 rotates at  ((joystick  LY ) / 3)  RPM, encoder motor EM2 rotates at  ((joystick  RY ) / 3)  RPM
+  caption: >
+    Each stick drives the wheel on its own side.
+  watch: >
+    These blocks only work from the Bluetooth Controller EXTENSION, and only in
+    Upload mode. The similar-looking blocks that come with the bundled controller
+    DEVICE carry no code for the robot, so they upload and do nothing.
+  see: [firefly_bluetoothcontroller.CheckBluetoothKey, mbot2.mbot2_encoder_motor_drive_speed2]
+
+firefly_bluetoothcontroller.CheckBluetoothKey:
+  what: >
+    Reports true while a named button on the gamepad is held — the numbered
+    buttons, the arrows, the shoulder buttons, the thumbsticks.
+  when: >
+    For everything that is not steering: a gripper, a horn, a light, a mode
+    change. Inside a forever loop it reads as "while this is held".
+  example: |
+    when button  A  pressed
+      forever
+        if  button  L1  pressed  then
+          play  hi
+  caption: >
+    The shoulder button sounds the horn for as long as it is held.
+  watch: >
+    Upload mode, and the extension rather than the device — the same warning as
+    the joystick block.
+  see: [firefly_bluetoothcontroller.getBluetoothJoystickValue]
+
+# --------------------------------------------------------------------- Display
+cyberpi.cyberpi_display_label_show_at_somewhere_with_size:
+  what: >
+    Writes a line of text at a fixed place on the CyberPi screen, in one of four
+    numbered slots. Writing to the same slot again replaces what was there.
+  when: >
+    This is the block for a message that STAYS — an instruction, a status, a
+    reading you want to keep an eye on. Because each slot overwrites itself, a
+    label inside a loop updates in place instead of scrolling away.
+  example: |
+    when CyberPi starts up
+      show label 1  press A to start  at center of screen  by small pixel
+  caption: >
+    The screen tells the driver what to do, and keeps telling them.
+  watch: >
+    Four slots, numbered 1 to 4. Two different messages in the same slot fight
+    each other; give each its own number.
+  see: [cyberpi.cyberpi_display_print, cyberpi.cyberpi_display_label_show_label_xy_with_size]
+
+cyberpi.cyberpi_display_label_show_label_xy_with_size:
+  what: >
+    The same thing, but you give an exact x and y position on the screen instead
+    of choosing from named places.
+  when: >
+    When the named positions do not line up the way you want — several readings
+    side by side, or a value placed under its own heading.
+  example: |
+    when button  A  pressed
+      show label 1  dist  at x:  0  y  0  by small pixel
+      show label 2  cm  at x:  0  y  20  by small pixel
+  caption: >
+    Two labels, stacked exactly twenty pixels apart.
+  see: [cyberpi.cyberpi_display_label_show_at_somewhere_with_size]
+
+cyberpi.cyberpi_display_print:
+  what: >
+    Adds text to the screen where the last print left off, without starting a new
+    line.
+  when: >
+    To build one line out of several pieces — a name, then its value.
+  example: |
+    when button  A  pressed
+      print  dist=
+      print  (ultrasonic 2  1  distance to an object (cm))
+  caption: >
+    Two prints, one line: "dist=23".
+  see: [cyberpi.cyberpi_display_println, operator_join]
+
+cyberpi.cyberpi_display_println:
+  what: >
+    Prints text and then moves to the next line, so the next print starts
+    underneath.
+  when: >
+    For a running log rather than a fixed readout — a list of readings as they
+    arrive, a trace of what the program did.
+  example: |
+    when button  A  pressed
+      repeat  5
+        print  (ultrasonic 2  1  distance to an object (cm))  and move to a newline
+        wait  1  seconds
+  caption: >
+    Five readings, one per line, one per second.
+  watch: >
+    The screen scrolls once it is full, so old lines are lost. For something that
+    must stay visible, use a label.
+  see: [cyberpi.cyberpi_display_print, cyberpi.cyberpi_display_clear]
+
+cyberpi.cyberpi_console_set_font:
+  what: >
+    Sets the size of the printed text — small, middle, big or super big.
+  when: >
+    Big for a number the class needs to read from their seats; small when several
+    lines have to fit at once.
+  example: |
+    when button  A  pressed
+      set print size to  big
+      print  (ultrasonic 2  1  distance to an object (cm))
+  caption: >
+    One large reading, visible across a room.
+  see: [cyberpi.cyberpi_display_print]
+
+cyberpi.cyberpi_display_clear:
+  what: >
+    Wipes the whole screen — printed lines, labels, charts and all.
+  when: >
+    At the start of a program, so you are not reading last run's leftovers, and
+    between screens of a display that changes.
+  example: |
+    when button  A  pressed
+      clear screen
+      show label 1  ready  at center of screen  by small pixel
+  caption: >
+    A clean screen before the new message.
+  see: [cyberpi.cyberpi_display_println]
+
+cyberpi.cyberpi_display_line_chart_add_data:
+  what: >
+    Adds one number to a line chart drawn on the screen, which scrolls as new
+    points arrive.
+  ide_image: assets/ui/cyberpi-line-chart.svg
+  ide_image_wide: true
+  ide_image_alt: A falling line chart of distance readings on the CyberPi screen
+  ide_image_caption: >
+    Each value becomes a new point on the CyberPi screen. The points are joined;
+    when the screen fills, older points scroll left.
+  when: >
+    When the SHAPE of a changing reading matters more than any single value —
+    watching a distance sensor as the robot approaches a wall shows the approach
+    far better than a number does.
+  example: |
+    when button  A  pressed
+      forever
+        line chart, add data  (ultrasonic 2  1  distance to an object (cm))
+        wait  0.1  seconds
+  caption: >
+    The wall arriving, drawn as a falling line.
+  see: [cyberpi.cyberpi_display_bar_chart_add_data, cyberpi.cyberpi_display_bar_chart_set_interval]
+
+cyberpi.cyberpi_display_bar_chart_add_data:
+  what: >
+    Adds one number to a bar chart on the screen.
+  when: >
+    When you are comparing a handful of separate values rather than watching one
+    change over time.
+  example: |
+    when button  A  pressed
+      bar chart, add data  (quad rgb sensor  1  probe  (1)R2  detects  object's R value)
+  caption: >
+    A bar per reading, easy to compare at a glance.
+  see: [cyberpi.cyberpi_display_line_chart_add_data]
+
+cyberpi.cyberpi_display_bar_chart_set_interval:
+  what: >
+    Sets how far apart the chart's points are drawn, in pixels.
+  when: >
+    To fit more history on screen, or to spread a slow reading out so its changes
+    are visible.
+  example: |
+    when button  A  pressed
+      line chart, set spacing to  2  pixel
+  caption: >
+    Tighter spacing means more of the past fits on the screen.
+  see: [cyberpi.cyberpi_display_line_chart_add_data]
+
+cyberpi.cyberpi_display_table_add_data_at_row_column_2:
+  what: >
+    Puts a value into one cell of a grid on the CyberPi screen, chosen by row and
+    column. The table has up to four rows and three columns. “excel_content” is
+    only placeholder text in the empty block: replace it with the text, number or
+    sensor value you want to display. It does not read an Excel file.
+  ide_image: assets/ui/cyberpi-table-display.svg
+  ide_image_wide: true
+  ide_image_alt: A four-row, three-column table displayed on the CyberPi screen
+  ide_image_caption: >
+    Column 1 contains the labels “dist” and “speed”; column 2 contains their
+    current readings. Writing to the same cell again updates that cell.
+  when: >
+    For several named readings at once — a small dashboard, where each value has
+    its own fixed home.
+  example: |
+    when button  A  pressed
+      clear screen
+      table, input  dist  at row  1  , column  1
+      table, input  speed  at row  2  , column  1
+      forever
+        table, input  (ultrasonic 2  1  distance to an object (cm))  at row  1  , column  2
+        table, input  (encoder motor  (1) EM1  's rotational speed(RPM))  at row  2  , column  2
+        wait  0.1  seconds
+  caption: >
+    Four table instructions create two rows: labels stay in column 1 while the
+    live distance and speed readings repeatedly update column 2.
+  see: [cyberpi.cyberpi_display_label_show_at_somewhere_with_size]
+
+cyberpi.cyberpi_display_set_brush_with_color:
+  ide_image: assets/ui/cyberpi-display-color.gif
+  ide_image_alt: Real CyberPi with its physical screen changing color
+  ide_image_wide: true
+  ide_image_caption: >
+    The result appears on the CyberPi's real color screen, not on the IDE stage.
+  ide_image_source: https://support.makeblock.com/hc/en-us/articles/6465533139223-Case-1-Hello-World
+  what: >
+    Chooses the colour that later text and drawing will use, from a colour picker.
+  when: >
+    To make one line stand out from the rest — a warning in red among readings in
+    white.
+  example: |
+    when button  A  pressed
+      set brush color
+      print  careful
+  caption: >
+    Pick a colour, then everything printed afterwards uses it.
+  watch: >
+    It changes what comes NEXT. Text already on the screen keeps the colour it was
+    drawn in.
+  see: [cyberpi.cyberpi_display_set_brush_with_r_g_b]
+
+cyberpi.cyberpi_display_set_brush_with_r_g_b:
+  what: >
+    The same, but mixing the colour from red, green and blue numbers instead of
+    picking it.
+  when: >
+    When the colour has to be worked out rather than chosen — a display that goes
+    redder as a reading rises.
+  example: |
+    when button  A  pressed
+      set brush color to R  255  G  0  B  0
+      print  too close
+  caption: >
+    A red warning, mixed by numbers so a program can vary it.
+  see: [cyberpi.cyberpi_display_set_brush_with_color]
+
+cyberpi.cyberpi_display_rotate_to_2:
+  what: >
+    Turns the screen image by a quarter, a half or three-quarters of a turn.
+  when: >
+    When the CyberPi is mounted sideways or upside down on your build, so the
+    writing comes out the right way up for whoever is reading it.
+  example: |
+    when CyberPi starts up
+      screen towards  upside-down(-90°)
+      show label 1  ready  at center of screen  by small pixel
+  caption: >
+    The board is mounted upside down; the words are not.
+  see: [cyberpi.cyberpi_display_clear]
+
+# ------------------------------------------------------------------------- LED
+cyberpi.cyberpi_led_show_single_with_rgb_2:
+  what: >
+    Lights one of the five LEDs, or all of them, in a colour you mix from red,
+    green and blue values between 0 and 255. The light stays on until something
+    changes it.
+  when: >
+    The workhorse status light. Because the colour is made of numbers, a program
+    can compute it — green when clear, red when blocked, and anything between.
+  example: |
+    when button  A  pressed
+      forever
+        if  ultrasonic 2  1  distance to an object (cm) < 15  then
+          LED  all  displays R  255  G  0  B  0
+        else
+          LED  all  displays R  0  G  255  B  0
+  caption: >
+    The robot says what it can see, without anybody reading the screen.
+  watch: >
+    0, 0, 0 is off. 255, 255, 255 is white and very bright.
+  see: [cyberpi.cyberpi_led_off_2, cyberpi.cyberpi_led_show_single_with_rgb_and_time]
+
+cyberpi.cyberpi_led_show_single_with_rgb_and_time:
+  what: >
+    The same, but the light comes on for a set number of seconds and then goes off
+    by itself. The script waits while it does.
+  when: >
+    For a flash that does not need cleaning up afterwards — a blink to confirm a
+    button press.
+  example: |
+    when button  A  pressed
+      LED  all  displays R  0  G  255  B  0  for  1  secs
+  caption: >
+    A one-second green flash, then dark again on its own.
+  see: [cyberpi.cyberpi_led_show_single_with_rgb_2]
+
+cyberpi.cyberpi_led_show_single_with_color_2:
+  what: >
+    Lights the LEDs in a colour you pick from a swatch instead of mixing from
+    numbers.
+  when: >
+    When you just want a colour and do not need a program to work it out. Quicker
+    to reach for than the RGB version.
+  example: |
+    when button  A  pressed
+      LED  all  displays
+  caption: >
+    Click the swatch, choose a colour, done.
+  see: [cyberpi.cyberpi_led_show_single_with_rgb_2]
+
+cyberpi.cyberpi_led_show_single_with_color_and_time_2:
+  what: >
+    A picked colour, on for a set time, then off by itself.
+  when: >
+    The quick version of a timed flash.
+  example: |
+    when button  A  pressed
+      LED  all  displays  for  1  secs
+  caption: >
+    A one-second flash in the colour you picked.
+  see: [cyberpi.cyberpi_led_show_single_with_rgb_and_time]
+
+cyberpi.cyberpi_led_off_2:
+  what: >
+    Switches off one LED, or all five.
+  when: >
+    At the end of anything that turned them on. A robot left glowing after its
+    program finished looks like a robot that is still running.
+  example: |
+    when button  B  pressed
+      turn off LED  all
+  caption: >
+    Lights out.
+  see: [cyberpi.cyberpi_led_show_single_with_rgb_2]
+
+cyberpi.cyberpi_play_led_animation_until:
+  what: >
+    Plays a ready-made light show — rainbow, spindrift, meteor, firefly — and
+    waits until it has finished.
+  when: >
+    For celebration and for a "working on it" signal. One block does what a dozen
+    LED blocks and waits would.
+  example: |
+    when button  A  pressed
+      play LED animation  rainbow  until done
+      play  hi
+  caption: >
+    A finish-line flourish: the lights run, and only then does it chirp.
+  watch: >
+    The script waits. Nothing else in it happens while the animation plays.
+  see: [cyberpi.cyberpi_show_led]
+
+cyberpi.cyberpi_show_led:
+  what: >
+    Sets all five LEDs at once from a little row of colour swatches you fill in on
+    the block itself.
+  when: >
+    When the five lights are a picture rather than one status — a level meter, a
+    direction indicator, a pattern.
+  example: |
+    when button  A  pressed
+      display
+  caption: >
+    Paint the five lights individually, straight on the block.
+  see: [cyberpi.cyberpi_move_led]
+
+cyberpi.cyberpi_move_led:
+  what: >
+    Shifts whatever the lights are showing round the ring by a number of places.
+  when: >
+    To animate a pattern you have set — a dot chasing round the ring, made by
+    lighting one LED and rolling it.
+  example: |
+    when button  A  pressed
+      forever
+        roll  1  LEDs rightwards
+        wait  0.1  seconds
+  caption: >
+    Whatever is on the ring travels round it.
+  see: [cyberpi.cyberpi_show_led]
+
+cyberpi.cyberpi_set_led_brightness:
+  what: >
+    Sets how bright the LEDs are, as a percentage, without changing their colours.
+  when: >
+    Once at the start, usually. Full brightness is dazzling indoors and drains the
+    battery faster.
+  example: |
+    when CyberPi starts up
+      set brightness to  30  %
+  caption: >
+    Comfortable to look at, and kinder to the battery.
+  see: [cyberpi.cyberpi_add_led_brightness, cyberpi.cyberpi_get_led_brightness]
+
+cyberpi.cyberpi_add_led_brightness:
+  what: >
+    Raises or lowers the LED brightness by a step. A negative number dims.
+  when: >
+    For fades, and for brightness that responds to something without your having
+    to track the level.
+  example: |
+    when button  A  pressed
+      repeat  10
+        increase LED brightness by  10  %
+        wait  0.1  seconds
+  caption: >
+    The ring fades up over a second.
+  see: [cyberpi.cyberpi_set_led_brightness]
+
+cyberpi.cyberpi_get_led_brightness:
+  what: >
+    Reports the current LED brightness as a percentage.
+  when: >
+    When a fade needs to know where it has reached, or to show the setting on the
+    screen.
+  example: |
+    when button  A  pressed
+      print  (LED brightness(%))
+  caption: >
+    Read the brightness back.
+  see: [cyberpi.cyberpi_set_led_brightness]
+
+# ----------------------------------------------------------------------- Audio
+cyberpi.cyberpi_play_audio_3:
+  what: >
+    Plays one of the CyberPi's built-in sounds and lets the script carry straight
+    on while it plays.
+  when: >
+    For a quick acknowledgement that must not hold anything up — a chirp when a
+    button is pressed, while the robot keeps driving.
+  example: |
+    when button  A  pressed
+      play  hi
+      moves forward  20  cm until done
+  caption: >
+    The chirp and the drive start together.
+  see: [cyberpi.cyberpi_play_audio_until_3]
+
+cyberpi.cyberpi_play_audio_until_3:
+  what: >
+    Plays a built-in sound and waits until it has finished before the script
+    moves on.
+  when: >
+    When the sound is the point — a countdown, a fanfare at the finish — and the
+    next thing should not tread on it.
+  example: |
+    when button  A  pressed
+      play  yeah  until done
+      turn off LED  all
+  caption: >
+    Let the sound finish, then go dark.
+  see: [cyberpi.cyberpi_play_audio_3]
+
+cyberpi.cyberpi_play_buzzer_tone:
+  what: >
+    Sounds a tone at a frequency you give in hertz, and carries on immediately.
+    Higher numbers are higher notes.
+  when: >
+    When the pitch should mean something — a tone that rises as the robot gets
+    closer to a wall is a sensor you can hear.
+  example: |
+    when button  A  pressed
+      forever
+        play sound at  (100 + (ultrasonic 2  1  distance to an object (cm)))  Hz
+  caption: >
+    The robot hums lower as it nears a wall.
+  see: [cyberpi.cyberpi_play_buzzer_tone_with_time]
+
+cyberpi.cyberpi_play_buzzer_tone_with_time:
+  what: >
+    Sounds a tone for a set number of seconds, and waits while it does.
+  when: >
+    For a beep of a definite length — a metronome, a countdown tick.
+  example: |
+    when button  A  pressed
+      repeat  3
+        play sound at  880  Hz for  0.2  secs
+        wait  0.8  seconds
+  caption: >
+    Three short pips, one a second.
+  see: [cyberpi.cyberpi_play_buzzer_tone]
+
+cyberpi.cyberpi_play_music_with_tone_and_note_2:
+  what: >
+    Plays a musical note for a number of beats, with the pitch chosen from a
+    keyboard on the block.
+  when: >
+    For tunes rather than beeps. Notes and beats are easier to compose with than
+    frequencies and seconds.
+  example: |
+    when button  A  pressed
+      play note  60  for  0.5  beat
+      play note  64  for  0.5  beat
+  caption: >
+    Two notes of a tune.
+  see: [cyberpi.cyberpi_play_music_with_note]
+
+cyberpi.cyberpi_play_music_with_note:
+  what: >
+    Plays a drum sound for a number of beats.
+  when: >
+    For rhythm — marking time, counting laps audibly.
+  example: |
+    when button  A  pressed
+      repeat  4
+        play  snare  for  0.25  beat
+  caption: >
+    Four beats on the snare.
+  see: [cyberpi.cyberpi_play_music_with_tone_and_note_2]
+
+cyberpi.cyberpi_start_record:
+  what: >
+    Starts recording sound through the CyberPi's microphone.
+  when: >
+    When the robot should capture something to play back later — a message, a
+    sound from the room.
+  example: |
+    when button  A  pressed
+      start recording
+      wait  3  seconds
+      stop recording
+  caption: >
+    A three-second recording, started and stopped by the program.
+  see: [cyberpi.cyberpi_stop_record, cyberpi.cyberpi_play_record]
+
+cyberpi.cyberpi_stop_record:
+  what: >
+    Stops the recording that is in progress.
+  when: >
+    Always, after starting one. Recording does not stop by itself.
+  example: |
+    when button  B  pressed
+      stop recording
+  caption: >
+    B ends the recording.
+  see: [cyberpi.cyberpi_start_record]
+
+cyberpi.cyberpi_play_record:
+  what: >
+    Plays back the last recording and carries on immediately.
+  when: >
+    When the playback should happen alongside something else.
+  example: |
+    when button  B  pressed
+      play recording
+      moves forward  10  cm until done
+  caption: >
+    The robot talks and drives at the same time.
+  see: [cyberpi.cyberpi_play_record_until]
+
+cyberpi.cyberpi_play_record_until:
+  what: >
+    Plays back the last recording and waits until it has finished.
+  when: >
+    When nothing should happen until the message has been heard.
+  example: |
+    when button  B  pressed
+      play recording until done
+      play  bye
+  caption: >
+    The message plays out fully before the sign-off.
+  see: [cyberpi.cyberpi_play_record]
+
+cyberpi.cyberpi_set_volume:
+  what: >
+    Sets the speaker volume as a percentage.
+  when: >
+    Once at the start. Twenty robots at full volume in one classroom is a
+    genuine problem.
+  example: |
+    when CyberPi starts up
+      set volume to  40  %
+  caption: >
+    Loud enough for one group, quiet enough for the room.
+  see: [cyberpi.cyberpi_add_volume, cyberpi.cyberpi_get_volume]
+
+cyberpi.cyberpi_add_volume:
+  what: >
+    Raises or lowers the volume by a step; a negative number turns it down.
+  when: >
+    For a volume the user can adjust with a button.
+  example: |
+    when joystick  pulled↑
+      increase volume by  10  %
+  caption: >
+    Push the stick up to turn it up.
+  see: [cyberpi.cyberpi_set_volume]
+
+cyberpi.cyberpi_get_volume:
+  what: >
+    Reports the current volume as a percentage.
+  when: >
+    To show the setting on screen while somebody adjusts it.
+  example: |
+    when button  A  pressed
+      print  (volume(%))
+  caption: >
+    Show what the volume is now.
+  see: [cyberpi.cyberpi_set_volume]
+
+cyberpi.cyberpi_set_audio_speed:
+  what: >
+    Sets the playback speed of sounds as a percentage; below 100 is slower and
+    deeper, above is faster and higher.
+  when: >
+    For character — a slowed voice, a chipmunk squeak.
+  example: |
+    when button  A  pressed
+      set audio speed to  50  %
+      play  hi  until done
+  caption: >
+    The same sound, half speed.
+  see: [cyberpi.cyberpi_get_audio_speed]
+
+cyberpi.cyberpi_add_audio_speed:
+  what: >
+    Nudges the playback speed up or down by a step.
+  when: >
+    For an effect that changes gradually.
+  example: |
+    when button  A  pressed
+      repeat  5
+        increase audio speed by  20  %
+        play  hi  until done
+  caption: >
+    The same sound, faster each time.
+  see: [cyberpi.cyberpi_set_audio_speed]
+
+cyberpi.cyberpi_get_audio_speed:
+  what: >
+    Reports the current playback speed as a percentage.
+  when: >
+    To display or restore the setting.
+  example: |
+    when button  A  pressed
+      print  (audio speed)
+  caption: >
+    Read the speed back.
+  see: [cyberpi.cyberpi_set_audio_speed]
+
+cyberpi.cyberpi_stop_audio:
+  what: >
+    Stops everything that is making a sound, at once.
+  when: >
+    To cut off a long sound early, and as part of a stop button.
+  example: |
+    when button  B  pressed
+      stop all sounds
+      stop encoder motor  all
+  caption: >
+    Silence and stillness together.
+  see: [cyberpi.cyberpi_play_audio_3]
+
+# --------------------------------------------------------------------- Sensing
+cyberpi.cyberpi_button_press:
+  what: >
+    Reports true while button A or B is being held down. It is a question, not a
+    hat — it tells you the state right now.
+  when: >
+    Inside a loop or a wait, when you want to ask rather than be interrupted. It
+    is what "wait until button A pressed" is built from.
+  example: |
+    when CyberPi starts up
+      show label 1  press A to start  at center of screen  by small pixel
+      wait until  button  A  pressed?
+      moves forward  20  cm until done
+  caption: >
+    The gate that keeps an uploaded program still until somebody is ready.
+  see: [cyberpi.cyberpi_when_button_press, control_wait_until]
+
+cyberpi.cyberpi_button_count:
+  what: >
+    Reports how many times a button has been pressed since the count was last
+    reset.
+  when: >
+    To cycle through modes without a variable of your own — press A three times
+    for mode three.
+  example: |
+    when button  A  pressed
+      print  (button  A  press counts)
+  caption: >
+    Show the running total of presses.
+  see: [cyberpi.cyberpi_button_count_reset]
+
+cyberpi.cyberpi_button_count_reset:
+  what: >
+    Sets a button's press count back to zero.
+  when: >
+    At the start of a program, and whenever a mode cycle should begin again.
+  example: |
+    when CyberPi starts up
+      reset button  A  press counts
+  caption: >
+    Start counting from nothing.
+  see: [cyberpi.cyberpi_button_count]
+
+cyberpi.cyberpi_direction_key_press:
+  what: >
+    Reports true while the CyberPi's own joystick is being held in a direction.
+  when: >
+    For steering or menu navigation using the onboard stick, inside a loop.
+  example: |
+    when button  A  pressed
+      forever
+        if  joystick  pulled↑  ?  then
+          moves forward at  40  RPM
+        else
+          stop encoder motor  all
+  caption: >
+    The robot drives only while the stick is held forward.
+  see: [cyberpi.cyberpi_when_direction_key_press]
+
+cyberpi.cyberpi_direction_key_count:
+  what: >
+    Reports how many times the onboard joystick has been pushed in a direction
+    since the count was reset.
+  when: >
+    For stepping through a list of choices with the stick.
+  example: |
+    when button  A  pressed
+      print  (joystick  pulled↑  counts)
+  caption: >
+    How many times has the stick been pushed up?
+  see: [cyberpi.cyberpi_direction_key_count_reset]
+
+cyberpi.cyberpi_direction_key_count_reset:
+  what: >
+    Sets a joystick direction's count back to zero.
+  when: >
+    Before starting a fresh count.
+  example: |
+    when CyberPi starts up
+      reset joystick  pulled↑  counts
+  caption: >
+    Zero the counter at boot.
+  see: [cyberpi.cyberpi_direction_key_count]
+
+cyberpi.cyberpi_loudness:
+  what: >
+    Reports how loud the room is right now, as a number. Quiet is near zero; a
+    clap is high.
+  when: >
+    For sound-triggered behaviour — start on a clap, stop when the room goes
+    quiet. Also the honest way to pick a threshold: print it in a real classroom
+    before choosing a number.
+  example: |
+    when button  A  pressed
+      forever
+        if  (loudness > 60)  then
+          play  wow
+  caption: >
+    The robot answers a loud noise.
+  watch: >
+    A quiet room and a noisy hall need different numbers. Measure before you
+    choose.
+  see: [cyberpi.cyberpi_when_sensor_value_bigger_or_smaller_than]
+
+cyberpi.cyberpi_brightness:
+  what: >
+    Reports how bright the light falling on the CyberPi is, as a number.
+  when: >
+    For light-following and light-avoiding, and for noticing a change — a hand
+    passing over the robot drops the reading sharply.
+  example: |
+    when button  A  pressed
+      forever
+        if  ((ambient light intensity) < 20)  then
+          LED  all  displays R  255  G  255  B  255
+        else
+          turn off LED  all
+  caption: >
+    The robot lights its own way when the room goes dark.
+  watch: >
+    Room lighting changes through the day. A threshold that worked this morning
+    may not work this afternoon.
+  see: [cyberpi.cyberpi_loudness]
+
+cyberpi.cyberpi_timer_get:
+  what: >
+    Reports how many seconds have passed since the timer was last reset.
+  when: >
+    For anything measured in elapsed time — a lap time, a timeout, a behaviour
+    that changes after a while.
+  example: |
+    when button  A  pressed
+      reset timer
+      moves forward at  40  RPM
+      wait until  ultrasonic 2  1  distance to an object (cm) < 15
+      stop encoder motor  all
+      print  (timer(s))
+  caption: >
+    How long did it take to reach the wall?
+  see: [cyberpi.cyberpi_timer_reset]
+
+cyberpi.cyberpi_timer_reset:
+  what: >
+    Sets the timer back to zero.
+  when: >
+    Immediately before whatever you are timing.
+  example: |
+    when button  A  pressed
+      reset timer
+  caption: >
+    Start the clock.
+  see: [cyberpi.cyberpi_timer_get]
+
+cyberpi.cyberpi_name:
+  what: >
+    Reports the CyberPi's own name, the one it shows when connecting.
+  when: >
+    In a classroom of identical robots, to put each one's name on its own screen.
+  example: |
+    when CyberPi starts up
+      show label 1  (hostname)  at center of screen  by small pixel
+  caption: >
+    Every robot says which one it is.
+  see: [cyberpi.cyberpi_battery_macaddress_blename_and_so_on]
+
+cyberpi.cyberpi_battery_macaddress_blename_and_so_on:
+  what: >
+    Reports one fact about the board itself, chosen from its dropdown — battery
+    level, MAC address, Bluetooth name, system language.
+  when: >
+    Battery level is the useful one. A robot behaving strangely is very often a
+    robot that is nearly flat.
+  watch: >
+    The whole block is one dropdown, so which fact it reports is chosen on the
+    block itself rather than typed into a slot.
+  see: [cyberpi.cyberpi_name]
+
+cyberpi.cyberpi_makex_mode:
+  what: >
+    Reports whether the robot is in the automatic or manual stage of a MakeX
+    competition round.
+  when: >
+    Only in MakeX competitions, which run programs in two stages.
+  example: |
+    when button  A  pressed
+      if  competition in  automatic stage  then
+        moves forward  50  cm until done
+  caption: >
+    Behave differently depending on which stage the round is in.
+  see: []
+
+# -------------------------------------------------------------- Motion Sensing
+cyberpi.cyberpi_detect_attitude:
+  what: >
+    Reports true while the CyberPi is being held at a particular angle.
+  when: >
+    Inside a loop, to check an orientation rather than be interrupted by it. Also
+    the way to notice the robot has tipped over.
+  example: |
+    when button  A  pressed
+      forever
+        if  tilted forward  ?  then
+          moves forward at  40  RPM
+        else
+          stop encoder motor  all
+  caption: >
+    Tilt the robot forward and it drives; level it and it stops.
+  see: [cyberpi.cyberpi_when_detect_attitude, cyberpi.cyberpi_tilt_degree]
+
+cyberpi.cyberpi_detect_action:
+  what: >
+    Reports true when a gesture has just been made — a wave in a direction, or a
+    twist.
+  when: >
+    Inside a loop, when a gesture should be one of several things you are checking.
+  example: |
+    when button  A  pressed
+      forever
+        if  wave up  detected?  then
+          play  yeah
+  caption: >
+    A flick upwards gets an answer.
+  see: [cyberpi.cyberpi_when_detect_action]
+
+cyberpi.cyberpi_tilt_degree:
+  what: >
+    Reports the actual angle of tilt in degrees, rather than a yes or no.
+  when: >
+    When how much matters — a robot that drives proportionally to how far it is
+    tipped, or a build that must stay level.
+  example: |
+    when button  A  pressed
+      forever
+        encoder motor EM1 rotates at  (tilted forward  angle (°))  RPM, encoder motor EM2 rotates at  (tilted forward  angle (°))  RPM
+  caption: >
+    Tip it further and it drives faster.
+  see: [cyberpi.cyberpi_detect_attitude]
+
+cyberpi.cyberpi_shaked_value:
+  what: >
+    Reports how hard the board is being shaken, as a number.
+  when: >
+    For a shake-to-start or shake-to-reset, where a threshold is friendlier than a
+    yes-or-no gesture.
+  example: |
+    when button  A  pressed
+      wait until  ((shaking strength) > 30)
+      play  wow
+  caption: >
+    Give it a good shake to set it off.
+  see: [cyberpi.cyberpi_detect_action]
+
+cyberpi.cyberpi_wave_angle:
+  what: >
+    Reports the direction of a wave, in degrees.
+  when: >
+    When a gesture should point somewhere rather than pick from four names.
+  example: |
+    when button  A  pressed
+      print  (waving direction (°))
+  caption: >
+    Which way was that wave?
+  see: [cyberpi.cyberpi_wave_speed]
+
+cyberpi.cyberpi_wave_speed:
+  what: >
+    Reports how fast the board is being waved.
+  when: >
+    To tell a gentle movement from a sharp one.
+  example: |
+    when button  A  pressed
+      print  (waving speed)
+  caption: >
+    How energetic was that?
+  see: [cyberpi.cyberpi_wave_angle]
+
+cyberpi.cyberpi_axis_acceleration:
+  what: >
+    Reports acceleration along one axis in metres per second squared. At rest, the
+    downward axis reads about 9.8 because gravity never stops pulling.
+  when: >
+    For detecting knocks, drops and sudden stops — a crash is a large brief spike.
+  example: |
+    when button  A  pressed
+      forever
+        line chart, add data  (motion sensor  x  acceleration(m/s²))
+  caption: >
+    Watch the bumps as the robot drives over them.
+  see: [cyberpi.cyberpi_axis_angle_speed]
+
+cyberpi.cyberpi_axis_angle_speed:
+  what: >
+    Reports how fast the board is turning about one axis, in degrees per second.
+  when: >
+    To measure a spin as it happens, rather than the total after it.
+  example: |
+    when button  A  pressed
+      forever
+        print  (angle speed around  z  axis(°/s))
+  caption: >
+    How fast is the robot spinning right now?
+  see: [cyberpi.cyberpi_axis_rotation_angle]
+
+cyberpi.cyberpi_axis_rotation_angle:
+  what: >
+    Reports the total angle turned about one axis since the last reset, adding up
+    as the robot turns.
+  when: >
+    For turning by a known angle without trusting the wheels. On a slippery floor
+    the wheels lie about the turn and this does not.
+  example: |
+    when button  A  pressed
+      reset rotated angle around  all  axis
+      encoder motor EM1 rotates at  30  RPM, encoder motor EM2 rotates at  -30  RPM
+      wait until  ((rotated angle around  z  axis (°)) > 90)
+      stop encoder motor  all
+  caption: >
+    Spin until the robot has really turned a right angle, then stop.
+  watch: >
+    The total keeps growing until reset, so reset before you measure.
+  see: [cyberpi.cyberpi_reset_axis_rotation_angle]
+
+cyberpi.cyberpi_reset_axis_rotation_angle:
+  what: >
+    Sets the accumulated rotation back to zero for one axis, or all three.
+  when: >
+    Immediately before a turn you intend to measure.
+  example: |
+    when button  A  pressed
+      reset rotated angle around  all  axis
+  caption: >
+    Zero the angle counters.
+  see: [cyberpi.cyberpi_axis_rotation_angle]
+
+cyberpi.cyberpi_reset_yaw:
+  what: >
+    Sets the robot's heading to zero, making whichever way it is pointing the new
+    forward.
+  when: >
+    At the start of a run, so headings are measured from where the robot actually
+    began rather than from where it was switched on.
+  example: |
+    when button  A  pressed
+      reset yaw angle
+  caption: >
+    This direction is now north.
+  see: [cyberpi.cyberpi_axis_rotation_angle]
+
+cyberpi.cyberpi_follow_mblock_sprite:
+  what: >
+    Links a sprite on the mBlock stage to the CyberPi's movement, so tilting the
+    board moves the sprite.
+  when: >
+    Live mode only, when the robot is being used as a controller for something on
+    the screen.
+  example: |
+    when green flag clicked
+      control to follow CyberPi with sensitivity  middle(0.4)
+  caption: >
+    The board becomes a tilt controller for the stage.
+  see: [cyberpi.cyberpi_detect_attitude]
+
+# ------------------------------------------------------------------------- LAN
+cyberpi.cyberpi_set_wifi_broadcast:
+  what: >
+    Sends a named message to every CyberPi on the same local network channel.
+  when: >
+    When robots must work together — one starts, and the rest follow.
+  example: |
+    when button  A  pressed
+      broadcast  go  on LAN
+  caption: >
+    One robot tells all the others to begin.
+  watch: >
+    Both robots must be set to the same LAN channel, or neither hears the other.
+  see: [cyberpi.cyberpi_wifi_broadcast_when_received_message, cyberpi.cyberpi_set_wifi_channels]
+
+cyberpi.cyberpi_set_wifi_broadcast_with_value:
+  what: >
+    Sends a named message and a number or word along with it.
+  when: >
+    When the message needs content — not just "go" but "go at speed 40".
+  example: |
+    when button  A  pressed
+      broadcast  speed  with value  40  on LAN
+  caption: >
+    The instruction and its number travel together.
+  see: [cyberpi.cyberpi_wifi_broadcast_get_value]
+
+cyberpi.cyberpi_wifi_broadcast_when_received_message:
+  what: >
+    A hat block that runs when a named message arrives over the network.
+  when: >
+    On the receiving robot, to act on what another robot said.
+  example: |
+    when receiving  go  broadcast on LAN
+      moves forward  20  cm until done
+  caption: >
+    This robot moves when another one says go.
+  see: [cyberpi.cyberpi_set_wifi_broadcast]
+
+cyberpi.cyberpi_wifi_broadcast_get_value:
+  what: >
+    Reports the value that came with the last message of that name.
+  when: >
+    Straight after the matching hat, to read what was sent.
+  example: |
+    when receiving  speed  broadcast on LAN
+      moves forward at  (LAN broadcast  speed  value received)  RPM
+  caption: >
+    The sender chose the speed; this robot uses it.
+  see: [cyberpi.cyberpi_set_wifi_broadcast_with_value]
+
+cyberpi.cyberpi_set_wifi_channels:
+  what: >
+    Chooses which network channel the robot talks and listens on.
+  when: >
+    When two groups in one room must not hear each other. Put each team on its own
+    channel and their messages stop crossing.
+  example: |
+    when CyberPi starts up
+      set LAN channel to  11
+  caption: >
+    This team keeps to channel 11.
+  see: [cyberpi.cyberpi_set_wifi_broadcast]
+
+# --------------------------------------------------- Upload Mode Broadcast
+cyberpi_upload_message.BLOCK_1551748322055:
+  what: >
+    Sends a named message from an uploaded program back to mBlock on the computer.
+  when: >
+    To watch what an uploaded robot is doing. Once a program is uploaded it is on
+    its own, and this is the thread back to the screen.
+  example: |
+    when button  A  pressed
+      send upload mode message  started
+  caption: >
+    The robot tells the computer it has begun.
+  see: [cyberpi_upload_message.BLOCK_1551748500023]
+
+cyberpi_upload_message.BLOCK_1551748500023:
+  what: >
+    Sends a named message with a value attached.
+  when: >
+    For sending readings out of an uploaded program — logging a sensor while the
+    robot runs untethered.
+  example: |
+    when button  A  pressed
+      forever
+        send upload mode message  dist  with value  (ultrasonic 2  1  distance to an object (cm))
+        wait  0.5  seconds
+  caption: >
+    A live feed of the distance sensor, twice a second.
+  see: [cyberpi_upload_message.BLOCK_1551748721826]
+
+cyberpi_upload_message.BLOCK_1551748632732:
+  what: >
+    A hat block that runs when a named upload-mode message arrives.
+  when: >
+    On the receiving side of the link.
+  example: |
+    when receiving upload mode message  go
+      moves forward  20  cm until done
+  caption: >
+    Act on a message from the other side.
+  see: [cyberpi_upload_message.BLOCK_1551748322055]
+
+cyberpi_upload_message.BLOCK_1551748721826:
+  what: >
+    Reports the value carried by the last message of that name.
+  when: >
+    Straight after the matching hat, to read what came with it.
+  example: |
+    when receiving upload mode message  speed
+      moves forward at  (upload mode message  speed  value)  RPM
+  caption: >
+    The message carried the speed to use.
+  see: [cyberpi_upload_message.BLOCK_1551748500023]
+
+# -------------------------------------------------------------------------- AI
+cyberpi.cyberpi_wifi_set:
+  what: >
+    Joins a Wi-Fi network, given its name and password. The script waits while it
+    connects.
+  when: >
+    First, before anything that needs the internet. Every AI and IoT block —
+    speaking, listening, translating, the weather — needs a network first.
+  example: |
+    when CyberPi starts up
+      connect to Wi-Fi  ClassroomWiFi  password  letmein
+      wait until  network connected?
+      play  hi
+  caption: >
+    Connect, wait until it really is connected, then say so.
+  watch: >
+    Upload mode only. A school network that needs a browser login page will not
+    work — the robot has no browser.
+  see: [cyberpi.cyberpi_wifi_is_connect]
+
+cyberpi.cyberpi_wifi_is_connect:
+  what: >
+    Reports true once the robot is on a network.
+  when: >
+    Straight after connecting, to wait properly instead of guessing a number of
+    seconds.
+  example: |
+    when CyberPi starts up
+      connect to Wi-Fi  ClassroomWiFi  password  letmein
+      wait until  network connected?
+      show label 1  online  at center of screen  by small pixel
+  caption: >
+    Wait for the real thing rather than a hopeful delay.
+  see: [cyberpi.cyberpi_wifi_set]
+
+cyberpi.cyberpi_wifi_reconnect:
+  what: >
+    Joins the last network again without your having to give the name and password
+    a second time.
+  when: >
+    After a drop-out, or at the start of a program that has connected before.
+  example: |
+    when button  B  pressed
+      connect to Wi-Fi again
+  caption: >
+    A reconnect button for when the network drops.
+  see: [cyberpi.cyberpi_wifi_set]
+
+cyberpi.cyberpi_wifi_disconnect:
+  what: >
+    Leaves the network.
+  when: >
+    To save battery, or to prove that something works without the internet.
+  example: |
+    when button  B  pressed
+      disconnect from Wi-Fi
+  caption: >
+    Off the network.
+  see: [cyberpi.cyberpi_wifi_reconnect]
+
+cyberpi.cyberpi_speak_with_some_language_3:
+  what: >
+    Reads text aloud through the speaker, using a voice generated in the cloud.
+  when: >
+    When the robot should say something a screen cannot — a result across a noisy
+    room, a greeting, an answer to a question it was asked.
+  example: |
+    when button  A  pressed
+      connect to Wi-Fi  ClassroomWiFi  password  letmein
+      wait until  network connected?
+      speak  auto   hello everyone
+  caption: >
+    Connect first, then talk.
+  watch: >
+    Needs Wi-Fi, an mBlock account signed in, AND Upload mode. If the block looks
+    greyed out or hatched in the editor, one of those three is missing.
+  see: [cyberpi.cyberpi_speech_recognition_with_time_3]
+
+cyberpi.cyberpi_speech_recognition_with_time_3:
+  what: >
+    Listens through the microphone for a number of seconds and sends what it hears
+    to the cloud to be turned into text. The script waits while it listens.
+  when: >
+    To take a spoken command. Pair it with the result block, which holds what came
+    back.
+  example: |
+    when button  A  pressed
+      recognize  (1) Chinese  3  secs
+      print  (speech recognition result)
+  caption: >
+    Listen for three seconds, then show what was heard.
+  watch: >
+    Choose the language on the block. Same three requirements as speaking: Wi-Fi,
+    signed in, Upload mode.
+  see: [cyberpi.cyberpi_speech_recognition_result]
+
+cyberpi.cyberpi_speech_recognition_result:
+  what: >
+    Reports the text that came back from the last listen.
+  when: >
+    Straight after recognising, to test what was said.
+  example: |
+    when button  A  pressed
+      recognize  (1) Chinese  3  secs
+      if  <(speech recognition result) contains  go  ?>  then
+        moves forward  20  cm until done
+  caption: >
+    Say the word and the robot moves. "contains" is kinder than "equals" here,
+    because people say more than the one word.
+  watch: >
+    It holds the LAST result. Read it before listening again.
+  see: [cyberpi.cyberpi_speech_recognition_with_time_3, operator_contains]
+
+cyberpi.cyberpi_translate_to_some_language_2:
+  what: >
+    Sends text to the cloud and reports it back in another language.
+  when: >
+    For a bilingual robot — hear a command in one language, answer in another.
+  example: |
+    when button  A  pressed
+      speak  auto   (translate  hello  into  English )
+  caption: >
+    Translate, then say the translation out loud.
+  see: [cyberpi.cyberpi_speak_with_some_language_3]
+
+# ------------------------------------------------------------------------- IoT
+cyberpi.cyberpi_set_cloud_broadcast:
+  what: >
+    Sends a named message over the internet to any robot signed in to the same
+    account.
+  when: >
+    When the robots are not in the same room. LAN broadcast is for robots side by
+    side; this one goes anywhere with a network.
+  example: |
+    when button  A  pressed
+      send user cloud broadcast  go
+  caption: >
+    A message that can cross a building.
+  watch: >
+    Wi-Fi, a signed-in account, and Upload mode.
+  see: [cyberpi.cyberpi_when_cloud_broadcast, cyberpi.cyberpi_set_wifi_broadcast]
+
+cyberpi.cyberpi_set_cloud_broadcast_with_value:
+  what: >
+    Sends a named cloud message with a value attached.
+  when: >
+    To send a reading, not just a signal.
+  example: |
+    when button  A  pressed
+      send user cloud broadcast  temp  with value  21
+  caption: >
+    The message carries its number with it.
+  see: [cyberpi.cyberpi_cloud_broadcast_get_value]
+
+cyberpi.cyberpi_when_cloud_broadcast:
+  what: >
+    A hat block that runs when a named cloud message arrives.
+  when: >
+    On the receiving robot.
+  example: |
+    when receiving user cloud broadcast  go
+      play  hi
+  caption: >
+    The robot answers a message from somewhere else entirely.
+  see: [cyberpi.cyberpi_set_cloud_broadcast]
+
+cyberpi.cyberpi_cloud_broadcast_get_value:
+  what: >
+    Reports the value that came with the last cloud message of that name.
+  when: >
+    Straight after the matching hat.
+  example: |
+    when receiving user cloud broadcast  temp
+      print  (user cloud broadcast  temp  value received)
+  caption: >
+    Show the number that arrived.
+  see: [cyberpi.cyberpi_set_cloud_broadcast_with_value]
+
+cyberpi.cyberpi_get_weather_from_internet:
+  what: >
+    Reports today's temperature for a place you name, fetched from the internet.
+  when: >
+    For a weather station project, or any program whose behaviour should depend on
+    the world outside the classroom.
+  watch: >
+    The place goes in the block's first slot, before the dropdown, so there is no
+    plain-text way to write this one out — build it in the editor. Needs Wi-Fi and
+    Upload mode.
+  see: [cyberpi.cyberpi_get_air_quality_from_internet, cyberpi.cyberpi_wifi_set]
+
+cyberpi.cyberpi_get_air_quality_from_internet:
+  what: >
+    Reports an air-quality figure — the AQI index, or the PM2.5 and PM10 particle
+    counts — for a named place.
+  when: >
+    For environmental projects, and for comparing the reading outside with one
+    taken in the room.
+  example: |
+    when button  A  pressed
+      print  (air quality  Phnom Penh  AQI)
+  caption: >
+    Today's air quality, on the robot's screen.
+  watch: >
+    Wi-Fi and Upload mode.
+  see: [cyberpi.cyberpi_get_weather_from_internet]
+
+cyberpi.cyberpi_get_sun_time_from_internet:
+  what: >
+    Reports the sunrise or sunset time for a named place.
+  when: >
+    For a robot that should behave differently after dark.
+  watch: >
+    Like the weather block, the place comes first in the block, so this one has to
+    be assembled in the editor rather than written out. Needs Wi-Fi and Upload
+    mode.
+  see: [cyberpi.cyberpi_get_weather_from_internet]
+
+cyberpi.cyberpi_cloud_get_time_data:
+  what: >
+    Fetches the current date and time for a time zone from the internet.
+  when: >
+    Before reading any of the separate parts. The robot has no clock of its own
+    that survives being switched off.
+  example: |
+    when button  A  pressed
+      print  ((0) UTC 's date and time)
+  caption: >
+    The real date and time, from the network.
+  see: [cyberpi.cyberpi_cloud_read_data]
+
+cyberpi.cyberpi_cloud_read_data:
+  what: >
+    Reports one part of the time that was last fetched — the year, the month, the
+    date, the hour.
+  when: >
+    After fetching, to use one piece rather than the whole string.
+  example: |
+    when button  A  pressed
+      print  (year  of date and time)
+  caption: >
+    Just the year, out of the whole timestamp.
+  see: [cyberpi.cyberpi_cloud_get_time_data]
+
+cyberpi.BLOCK_1610527804319:
+  what: >
+    Reports one part of the current time for a chosen time zone, in one block.
+  when: >
+    When you want a single value and do not need the whole timestamp.
+  example: |
+    when button  A  pressed
+      print  ((0) UTC 's  year)
+  caption: >
+    One number, straight from the network clock.
+  see: [cyberpi.cyberpi_cloud_read_data]
+
+# ----------------------------------------------------------------- Magic emoji
+cyberpi_ai_emotion.BLOCK_1716774550298:
+  what: >
+    Shows a picture on the CyberPi screen that was generated by the AI Emoji
+    Workshop — the button at the top of this drawer, which asks the cloud to draw
+    faces from a description.
+  when: >
+    To give the robot an expression without drawing one yourself. The picture goes
+    in the slot on the block; the workshop is where you make it.
+  example: |
+    when button  A  pressed
+      Set AI Emojis to
+  caption: >
+    Whichever generated face you dropped into the slot appears on the screen.
+  watch: >
+    The workshop needs Wi-Fi and a signed-in account. The block itself only shows
+    a picture that has already been made.
+  see: [cyberpi_ai_emotion.show_dynamic_face]
+
+cyberpi_ai_emotion.BLOCK_1716776195766:
+  what: >
+    Shows a face you drew yourself, pixel by pixel, on the little grid built into
+    the block.
+  when: >
+    When you want a specific expression and no internet. Drawing sixteen by
+    sixteen pixels is also a good lesson in how little a screen needs to say
+    something.
+  example: |
+    when button  A  pressed
+      Set DIY Emojis to
+  caption: >
+    Your own drawing, straight on the robot's face.
+  see: [cyberpi_ai_emotion.BLOCK_1716774550298]
+
+cyberpi_ai_emotion.show_dynamic_face:
+  what: >
+    Plays one of eight ready-made animated faces — cute, unhappy, sleepy,
+    surprised, cool, angry, happy, in love.
+  when: >
+    The quickest way to give the robot a mood. No drawing and no network needed.
+  example: |
+    when button  A  pressed
+      Set Animojis to  Happy
+  caption: >
+    The robot grins.
+  see: [cyberpi_ai_emotion.BLOCK_1716776195766]
+
+# -------------------------------------------------------- mBot2 Extension Port
+mbot2.mbot2_servo_set_angle:
+  ide_image: assets/parts/servopack.png
+  ide_image_alt: Servo motor assembly used by the robot arm
+  ide_image_medium: true
+  ide_image_caption: >
+    The arm servo: a geared motor, position sensor and controller in one housing.
+  what: >
+    A servo is a small geared motor with a built-in position sensor and controller.
+    Instead of being told how strongly to spin, it is given a target angle; it
+    moves there, checks its position and applies force to hold that position.
+    This block sends that angle to a servo on one of the four extension ports.
+  when: >
+    This is the block for anything that must be in a POSITION rather than moving —
+    a gripper open or shut, an arm raised or lowered, a sensor aimed. Unlike a
+    plain DC motor, a standard servo moves through a limited angle range rather
+    than spinning continuously.
+  example: |
+    when button  A  pressed
+      set servo  (1) S1  angle to  90  °
+      wait  1  seconds
+      set servo  (1) S1  angle to  0  °
+  caption: >
+    Open the gripper, pause, close it again.
+  watch: >
+    The servo will strain against a stop if you ask for an angle its build cannot
+    reach. Find the two angles that mean open and shut before writing the program
+    around them.
+  see: [mbot2.mbot2_servo_get_angle, mbot2.mbot2_servo_add_angle]
+
+mbot2.mbot2_servo_add_angle:
+  what: >
+    Moves a servo by a number of degrees from where it is now, rather than to a
+    fixed angle.
+  when: >
+    For nudging under someone's control — a gripper that closes a little more each
+    time a button is held.
+  example: |
+    when button  A  pressed
+      forever
+        if  button  L1  pressed  then
+          increase servo  (1) S1  angle by  5  °
+  caption: >
+    Hold the button and the arm creeps up.
+  watch: >
+    Nudging has no memory of limits. Hold the button long enough and it will push
+    past what the build allows.
+  see: [mbot2.mbot2_servo_set_angle]
+
+mbot2.mbot2_servo_get_angle:
+  what: >
+    Reports the angle a servo is currently set to.
+  when: >
+    To show the position on screen, or to work out the next nudge from the current
+    one.
+  example: |
+    when button  A  pressed
+      print  (servo  (1) S1  current angle (°))
+  caption: >
+    Where is the arm right now?
+  see: [mbot2.mbot2_servo_set_angle]
+
+mbot2.mbot2_servo_driver:
+  what: >
+    Sets all four servos to their own angles in one block.
+  when: >
+    When several joints must move together — a whole arm to a pose, rather than
+    one joint at a time.
+  example: |
+    when button  A  pressed
+      set servo angle S1  90  ° , S2  45  ° , S3  0  °, S4  0  °
+  caption: >
+    A whole pose in one line.
+  see: [mbot2.mbot2_servo_set_angle]
+
+mbot2.mbot2_servo_release_angle:
+  what: >
+    Lets a servo go limp, so it stops holding its angle and can be moved by hand.
+  when: >
+    To save power and to stop a servo buzzing while it fights a load it cannot
+    hold. Also the way to pose an arm by hand before recording where it went.
+  example: |
+    when button  B  pressed
+      servo  all  release angle
+  caption: >
+    Everything goes slack and can be moved by hand.
+  see: [mbot2.mbot2_servo_set_angle]
+
+mbot2.mbot2_servo_reset_angle_to_zero:
+  what: >
+    Treats the servo's current position as its new zero.
+  when: >
+    After assembling something, so the angles in your program are measured from
+    where the build actually starts.
+  example: |
+    when CyberPi starts up
+      servo  all  back to zero position
+  caption: >
+    Wherever the arm is now, call that zero.
+  see: [mbot2.mbot2_servo_get_angle]
+
+mbot2.mbot2_motor_set_power_cw:
+  what: >
+    Runs a plain DC motor on an extension port with a chosen amount of electrical
+    drive: 0% is off, 50% is half power and 100% is full power. This controls how
+    strongly the motor is driven, not an exact speed or angle. A negative number
+    applies the power in the opposite direction.
+  when: >
+    For an added motor that just has to spin — a fan, a roller, a conveyor. These
+    are not the wheel motors, which have their own blocks in the Chassis drawer.
+    The same percentage can produce different speeds as the battery, load or
+    friction changes.
+  example: |
+    when button  A  pressed
+      motor  (1) M1  rotates at  50  % power
+      wait  2  seconds
+      stop motor  (1) M1
+  caption: >
+    The extra motor receives half power for two seconds, then stops.
+  watch: >
+    There is no angle slot because a plain DC motor has no encoder: it cannot
+    measure how far it has turned or stop itself at a target angle. It keeps its
+    last power command until another block changes or stops it. Use a servo to
+    move to a particular position, or an encoder motor to measure rotation.
+  see: [mbot2.mbot2_motor_stop_power, mbot2.mbot2_encoder_motor_set]
+
+mbot2.mbot2_motor_add_power_cw:
+  what: >
+    Changes an extension motor's power by a step instead of setting it outright.
+  when: >
+    For ramping a motor up gently rather than starting it with a jolt.
+  example: |
+    when button  A  pressed
+      repeat  10
+        motor  (1) M1  rotates with power up  10  %
+        wait  0.1  seconds
+  caption: >
+    A one-second run-up to full power.
+  see: [mbot2.mbot2_motor_set_power_cw]
+
+mbot2.mbot2_motor_driver_power_cw:
+  what: >
+    Sets both extension motors' power in one block.
+  when: >
+    When two added motors work as a pair.
+  example: |
+    when button  A  pressed
+      set motor M1 power to  50  % , motor M2 power to  50  %
+  caption: >
+    Both extra motors together.
+  see: [mbot2.mbot2_motor_set_power_cw]
+
+mbot2.mbot2_motor_get_power_cw:
+  what: >
+    Reports the power an extension motor is currently set to.
+  when: >
+    To display or to base the next change on.
+  example: |
+    when button  A  pressed
+      print  (motor  (1) M1  rotation output power(%))
+  caption: >
+    Read the current power setting.
+  see: [mbot2.mbot2_motor_set_power_cw]
+
+mbot2.mbot2_motor_stop_power:
+  what: >
+    Stops an extension motor, or all of them.
+  when: >
+    At the end of anything that started one. Like the wheel motors, they keep
+    their last order.
+  example: |
+    when button  B  pressed
+      stop motor  all
+  caption: >
+    Everything on the extension ports stops.
+  see: [mbot2.mbot2_motor_set_power_cw]
+
+mbot2.mbot2_led_on_with_rgb:
+  what: >
+    Lights one LED, or all of them, on a compatible three-wire programmable RGB
+    strip connected through the mBot2 Shield or an mBuild LED Driver. This is not
+    an ordinary single-colour strip or four-wire analogue RGB tape; the connector,
+    voltage and control type must match. Makeblock sells the strip and driver as
+    add-on hardware, but availability varies and the parts may need to be bought
+    separately. They are not available in this classroom, so this block is
+    outside the course and is included here only as palette reference.
+  when: >
+    When five lights on the board are not enough or not in the right place — a
+    strip along an arm, or round the outside of a build.
+  example: |
+    when button  A  pressed
+      LED strip  all  LED  all  displays R:  0  G:  255  B:  0
+  caption: >
+    The whole added strip goes green.
+  watch: >
+    This is the STRIP on an extension port, not the ring on the CyberPi. Those
+    have their own blocks in the LED drawer. For every colour signal in this
+    course, use the CyberPi's five built-in LEDs instead; no extra purchase is
+    needed.
+  see: [mbot2.mbot2_led_on_with_color, cyberpi.cyberpi_led_show_single_with_rgb_2]
+
+mbot2.mbot2_led_on_with_color:
+  ide_image: assets/ui/mbuild-led-strip.png
+  ide_image_alt: Real mBot2 connected to an illuminated mBuild LED strip
+  ide_image_wide: true
+  ide_image_caption: >
+    A real mBuild LED strip illuminated beside the mBot2. This is separate from
+    the five built-in LEDs on the CyberPi.
+  ide_image_source: https://support.makeblock.com/hc/en-us/articles/15852336207383-17-How-to-Use-the-mBuild-LED-Strip
+  what: >
+    The same, with the colour picked from a swatch instead of mixed from numbers.
+  when: >
+    When you just want a colour.
+  example: |
+    when button  A  pressed
+      LED strip  all  LED  all  displays color
+  caption: >
+    Pick the colour on the block.
+  see: [mbot2.mbot2_led_on_with_rgb]
+
+mbot2.mbot2_led_show:
+  what: >
+    Lights the first few LEDs of a strip, like a bar going up.
+  when: >
+    For a level meter — battery, speed, distance — where the number of lit lights
+    IS the reading.
+  example: |
+    when button  A  pressed
+      forever
+        LED strip  all  lights up  3
+  caption: >
+    Three lights on: a reading you can see from across the room.
+  see: [mbot2.mbot2_led_on_with_rgb]
+
+mbot2.mbot2_led_move_with_cycle:
+  what: >
+    Shifts the pattern along the strip, wrapping round at the end.
+  when: >
+    To animate a strip — a dot running along an arm, a chase sequence.
+  example: |
+    when button  A  pressed
+      forever
+        LED strip  all  rolls  1  LEDs with cycle
+        wait  0.1  seconds
+  caption: >
+    The pattern travels along and comes back round.
+  see: [mbot2.mbot2_led_show]
+
+mbot2.mbot2_led_off:
+  what: >
+    Switches off one LED on the strip, or the whole strip.
+  when: >
+    At the end of a program.
+  example: |
+    when button  B  pressed
+      LED strip  all  LED  all  lights off
+  caption: >
+    Strip off.
+  see: [mbot2.mbot2_led_on_with_rgb]
+
+mbot2.mbot2_led_set_brightness:
+  what: >
+    Sets the strip's brightness as a percentage.
+  when: >
+    Once at the start. A long strip at full brightness is both dazzling and a real
+    drain on the battery.
+  example: |
+    when CyberPi starts up
+      set LED strip  all  brightness to  40  %
+  caption: >
+    Bright enough to see, kind to the battery.
+  see: [mbot2.mbot2_led_add_brightness]
+
+mbot2.mbot2_led_add_brightness:
+  what: >
+    Changes the strip's brightness by a step.
+  when: >
+    For fades.
+  example: |
+    when button  A  pressed
+      repeat  5
+        increase LED strip  all  brightness by  20  %
+        wait  0.1  seconds
+  caption: >
+    The strip fades up.
+  see: [mbot2.mbot2_led_set_brightness]
+
+mbot2.mbot2_led_get_brightness:
+  what: >
+    Reports the strip's current brightness.
+  when: >
+    To display the setting or continue a fade from it.
+  example: |
+    when button  A  pressed
+      print  (LED strip  (1) S1  brightness(%))
+  caption: >
+    Read the brightness back.
+  see: [mbot2.mbot2_led_set_brightness]
+
+mbot2.mbot2_pin_write_digtial:
+  what: >
+    Drives the selected S1/S2 signal contact to one of two output levels. Writing
+    0 holds it low, near ground; writing 1 drives it high, near the positive logic
+    supply. Unlike digital read, which observes an incoming signal, digital write
+    sends a signal out.
+  when: >
+    For simple electronics of your own: a buzzer, a relay, a single LED wired to
+    the port.
+  example: |
+    when button  A  pressed
+      digital write to pin  (1) S1  1
+    when button  B  pressed
+      digital write to pin  (1) S1  0
+  caption: >
+    Real case: an external warning LED turns on with A and off with B. The LED
+    needs the correct series resistor (and a driver if its current is too high).
+  watch: >
+    A signal pin can control a compatible low-current circuit; it is not a power
+    outlet for a motor or other heavy load. Check the part's voltage, current and
+    wiring requirements before connecting it.
+  see: [mbot2.mbot2_pin_read_digtial]
+
+mbot2.mbot2_pin_read_digtial:
+  what: >
+    Reports whether a pin is currently reading on or off.
+  when: >
+    For a switch or button of your own wired to a port.
+  example: |
+    when button  A  pressed
+      forever
+        print  (digital read pin  (1) S1)
+  caption: >
+    Watch the state of a home-made switch.
+  see: [mbot2.mbot2_pin_is_high]
+
+mbot2.mbot2_pin_is_high:
+  ide_image: assets/ui/mbot2-shield-ports.png
+  ide_image_alt: Labeled mBot2 Shield showing multifunction ports S1 and S2
+  ide_image_wide: true
+  ide_image_caption: >
+    S1 and S2 are two multifunction connectors on the mBot2 Shield. “(1) S1”
+    selects connector S1 and “(2) S2” selects connector S2; (1) and (2) are menu
+    identifiers, not physical pin numbers.
+  ide_image_source: https://support.makeblock.com/hc/en-us/articles/12966349331991-A-Beginner-s-Guide-to-mBot-Neo-mBot2
+  what: >
+    Reads the voltage arriving on the signal contact inside connector S1 or S2.
+    Each connector also has separate power and ground contacts, but this block
+    does not read those. It converts the signal voltage into a yes-or-no answer:
+    a high level reports true and a low level reports false. The connector is not
+    a sensor by itself; an external switch, sensor or circuit must supply the
+    signal.
+  when: >
+    With custom electronics that provide a digital high-or-low output, inside an
+    if or a wait. Connect the part's power, ground and signal correctly before
+    reading it; this course does not ask students to build that circuit.
+  example: |
+    when button  A  pressed
+      wait until  pin  (1) S1  on high level?
+      play  hi
+  caption: >
+    Signal flow: external switch or sensor → S1 signal contact → high/low answer.
+    With nothing connected, the input may be unstable and should not be trusted.
+  watch: >
+    In a common pull-down switch circuit, an open switch leaves the signal near
+    ground, so it is low/false; closing the switch connects the signal to the
+    port's positive supply, so it is high/true. A digital sensor can do the same:
+    for example, high when it detects an object and low when it does not. Some
+    devices are active-low and deliberately reverse those meanings, so always
+    check the device's wiring or documentation. An unconnected signal can float
+    between states and is not a meaningful reading.
+  see: [mbot2.mbot2_pin_read_digtial]
+
+mbot2.mbot2_pin_use_5V_read_digtial:
+  what: >
+    Reports the actual voltage on a pin, rather than just on or off.
+  when: >
+    For sensors that answer with a voltage instead of a switch — a light-dependent
+    resistor, a potentiometer, a home-made divider.
+  example: |
+    when button  A  pressed
+      forever
+        line chart, add data  (voltage read pin  (1) S1  (V))
+  caption: >
+    A home-made sensor, drawn as a graph.
+  see: [mbot2.mbot2_pin_read_digtial]
+
+mbot2.mbot2_pin_set_pwm_with_duty_and_frquency:
+  what: >
+    “Analog write” here is PWM, not a continuously adjustable analog voltage. The
+    pin still outputs only high or low, but switches rapidly between them. Duty
+    cycle is the percentage of each cycle spent high; frequency is how many cycles
+    occur per second. At 50% duty cycle, the signal is high half the time and low
+    half the time.
+  when: >
+    To dim a plain LED or run a small motor at part speed from a pin that can only
+    be on or off. Half-on, thousands of times a second, looks like half brightness.
+  example: |
+    when button  A  pressed
+      analog write to pin  (1) S1  , duty cycle  20  %, frequency  2000  Hz
+    when button  B  pressed
+      analog write to pin  (1) S1  , duty cycle  100  %, frequency  2000  Hz
+  caption: >
+    Real case: a night-light LED is dim at 20% after A and fully bright at 100%
+    after B. Use the correct resistor and output-driver circuit for the load.
+  see: [mbot2.mbot2_pin_write_digtial]
+
+# ------------------------------------------------------------------- Sprites
+# The CyberPi's screen can hold named pictures — sprites — that you move about
+# independently, rather than printing lines. Each block names the sprite it acts
+# on, so several can be on screen at once.
+cyberpi_sprite.cyberpi_sprite_draw_text:
+  what: >
+    Makes a named sprite out of a piece of text and puts it on the screen. From
+    then on, other sprite blocks can move, colour and hide it by that name.
+  when: >
+    When a word has to move about rather than sit in a fixed slot — a score that
+    slides in, a label that follows something.
+  example: |
+    when button  A  pressed
+      set sprite  score  show to  0
+      sprite  score  show goes to x  40  y  20
+  caption: >
+    A named piece of text, put exactly where you want it.
+  see: [cyberpi_sprite.cyberpi_sprite_move_to, cyberpi.cyberpi_display_label_show_at_somewhere_with_size]
+
+cyberpi_sprite.cyberpi_sprite_draw_pixel_with_matrix16:
+  what: >
+    Makes a sprite out of a picture you draw yourself on a small grid on the
+    block.
+  when: >
+    For a face, an arrow, an icon of your own — anything the built-in pictures do
+    not cover.
+  example: |
+    when button  A  pressed
+      set sprite  face  show to
+  caption: >
+    Draw it on the block; it appears on the screen.
+  see: [cyberpi_sprite.cyberpi_sprite_draw_pixel_with_icon]
+
+cyberpi_sprite.cyberpi_sprite_draw_pixel_with_icon:
+  what: >
+    Makes a sprite from one of the CyberPi's built-in icons.
+  when: >
+    When a ready-made symbol will do and you would rather not draw one.
+  example: |
+    when button  A  pressed
+      set sprite  icon  show to  music
+  caption: >
+    A built-in symbol, no drawing needed.
+  see: [cyberpi_sprite.cyberpi_sprite_draw_pixel_with_matrix16]
+
+cyberpi_sprite.cyberpi_sprite_draw_QR:
+  what: >
+    Makes a sprite that is a QR code containing whatever text you give it.
+  when: >
+    To hand something to a phone — a link, a robot's name, a result. It turns the
+    robot's screen into something a visitor can scan.
+  example: |
+    when button  A  pressed
+      set sprite  code  show to QR code  hello
+  caption: >
+    A scannable code on the robot's face.
+  see: [cyberpi_sprite.cyberpi_sprite_draw_text]
+
+cyberpi_sprite.cyberpi_sprite_move_to:
+  what: >
+    Puts a sprite at an exact x and y position on the screen.
+  when: >
+    For laying a screen out deliberately, and for showing a value as a position —
+    a marker that moves as a reading changes.
+  example: |
+    when button  A  pressed
+      forever
+        sprite  dot  show goes to x  (ultrasonic 2  1  distance to an object (cm))  y  30
+  caption: >
+    A dot that slides across the screen as the wall gets nearer.
+  see: [cyberpi_sprite.cyberpi_sprite_move_x_and_y]
+
+cyberpi_sprite.cyberpi_sprite_move_x_and_y:
+  what: >
+    Moves a sprite a number of pixels from where it is now, in a direction you
+    choose.
+  when: >
+    For animation by steps, where each move follows the last.
+  example: |
+    when button  A  pressed
+      repeat  10
+        sprite  dot  show moves  right (x)  5  pixels
+        wait  0.1  seconds
+  caption: >
+    The sprite walks across the screen.
+  see: [cyberpi_sprite.cyberpi_sprite_move_to]
+
+cyberpi_sprite.cyberpi_sprite_move_random:
+  what: >
+    Jumps a sprite to a random place on the screen.
+  when: >
+    For games — a target that appears somewhere new each round.
+  example: |
+    when button  A  pressed
+      sprite  target  show goes to random position
+  caption: >
+    A new place every press.
+  see: [operator_random]
+
+cyberpi_sprite.cyberpi_sprite_rotate:
+  what: >
+    Turns a sprite by a number of degrees from its current direction.
+  when: >
+    For spinning something, and for a needle that turns as a reading changes.
+  example: |
+    when button  A  pressed
+      forever
+        sprite  hand  show rotates  15  ° clockwise
+        wait  0.1  seconds
+  caption: >
+    A hand sweeping round like a clock.
+  see: [cyberpi_sprite.cyberpi_sprite_rotate_to]
+
+cyberpi_sprite.cyberpi_sprite_rotate_to:
+  what: >
+    Points a sprite in an exact direction rather than turning it by a step.
+  when: >
+    For a compass or a dial, where the angle IS the value.
+  example: |
+    when button  A  pressed
+      forever
+        sprite  needle  show points in direction  (rotated angle around  z  axis (°))  °
+  caption: >
+    A needle on screen that follows how far the robot has turned.
+  see: [cyberpi_sprite.cyberpi_sprite_rotate]
+
+cyberpi_sprite.cyberpi_sprite_set_size:
+  what: >
+    Scales a sprite, as a percentage of its normal size.
+  when: >
+    To make something grow or shrink — a bar that fills, an alert that swells.
+  example: |
+    when button  A  pressed
+      set sprite  alert  show size to  200  %
+  caption: >
+    Twice as big, to catch the eye.
+  see: [cyberpi_sprite.cyberpi_sprite_get_x_y_rotation_size_align]
+
+cyberpi_sprite.cyberpi_sprite_set_color_with_color:
+  what: >
+    Recolours a sprite using a colour you pick.
+  when: >
+    To change what a sprite means without redrawing it — the same shape, red for
+    danger and green for clear.
+  example: |
+    when button  A  pressed
+      set sprite  dot  show color to
+  caption: >
+    Pick a colour on the block.
+  see: [cyberpi_sprite.cyberpi_sprite_set_color_with_rgb]
+
+cyberpi_sprite.cyberpi_sprite_set_color_with_rgb:
+  what: >
+    Recolours a sprite from red, green and blue numbers.
+  when: >
+    When the colour must be worked out — redder as a reading rises.
+  example: |
+    when button  A  pressed
+      set sprite  dot  show color to R:  255  G:  0  B:  0
+  caption: >
+    A colour a program can compute.
+  see: [cyberpi_sprite.cyberpi_sprite_set_color_with_color]
+
+cyberpi_sprite.cyberpi_sprite_close_color:
+  what: >
+    Puts a sprite back to the colour it was drawn in.
+  when: >
+    After a temporary highlight.
+  example: |
+    when button  B  pressed
+      reset sprite  dot  show to default color
+  caption: >
+    Back to normal.
+  see: [cyberpi_sprite.cyberpi_sprite_set_color_with_color]
+
+cyberpi_sprite.cyberpi_sprite_show_and_hide:
+  what: >
+    Shows or hides a sprite without deleting it. A hidden sprite keeps its
+    position and can come back.
+  when: >
+    For blinking, and for screens that change — hide this group, show that one.
+  example: |
+    when button  A  pressed
+      forever
+        show sprite  dot
+        wait  0.5  seconds
+        hide sprite  dot
+        wait  0.5  seconds
+  caption: >
+    A blinking dot.
+  see: [cyberpi_sprite.cyberpi_sprite_delete]
+
+cyberpi_sprite.cyberpi_sprite_delete:
+  what: >
+    Removes a sprite for good.
+  when: >
+    When it will not be needed again. Hiding is better if it might.
+  example: |
+    when button  B  pressed
+      delete sprite  dot  show
+  caption: >
+    Gone for good.
+  see: [cyberpi_sprite.cyberpi_sprite_show_and_hide]
+
+cyberpi_sprite.cyberpi_mirror_with_axis:
+  what: >
+    Flips a sprite left-to-right or top-to-bottom.
+  when: >
+    To reuse one drawing facing both ways — one arrow, pointing either direction.
+  example: |
+    when button  A  pressed
+      sprite  arrow  show flips  left-right
+  caption: >
+    The same arrow, now pointing the other way.
+  see: [cyberpi_sprite.cyberpi_sprite_rotate]
+
+cyberpi_sprite.cyberpi_sprite_set_align:
+  what: >
+    Chooses which part of a sprite counts as its position — its middle, a corner,
+    an edge.
+  when: >
+    When things must line up. Text anchored at its left edge starts in the same
+    place however long it gets; text anchored at its middle shifts as it grows.
+  example: |
+    when button  A  pressed
+      set anchor point of sprite  score  show to  top left
+  caption: >
+    Anchored at the corner, so it grows rightwards instead of spreading both ways.
+  see: [cyberpi_sprite.cyberpi_sprite_move_to]
+
+cyberpi_sprite.cyberpi_sprite_z_max_and_min:
+  what: >
+    Sends a sprite right to the front or right to the back of the pile.
+  when: >
+    When sprites overlap and one must be readable over the others.
+  example: |
+    when button  A  pressed
+      sprite  alert  show goes to  front  layer
+  caption: >
+    The warning sits on top of everything else.
+  see: [cyberpi_sprite.cyberpi_sprite_z_up_and_down]
+
+cyberpi_sprite.cyberpi_sprite_z_up_and_down:
+  what: >
+    Moves a sprite one step up or down the pile.
+  when: >
+    For finer control than front-or-back when three or more sprites overlap.
+  example: |
+    when button  A  pressed
+      sprite  dot  show goes  forward  one layer
+  caption: >
+    One step nearer the front.
+  see: [cyberpi_sprite.cyberpi_sprite_z_max_and_min]
+
+cyberpi_sprite.cyberpi_sprite_is_touch_other_sprite:
+  what: >
+    Reports true when two sprites are overlapping.
+  when: >
+    For games on the robot's own screen — catching, dodging, collecting.
+  example: |
+    when button  A  pressed
+      forever
+        if  <sprite  dot  show touches sprite  target  ?>  then
+          play  yeah
+  caption: >
+    A hit is worth a noise.
+  see: [cyberpi_sprite.cyberpi_sprite_is_touch_edge]
+
+cyberpi_sprite.cyberpi_sprite_is_touch_edge:
+  what: >
+    Reports true when a sprite has reached the edge of the screen.
+  when: >
+    To bounce something back, or to stop it disappearing.
+  example: |
+    when button  A  pressed
+      forever
+        sprite  dot  show moves  right (x)  5  pixels
+        if  <sprite  dot  show on edge?>  then
+          sprite  dot  show goes to x  0  y  0
+  caption: >
+    It walks to the edge and starts again from the middle.
+  see: [cyberpi_sprite.cyberpi_sprite_is_touch_other_sprite]
+
+cyberpi_sprite.cyberpi_sprite_get_x_y_rotation_size_align:
+  what: >
+    Reports one fact about a sprite — its x, its y, its direction, its size.
+  when: >
+    When a movement must be worked out from where the sprite already is.
+  example: |
+    when button  A  pressed
+      print  (x position  of sprite  dot  show)
+  caption: >
+    Where has it got to?
+  see: [cyberpi_sprite.cyberpi_sprite_move_to]
+
+cyberpi_sprite.cyberpi_sprite_background_fill_with_color:
+  what: >
+    Fills the whole screen behind the sprites with a colour you pick.
+  when: >
+    To set a mood or make a warning unmissable — a whole red screen says more than
+    a red word.
+  example: |
+    when button  A  pressed
+      set backdrop to
+  caption: >
+    The whole screen changes colour.
+  see: [cyberpi_sprite.cyberpi_sprite_background_fill_with_rgb]
+
+cyberpi_sprite.cyberpi_sprite_background_fill_with_rgb:
+  what: >
+    Fills the screen behind the sprites with a colour mixed from numbers.
+  when: >
+    When the background colour has to be computed — a screen that reddens as
+    something gets worse.
+  example: |
+    when button  A  pressed
+      set backdrop to R:  255  G:  0  B:  0
+  caption: >
+    A screen a program can colour by itself.
+  see: [cyberpi_sprite.cyberpi_sprite_background_fill_with_color]
+
+cyberpi_sprite.cyberpi_screen_get_color_equal_with_rgb:
+  what: >
+    Reports true when the pixel at a given point on the screen is a particular
+    colour.
+  when: >
+    A different way to test a collision — by what is drawn rather than by which
+    sprites overlap.
+  example: |
+    when button  A  pressed
+      if  <color of x:  60  y:  60  on the display is R:  255  G:  0  B:  0>  then
+        play  hi
+  caption: >
+    Ask the screen itself what colour it is showing.
+  see: [cyberpi_sprite.cyberpi_sprite_is_touch_other_sprite]
+
+cyberpi_sprite.cyberpi_screen_render:
+  what: >
+    Redraws the screen right now, rather than waiting for the next automatic
+    refresh.
+  when: >
+    When several changes must appear together, or when an animation looks jerky
+    because the screen is updating at its own pace rather than yours.
+  example: |
+    when button  A  pressed
+      sprite  dot  show goes to x  40  y  40
+      force rendering
+  caption: >
+    Move it and show the move immediately.
+  see: [cyberpi_sprite.cyberpi_sprite_move_to]
+
+# -------------------------------------------------------------------- Doodle
+# Doodle is a pen on the CyberPi screen. You point it, move it, and it leaves a
+# line — the same idea as turtle graphics, and a neat way to see geometry.
+cyberpi_sprite.cyberpi_sketch_start:
+  what: >
+    Puts the pen down, so from now on moving the airbrush draws a line.
+  when: >
+    At the beginning of every drawing.
+  example: |
+    when button  A  pressed
+      start doodling
+      airbrush moves  40  pixels
+  caption: >
+    Pen down, then a line forty pixels long.
+  see: [cyberpi_sprite.cyberpi_sketch_end]
+
+cyberpi_sprite.cyberpi_sketch_end:
+  what: >
+    Lifts the pen, so the airbrush can be moved without leaving a line.
+  when: >
+    Between shapes, to travel from one to the next without joining them.
+  example: |
+    when button  A  pressed
+      finish doodling
+      airbrush goes to x:  40  y:  40
+      start doodling
+  caption: >
+    Lift, move, put down — the way to draw two separate things.
+  see: [cyberpi_sprite.cyberpi_sketch_start]
+
+cyberpi_sprite.cyberpi_sketch_clear:
+  what: >
+    Wipes everything the pen has drawn.
+  when: >
+    Before a new drawing, and at the start of a program.
+  example: |
+    when button  A  pressed
+      clear doodles
+  caption: >
+    A blank page.
+  see: [cyberpi_sprite.cyberpi_sketch_start]
+
+cyberpi_sprite.cyberpi_sketch_move:
+  what: >
+    Moves the airbrush forward, in whatever direction it is currently pointing,
+    by a number of pixels — drawing if the pen is down.
+  when: >
+    The heart of turtle drawing. A shape is this block and a turn, repeated.
+  example: |
+    when button  A  pressed
+      clear doodles
+      start doodling
+      repeat  4
+        airbrush moves  40  pixels
+        airbrush rotates  90  ° clockwise
+  caption: >
+    A square on the robot's screen — the same four-times-ninety idea as driving
+    one on the floor.
+  see: [cyberpi_sprite.cyberpi_sketch_cw]
+
+cyberpi_sprite.cyberpi_sketch_cw:
+  what: >
+    Turns the airbrush by a number of degrees from where it is pointing.
+  when: >
+    Everywhere the pen must change direction. Turning by 360 divided by the number
+    of sides draws any regular shape.
+  example: |
+    when button  A  pressed
+      clear doodles
+      start doodling
+      repeat  6
+        airbrush moves  30  pixels
+        airbrush rotates  (360 / 6)  ° clockwise
+  caption: >
+    A hexagon, with the angle worked out rather than looked up.
+  see: [cyberpi_sprite.cyberpi_sketch_set_angle_2]
+
+cyberpi_sprite.cyberpi_sketch_set_angle_2:
+  what: >
+    Points the airbrush in an exact direction rather than turning it by a step.
+  when: >
+    To start a shape from a known heading, so the drawing comes out the same way
+    up every time.
+  example: |
+    when button  A  pressed
+      airbrush points in direction  0  °
+  caption: >
+    Face a known way before you start.
+  see: [cyberpi_sprite.cyberpi_sketch_cw]
+
+cyberpi_sprite.cyberpi_sketch_move_to:
+  what: >
+    Sends the airbrush to an exact point on the screen.
+  when: >
+    To start a shape somewhere particular. Lift the pen first unless you want a
+    line drawn on the way.
+  example: |
+    when button  A  pressed
+      finish doodling
+      airbrush goes to x:  20  y:  20
+      start doodling
+  caption: >
+    Travel without drawing, then begin.
+  see: [cyberpi_sprite.cyberpi_sketch_move_to_center]
+
+cyberpi_sprite.cyberpi_sketch_move_x_and_y:
+  what: >
+    Moves the airbrush a number of pixels in a named direction, whichever way it
+    happens to be pointing.
+  when: >
+    For drawing on a grid, where up and across are easier to think in than
+    headings.
+  example: |
+    when button  A  pressed
+      start doodling
+      airbrush moves  right (x)  30  pixels
+  caption: >
+    Straight across, regardless of heading.
+  see: [cyberpi_sprite.cyberpi_sketch_move]
+
+cyberpi_sprite.cyberpi_sketch_move_to_center:
+  what: >
+    Sends the airbrush back to the middle of the screen.
+  when: >
+    A reliable starting point at the beginning of a drawing.
+  example: |
+    when button  A  pressed
+      clear doodles
+      set airbrush to the display centre
+  caption: >
+    Blank page, pen in the middle.
+  see: [cyberpi_sprite.cyberpi_sketch_move_to]
+
+cyberpi_sprite.cyberpi_sketch_circle:
+  what: >
+    Sweeps the airbrush along an arc of a given radius, drawing a curve.
+  when: >
+    For circles and rounded corners, which are painful to build out of straight
+    lines.
+  example: |
+    when button  A  pressed
+      clear doodles
+      start doodling
+      airbrush moves  360  ° at radius  30
+  caption: >
+    A whole circle in one block.
+  see: [cyberpi_sprite.cyberpi_sketch_move]
+
+cyberpi_sprite.cyberpi_sketch_set_size:
+  what: >
+    Sets how thick the drawn line is, in pixels.
+  when: >
+    Thick for something to be seen across a room, thin for detail.
+  example: |
+    when button  A  pressed
+      set doodle thickness to  3  pixels
+  caption: >
+    A bolder line.
+  see: [cyberpi_sprite.cyberpi_sketch_set_color_with_rgb]
+
+cyberpi_sprite.cyberpi_sketch_set_color_with_color:
+  what: >
+    Sets the pen colour from a colour you pick.
+  when: >
+    To draw parts of a picture in different colours.
+  example: |
+    when button  A  pressed
+      set airbrush color to
+  caption: >
+    Pick the colour on the block.
+  see: [cyberpi_sprite.cyberpi_sketch_set_color_with_rgb]
+
+cyberpi_sprite.cyberpi_sketch_set_color_with_rgb:
+  what: >
+    Sets the pen colour from red, green and blue numbers.
+  when: >
+    When the colour is computed — a graph that changes colour as it climbs.
+  example: |
+    when button  A  pressed
+      set airbrush color to R  0  G  128  B  255
+  caption: >
+    A colour a program can choose for itself.
+  see: [cyberpi_sprite.cyberpi_sketch_set_color_with_color]
+
+cyberpi_sprite.cyberpi_sketch_set_speed:
+  what: >
+    Sets how fast the airbrush travels, so a drawing can be watched being made
+    rather than appearing all at once.
+  when: >
+    When the drawing IS the lesson. A slow pen shows the shape being built up,
+    which is the whole point of turtle graphics.
+  example: |
+    when button  A  pressed
+      set doodling speed to  3
+      start doodling
+      airbrush moves  60  pixels
+  caption: >
+    Slow enough to follow with your eye.
+  see: [cyberpi_sprite.cyberpi_sketch_move]
+
+cyberpi_sprite.cyberpi_sketch_get_x_y_angle_and_size:
+  what: >
+    Reports where the airbrush is, or which way it is pointing, or how thick it
+    is drawing.
+  when: >
+    When the next move must be worked out from the current position.
+  example: |
+    when button  A  pressed
+      print  (airbrush  x position)
+  caption: >
+    Where has the pen got to?
+  see: [cyberpi_sprite.cyberpi_sketch_move_to]
+
+cyberpi_sprite.cyberpi_sprite_draw_sketch:
+  what: >
+    Turns whatever has been drawn into a sprite, which can then be moved, scaled
+    and coloured like any other.
+  when: >
+    To draw something once and then animate it, instead of redrawing it in every
+    position.
+  example: |
+    when button  A  pressed
+      set current doodle as sprite  shape  show
+      sprite  shape  show goes to x  40  y  40
+  caption: >
+    The drawing becomes an object you can move about.
+  see: [cyberpi_sprite.cyberpi_sprite_move_to]

@@ -1,0 +1,111 @@
+n: 21
+stage: D
+stage_title: រូបយន្តមានរបៀបរៀបរយ
+kind: step
+title: រូបយន្តមានរបៀប
+concept: ម៉ាស៊ីនស្ថានភាព
+hours: 2
+project: G7-D-organised
+goal: អថេរតែមួយសម្រេចថារូបយន្តកំពុងធ្វើអ្វី ហើយក្រុមអាចប្រាប់ថាអ្វីធ្វើឲ្យវាប្ដូរ។
+build: រូបយន្តមានការងារ៖ ល្បាត ដើរតាម ដឹកជញ្ជូន។
+builds_on:
+- ជំហានទី ១៨ · follow_line
+- ជំហានទី ១៦ · ប្លុករបស់អ្នក
+- ជំហានទី ១១ · អថេរ
+teach:
+- ឥឡូវរូបយន្តអាចធ្វើរបស់ច្រើន។ វាត្រូវដឹងថា <b>វាកំពុងធ្វើមួយណា</b> — ហើយនោះជាអថេរតែមួយផ្ទុកពាក្យ៖ ល្បាត
+  ដើរតាម ដឹកជញ្ជូន។ រង្វិលជុំមេគឺខ្លីណាស់៖ មើលរបៀប ដំណើរការប្លុកសម្រាប់របៀបនោះ។ ការងារនីមួយៗនៅជាកម្មវិធីតូច
+  ហើយរង្វិលជុំគ្រាន់តែជ្រើស។
+- ផ្នែកគួរឲ្យចាប់អារម្មណ៍គឺ <b>ការផ្លាស់ប្ដូរ</b> — អ្វីធ្វើឲ្យវាប្ដូរ។ ប៊ូតុងមួយ។ បំណះក្រហមក្រោមឧបករណ៍ចាប់សញ្ញា។
+  ការងារមួយបញ្ចប់។ គូរពួកវាជាព្រួញលើក្រដាសមុនសរសេរប្លុកណាមួយ ព្រោះព្រួញដែលអ្នកភ្លេច គឺពិតជាព្រួញដែលធ្វើឲ្យរូបយន្តជាប់គាំងកណ្ដាលបេសកកម្ម។
+guide:
+- label: ស្ថានភាព
+  value: អថេរតែមួយ ផ្ទុកពាក្យ
+- label: រង្វិលជុំ
+  value: អានរបៀប → ដំណើរការប្លុកនោះ
+- label: គូរជាមុន
+  value: ព្រួញលើក្រដាស មុនប្លុក
+- label: ឥដ្ឋ
+  value: វគ្គខ្សែ បូកបំណះក្រហមសម្រាប់ដឹកជញ្ជូន
+steps:
+- time: 15′
+  text: លើក្រដាស៖ ប្រអប់បី ព្រួញរវាងពួកវា និងលក្ខខណ្ឌសរសេរលើព្រួញនីមួយៗ។ មិនទាន់មានប្លុកទេ។
+  expect: ប្រអប់បីលើក្រដាស មានព្រួញ និងលក្ខខណ្ឌសរសេរលើព្រួញនីមួយៗ។ នៅមិនទាន់មានប្លុកទេ។
+- time: 25′
+  text: សាងសង់អថេររបៀប និងរង្វិលជុំមេ។ របៀបនីមួយៗហៅប្លុកដែលអ្នកបានសរសេររួច។
+  expect: អថេរតែមួយកាន់របៀប និងរង្វិលជុំមេដែលប្រគល់ការងារទៅប្លុកដែលអ្នកសរសេររួច។
+- time: 25′
+  text: ភ្ជាប់ការផ្លាស់ប្ដូរ៖ ប៊ូតុង A ចាប់ផ្ដើមការដើរតាម បំណះក្រហមមានន័យថាដឹកជញ្ជូន ហើយការដឹកជញ្ជូនត្រឡប់ទៅល្បាតវិញពេលវារួច។
+  expect: គ្រប់ព្រួញលើក្រដាសដំណើរការលើរូបយន្ត៖ ច្រានឡើងដើរតាមខ្សែ ច្រានចុះល្បាត ពណ៌ក្រហមដឹកជញ្ជូន ហើយបញ្ចប់ត្រឡប់ទៅល្បាតវិញ។
+- time: 20′
+  text: បង្ហាញរបៀបលើអេក្រង់ជាពាក្យ។ អ្នកគួរតែអាចប្រាប់ថារូបយន្តគិតអ្វី ពីម្ខាងបន្ទប់។
+  expect: ពាក្យមួយលើអេក្រង់ប្រាប់អ្នកមើលពីចម្ងាយថារូបយន្តនៅរបៀបណា។
+- time: 25′
+  text: ព្យាយាមធ្វើឲ្យវាជាប់គាំង៖ តើអ្នកអាចធ្វើឲ្យរូបយន្តចូលរបៀបដែលគ្មានផ្លូវចេញបានទេ? បើអ្នកអាច នោះជាព្រួញដែលបាត់
+    — ទៅបន្ថែមវា។
+  expect: ការព្យាយាមដោយចេតនាដាក់រូបយន្តឲ្យជាប់ក្នុងរបៀបគ្មានផ្លូវចេញ — ហើយអន្ទាក់ទាំងអស់ដែលរកឃើញ ក្លាយជាព្រួញថ្មី។
+- time: 10′
+  text: កត់ត្រាដ្យាក្រាម ជាមួយព្រួញដែលអ្នកត្រូវបន្ថែមក្រោយសាកល្បង។ ជំហានទី ២៣ ត្រូវការវា។
+  expect: ដ្យាក្រាមក្នុងកំណត់ហេតុ រួមទាំងព្រួញដែលអ្នករកឃើញតែពេលសាកល្បង។ ជំហានទី ២៣ ចាប់ផ្ដើមពីវា។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\ndefine  follow_line\n  if  quad\
+    \ rgb sensor 1 probe (3) L1 detects  line ?  then\n    encoder motor EM1 rotates at 15 RPM, encoder\
+    \ motor EM2 rotates at 55 RPM\n  else\n    if  quad rgb sensor 1 probe (2) R1 detects  line ?  then\n\
+    \      encoder motor EM1 rotates at 55 RPM, encoder motor EM2 rotates at 15 RPM\n    else\n    \
+    \  moves forward  at (speed)  RPM\n\nwhen button A pressed\n  scan\n  if  (found) = 1  then\n  \
+    \  celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square  60\n\nwhen joystick \
+    \ middle pressed\n  set  speed  to 40\n  quad rgb sensor 1 performs calibration\n  forever\n   \
+    \ follow_line\n    show label 1  join  err:   (quad rgb sensor 1 deviation (-100~100))  at x: 0\
+    \ y: 0  by small pixel\n\nwhen CyberPi starts up\n  set  mode  to  idle\n  show label 1  press A\
+    \ to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n  forever\n    show\
+    \ label 2  join  mode:   (mode)  at x: 0 y: 20  by small pixel\n    if  (mode) = patrol  then\n\
+    \      scan\n    if  (mode) = follow  then\n      follow_line\n      if  quad rgb sensor 1 probe\
+    \ (3) L1 detects  red ?  then\n        set  mode  to  deliver\n    if  (mode) = deliver  then\n\
+    \      stop encoder motor  all\n      celebrate\n      set  mode  to  patrol\n\nwhen joystick  pulled↑\n\
+    \  set  mode  to  follow\n\nwhen joystick  pulled↓\n  set  mode  to  patrol"
+tips:
+- ស្ថានភាពគឺជារបស់ដែលរូបយន្ត <i>កំពុងធ្វើ</i> — ល្បាត ដើរតាម ដឹកជញ្ជូន។ បើស្ថានភាពរបស់ក្រុមណាជាលេខគ្មានឈ្មោះ
+  សួរពួកគេថាស្ថានភាព ៣ មានន័យអ្វី។
+- របៀបដែលគ្មានផ្លូវចេញគឺជាអន្ទាក់ ហើយថ្នាក់គ្រប់ថ្នាក់សាងសង់យ៉ាងតិចមួយ។ ការរកឃើញវាដោយព្យាយាមធ្វើឲ្យរូបយន្តជាប់គាំង
+  គឺជាមេរៀន។
+- របៀបលើអេក្រង់ធ្វើឲ្យរាល់កំហុសក្រោយមកងាយឃើញដប់ដង។ កុំឲ្យនរណារំលងវា។
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits for you]
+    - [FOLLOW, '#0891b2', follows the line]
+    - [DELIVER, '#7c3aed', 'stops, celebrates']
+    - [PATROL, '#16a34a', 'turns, looks around']
+    trans:
+    - [0, 1, 'joystick ↑']
+    - [1, 2, red patch]
+    - [2, 3, celebrated]
+    - [0, 3, 'joystick ↓']
+    caption: one variable holds the mode — the joystick can change it at any moment
+success:
+- របៀបបី នីមួយៗមានស្លាកឃើញ និងអាចទៅដល់
+- រាល់របៀបអាចចេញវិញបាន — គ្មានអន្ទាក់
+- ដ្យាក្រាមលើក្រដាសត្រូវនឹងអ្វីដែលរូបយន្តធ្វើពិត
+check:
+- do: up
+  see: The screen says follow, and it follows the line.
+- do: down
+  see: The screen says patrol, and it looks around instead.
+- do: see
+  see: On a red patch it stops, celebrates, and goes back to patrol.
+parts:
+- id: robot_wheel
+- id: map
+- id: patches
+  note: red = deliver
+- id: craft
+  note: paper for the diagram
+

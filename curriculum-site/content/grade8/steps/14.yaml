@@ -1,0 +1,108 @@
+n: 14
+stage: C
+stage_title: Interaction
+kind: step
+title: Two robots, one job
+concept: Messages with a payload
+hours: 2
+project: G8-C-connects
+goal: Two Rovers hand a task between them, passing a value — and two pairs work in the same room without
+  interfering.
+build: 'A relay: one robot finds it, the other fetches it.'
+builds_on:
+- Step 10 · jobs
+- Step 13 · the menu
+teach:
+- 'Robots can talk. <b>broadcast "found" on LAN</b> sends a message to every robot listening, and <b>when
+  receiving "found" broadcast on LAN</b> wakes the other one up. That alone makes a relay possible:
+  A finishes, B starts, nobody touches either.'
+- Better, a message can carry a <b>value</b>. <b>broadcast "found" with value 42</b> and the receiver
+  reads it with <b>LAN broadcast value received</b>. Now A can send B the distance it measured, or which
+  zone to go to. A name plus a payload is what a <b>protocol</b> is, and two teams have to agree one
+  before either writes a block.
+- 'Then the classroom problem: with everyone on one channel, every robot hears every message. <b>set
+  LAN channel</b> is the fix, and discovering the need for it by collision is much better than being
+  warned.'
+guide:
+- label: Try it
+  value: button B → find it and broadcast
+- label: Send
+  value: broadcast "msg" with value n on LAN
+- label: Receive
+  value: when receiving "msg" · value received
+- label: Agree first
+  value: message names, written down
+- label: Floor
+  value: 2 m of clear run, with a red patch at the far end
+steps:
+- time: 20′
+  text: 'Two teams agree a protocol on paper: message names, what each means, what value travels with
+    it. No blocks until it is written.'
+  expect: 'A written protocol between two teams: message names, meanings, and the value that travels
+    with each. No blocks until it exists.'
+- time: 25′
+  text: 'Simplest version: A broadcasts, B lights up. Prove the link works before adding anything.'
+  use:
+  - cyberpi_set_wifi_broadcast_with_value
+  - cyberpi_wifi_broadcast_when_received_message
+  expect: Robot A broadcasts, robot B lights up. The link is proved before anything is built on it.
+- time: 25′
+  text: 'Now the payload: A sends a number it measured, B shows it on screen. Check it is the same number.'
+  expect: A number measured on A appearing on B’s screen — and checked to be the same number.
+- time: 25′
+  text: 'The relay: A searches and broadcasts what it found; B fetches it. Neither team touches the
+    other''s robot.'
+  use:
+  - control_wait_until
+  - cyberpi_timer_reset
+  expect: A finds something and says what it found; B goes and fetches it. Neither team touches the
+    other’s robot.
+- time: 15′
+  text: Two pairs run at once and discover they are hearing each other. Fix it with channels.
+  use:
+  - cyberpi_set_wifi_channel
+  expect: Two pairs running at once without hearing each other, because each pair is on its own channel.
+- time: 10′
+  text: Log the protocol table — message, meaning, value.
+  expect: 'The protocol table in the log: message, meaning, value.'
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\nwhen button A pressed\n  forever\n    encoder motor EM1 rotates at\
+    \ ((joystick LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n    if  button\
+    \  L1  pressed  then\n      grip\n    if  button  R1  pressed  then\n      release\n    if  button\
+    \  1  pressed  then\n      celebrate\n\nwhen CyberPi starts up\n  set LAN channel to  6 (default)\n\
+    \  delete all of  menu\n  add  fetch  to  menu\n  add  patrol  to  menu\n  add  dance  to  menu\n\
+    \  set  pick  to 1\n  forever\n    clear screen\n    set  stop  to  ((length of menu) + 1)\n   \
+    \ count with  i  from 1 to (stop) by step 1 repeat\n      if  (i) = (pick)  then\n        print\
+    \  join  PICK   (item (i) of menu)  and move to a newline\n      else\n        print  (item (i)\
+    \ of menu)  and move to a newline\n\nwhen joystick  pulled↓\n  change  pick  by 1\n  if  (pick)\
+    \ > (length of menu)  then\n    set  pick  to 1\n\nwhen joystick  middle pressed\n  set  job  to\
+    \  (item (pick) of menu)\n\nwhen button B pressed\n  reset timer\n  moves forward  at 40  RPM\n\
+    \  wait until  (quad rgb sensor 1 probe (3) L1 detects  red ?)\n  stop encoder motor  all\n  broadcast\
+    \ message  found  with value  (timer(s))  on LAN\n\nwhen receiving  found  broadcast on LAN\n  show\
+    \ label 1  join  partner took:   (LAN broadcast  found  value received)  at x: 0 y: 0  by small\
+    \ pixel\n  set  job  to  fetch"
+tips:
+- Make them write the protocol before they code it. Two teams coding to different assumptions is the
+  whole lesson, and it is cheaper on paper.
+- Let the channel collision happen. Two pairs on one channel is a genuinely confusing five minutes and
+  the fix means far more afterwards.
+- Message names are case- and spelling-sensitive. "found" and "Found" are two different messages, and
+  that is a real debugging afternoon if not said early.
+result:
+  scene: relay
+success:
+- A message with a value sent and correctly received
+- A full relay with nobody touching either robot
+- Two pairs running in the same room on separate channels
+check:
+- do: B
+  see: Robot A drives until it finds the red patch, and stops.
+- do: hear
+  see: Robot B wakes up and shows how many seconds A took to find it.
+parts:
+- id: robot_tank
+  note: two of them, paired teams
+- id: cards
+

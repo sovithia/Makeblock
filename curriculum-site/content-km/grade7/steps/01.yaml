@@ -1,0 +1,82 @@
+n: 1
+stage: '0'
+stage_title: Build the robot
+kind: step
+title: Build it — chassis, motors, wheels
+concept: Reading an exploded diagram
+hours: 2
+goal: Chassis, motors and wheels assembled correctly, straight from the printed guide.
+build: The bottom half of a robot, built by reading pictures.
+builds_on:
+- nothing — this is hour zero
+teach:
+- 'The mBot2 guide is almost wordless, and that is deliberate: reading an <b>exploded diagram</b> is
+  an engineering skill in itself. Three things to find in every picture before touching a screwdriver
+  — which <b>parts</b>, which way round they go, and which <b>screws</b>. The screw lengths are drawn
+  actual size in the margin; hold yours against the page.'
+- 'The single most common error in this build is a motor mounted backwards, or the left and right motor
+  cables swapped. Neither shows up until the robot drives — and then it turns when you told it to go
+  straight. So there is a rule: no wheels go on until another team has checked the orientation.'
+build_images:
+- g7-09
+- g7-10
+build_caption: mbot2.pdf · printed pages 9–10 · guide steps ①–③
+guide:
+- label: Guide
+  value: mbot2.pdf pp. 9–12, steps ①–③
+- label: First
+  value: motor cables in BEFORE the motor goes in
+- label: Screws
+  value: M4×8 for motors · M2.5×12 for wheels
+steps:
+- time: 10′
+  text: 'Open the box over a tray and sort the screws by size. This is the single biggest time-saver
+    of the day, and the teams who skip it will be hunting for an M4×8 in twenty minutes.'
+  expect: វីសគ្រប់ទំហំនៅក្នុងប្រអប់រៀងៗខ្លួន ហើយអ្នកអាចចង្អុលទៅ M4×8 ដោយមិនចាំបាច់ស្វែងរក។
+- time: 5′
+  text: 'Read one diagram together — guide step ② on the screen. Name the parts, the orientation and
+    the screws out loud before anyone builds anything.'
+  expect: មុនពេលប៉ះគ្រឿងណាមួយ ក្រុមអាចនិយាយឮៗថា ម៉ូទ័រទាំងពីរបែរទៅទិសណា និងវីសមួយណាដាក់ត្រង់ណា។
+- time: 40′
+  text: 'Build guide steps ①–③: motor cables in first, motors into the chassis with M4×8, wheel hubs
+    pressed into the tyres, wheels onto the shafts with M2.5×12.'
+  expect: តួរថយន្តដែលមានម៉ូទ័រពីរបានរឹតជាប់ ខ្សែរបស់វាដោតរួច និងកង់ទាំងពីរនៅលើដងរបស់វា។
+- time: 15′
+  text: 'Cross-team check before the wheels go on: another team confirms both motors face the way the
+    diagram shows and the cables run where they can still be reached.'
+  expect: ក្រុមផ្សេងបានមើលរូបយន្តរបស់អ្នក ហើយយល់ស្របថាម៉ូទ័របែរតាមដ្យាក្រាម។
+- time: 10′
+  text: Spin both wheels by hand. They should turn freely and sound the same as each other.
+  expect: កង់ទាំងពីរវិលដោយសេរីពេលអ្នកច្រានវា ហើយសំឡេងរបស់វាដូចគ្នា។
+- time: 10′
+  text: 'On your lesson sheet: one diagram that was confusing, and how you worked it out.'
+  expect: ដ្យាក្រាមមួយដែលច្របូកច្របល់ សរសេរក្នុងកំណត់ហេតុ ព្រមទាំងឃ្លាដែលធ្វើឲ្យវាយល់បាន។
+tips:
+- Plug each motor cable in BEFORE the motor goes into the chassis. The port is unreachable afterwards,
+  and every year a team takes a motor back out to discover this.
+- The four long M4×25 screws belong to the next step. A team reaching for them today is on the wrong page.
+- Snug, not tight. These screws go into plastic and they will strip.
+- Half-built is fine. Label the tray with the team name and put it on the shelf.
+result:
+  scene: build
+  params: {stage: half}
+success:
+- Both motors mounted, orientation checked and signed off by another team
+- Wheels spin freely and quietly by hand
+- No leftover screws that nobody can name
+check:
+- do: "see"
+  see: Both wheels spin freely when you flick them, and sound the same.
+- do: "see"
+  see: The motor cables can still be reached. You did not build over them.
+- do: "see"
+  see: The tray has no mystery screws left in it.
+parts:
+- id: chassis
+- id: motor
+- id: wheelset
+- id: motorcable
+- id: screws7
+- id: screwdriver
+- id: trays
+  note: sort the screws first

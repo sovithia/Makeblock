@@ -1,0 +1,50 @@
+# 2 h per session x 20 sessions = 40 h, delivered weekly over ~5 months.
+per: "2 h"
+total: "40 h"
+num: '9'
+theme: Engineering & Autonomy — Robots That Work
+form: mBot2 Rover · tracked base + twin grip arms
+codemode: Full Python
+capstone: Robots at Work
+colors:
+  color: '#d97706'
+  dark: '#9a4f08'
+  light: '#fdf0dd'
+  tint: '#fcd34d'
+units:
+- name: Python Bootcamp
+  sessions: 4
+  color: '#d97706'
+- name: Better Control
+  sessions: 5
+  color: '#f0a13c'
+- name: The Arms
+  sessions: 3
+  color: '#9a4f08'
+- name: Integration
+  sessions: 2
+  color: '#f0a13c'
+- name: 'Capstone: Robots at Work'
+  sessions: 6
+  color: '#16a34a'
+objectives:
+- 'Write, structure and review Python: functions, constants, state machines'
+- 'Implement and tune closed-loop control: P, then PD, then encoder feedback; argue with graphs'
+- Program the Rover's twin grip arms for safe, reliable pick & place
+- 'Run an engineering project: spec, sprints, reviews, recovery'
+- Deliver an autonomous mission and pitch it (Robots at Work)
+friction: 'no build year — the Rover comes forward from Grade 8 standing, calibrated and with both servos
+  on S1/S2; if the kits were stripped over the break, budget a rebuild from the printed booklet BEFORE
+  Session 1 · this robot has no ultrasonic: every distance is an encoder count and every marker is a colour
+  under the Quad RGB · never force an arm past resistance (gears strip) · exact Python function names vary
+  by mBlock version: trust autocomplete · rebuild capstone courses from tape-measure photos.'
+capstone_blurb:
+  name: Robots at Work
+  text: 'An autonomous mission simulating a real job: follow a line under closed-loop control, detect a
+    colour marker, pick an object with the grip arms and deliver it — pitched and scored at Demo Day.'
+  scene: work
+box_usage: 'Both boxes are already in the robot: Grade 9 builds nothing and unscrews nothing. Session
+  parts panels tag every piece with its source box.'
+boxes:
+- mbot2
+- rover

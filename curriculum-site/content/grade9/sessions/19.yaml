@@ -1,0 +1,75 @@
+n: 19
+title: Rehearsal & Pitch Prep ✱
+goal: Failure recovery hardened, run configuration frozen, and the 5-minute pitch rehearsed.
+builds_on:
+- S18 · the integrated mission
+teach:
+- 'Two workstreams. <b>Robot</b>: rehearse under Demo-Day conditions (official start, audience noise simulated,
+  two attempts) and add cheap recovery where the run log points — the classics: re-grip once if pick fails
+  (Session 12’s seed sprouts), re-find line if lost (Grade 7’s search behavior returns), timeout-and-skip
+  rather than freeze forever. Then freeze the configuration — the Grade 7 race-config ritual, now second
+  nature.'
+- '<b>Pitch</b> (5 minutes, strict): the problem (30 s) → the solution & how it works (2′) → live demo
+  (90 s) → <b>one honest failure story</b> and what it taught (1′). The failure story is mandatory and
+  rubric-weighted — it’s where engineering maturity shows, and after three years of debug discipline every
+  team has a good one. Rehearse with a timer; cutting to fit five minutes is itself the exercise. Assign
+  demo roles: driver (starts the run), narrator (talks over it), catcher (handles the robot if chaos wins).'
+steps:
+- time: 18′
+  text: 'Recovery pass: implement the top recovery the run log justifies; verify it triggers correctly.'
+- time: 8′
+  text: 'Freeze: race configuration written, code committed, no edits after this line.'
+- time: 15′
+  text: Pitch rehearsal ×2 with timer; peers give one keep / one cut note.
+- time: 4′
+  text: 'Demo-day logistics: order drawn, roles assigned, batteries on chargers.'
+tips:
+- 'Buffer session: recovery can shrink to timeout-and-skip only — but the freeze and the timed rehearsal
+  are untouchable.'
+- The failure story must end on the lesson, not the excuse — coach the last sentence.
+result:
+  scene: demo
+success:
+- One recovery behavior demonstrably triggers and works
+- Configuration frozen in writing
+- Pitch fits 5:00 with all four parts, twice
+parts:
+- id: robot_arm
+- id: tablet
+- id: timer
+  note: strict 5:00
+- id: cards
+  note: pitch structure card
+long:
+  goal: One recovery behaviour that demonstrably triggers, a configuration frozen in writing, and a pitch
+    that fits five minutes twice running.
+  recap:
+    time: 10′
+    text: 'Let the run log choose the recovery. Do not build the one that sounds most impressive — build the
+      one the failure data justifies: re-grip once, re-find the line, or time out and skip. The log names
+      which, and building the wrong one spends a whole session solving a problem this robot does not have.'
+  extend:
+  - spec: recovery triggers on demand
+    text: Cause the failure deliberately and watch the recovery fire. A recovery never seen to trigger is
+      a recovery nobody should count on.
+  - spec: frozen, in writing
+    text: The race configuration written out in full, with no edits after that line.
+  - spec: 5:00 twice, all four parts
+    text: Problem, solution, live demo, and the honest failure story — timed, twice.
+  log:
+    time: 10′
+    text: The frozen configuration and the pitch script with timings per section. The failure story is rubric-weighted,
+      so its last sentence is worth drafting rather than improvising — it has to end on the lesson, never
+      on the excuse.
+  review:
+    time: 15′
+    text: Peers give one keep note and one cut note per pitch. Criteria — does the failure story end on what
+      was learned, and did the live demo fit inside its ninety seconds without anyone having to rush?
+  parts:
+  - id: timer
+  - id: usb
+    note: chargers on before the session ends
+  success:
+  - The recovery fires when the failure is caused deliberately
+  - The pitch fits 5:00 twice, with all four parts present both times
+

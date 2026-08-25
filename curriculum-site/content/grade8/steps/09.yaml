@@ -1,0 +1,115 @@
+n: 9
+stage: B
+stage_title: Algorithms on new hardware
+kind: step
+title: Smooth, not stepped
+concept: Operators on sensor values
+hours: 2
+project: G8-B-thinks
+goal: The Rover's speed is calculated from how far it still has to go, so it eases to a stop instead
+  of jumping between fixed settings.
+build: A robot that eases off instead of slamming on the brakes.
+builds_on:
+- Grade 7 · zones
+- Step 4 · clamping
+teach:
+- 'Last year the robot had three speeds and jumped between them. Today it has as many speeds as there
+  are positions, because the speed is <b>calculated</b>: the encoder says how far it has travelled,
+  subtract that from the target and you have <b>how far is left</b>. Multiply that by a number and drive
+  at the answer. Far from the target, fast. Nearly there, slow. No steps, no jerk.'
+- 'Two things make it real. <b>Clamp</b> it, or a long run produces a speed of 400 and the last centimetre
+  produces a speed of nothing. And <b>tune the multiplier</b>: too small and it crawls the whole way,
+  too big and it is back to slamming. That number is yours to find, and finding it by trying is the
+  point.'
+guide:
+- label: Try it
+  value: joystick up → smooth approach
+- label: Calculate
+  value: speed = (target − travelled) × gain
+- label: Clamp
+  value: between 15 and 80 RPM
+- label: Tune
+  value: one gain value per run, logged
+- label: Floor
+  value: 2 m clear, straight, with a taped finish line
+steps:
+- time: 15′
+  text: Drive the Step-7 patrol at a fixed speed to a taped finish line and watch it overshoot or stop
+    dead. Name what is wrong with it.
+  expect: A patrol that slams from full speed to nothing, and a team that can name what is wrong with
+    it.
+- time: 25′
+  text: Reset the encoder, set a target, and calculate the speed from what is left. Show both numbers
+    on screen so you can see the relationship.
+  use:
+  - mbot2_encoder_motor_reset_angle
+  - control_forever
+  - mbot2_move_direction_with_rpm
+  expect: Two numbers on the screen at once — how far is left, and the speed that produces — and the
+    second falls as the first does.
+- time: 25′
+  text: Clamp top and bottom. Then deliberately set a very long target and a very short one to test
+    both limits.
+  use:
+  - control_if
+  - mbot2_encoder_motor_stop
+  - control_stop
+  expect: A very long target cannot make it run away and the last centimetre cannot make it stall. Both
+    limits tried on purpose.
+- time: 25′
+  text: 'Tune the multiplier: one value per run, logged, until the approach feels right. There is no
+    correct answer, only a trade-off.'
+  expect: One multiplier changed per run, each logged, until the approach feels right. There is no correct
+    answer here, only a trade-off.
+- time: 20′
+  text: 'Race: from 2 m away, stop within 10 cm of the line as fast as possible without crossing it.
+    Three attempts.'
+  expect: Three attempts stopping within 10 cm of the wall from 2 m away, without touching it.
+- time: 10′
+  text: Log your gain and what happened at double and half that value. Step 10 drives the fetch job
+    at this speed.
+  expect: Your gain in the log, with what happened at double and at half. Step 10 drives the fetch job
+    at this speed.
+tips:
+- This is speed from <i>distance remaining</i>, not steering from line error. Grade 9 does the steering
+  version and it is their headline lesson — do not pre-empt it here.
+- Both clamps or neither. A team that clamps only the top will eventually drive backwards.
+- Showing what is left and the speed together on screen is what makes the relationship visible. Without
+  it this is just a formula.
+- The Rover has no distance sensor — that was the mBot2's ultrasonic, and it stays in the tray. What
+  the Rover knows is how far its own motors have turned, which is enough to ease to a stop on a measured
+  run.
+result:
+  scene: chart
+  params:
+    bars: [[far, 82], [near, 48], [finish, 18]]
+    ylab: calculated speed
+    caption: speed falls as the distance remaining gets smaller
+success:
+- Speed calculated from the distance remaining, not chosen from fixed values
+- Clamped at both ends and both limits tested deliberately
+- A tuned multiplier, with the values either side of it logged
+check:
+- do: up
+  see: The nearer the finish line, the slower it goes. No sudden stop.
+parts:
+- id: robot_tank
+- id: tape
+  note: a finish line to stop on
+- id: ruler
+
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  delete all of  poses\n\nwhen joystick  middle pressed\n  add  (servo\
+    \ (1) S1 current angle (°))  to  poses\n  show label 1  join  poses:   (length of poses)  at x:\
+    \ 0 y: 0  by small pixel\n\nwhen button A pressed\n  set  stop  to  ((length of poses) + 1)\n  count\
+    \ with  i  from 1 to (stop) by step 1 repeat\n    lift  (item (i) of poses)\n    wait 0.4 seconds\n\
+    \nwhen button B pressed\n  set  sides  to 0\n  repeat 3\n    repeat 4\n      moves forward  20 \
+    \ cm  until done\n      turns right  90  ° until done\n      change  sides  by 1\n    LED\
+    \ all displays R  (pick random 0 to 255)  G 0 B 120\n  show label 2  join  sides driven:\
+    \   (sides)  at x: 0 y: 20  by small pixel\n\nwhen joystick  pulled↑\n  reset encoder motor  (1)\
+    \ EM1  rotated angle\n  set  target  to 1200\n  forever\n    set  left  to  ((target) - (encoder\
+    \ motor (1) EM1 rotated angle (°)))\n    set  speed  to  ((left) * 0.06)\n    if  (speed) > 80 \
+    \ then\n      set  speed  to 80\n    if  (speed) < 15  then\n      set  speed  to 15\n    show label\
+    \ 3  join  spd:   (speed)  at x: 0 y: 40  by small pixel\n    moves forward  at (speed)  RPM\n \
+    \   if  (left) < 40  then\n      stop encoder motor  all\n      stop  this script"

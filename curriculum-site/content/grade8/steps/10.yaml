@@ -1,0 +1,128 @@
+n: 10
+stage: B
+stage_title: Algorithms on new hardware
+kind: step
+title: The Rover has jobs
+concept: State machine
+hours: 2
+project: G8-B-thinks
+goal: One variable decides what the Rover is doing, with every transition drawn before it is built.
+build: A robot that fetches, carries and delivers.
+builds_on:
+- Step 9 · smooth approach
+- Step 5 · arm blocks
+- Grade 7 · modes
+teach:
+- The Rover can now drive, approach smoothly, and grip. It needs to know <b>which job it is on</b> —
+  idle, fetching, carrying, delivering — and that is one variable holding a word, with a short main
+  loop that reads it and runs the matching block.
+- 'The interesting work is the <b>arrows</b>: what ends fetching and starts carrying? Gripping something.
+  What ends carrying? Arriving. Draw them on paper first, then look for the ones you did not draw —
+  the arrow out of "I tried to grip and missed" is the one every team forgets, and it is the one that
+  strands the robot in the mission.'
+guide:
+- label: Try it
+  value: joystick ← → set the job to fetch
+- label: States
+  value: idle · fetch · carry · deliver
+- label: Draw first
+  value: arrows on paper, then blocks
+- label: Find
+  value: the arrow out of failure
+- label: Floor
+  value: 2 m, a pick-up patch and a drop zone
+steps:
+- time: 20′
+  text: 'On paper: four boxes, arrows between them, the condition on each arrow. No blocks yet.'
+  expect: Four boxes on paper with a condition written on every arrow. No blocks yet.
+- time: 25′
+  text: Build the mode variable and the main loop. Each job calls blocks you already have.
+  use:
+  - data_setvariableto
+  - control_forever
+  - control_if
+  expect: One variable holding the current job, and a main loop that hands each job to blocks you already
+    own.
+- time: 25′
+  text: Wire the transitions and show the current job on screen as a word.
+  use:
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: Every arrow works on the robot, and the screen says in a word which job it is doing.
+- time: 25′
+  text: 'Now break it: what happens if the grip closes on nothing? Add the arrow you did not draw.'
+  use:
+  - mbot2_encoder_motor_stop
+  expect: You close the grip on nothing and the robot recovers instead of freezing — the arrow you had
+    not drawn.
+- time: 15′
+  text: 'Full cycle: fetch a foam block, carry it a metre, deliver it, return to idle. Three times running.'
+  expect: Fetch, carry a metre, deliver, return to idle — three times in a row without help.
+- time: 10′
+  text: Log the diagram, marking the arrows you added only after testing. Step 22 designs the real job
+    starting from this diagram.
+  expect: The diagram in the log with the arrows you only found by testing marked. Step 22 starts from
+    it.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  delete all of  poses\n  set  speed  to 40\n  set  job  to  idle\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 4  join  job:   (job)  at x: 0 y: 60  by small pixel\n    if  (job) =\
+    \ fetch  then\n      moves forward  at (speed)  RPM\n      if  quad rgb sensor 1 probe (3) L1 detects\
+    \  red ?  then\n        stop encoder motor  all\n        grip\n        set  job  to  carry\n   \
+    \ if  (job) = carry  then\n      lift  60\n      moves forward  100  cm  until done\n      set \
+    \ job  to  deliver\n    if  (job) = deliver  then\n      lift  20\n      release\n      set  job\
+    \  to  idle\n\nwhen joystick  middle pressed\n  add  (servo (1) S1 current angle (°))  to  poses\n\
+    \  show label 1  join  poses:   (length of poses)  at x: 0 y: 0  by small pixel\n\nwhen button A\
+    \ pressed\n  set  stop  to  ((length of poses) + 1)\n  count with  i  from 1 to (stop) by step 1\
+    \ repeat\n    lift  (item (i) of poses)\n    wait 0.4 seconds\n\nwhen button B pressed\n  set  sides\
+    \  to 0\n  repeat 3\n    repeat 4\n      moves forward  20  cm  until done\n      turns right  90\
+    \  ° until done\n      change  sides  by 1\n    LED all displays R  (pick random 0\
+    \ to 255)  G 0 B 120\n  show label 2  join  sides driven:   (sides)  at x: 0 y: 20  by small pixel\n\
+    \nwhen joystick  pulled↑\n  reset encoder motor  (1) EM1  rotated angle\n  set  target  to 1200\n\
+    \  forever\n    set  left  to  ((target) - (encoder motor (1) EM1 rotated angle (°)))\n    set \
+    \ speed  to  ((left) * 0.06)\n    if  (speed) > 80  then\n      set  speed  to 80\n    if  (speed)\
+    \ < 15  then\n      set  speed  to 15\n    show label 3  join  spd:   (speed)  at x: 0 y: 40  by\
+    \ small pixel\n    moves forward  at (speed)  RPM\n    if  (left) < 40  then\n      stop encoder\
+    \ motor  all\n      stop  this script\n\nwhen joystick  pulled←\n  set  job  to  fetch"
+tips:
+- A job with no way out is a trap, and every class builds one. Finding it by trying to strand the robot
+  is the lesson, not a failure.
+- The job name on screen makes every later bug visible from across the room. Do not let anyone skip
+  it.
+- Foam blocks and a generous drop zone today. Precision comes in Stage E.
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits]
+    - [FETCH, '#16a34a', 'drives, finds red']
+    - [CARRY, '#0891b2', 'arm up, 100 cm']
+    - [DELIVER, '#7c3aed', 'arm down, lets go']
+    trans:
+    - [0, 1, 'joystick ←']
+    - [1, 2, 'gripped it']
+    - [2, 3, arrived]
+    - [3, 0, 'let go']
+    caption: one variable holds the job — every arrow is a thing that happens
+success:
+- Four jobs, each labelled on screen and each escapable
+- A full fetch-carry-deliver cycle, three times running
+- At least one arrow added after testing that was not on the original diagram
+check:
+- do: A
+  see: The press A to start message goes, and the screen shows job idle instead. Idle is a job like
+    any other — having nothing to do is a state, not a bug.
+- do: left
+  see: The word on screen changes from idle to fetch and it drives off hunting for the red patch. One
+    push of the joystick moved it along one arrow of the diagram.
+- do: see
+  see: On the patch it stops, grips, and the screen says carry; it drives a metre, says deliver, lowers
+    the arm, lets go, and comes back to idle. Four jobs, four arrows, nobody touching it.
+parts:
+- id: robot_tank
+- id: foam
+- id: patches
+  note: drop zone
+- id: craft
+  note: paper for the diagram
+

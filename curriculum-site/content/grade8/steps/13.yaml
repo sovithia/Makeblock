@@ -1,0 +1,99 @@
+n: 13
+stage: C
+stage_title: Interaction
+kind: step
+title: A menu on the robot
+concept: List + variable + event as an interface
+hours: 2
+project: G8-C-connects
+goal: The Rover offers a menu on its own screen, navigated with the joystick, that runs the chosen job.
+build: A robot with a user interface.
+builds_on:
+- Step 12 · inputs
+- Step 7 · lists
+- Step 10 · jobs
+teach:
+- 'A menu is three things you already have, put together: a <b>list</b> of the options, a <b>variable</b>
+  holding which one is highlighted, and <b>events</b> that move the highlight and choose. There is nothing
+  new here — which is the point, and worth saying, because students rarely notice when they have crossed
+  from copying to composing.'
+- 'Wrapping the highlight around from the bottom back to the top is the interesting bit, and it is a
+  decision, not a rule: what <i>should</i> happen at the end of the list? Stopping and wrapping are
+  both defensible. Make them choose and defend it.'
+guide:
+- label: Options
+  value: a list of job names
+- label: Highlight
+  value: one variable, an index
+- label: Choose
+  value: joystick middle → set job
+- label: Floor
+  value: 3 m clear — the drive script is still on board
+steps:
+- time: 15′
+  text: List your robot's jobs. That list is your menu — no new code needed to have one.
+  expect: A written list of your robot’s jobs — which is already a menu, before any new code.
+- time: 25′
+  text: Show all the options on screen with the current one marked. Move the highlight with the joystick.
+  use:
+  - cyberpi_display_clear
+  - cyberpi_display_println
+  - cyberpi_when_direction_key_press
+  expect: All the options on screen with one marked, and the joystick moving the mark up and down.
+- time: 25′
+  text: Decide what happens at the ends of the list. Implement your choice and defend it to another
+    team.
+  use:
+  - control_if_else
+  expect: A decided, implemented answer to what happens at the end of the list — and a defence of it
+    to another team.
+- time: 25′
+  text: 'Wire selection: pressing the joystick sets the job variable and the Step 10 loop takes over.'
+  use:
+  - data_setvariableto
+  expect: Pressing the joystick sets the job, and the Step 10 loop takes it from there.
+- time: 20′
+  text: Hand it to someone who has never seen it and watch them use it without instructions. That is
+    the only test that counts.
+  expect: Someone who has never seen the robot uses the menu with no instructions from you. That is
+    the only test that counts.
+- time: 10′
+  text: Log which parts of the menu were new code and which were reused.
+  expect: A log line splitting the menu into what was new code and what was reused.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\nwhen button A pressed\n  forever\n    encoder motor EM1 rotates at\
+    \ ((joystick LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n    if  button\
+    \  L1  pressed  then\n      grip\n    if  button  R1  pressed  then\n      release\n    if  button\
+    \  1  pressed  then\n      celebrate\n\nwhen CyberPi starts up\n  delete all of  menu\n  add  fetch\
+    \  to  menu\n  add  patrol  to  menu\n  add  dance  to  menu\n  set  pick  to 1\n  forever\n   \
+    \ clear screen\n    set  stop  to  ((length of menu) + 1)\n    count with  i  from 1 to (stop) by\
+    \ step 1 repeat\n      if  (i) = (pick)  then\n        print  join  PICK   (item (i) of menu)  and\
+    \ move to a newline\n      else\n        print  (item (i) of menu)  and move to a newline\n\nwhen\
+    \ joystick  pulled↓\n  change  pick  by 1\n  if  (pick) > (length of menu)  then\n    set  pick\
+    \  to 1\n\nwhen joystick  middle pressed\n  set  job  to  (item (pick) of menu)"
+tips:
+- Redrawing every label every loop pass is fine and simple. If it flickers, clear less often rather
+  than redrawing less.
+- The wrap-around decision is a genuine design choice. Do not tell them the answer.
+- A menu nobody can use without instructions is a failed menu, however good the code is.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["> fetch", "#7dd3fc", 11, true]
+    - ["  patrol", "#facc15", 10, false]
+    - ["  deliver", "#22c55e", 10, false]
+    caption: the joystick moves a highlight and selects a job
+success:
+- A menu of at least three options, navigable and selectable
+- A deliberate, defended decision about what happens at the ends of the list
+- A stranger used it without being told how
+check:
+- do: down
+  see: The arrow moves to the next job on the screen.
+- do: mid
+  see: The job you picked becomes the robot's job.
+parts:
+- id: robot_tank

@@ -1,0 +1,73 @@
+n: 18
+title: Build Sprint III
+goal: 'Full mission integration: navigation + manipulation attempts on the complete course.'
+builds_on:
+- S16–S17 · navigation + manipulation halves
+teach:
+- 'Integration week peaks: manipulation joins navigation and full mission attempts begin. Expect the seam
+  bugs from Session 13 at mission scale — stop accuracy vs. arm alignment — plus the new one: <b>cumulative
+  drift</b> over a longer course (small navigation errors sum; missions that pick early and deliver late
+  feel it most). The state-machine structure from Session 14 earns its keep now: teams with clean states
+  can add a re-align step to one state without touching the rest.'
+- 'Keep a visible run log per team on the wall: attempt number, phases completed, failure point. The log
+  turns frustration into data — ‘we fail at delivery 3 of 4 times’ is actionable; ‘it keeps breaking’
+  is despair. It also quietly writes the failure-story half of the pitch. Teams at their cut line make
+  the cut today, without shame — point at the board from Session 15.'
+steps:
+- time: 5′
+  text: Standup; run-log sheets posted per team.
+- time: 33′
+  text: Full mission attempts; every attempt logged; fixes between runs follow one-change discipline.
+- time: 7′
+  text: 'Milestone: at least one full-mission success, or the cut executed and the reduced mission succeeding.'
+tips:
+- Enforce the log — memory lies under sprint pressure, paper doesn’t.
+- Battery sag changes stop distance late in the hour; note battery level in the log too (Grade 7 wisdom,
+  still true).
+result:
+  scene: work
+success:
+- Full mission completed at least once (original or post-cut scope)
+- Run log with phase-level failure data
+- One drift/seam fix implemented via a single state change
+parts:
+- id: robot_arm
+- id: tablet
+- id: foam
+  note: run log on the wall
+- id: shield
+  note: log battery level too
+long:
+  goal: A phase-level run log that turns frustration into data, and one seam or drift fix made through a single
+    change.
+  recap:
+    time: 10′
+    text: Read the log before touching the robot. Whatever the wall sheet says fails most is where the hour
+      goes. "We fail at delivery three times out of four" is a work item; "it keeps breaking" is a mood —
+      and under sprint pressure the log is the only reliable difference between the two.
+  extend:
+  - spec: full mission once
+    text: Original scope or the post-cut scope. Executing the cut counts as success, and pretending the cut
+      was not needed does not.
+  - spec: phase-level logging
+    text: Every attempt records the phase it reached, not merely pass or fail.
+  - spec: one-change fixes only
+    text: Every fix between runs is a single logged change, so the log stays readable as evidence.
+  log:
+    time: 10′
+    text: The wall run log — attempt, phases completed, failure point, battery level. Battery sag changes
+      stop distance late in the hour; that was Grade 7 wisdom and it is still true two years and two robots
+      later.
+  review:
+    time: 15′
+    text: Teams read their own failure distribution aloud. Criteria — does the log identify one dominant failure
+      point, and is the next action aimed at that point rather than at whichever failure was most annoying
+      to watch?
+  parts:
+  - id: craft
+    note: wall run-log sheets
+  - id: timer
+  success:
+  - The dominant failure point identified from the log rather than from memory
+  - Every between-run fix was a single logged change
+

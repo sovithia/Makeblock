@@ -1,0 +1,84 @@
+n: 10
+stage: B
+stage_title: រូបយន្តសម្រេចចិត្ត
+kind: step
+title: តំបន់ និងការវារចូល
+concept: if / else ជាន់គ្នា · repeat until
+hours: 2
+project: G7-B-decides
+goal: តំបន់ចម្ងាយបី ដែលមានអាកប្បកិរិយាខុសគ្នា និងការវារចូលដែលឈប់ត្រង់ 5 cm។
+build: រូបយន្តដែលបន្ថយល្បឿនពេលចូលជិត ជំនួសឲ្យការហ្វ្រាំងភ្លាម។
+builds_on:
+- ជំហានទី ៧ · if
+teach:
+- ការសម្រេចចិត្តមួយឲ្យលទ្ធផលពីរ។ ការសម្រេចចិត្តពីរជាន់គ្នា ឲ្យបី៖ <b>ឆ្ងាយ</b> → ល្បឿនពេញ, <b>ជិត</b>
+  → វារ, <b>ជិតពេក</b> → ឈប់។ រូបយន្តពិតស្ទើរតែមិនដែលមានតែពីរស្ថានភាពទេ ហើយសិស្សគួរតែមានអារម្មណ៍ពីភាពខុសគ្នារវាងរូបយន្តដែលហ្វ្រាំង
+  និងរូបយន្តដែលចូលមកជិត។
+- បន្ទាប់មករង្វិលជុំប្រភេទផ្សេង។ <b>repeat until</b> បន្តរហូតដល់អ្វីមួយក្លាយជាពិត — មិនមែនការរាប់ទេ
+  តែជា <b>លក្ខខណ្ឌ</b>។ "វារទៅមុខរហូតដល់ចម្ងាយស្មើ 5" គឺជាប្លុកតែមួយដែលនិយាយពិតប្រាកដនូវអ្វីដែលអ្នកចង់មានន័យ
+  ហើយវាជារបៀបធម្មជាតិក្នុងការសរសេរការចូលមកជិត។
+guide:
+- label: សាកល្បង
+  value: button B → approach, creep, arrive
+- label: ឆ្ងាយ
+  value: '> 25 cm — ល្បឿនពេញ'
+- label: ជិត
+  value: 10–25 cm — វារ
+- label: ឈប់
+  value: ≤ 5 cm — ឈប់
+- label: ឥដ្ឋ
+  value: ទំនេរ ២ ម៉ែត្រ តំបន់បីបិទកាសែតលើឥដ្ឋ
+steps:
+- time: 15′
+  text: គូរតំបន់ទាំងបីលើក្រដាសជាមួយលេខក្នុងវា រួចបិទវាដោយកាសែតលើឥដ្ឋ ដើម្បីឲ្យតំបន់ក្លាយជាពិត។
+  expect: តំបន់បីគូរលើក្រដាសជាមួយលេខរបស់វា រួចបិទកាសែតលើឥដ្ឋត្រង់កន្លែងរូបយន្តនឹងបើកពិត។
+- time: 30′
+  text: សាងសង់ if/else ជាន់គ្នា។ បើកបរឆ្លងកាត់ទាំងបីតំបន់ ហើយមើលល្បឿនប្រែប្រួល។
+  expect: បើកវាឆ្លងកាត់តំបន់ទាំងបី ហើយល្បឿនប្ដូរឲ្យឃើញច្បាស់នៅព្រំដែននីមួយៗ។
+- time: 25′
+  text: សរសេរផ្នែកចុងក្រោយឡើងវិញដោយ repeat until។ អាកប្បកិរិយាដូចគ្នា ប្លុកតែមួយ ហើយវាអានដូចប្រយោគដែលអ្នកនឹងនិយាយឮៗ។
+  expect: អាកប្បកិរិយាដដែល ប៉ុន្តែកម្មវិធីឥឡូវអានដូចឃ្លាដែលអ្នកនឹងនិយាយឮៗ។
+- time: 25′
+  text: ការប្រកួតភាពជាក់លាក់៖ ឈប់ត្រង់ 5 cm បីដង វាស់។ មធ្យមភាគជិតបំផុតឈ្នះ។
+  expect: ការសាកល្បងបីដងឈប់ត្រង់ ៥ ស.ម. និងមធ្យមភាគមួយដែលអាចធៀបនឹងក្រុមផ្សេង។
+- time: 15′
+  text: បង្ហាញតំបន់បច្ចុប្បន្នលើអេក្រង់ជាពាក្យ មិនមែនលេខ។ អ្នកមើលគួរតែដឹងថារូបយន្តគិតអ្វី ពីម្ខាងបន្ទប់។
+  expect: ពាក្យមួយលើអេក្រង់ — មិនមែនលេខ — ដែលប្រាប់អ្នកមើលពីចម្ងាយថារូបយន្តគិតថាវានៅតំបន់ណា។
+- time: 10′
+  text: កត់ត្រាព្រំដែនដែលអ្នកជ្រើស និងហេតុអ្វី។ ជំហានទី ២៤ ត្រូវការវា។
+  expect: ព្រំដែនដែលអ្នកជ្រើស និងហេតុផលនីមួយៗក្នុងកំណត់ហេតុ។ ជំហានទី ២៤ ត្រូវការព្រំដែនដែលអ្នកទុកចិត្ត។
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  forever\n    show label 1  join  dist:   (ultrasonic 2 1 distance\
+    \ to an object (cm))  at x: 0 y: 0  by small pixel\n    show label 2  join  light:  (ambient light\
+    \ intensity)  at x: 0 y: 20  by small pixel\n    show label 3  join  loud:   (loudness)  at x: 0\
+    \ y: 40  by small pixel\n    line chart, add data  (ultrasonic 2 1 distance to an object (cm))\n\
+    \nwhen button A pressed\n  forever\n    if  (ultrasonic 2 1 distance to an object (cm)) < 15  then\n\
+    \      stop encoder motor  all\n      ultrasonic 2 1 displays emotion  dizzy\n    else\n      moves\
+    \ forward  at 50  RPM\n      ultrasonic 2 1 displays emotion  standby\n\nwhen button B pressed\n\
+    \  repeat until  (ultrasonic 2 1 distance to an object (cm)) < 25\n    moves forward  at 60  RPM\n\
+    \    show label 4  approaching  at center of screen  by small pixel\n  repeat until  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 5\n    moves forward  at 15  RPM\n    show label 4  creeping\
+    \  at center of screen  by small pixel\n  stop encoder motor  all\n  show label 4  arrived  at center\
+    \ of screen  by small pixel"
+tips:
+- ព្រំដែនពីរ មិនមែនមួយ គឺជាអ្វីដែលធ្វើឲ្យការចូលមកជិតរលូន។ ក្រុមដែលប្រើតែមួយនឹងទៅដល់ ហើយហួស។
+- repeat until ងាយច្រឡំជាមួយ repeat n។ សួរថា "វាដំណើរការប៉ុន្មានដង?" — បើចម្លើយគឺ "រហូតដល់អ្វីមួយកើតឡើង"
+  នោះជាប្លុកត្រឹមត្រូវ។
+- ពាក្យលើអេក្រង់ធ្វើឲ្យការកែកំហុសងាយស្រួលជាងច្រើន។ តម្រូវឲ្យមាន។
+result:
+  scene: ifelse
+success:
+- អាកប្បកិរិយាបីខុសគ្នាលើតំបន់បីដែលបិទដោយកាសែត
+- ការវារឈប់ក្នុង 1 cm ពីចំណុច 5 cm បីដងជាប់គ្នា
+- រូបយន្តប្រាប់ឈ្មោះតំបន់បច្ចុប្បន្នលើអេក្រង់
+check:
+- do: B
+  see: It hurries up close, then creeps, then stops and says arrived.
+parts:
+- id: robot_wheel
+- id: boxes
+- id: tape
+  note: zone lines
+- id: ruler
+

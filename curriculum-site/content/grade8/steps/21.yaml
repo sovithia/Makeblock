@@ -1,0 +1,63 @@
+n: 21
+stage: D
+stage_title: Voice
+kind: checkpoint
+title: Checkpoint 4 — voice and integration
+concept: Catch-up gate
+hours: 1
+project: G8-D-listens
+goal: Every student can make the robot act on a spoken command, handle being misheard, and say how AI
+  fits the pattern they already knew.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 16–19
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches make the robot ask a follow-up question when it is not sure — “Did you say fetch?” — and act on the answer.'
+- Last gate before the mission. Stage E assembles a real job out of everything above, and the students
+  who struggle there are always the ones who never quite understood how the inputs reach the state machine.
+- Coaches, hands off, buffer where needed.
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up. Say plainly that the mission starts next.
+  expect: A class that knows the mission starts next.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> add a new spoken command and map it to an existing job without
+    changing that job''s blocks. <b>(2)</b> show what your robot does when it mishears, and explain why
+    it must not guess.
+    <b>(3)</b> explain how a spoken command reaches the job variable — and why that is the same path
+    a button press takes.'
+  expect: 'Three challenges shown: a new spoken command mapped to an existing job without changing the
+    job itself, a demonstrated mishearing that does not guess, and the path from a spoken word to the
+    job variable.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- AI
+- Variables
+- Control
+tips:
+- Challenge 1 is the test of whether the vocabulary really is data. If they have to add a block, their
+  design is not there yet.
+- Challenge 3 is the one that shows whether AI has been understood or merely operated.
+- Last checkpoint — if anyone is still behind, plan the mission teams so they are paired with a coach
+  rather than carried by one.
+result:
+  scene: healthcheck
+  params:
+    checks: [new voice command mapped, no-match path demonstrated, input-to-job path explained]
+    caption: every student clears the voice-integration gate
+success:
+- Every student demonstrated all three challenges
+- Every robot has a sensible no-match behaviour
+- The class starts the mission together
+parts:
+- id: robot_tank
+- id: router

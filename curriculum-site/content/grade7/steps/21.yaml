@@ -1,0 +1,130 @@
+n: 21
+stage: D
+stage_title: The robot is organised
+kind: step
+title: The robot has modes
+concept: State machine
+hours: 2
+project: G7-D-organised
+goal: One variable decides what the robot is doing, and the team can say what makes it change.
+build: 'A robot with jobs: patrol, follow, deliver.'
+builds_on:
+- Step 20 · follow_line
+- Step 18 · your own blocks
+- Step 13 · variables
+teach:
+- 'The robot can now do several things. It needs to know <b>which one it is doing</b> — and that is
+  one variable holding a word: patrol, follow, deliver. The main loop is then very short: look at the
+  mode, run the block for that mode. Each job stays a small program, and the loop just picks.'
+- The interesting part is the <b>transitions</b> — what makes it change. A button. A red patch under
+  the sensor. A job finishing. Draw them as arrows on paper before writing any blocks, because the arrows
+  you forget are exactly the ones that strand the robot mid-mission.
+guide:
+- label: State
+  value: one variable, holding a word
+- label: Loop
+  value: read mode → run that block
+- label: Draw first
+  value: arrows on paper before blocks
+- label: Floor
+  value: the line course plus a red patch to deliver to
+steps:
+- time: 15′
+  text: 'On paper: three boxes, arrows between them, and the condition written on each arrow. No blocks
+    yet.'
+  expect: Three boxes on paper with arrows between them and a condition written on every arrow. Still
+    no blocks.
+- time: 25′
+  text: Build the mode variable and the main loop. Each mode calls a block you already wrote.
+  use:
+  - data_setvariableto
+  - control_forever
+  - control_if_else
+  expect: One variable holding the mode, and a main loop that hands the work to blocks you already wrote.
+- time: 25′
+  text: 'Wire the transitions: joystick up starts following, joystick down goes back to patrol, a red
+    patch means deliver, and delivering goes back to patrol when it is done.'
+  use:
+  - cyberpi_when_direction_key_press
+  - my:follow_line
+  - my:celebrate
+  expect: 'Every arrow on your paper works on the robot: joystick up follows, joystick down patrols,
+    red delivers, delivering returns to patrol.'
+- time: 20′
+  text: Show the mode on the screen as a word. You should be able to tell what the robot is thinking
+    from across the room.
+  use:
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: A word on the screen telling a watcher across the room which mode the robot is in.
+- time: 25′
+  text: 'Try to strand it: can you get the robot into a mode with no way out? If you can, that is a
+    missing arrow — go and add it.'
+  expect: A deliberate attempt to trap the robot in a mode with no way out — and every trap you found
+    turned into a new arrow.
+- time: 10′
+  text: Log the diagram, with the arrows you had to add after testing. Step 23 starts from this diagram.
+    Bring it.
+  expect: The diagram in the log, including the arrows you only discovered by testing. Step 23 starts
+    from it.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\ndefine  follow_line\n  if  quad\
+    \ rgb sensor 1 probe (3) L1 detects  line ?  then\n    encoder motor EM1 rotates at 15 RPM, encoder\
+    \ motor EM2 rotates at 55 RPM\n  else\n    if  quad rgb sensor 1 probe (2) R1 detects  line ?  then\n\
+    \      encoder motor EM1 rotates at 55 RPM, encoder motor EM2 rotates at 15 RPM\n    else\n    \
+    \  moves forward  at (speed)  RPM\n\nwhen button A pressed\n  scan\n  if  (found) = 1  then\n  \
+    \  celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square  60\n\nwhen joystick \
+    \ middle pressed\n  set  speed  to 40\n  quad rgb sensor 1 performs calibration\n  forever\n   \
+    \ follow_line\n    show label 1  join  err:   (quad rgb sensor 1 deviation (-100~100))  at x: 0\
+    \ y: 0  by small pixel\n\nwhen CyberPi starts up\n  set  mode  to  idle\n  show label 1  press A\
+    \ to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n  forever\n    show\
+    \ label 2  join  mode:   (mode)  at x: 0 y: 20  by small pixel\n    if  (mode) = patrol  then\n\
+    \      scan\n    if  (mode) = follow  then\n      follow_line\n      if  quad rgb sensor 1 probe\
+    \ (3) L1 detects  red ?  then\n        set  mode  to  deliver\n    if  (mode) = deliver  then\n\
+    \      stop encoder motor  all\n      celebrate\n      set  mode  to  patrol\n\nwhen joystick  pulled↑\n\
+    \  set  mode  to  follow\n\nwhen joystick  pulled↓\n  set  mode  to  patrol"
+tips:
+- States are things the robot <i>is doing</i> — patrol, follow, deliver. If a team's state is a number
+  with no name, ask them what state 3 means.
+- A mode with no way out is a trap, and every class builds at least one. Finding it by trying to strand
+  the robot is the lesson.
+- The mode on screen makes every later bug ten times easier to see. Do not let anyone skip it.
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits for you]
+    - [FOLLOW, '#0891b2', follows the line]
+    - [DELIVER, '#7c3aed', 'stops, celebrates']
+    - [PATROL, '#16a34a', 'turns, looks around']
+    trans:
+    - [0, 1, 'joystick ↑']
+    - [1, 2, red patch]
+    - [2, 3, celebrated]
+    - [0, 3, 'joystick ↓']
+    caption: one variable holds the mode — the joystick can change it at any moment
+success:
+- Three modes, each visibly labelled and each reachable
+- Every mode can be left again — no traps
+- The paper diagram matches what the robot actually does
+check:
+- do: up
+  see: The screen says follow, and it follows the line.
+- do: down
+  see: The screen says patrol, and it looks around instead.
+- do: see
+  see: On a red patch it stops, celebrates, and goes back to patrol.
+parts:
+- id: robot_wheel
+- id: map
+- id: patches
+  note: red = deliver
+- id: craft
+  note: paper for the diagram
+

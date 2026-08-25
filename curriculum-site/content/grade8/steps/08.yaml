@@ -1,0 +1,94 @@
+n: 8
+stage: B
+stage_title: Algorithms on new hardware
+kind: step
+title: A loop inside a loop
+concept: Nested loops
+hours: 2
+project: G8-B-thinks
+goal: The team predicts exactly how many times the inner blocks run, before pressing go.
+build: A patrol pattern built from a loop inside a loop.
+builds_on:
+- Step 7 · lists and count with i
+- Grade 7 · repeat
+teach:
+- A loop inside a loop multiplies. <b>repeat 3</b> wrapped around <b>repeat 4</b> runs the inside twelve
+  times, and the question to ask before every single run is "how many times does the inner block happen?"
+  A student who can answer that reliably has understood loops; one who cannot will guess for the rest
+  of the year.
+- It is also how patterns get built without repetition. Three laps of a square, with a flash between
+  laps, is two loops and four blocks — the alternative is thirty-six blocks and a mistake somewhere
+  in the middle of them.
+guide:
+- label: Ask first
+  value: how many times does the inside run?
+- label: Outer × inner
+  value: 3 × 4 = 12
+- label: Prove it
+  value: count it in a variable
+- label: Floor
+  value: 1 m clear — three squares of 20 cm sides
+steps:
+- time: 15′
+  text: 'Predict: repeat 3 around repeat 4 — how many sides get driven? Everyone writes a number before
+    anything runs.'
+  expect: Everyone has written a number down before a single block runs.
+- time: 25′
+  text: Build it and count for real, with a variable that increments inside the inner loop. Compare
+    with your prediction.
+  use:
+  - control_repeat
+  - data_changevariableby
+  expect: A counter that says how many sides really got driven, next to the number you predicted.
+- time: 25′
+  text: 'Make the pattern mean something: a square patrol per lap, with the CyberPi LED ring changing colour
+    between laps.'
+  use:
+  - cyberpi_led_show_single_with_rgb_2
+  expect: A square patrol per lap with the built-in LED ring changing colour between laps, so you can see the
+    outer loop turning over.
+- time: 25′
+  text: Three predictions in a row, each with different numbers, all called before running. Three out
+    of three is the target.
+  expect: Three predictions called before three runs. Three out of three is the target.
+- time: 20′
+  text: Swap programs and predict another team's count by reading it, without running it.
+  expect: Another team’s count predicted by reading their program, without running it.
+- time: 10′
+  text: Log the rule in your own words, with one worked example.
+  expect: The rule in your own words with one worked example beside it.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  delete all of  poses\n\nwhen joystick  middle pressed\n  add  (servo\
+    \ (1) S1 current angle (°))  to  poses\n  show label 1  join  poses:   (length of poses)  at x:\
+    \ 0 y: 0  by small pixel\n\nwhen button A pressed\n  set  stop  to  ((length of poses) + 1)\n  count\
+    \ with  i  from 1 to (stop) by step 1 repeat\n    lift  (item (i) of poses)\n    wait 0.4 seconds\n\
+    \nwhen button B pressed\n  set  sides  to 0\n  repeat 3\n    repeat 4\n      moves forward  20 \
+    \ cm  until done\n      turns right  90  ° until done\n      change  sides  by 1\n    LED\
+    \ all displays R  (pick random 0 to 255)  G 0 B 120\n  show label 2  join  sides driven:\
+    \   (sides)  at x: 0 y: 20  by small pixel"
+tips:
+- Ask "how many times?" before every run, every time, until it is automatic. It is the single best comprehension
+  check in the course.
+- A counter inside the inner loop settles arguments instantly. Insist on it rather than letting teams
+  debate.
+- Clear floor space. Three laps of a square is a lot more travel than teams expect.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["outer loops: 3", "#7dd3fc", 10, true]
+    - ["inner sides: 4", "#facc15", 10, false]
+    - ["total: 12", "#22c55e", 11, true]
+    caption: three square laps make twelve inner-loop runs
+success:
+- The inner-loop count predicted correctly before running, three times
+- A pattern built from nested loops rather than repeated blocks
+- Another team's count predicted by reading their program
+check:
+- do: B
+  see: It drives three squares, changes colour after each, and shows 12.
+parts:
+- id: robot_tank
+- id: tape
+  note: patrol area

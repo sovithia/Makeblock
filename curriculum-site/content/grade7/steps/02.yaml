@@ -1,0 +1,106 @@
+n: 2
+stage: '0'
+stage_title: Build the robot
+kind: step
+title: Finish it — sensors, shield, first power-on
+concept: Quality control before it matters
+hours: 2
+goal: A finished robot that another team has inspected and signed off, powered on for the first time.
+build: A robot that is yours, checked by somebody else, and switched on.
+builds_on:
+- Step 1 · chassis, motors, wheels
+teach:
+- 'Finish the build: the two sensors underneath and in front, then the mBot2 Shield on top — its battery
+  is <b>built in</b>, so charge it before this lesson — and the CyberPi last. Cables go in with the
+  <b>10 cm</b> mBuild leads; the guide crosses the 20 cm one out in red, and a cable left loose near a
+  wheel is the commonest cause of a robot that "randomly stops" in week nine.'
+- 'Then <b>quality control</b>, which is a real engineering practice and not a tidying-up ritual. Each
+  team inspects <i>another</i> team''s robot against four points and signs it. You stop seeing your own
+  mistakes after twenty minutes with a screwdriver; somebody else sees them in ten seconds. Everything
+  the class finds today is a fault that does not eat a lesson later.'
+- '<b>EM means encoder motor.</b> EM1 and EM2 are the two numbered motor ports on the Shield — they are
+  not different kinds of motor. A block that says EM1 controls whichever motor cable is plugged into
+  port EM1, and likewise for EM2. On this standard mBot2 build, connect the left motor to EM1 and the
+  right motor to EM2; that lets later blocks use those names to choose a wheel.'
+- '<b>A port contains several electrical pins.</b> S1 and S2 are multifunction connectors; each has
+  separate contacts for power, ground and a signal. A digital-read block looks only at the signal
+  voltage relative to ground and turns it into a yes/no answer: near ground is <b>low / false</b>, and
+  near the positive logic supply is <b>high / true</b>. In a common pull-down switch circuit, open is
+  low and closing the switch makes it high. Some sensors are <b>active-low</b> and reverse that meaning,
+  so their documentation wins. A signal with nothing connected can <b>float</b> unpredictably and is
+  not a valid reading. This course does not wire custom circuits to those pins, but those words explain
+  what the raw S1/S2 pin blocks in the palette are reading.'
+build_images:
+- g7-11
+- g7-12
+- g7-13
+- g7-14
+build_caption: mbot2.pdf · printed pages 11–14 · guide steps ④–⑩
+guide:
+- label: Guide
+  value: mbot2.pdf pp. 13–14, steps ④–⑩
+- label: Cables
+  value: 10 cm mBuild · left motor → EM1, right → EM2
+- label: QC
+  value: wheels · cables · battery · rattle
+steps:
+- time: 30′
+  text: 'Fit the underside and the front: Quad RGB sensor and mini wheel below (M4×14), ultrasonic sensor
+    at the front (M4×14). The ultrasonic must face exactly forward — a small tilt gives nonsense readings
+    for the rest of the year.'
+  expect: 'Quad RGB underneath, ultrasonic at the front. Sight along the chassis: the ultrasonic looks
+    straight ahead, not tilted up, down or sideways.'
+- time: 20′
+  text: 'Shield on with the four long M4×25 screws, CyberPi slides in last. Route the cables and tuck
+    them where no wheel can reach them. Read the port labels as you connect the motors: EM means encoder
+    motor; left motor → EM1 and right motor → EM2.'
+  expect: Shield screwed down with the four long screws, CyberPi seated, left motor in EM1, right motor
+    in EM2, and no cable anywhere a wheel could catch it.
+- time: 15′
+  text: 'Cross-team QC. Four points, inspected on somebody else''s robot and signed: wheels turn freely
+    · cables tucked · battery seated · nothing rattles when shaken.'
+  expect: 'Four checks signed off on somebody else''s robot: wheels free · cables tucked · battery seated
+    · nothing rattles.'
+- time: 10′
+  text: Fix whatever QC found on your own robot. Then shake it and spin the wheels in front of the class.
+  expect: Your own robot passes all four, shaken and spun in front of the class.
+- time: 15′
+  text: 'Power on for the first time. It lights up and shows the Makeblock screen — that is all it does
+    yet, and that is the point: the robot exists, and next step you make it yours.'
+  expect: It lights up and shows the Makeblock screen. It does nothing else yet — that is exactly right.
+- time: 10′
+  text: 'Name the robot and label it. On your lesson sheet: what did QC catch on the robot you inspected?'
+  expect: A robot with a name on it, and a log line naming what QC caught on the robot you inspected.
+tips:
+- The ultrasonic sensor must face exactly forward. Sight down it from above before tightening.
+- 10 cm cables for the sensors. Teams reaching for the 20 cm one are on the step the guide crossed out.
+- Left motor into EM1, right into EM2. Swapped means the robot turns when told to go straight, and you
+  will not find out until Step 3.
+- The Shield's battery is built in and charges over USB-C. Start every build day charged.
+- Label each robot with its team name now, while there is still one on the bench that is not labelled.
+result:
+  scene: build
+  params: {stage: full}
+success:
+- The robot passes all four QC points, signed by another team
+- Sensors mounted straight and plugged into the right ports
+- It powers on, and the team knows whose robot it is
+check:
+- do: "on"
+  see: It lights up and shows the Makeblock screen. Nothing else yet.
+- do: "see"
+  see: Shake it gently. Nothing rattles and nothing falls off.
+- do: "see"
+  see: Another team has signed your four QC points.
+parts:
+- id: cyberpi
+- id: shield
+- id: ultra
+- id: quadrgb
+- id: miniwheel
+- id: mbuild
+  note: the 10 cm ones
+- id: screws7
+- id: screwdriver
+- id: usb
+  note: charge the shield before this lesson

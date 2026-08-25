@@ -1,0 +1,69 @@
+n: 23
+stage: E
+stage_title: The mission
+kind: step
+title: Design the Rescue Run
+concept: Assembling what you already have
+hours: 1
+project: G7-E-mission
+goal: A signed plan for the full mission, in which every box names a block the team has already built.
+build: A paper plan, and nothing else.
+builds_on:
+- Steps 16–19 · your own blocks and modes
+teach:
+- 'The mission, in full: <b>follow the line → meet an obstacle sitting on it → get around and find the
+  line again → stop inside the red zone → celebrate.</b> Every one of those already exists as a block
+  you wrote, except the way round the obstacle. Today is <b>assembly</b>, which is what real engineering
+  mostly is.'
+- No blocks today, on purpose. Draw the modes and the arrows, and against every box write the name of
+  the block that will run there. A box with no block behind it is a box that will not exist on the day
+  — find those now, while finding them is free.
+guide:
+- label: Mission
+  value: follow → avoid → re-find → stop in zone → celebrate
+- label: Rule
+  value: every box names an existing block
+- label: New today
+  value: only the way round the obstacle
+steps:
+- time: 10′
+  text: Mission brief and the scoring sheet. Walk the course as a class so everyone has seen it.
+  expect: The whole class has walked the actual course and read the scoring sheet.
+- time: 20′
+  text: 'Decompose: list the phases, and beside each write the block you already have. Circle anything
+    with no block behind it.'
+  expect: A list of mission phases with the block you already own written beside each — and a circle around
+    anything with no block behind it yet.
+- time: 20′
+  text: Draw the mode diagram with the arrows, including what happens when a phase fails.
+  expect: A mode diagram with arrows, including what the robot does when a phase fails.
+- time: 10′
+  text: 'Sign-off: the teacher asks two "what if" questions per team. Hand-waving sends the plan back.'
+  expect: Two “what if” questions answered per team without hand-waving. A vague answer sends the plan
+    back.
+blocks:
+- My Blocks
+- Variables
+tips:
+- Refuse boxes like "do the avoiding". Every box must name a block that exists, or be explicitly marked
+  as the one new thing.
+- The obstacle sits <b>on</b> the line — teams must realise that avoiding it means leaving the line
+  and having to find it again.
+- Ask each team which phase they think will fail most. They are usually right, and it tells them where
+  to spend Step 24.
+result:
+  scene: storyboard
+success:
+- Every box on the plan names a block the team has already built
+- The one genuinely new behaviour is identified and agreed
+- Two what-if questions answered from the diagram, teacher signed
+parts:
+- id: craft
+  note: large paper
+- id: cards
+- id: map
+- id: boxes
+  note: the obstacle
+- id: patches
+  note: red rescue zone
+

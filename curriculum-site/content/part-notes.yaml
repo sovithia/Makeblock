@@ -1,0 +1,26 @@
+# How to CHOOSE a classroom item — not what it is used for that week (that is the
+# per-lesson `note:` on each step) but what makes one good or useless. Shown once,
+# on the materials page, under the item's name.
+#
+# Keyed by the part id in generator/parts_catalog.py ICONS. Optional: a part with
+# no entry simply shows no guidance line.
+
+boxes: >-
+  Obstacles and walls, never something the robot picks up. Cardboard cartons,
+  shoebox size or bigger. Two things matter more than size: the face must be
+  <b>tall enough to cover the ultrasonic window</b> at the front of the robot —
+  anything shorter is driven straight over — and it must be <b>heavy enough not
+  to slide</b> when nudged, or every distance the class measures is fiction.
+  Weight them with a book. A flat face reads cleanly; round or angled surfaces
+  scatter the ping and come back as "nothing there".
+
+foam: >-
+  The things the gripper actually holds — small enough to fit between the arms
+  and light enough to lift. <b>Foam only.</b> Wooden or hard plastic blocks
+  strip the servo gears when the grip closes too far, and that damage is
+  permanent.
+
+tape: >-
+  Masking tape, not electrical or duct tape: it must lift off the floor without
+  leaving glue, and the Quad RGB sensor needs a matt surface. Shiny tape
+  reflects unpredictably and the line follower loses the line.

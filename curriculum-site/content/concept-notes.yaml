@@ -1,0 +1,95 @@
+# The IDEA a step introduces, as opposed to what its individual blocks do.
+#
+# Keyed by grade and step — `G7-16` — not by the concept's name, because the
+# concept string is translated and a Khmer build would match nothing. A note
+# appears simply by being written here; no step YAML has to opt in. It renders
+# above the block list, under the step's own concept heading.
+#
+# content-km/concept-notes.yaml overrides this file when it exists, so the notes
+# can be translated without touching the generator.
+#
+# Deliberately not one per step. A concept note earns its place when the idea
+# outlives the blocks that carry it — a function is a function in every language,
+# a loop is a loop. "Skid steering · recalibration" needs no paragraph of theory;
+# it needs the lesson text, which it already has. Where there is no entry here,
+# nothing is shown.
+#
+# Write for a student who has never met the word. Name the idea, say what problem
+# it solves, and say what it is called outside this classroom.
+
+G7-03: >-
+  Two ideas hold up everything else. A <b>sequence</b> is instructions in order —
+  the robot does one, then the next, and swapping two lines changes what happens.
+  An <b>event</b> is what starts a sequence running. Nothing runs on its own:
+  something has to happen first — the robot powering on, a button going down.
+  Every program you write this year is sequences waiting on events.
+
+G7-05: >-
+  A <b>loop</b> runs the same blocks again without you writing them again. That is
+  worth more than the typing it saves: with a loop, "do this four times" and "do
+  this forty times" are the same program with one number changed. Every language
+  has loops, and this is what they are for.
+
+G7-09: >-
+  A <b>conditional</b> lets the program take a decision while it is running. Up to
+  now your robot did the same thing every time. With <b>if</b>, what it does
+  depends on what is true at that moment — so the same program behaves differently
+  in a different room. This is the block that makes a robot look like it is
+  thinking.
+
+G7-11: >-
+  An <b>operator</b> takes values and produces a new one — comparing two numbers,
+  adding them, joining two pieces of text. They slot into any hole that expects a
+  value, including inside each other, so a small set of them combines into
+  conditions far more precise than any single block could offer.
+
+G7-13: >-
+  A <b>variable</b> is a named box the program can put a value in and read back
+  later. It is how a program <i>remembers</i>: without one, the robot starts every
+  moment knowing nothing about the last one. The name matters as much as the box —
+  <code>walls</code> tells the next reader what is inside, <code>x</code> does not.
+
+G7-15: >-
+  A <b>list</b> is one name holding many values in order, so a program can work
+  with a hundred things without a hundred variables. Reading one out needs its
+  position, which is why a list and a counted loop belong together: the loop hands
+  you 1, 2, 3 … and the list turns each number into the value stored there.
+
+G7-18: >-
+  A <b>function</b> is a piece of program you name, so you can use it by name
+  afterwards. This is the biggest idea in the course. It does two things at once:
+  it stops you writing the same blocks twice, and — more importantly — it lets the
+  main program say <i>what</i> it is doing rather than <i>how</i>. Fixing the
+  behaviour later means fixing it in one place. In mBlock these are called My
+  Blocks; everywhere else they are called functions, procedures or methods.
+
+G7-19: >-
+  A function becomes far more useful when you can hand it a value. The value goes
+  into a named slot — an <b>input</b>, or <i>parameter</i> — and the blocks inside
+  use that name instead of a fixed number. One function with an input replaces a
+  family of near-identical ones, and the caller decides the detail.
+
+G7-21: >-
+  A <b>state machine</b> is a program that is always in exactly one named state,
+  with clear rules for moving between them. Once behaviour gets complicated,
+  tangled <b>if</b>s stop being readable; naming the states — patrol, follow,
+  deliver — turns the program into something you can draw on paper and argue about
+  before you build it. The arrows between the states are the real design.
+
+G8-12: >-
+  There are two ways to notice something happened. An <b>event</b> hat wakes the
+  program up when it happens. <b>Polling</b> means asking, over and over inside a
+  loop, whether it has happened yet. Neither is better — but you have to know
+  which one a device gives you, because a controller with no event hats can only
+  be polled, and a poll that runs too slowly misses things.
+
+G8-14: >-
+  Separate programs coordinate by sending <b>messages</b>. A message with a value
+  attached carries information, not just a signal — and once two programs must
+  agree on the names and what travels with them, you have written a
+  <b>protocol</b>. Agreeing it before writing any blocks is the whole skill.
+
+G8-08: >-
+  A loop inside a loop. The inner one finishes completely on every single pass of
+  the outer one, which is why three of an outer loop around four of an inner gives
+  twelve — a pattern that shows up any time work has rows and columns.

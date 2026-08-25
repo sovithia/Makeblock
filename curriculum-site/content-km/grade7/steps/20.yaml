@@ -1,0 +1,90 @@
+n: 20
+stage: D
+stage_title: រូបយន្តមានរបៀបរៀបរយ
+kind: step
+title: ការដើរតាមខ្សែ
+concept: លក្ខខណ្ឌលើបញ្ហាបញ្ជាពិត
+hours: 2
+project: G7-D-organised
+goal: កម្មវិធីដើរតាមខ្សែសរសេរជាប្លុកមានឈ្មោះតែមួយ ជាមួយកំហុសឃើញលើអេក្រង់ — ហើយការរញ្ជួយត្រូវដាក់ឈ្មោះតែមិនកែ។
+build: follow_line — បេះដូងនៃបេសកកម្ម។
+builds_on:
+- ជំហានទី ១៦ · អនុគមន៍
+- ជំហានទី ៨ · ការសម្រេចចិត្តជាន់គ្នា
+teach:
+- ក្រិតជាមុនសិន គ្រប់ដងតែម្ដង៖ <b>quad rgb sensor performs calibration</b> បង្រៀនឧបករណ៍ចាប់សញ្ញាថាឥដ្ឋនេះ
+  និងពន្លឺនេះមើលទៅយ៉ាងណា។ រំលងវា ហើយគ្មានអ្វីដំណើរការ; ធ្វើវាដោយស្មោះ ហើយទុក្ខព្រួយភាគច្រើននៃការដើរតាមខ្សែបាត់។
+  ធ្វើវាជាពិធី ដូចការពិនិត្យការតភ្ជាប់។
+- កម្មវិធីដើរតាមខ្សែខ្លួនវាគឺជាការសម្រេចចិត្តបី — ខ្សែនៅក្រោមឧបករណ៍ឆ្វេង ក្រោមស្ដាំ ឬត្រង់ទៅមុខ — រុំក្នុងប្លុកឈ្មោះ
+  <b>follow_line</b>។ ដាក់ <b>deviation</b> របស់ឧបករណ៍ចាប់សញ្ញាលើអេក្រង់ពេលវាដំណើរការ ហើយមើលលេខយោលពីអវិជ្ជមាន
+  ទៅសូន្យ ទៅវិជ្ជមាន ពេលរូបយន្តរាវរកឆ្លងកាត់ខ្សែ។ ការយោលនោះគឺ <b>ការរញ្ជួយ</b>។ ដាក់ឈ្មោះវា សរសេរសំណួរលើក្ដារ
+  ហើយ <i>កុំឆ្លើយវា</i> — ថ្នាក់ទី ៩ ចំណាយពីរវគ្គដើម្បីសម្លាប់វា ហើយការរៀបចំមានតម្លៃជាងការកែរហ័សឥឡូវនេះ។
+guide:
+- label: សាកល្បង
+  value: joystick middle → calibrate, then follow
+- label: ជាមុនគ្រប់ដង
+  value: performs calibration
+- label: មើល
+  value: deviation (-100…100) លើអេក្រង់
+- label: ទុកចំហ
+  value: ការរញ្ជួយ — ថ្នាក់ទី ៩ ឆ្លើយវា
+- label: ឥដ្ឋ
+  value: វគ្គខ្សែបិទកាសែត ប្រហែល ២ ម៉ែត្រ
+steps:
+- time: 15′
+  text: ក្រិត។ រួចរំលងការក្រិតដោយចេតនាម្ដង ហើយដំណើរការវា — មើលវាបរាជ័យ។ ឥឡូវគ្មាននរណាភ្លេចទេ។
+  expect: ឧបករណ៍ចាប់សញ្ញាបានក្រិត និងការចងចាំពីអ្វីដែលកើតឡើងពេលអ្នករំលងការក្រិតដោយចេតនា។
+- time: 25′
+  text: សាងសង់ follow_line ជាប្លុករបស់វាផ្ទាល់៖ ឧបករណ៍ឆ្វេង ឧបករណ៍ស្ដាំ បើមិនដូច្នេះទេ ត្រង់។
+  expect: ប្លុក follow_line ដែលឆែកឆ្វេង ឆែកស្ដាំ ហើយបើមិនដូច្នេះទេ បើកត្រង់។
+- time: 25′
+  text: រត់ជុំលើផ្លូវ។ ដាក់ deviation លើអេក្រង់ ហើយមើលវាយោលពេលរូបយន្តបើកបរ។
+  expect: ជុំពេញមួយ ដោយលេខគម្លាតយោលលើអេក្រង់ខណៈរូបយន្តកំពុងបើក។
+- time: 20′
+  text: គូរការរញ្ជួយក្នុងកំណត់ហេតុ។ ហេតុអ្វីវាដើរវៀច? ប្រមូលសម្មតិកម្មលើក្ដារ ហើយទុកពួកវានៅទីនោះ។
+  expect: រូបគូរនៃការយោលក្នុងកំណត់ហេតុ និងសម្មតិកម្មរបស់ថ្នាក់ថាហេតុអ្វី ទុកនៅលើក្ដារ។
+- time: 25′
+  text: ជុំចាប់ម៉ោង។ ប្ដូរលេខមួយក្នុងមួយដង — ល្បឿនគោល ឬល្បឿនបញ្ជាទិសទាំងពីរ — ហើយកត់ត្រាអ្វីដែលវាធ្វើ។
+  expect: ជុំកំណត់ម៉ោង ដែលមានលេខតែមួយប្ដូរក្នុងមួយជុំ សរសេរទុករាល់ដងជាមួយលទ្ធផល។
+- time: 10′
+  text: កត់ត្រាជុំល្អបំផុតរបស់អ្នក និងលេខដែលបង្កើតវា។ ជំហានទី ២២ ត្រូវការពួកវា។
+  expect: ជុំល្អបំផុតរបស់អ្នក និងលេខដែលបង្កើតវា។ ជំហានទី ២៤ ត្រូវការវា។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\ndefine  turn_by (deg)\n  reset encoder motor  (1) EM1  rotated angle\n  encoder motor\
+    \ EM1 rotates at 30 RPM, encoder motor EM2 rotates at -30 RPM\n  wait until  (encoder motor (1)\
+    \ EM1 rotated angle (°)) > (deg)\n  stop encoder motor  all\n\ndefine  drive_square (size)\n  repeat\
+    \ 4\n    moves forward  (size)  cm  until done\n    turn_by  90\n\ndefine  follow_line\n  if  quad\
+    \ rgb sensor 1 probe (3) L1 detects  line ?  then\n    encoder motor EM1 rotates at 15 RPM, encoder\
+    \ motor EM2 rotates at 55 RPM\n  else\n    if  quad rgb sensor 1 probe (2) R1 detects  line ?  then\n\
+    \      encoder motor EM1 rotates at 55 RPM, encoder motor EM2 rotates at 15 RPM\n    else\n    \
+    \  moves forward  at (speed)  RPM\n\nwhen button A pressed\n  scan\n  if  (found) = 1  then\n  \
+    \  celebrate\n\nwhen button B pressed\n  drive_square  30\n  drive_square  60\n\nwhen joystick \
+    \ middle pressed\n  set  speed  to 40\n  quad rgb sensor 1 performs calibration\n  forever\n   \
+    \ follow_line\n    show label 1  join  err:   (quad rgb sensor 1 deviation (-100~100))  at x: 0\
+    \ y: 0  by small pixel"
+tips:
+- ក្រិតឡើងវិញរាល់ពេលឥដ្ឋឬពន្លឺប្ដូរ — រួមទាំងពេលព្រះអាទិត្យផ្លាស់ទី។ នេះមិនមែនជាជំនឿទេ វាជារបៀបដែលឧបករណ៍ចាប់សញ្ញាដំណើរការ។
+- កាសែតដែលកោង និងក្រដាសរលោង បញ្ឆោតឧបករណ៍ចាប់សញ្ញាទាំងពីរ។ បិទផែនទីឲ្យរាបគ្រប់គែម។
+- <b>កុំឲ្យនរណាប្រើ deviation ដើម្បីបញ្ជាទិសនៅឡើយ</b> ទោះល្បួងយ៉ាងណា។ ការមើលវាជាចំណុចទាំងមូលនៃថ្ងៃនេះ;
+  ថ្នាក់ទី ៩ ប្រែវាទៅជាការបញ្ជា ហើយមេរៀននោះគួរការពារ។
+result:
+  scene: line
+success:
+- ជុំពេញមួយដោយគ្មានជំនួយ ជាមួយ follow_line ជាប្លុកមានឈ្មោះ
+- លេខ deviation នៅលើអេក្រង់ ហើយយោលឲ្យឃើញ
+- ការរញ្ជួយត្រូវបានគូរ សន្មត់ ហើយទុកមិនឆ្លើយ
+check:
+- do: mid
+  see: It follows the black line and shows how far off it is.
+parts:
+- id: robot_wheel
+- id: quadrgb
+- id: map
+- id: tape
+  note: to tape the map flat
+- id: timer
+

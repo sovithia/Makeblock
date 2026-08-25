@@ -1,0 +1,93 @@
+n: 5
+stage: A
+stage_title: The robot obeys
+kind: step
+title: Stop copying blocks
+concept: Loop — repeat
+hours: 2
+project: G7-A-obeys
+goal: The robot drives any closed shape the teacher names, from one repeat block, first try.
+build: 'A shape machine: change two numbers, get any polygon.'
+builds_on:
+- Step 4 · it drives a measured distance
+teach:
+- Build the square the long way first — drive, turn, drive, turn, eight blocks — because the ache of
+  dragging the eighth block is the argument for what comes next. Then replace all eight with <b>repeat
+  4</b> wrapped round two. Same behaviour, less code, and one place to change it.
+- 'The turn is the <b>outside</b> angle, not the inside one. Walk it: at each corner of a square you
+  turn 90°, and after four corners you have turned all the way round — 360°. So for any closed shape,
+  each turn is <b>360 ÷ sides</b>. Let teams try 60° for a triangle first and watch it spiral; the failure
+  teaches the rule faster than the rule does.'
+guide:
+- label: Try it
+  value: joystick up → draw the polygon
+- label: Square
+  value: repeat 4 · turn 90°
+- label: Triangle
+  value: repeat 3 · turn 120° (not 60°)
+- label: Rule
+  value: turn = 360 ÷ number of sides
+- label: Floor
+  value: 1 m clear — the shapes have 30 cm sides
+steps:
+- time: 10′
+  text: Build the square with no loop. Count the blocks. Complain.
+  use:
+  - mbot2_move_straight_with_cm_and_inch
+  - mbot2_cw_and_ccw_with_angle
+  expect: A square drawn with eight blocks, and a class that is fed up with copying them.
+- time: 20′
+  text: Rebuild it with repeat 4. Prove the behaviour is identical by running both and watching.
+  use:
+  - control_repeat
+  expect: 'The same square from two blocks inside a loop. Run both: you cannot tell which is which by
+    watching.'
+- time: 25′
+  text: Triangle. Predict the turn angle first and write it down. If you wrote 60, run it anyway — the
+    spiral is worth seeing.
+  expect: A written prediction of the triangle's turn angle before running it — and then the truth.
+- time: 25′
+  text: 'Any polygon: put the division into the block itself so one program draws a pentagon, a hexagon,
+    an octagon by changing one number.'
+  use:
+  - data_setvariableto
+  expect: One program that draws a pentagon, a hexagon or an octagon when you change a single number.
+- time: 15′
+  text: 'Closing contest: the shape whose end point is nearest its start wins. Measure the gap with
+    a ruler.'
+  expect: A measured gap between where the shape started and where it ended, in millimetres.
+- time: 5′
+  text: Log the rule in your own words, with a drawing. Step 19 turns that rule into a block of your
+    own.
+  expect: The rule written in your own words with a drawing beside it.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set print size to  big\n  print  Team Rocket  and move to a newline\n\
+    \  LED all displays R 0 G 128 B 255\n  play LED animation  rainbow  until done\n\nwhen button A\
+    \ pressed\n  play recording\n  ultrasonic 2 1 displays emotion  happy\n\nwhen button B pressed\n\
+    \  clear screen\n  print  bye!\n  turn off LED all\n\nwhen joystick  middle pressed\n  reset encoder\
+    \ motor  (1) EM1  rotated angle\n  moves forward  100  cm  until done\n  show label 1  join  robot\
+    \ says:  (encoder motor (1) EM1 rotated angle (°))  at x: 0 y: 0  by small pixel\n\nwhen joystick\
+    \  pulled↑\n  set  sides  to  5\n  repeat  (sides)\n    moves forward  30  cm  until done\n    turns\
+    \ right  (360 / (sides))  ° until done"
+tips:
+- Slow turns close better than fast ones. A team that lowers the speed will beat a team that does not,
+  and noticing that is half the lesson.
+- Teams who reach for a variable here have invented Step 13 early. Let them, and say so.
+- 60° for the triangle is the most productive wrong answer in the course. Do not prevent it.
+result:
+  scene: repeat
+success:
+- The square runs from a repeat block, behaviour unchanged
+- The triangle turns 120°, derived rather than told
+- A shape the team had not tried closes on the first attempt
+check:
+- do: up
+  see: It walks a five-sided shape and ends where it started.
+- do: see
+  see: Change the one number and you get a different shape.
+parts:
+- id: robot_wheel
+- id: ruler
+- id: tape
+

@@ -1,0 +1,88 @@
+n: 11
+stage: B
+stage_title: រូបយន្តសម្រេចចិត្ត
+kind: step
+title: ការប្រៀបធៀប និងការផ្សំ
+concept: សញ្ញាប្រមាណវិធី
+hours: 2
+project: G7-B-decides
+goal: រូបយន្តឆ្លើយតបនឹងលក្ខខណ្ឌពីរក្នុងពេលតែមួយ ហើយក្រុមអាចបង្ហាញ "យ៉ាងតិច" ដោយគ្មានប្លុកធំជាងឬស្មើ។
+build: រូបយន្តដែលភ្ញាក់តែពេលងងឹត ហើយមានអ្វីមួយនៅជិត។
+builds_on:
+- ជំហានទី ៨ · លក្ខខណ្ឌ
+- ជំហានទី ៦ · តម្លៃឧបករណ៍ចាប់សញ្ញា
+teach:
+- លក្ខខណ្ឌអាចត្រូវបានសាងសង់ មិនមែនគ្រាន់តែជ្រើសទេ។ <b>and</b> ត្រូវការទាំងពីរជាពិត, <b>or</b> ត្រូវការមួយណាក៏បាន,
+  <b>not</b> បង្វែរវា។ ហើយលេខអាចត្រូវគណនាមុនពេលអ្នកប្រៀបធៀប៖ ល្បឿនអាចជាផលបូក ព្រំដែនអាចជាការគណនា។
+- មានចន្លោះមួយក្នុងផ្ទាំងប្លុកដែលគួររកឃើញជាជាងប្រកាស៖ <b>គ្មាន ≥ និងគ្មាន ≤</b> ទេ។ មានតែធំជាង តូចជាង
+  ស្មើ។ ដូច្នេះ "យ៉ាងតិច 20" ត្រូវសរសេរជា <b>not (x &lt; 20)</b>។ ទុកឲ្យក្រុមមួយប៉ះជញ្ជាំង រួចទុកឲ្យពួកគេគិតរកចម្លើយ
+  — នោះជាការវែកញែកតក្កពិត ហើយវាជាពេលដែល <b>not</b> ឈប់ជាការតុបតែង។
+guide:
+- label: and
+  value: ទាំងពីរត្រូវតែពិត
+- label: or
+  value: មួយណាក៏បាន
+- label: ≥ 20
+  value: not (x < 20) — គ្មាន ≥ ទេ
+- label: ឥដ្ឋ
+  value: ទំនេរ ២ ម៉ែត្រ និងវិធីធ្វើឲ្យបន្ទប់ងងឹត
+steps:
+- time: 15′
+  text: គ្របឧបករណ៍ចាប់ពន្លឺ ហើយមើលផ្ទាំង។ រកលេខដែលមានន័យថា "ងងឹតក្នុងបន្ទប់នេះ ថ្ងៃនេះ" — វាមិនមែនជាបន្ទប់ដដែលនឹងម្សិលមិញទេ។
+  expect: លេខពិតដែលមានន័យថា «ងងឹត ក្នុងបន្ទប់នេះ ថ្ងៃនេះ» — វាស់ឥឡូវ មិនមែនចាំពីម្សិលមិញ។
+- time: 25′
+  text: សាងសង់ឆ្កែយាម៖ ឆ្លើយតបតែពេលងងឹត <b>និង</b> មានអ្វីមួយនៅជិត។ សាកល្បងបន្សំទាំងបួនដោយចេតនា។
+  expect: រូបយន្តប្រតិកម្មតែពេលងងឹត និង មានអ្វីនៅជិត។ ករណីទាំងបួនសាកល្បងដោយចេតនា។
+- time: 20′
+  text: បញ្ហា ≥។ សុំ "យ៉ាងតិច 20 cm" ហើយទុកឲ្យពួកគេរកប្លុក។ រួចទុកឲ្យពួកគេសាងសង់វាពី not និង <។
+  expect: «យ៉ាងហោច ២០ ស.ម.» ដំណើរការ សាងសង់ពី not និង < ព្រោះគ្មានប្លុក ≥ ឲ្យរកទេ។
+- time: 25′
+  text: នព្វន្តតាមផ្លូវ៖ ធ្វើឲ្យល្បឿនកើនឡើងពេលកាន់តែងងឹត ជំនួសឲ្យការប្ដូររវាងល្បឿនពីរ។
+  expect: ល្បឿនកើនឡើងរលូនតាមភាពងងឹតនៃបន្ទប់ ជំនួសឲ្យការលោតរវាងល្បឿនពីរ។
+- time: 20′
+  text: បន្ទាប់មកបង្ហាញពួកគេ <b>when light value &gt; 50</b> — ប្លុកតែមួយដែលធ្វើអ្វីដែលពួកគេប្រើបី។
+    ទាំងពីរត្រឹមត្រូវ; ការដឹងថាហេតុអ្វីអ្នកជ្រើសមួយណា ជាចំណុចសំខាន់។
+  expect: ប្លុកមួកតែមួយធ្វើអ្វីដែលអ្នកធ្វើដោយប្លុកបី — ហើយអ្នកអាចប្រាប់ថាពេលណាអ្នកនៅតែជ្រើសផ្លូវវែង។
+- time: 15′
+  text: កត់ត្រាតារាងសាកល្បងបួនផ្លូវ និងព្រំដែនរបស់អ្នក។
+  expect: តារាងសាកល្បងបួនករណី និងព្រំដែនរបស់អ្នកក្នុងកំណត់ហេតុ។
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  forever\n    show label 1  join  dist:   (ultrasonic 2 1 distance\
+    \ to an object (cm))  at x: 0 y: 0  by small pixel\n    show label 2  join  light:  (ambient light\
+    \ intensity)  at x: 0 y: 20  by small pixel\n    show label 3  join  loud:   (loudness)  at x: 0\
+    \ y: 40  by small pixel\n    line chart, add data  (ultrasonic 2 1 distance to an object (cm))\n\
+    \    if  ((ambient light intensity) < 20)  and  ((ultrasonic 2 1 distance to an object (cm)) < 30)\
+    \  then\n      LED all displays R 255 G 0 B 0\n      play  hi\n    else\n      turn off LED  all\n\
+    \nwhen button A pressed\n  forever\n    if  (ultrasonic 2 1 distance to an object (cm)) < 15  then\n\
+    \      stop encoder motor  all\n      ultrasonic 2 1 displays emotion  dizzy\n    else\n      moves\
+    \ forward  at 50  RPM\n      ultrasonic 2 1 displays emotion  standby\n\nwhen button B pressed\n\
+    \  repeat until  (ultrasonic 2 1 distance to an object (cm)) < 25\n    moves forward  at 60  RPM\n\
+    \    show label 4  approaching  at center of screen  by small pixel\n  repeat until  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 5\n    moves forward  at 15  RPM\n    show label 4  creeping\
+    \  at center of screen  by small pixel\n  stop encoder motor  all\n  show label 4  arrived  at center\
+    \ of screen  by small pixel\n\nwhen  light  value  >  50\n  show label 5  lights on!  at center\
+    \ of screen  by small pixel"
+tips:
+- សាកល្បងបន្សំទាំងបួននៃលក្ខខណ្ឌពីរដោយចេតនា — ងងឹត+ជិត, ងងឹត+ឆ្ងាយ, ភ្លឺ+ជិត, ភ្លឺ+ឆ្ងាយ។ ក្រុមសាកល្បងតែមួយ
+  រួចប្រកាសជ័យជម្នះ។
+- '"ងងឹត" គឺជាលេខដែលប្រែប្រួលតាមអាកាសធាតុ និងពេលវេលា។ អានវាឡើងវិញនៅដើមរាល់វគ្គចាប់ពីពេលនេះ។'
+- ការបាត់ ≥ មិនមែនជាកំហុសក្នុង mBlock ទេ។ សួរថា not(x < 20) មានន័យអ្វីជាពាក្យ រហូតដល់នរណាម្នាក់និយាយថា
+  "20 ឬច្រើនជាង"។
+result:
+  scene: lightdark
+success:
+- លក្ខខណ្ឌប្រើ and ដែលដំណើរការត្រឹមត្រូវក្នុងករណីទាំងបួន
+- '"យ៉ាងតិច" បង្ហាញដោយ not និង < ដែលក្រុមទាញចេញដោយខ្លួនឯង'
+- តម្លៃមួយត្រូវបានគណនា ជំនួសឲ្យវាយបញ្ចូល
+check:
+- do: 'on'
+  see: 'Cover it AND put your hand close: it turns red and beeps.'
+- do: light
+  see: Shine a torch at it and the screen says lights on!
+parts:
+- id: robot_wheel
+- id: torch
+  note: control the light
+- id: boxes
+

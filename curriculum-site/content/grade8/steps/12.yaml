@@ -1,0 +1,116 @@
+n: 12
+stage: C
+stage_title: Interaction
+kind: step
+title: Driving it yourself
+concept: Events vs polling
+hours: 2
+project: G8-C-connects
+goal: Tank steering from two sticks, four buttons mapped, and the team can say why the sticks must be
+  asked rather than waited for.
+build: A Rover you drive with two thumbs.
+builds_on:
+- Step 10 · jobs
+- Step 9 · speed from a number
+teach:
+- Add the <b>Bluetooth Controller</b> extension and the sticks become numbers you can read. <b>joystick
+  LY</b> is not on or off — it is how far, right now. Feed the left stick to the left track and the
+  right stick to the right and you have <b>tank steering</b>, built out of two numbers and the scaling
+  you learned in Step 9.
+- 'A number that changes continuously has to be <b>asked for</b>, over and over, inside a forever loop.
+  There is no hat block that fires "when the stick is at 47". That is <b>polling</b>, and it is the
+  opposite of the <b>event</b> you have used all year: <b>when button A pressed</b> lets your code sleep
+  until the robot wakes it. Steering cannot sleep. Almost every real system does some of each, and knowing
+  which a job needs is the skill.'
+- 'The controller also drives this Rover with no program at all — that is built into the robot. What
+  you are doing today is different and better: <b>your</b> mapping, <b>your</b> blocks, on buttons you
+  chose.'
+guide:
+- label: Add
+  value: the Bluetooth Controller extension
+- label: Ask
+  value: ⟨button 1 pressed⟩ — inside forever
+- label: Sticks
+  value: LY → EM1 · RY → EM2, divided down
+- label: Write it down
+  value: a mapping card, like a pilot
+- label: Floor
+  value: 3 m clear, or a slalom of boxes
+steps:
+- time: 15′
+  text: Pair the controller to the robot — hold it close and press its Bluetooth button until the robot
+    beeps. Then add the <b>Bluetooth Controller</b> extension in mBlock, or none of today's blocks exist.
+  expect: A paired controller — and the discovery that it does nothing until the robot is running a
+    program that asks it.
+- time: 25′
+  text: 'Tank steering: left stick to the left track, right stick to the right. Drive it badly for a
+    while; it is meant to feel odd at first.'
+  use:
+  - control_forever
+  - mbot2_encoder_motor_drive_speed
+  expect: Both tracks respond to their own stick, and the robot keeps driving with the tablet switched
+    off entirely.
+- time: 25′
+  text: Scale the stick values so the robot is drivable rather than violent. This is Step 9's arithmetic
+    doing a new job.
+  expect: A question asked once, outside the loop, answers 'no' forever. The robot does nothing, and
+    the team can say why.
+- time: 25′
+  text: Map four buttons to behaviours you already have — grip, release, lift, celebrate — and write
+    a <b>mapping card</b> on paper.
+  use:
+  - control_if
+  - my:grip
+  - my:release
+  - my:celebrate
+  - cyberpi_led_show_single_with_rgb_2
+  - cyberpi_play_audio_2
+  - cyberpi_led_off_2
+  expect: Four buttons doing four things you already built, and a mapping card on paper that says which
+    is which.
+- time: 20′
+  text: Hand your controller and your card to another team and let them drive. Anything they get wrong
+    is a flaw in the card, not the driver.
+  expect: Another team drives your robot from your card alone. Anything they get wrong is a flaw in
+    the card.
+- time: 10′
+  text: 'Log: which of your inputs are events and which are polled, and why the sticks have to be the
+    second kind.'
+  expect: A log line splitting your inputs into events and polls, and why the controller has to be polled.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\nwhen CyberPi starts up\n  show label 1  press A to drive  at x: 0\
+    \ y: 0  by small pixel\n\nwhen button A pressed\n  forever\n    encoder motor EM1 rotates at ((joystick\
+    \ LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n    if  button  L1  pressed\
+    \  then\n      grip\n    if  button  R1  pressed  then\n      release\n    if  button  1  pressed\
+    \  then\n      celebrate"
+tips:
+- The extension is not there by default — bottom of the block palette, <b>+ extensions</b>, <b>Bluetooth
+  Controller</b>. Without it the blocks simply do not exist and the class will hunt for them.
+- Upload the program, then press A. The controller pairs with the <i>robot</i>, not the computer, so
+  once it is flashed you can put the tablet away entirely — that is the point of the lesson being uploaded.
+- Divide the stick value down or the robot is uncontrollable. The right divisor is a tuning job, not
+  a given.
+- The mapping card is not busywork — pilots write them for the same reason. A team that cannot hand
+  their card to a stranger has not finished.
+result:
+  scene: controller
+  params:
+    left: left stick = left track
+    right: right stick = right track
+    buttons: buttons = grip · release · lift · celebrate
+    caption: tank steering and four buttons, mapped on a written card
+success:
+- Tank steering from two sticks, drivable at a sensible speed
+- At least four buttons mapped to existing blocks
+- Another team drove it from the written card with no coaching
+check:
+- do: A
+  see: The sticks drive it. The shoulder buttons grip and let go.
+parts:
+- id: robot_tank
+- id: controller
+- id: boxes
+  note: a slalom
+- id: cards

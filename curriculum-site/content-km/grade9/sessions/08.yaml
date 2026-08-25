@@ -1,0 +1,121 @@
+n: 8
+title: The D Term
+goal: A PD follower running, and its overshoot measured against Session 7’s P-only trace.
+builds_on:
+- S7 · the error-vs-time graphs
+- S6 · the champion gain
+teach:
+- 'Yesterday’s teaser, cashed in. A P-controller looks only at <i>where the robot is</i>: offset 40 gets
+  the same correction whether the robot is racing back towards the line or drifting further off it. Those
+  two situations need opposite treatment, and P cannot tell them apart — which is exactly why the trace
+  still overshoots. The missing information is already in their data: the <b>difference between this reading
+  and the last one</b>. Rising error means going the wrong way, push harder; falling error means the correction
+  is already working, ease off. One subtraction, <code>err − last_err</code>, and the controller can finally
+  see motion instead of position.'
+- 'Then the discipline that makes it real. Freeze <code>KP</code> at Session 6’s champion value and change
+  only <code>KD</code> — the one-change rule, now protecting a two-dimensional search that punishes sloppiness
+  fast. Two things to predict aloud before anyone runs: too much D makes the robot <i>twitchy</i> rather
+  than wobbly (it amplifies sensor noise, because noise is the fastest-changing thing in the signal), and
+  <b>the loop’s beat is part of the maths</b> — <code>err − last_err</code> means nothing without a fixed
+  interval between reads, so a stray <code>print()</code> inside the loop silently retunes the controller.
+  That is the day’s real lesson and it applies to every control loop they will ever write.'
+steps:
+- time: 10′
+  text: Add last_err and the delta line to the champion P-follower; run once at KD = 0 and confirm nothing
+    changed.
+- time: 20′
+  text: 'KD sweep: 5+ values with KP frozen, one timed lap each, logged in the table beside Session 6’s.'
+- time: 10′
+  text: 'Re-log the error series at champion KD and overlay it on Session 7’s P-only trace: same axes,
+    same run length.'
+- time: 5′
+  text: 'On your lesson sheet: the KD at which the robot became twitchy, and what it was reacting to.'
+code:
+  lang: python
+  source: |-
+    import mbot2, cyberpi, time
+
+    BASE = 45      # cruise RPM
+    KP   = 0.5     # S6's champion, frozen
+    KD   = 0.0     # the only thing you change
+
+    last_err = 0
+
+    while True:
+        err = cyberpi.quad_rgb_sensor.get_offset_track()
+        # delta: how fast the error is changing
+        delta = err - last_err
+        # P sees where we are, D where we head
+        steer = KP * err + KD * delta
+        mbot2.drive_speed(BASE + steer,
+                          BASE - steer)
+        last_err = err
+        # a fixed beat, or delta means nothing
+        time.sleep(0.02)
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete.'
+- KD = 0 must behave exactly like Session 6. If it does not, the bug is in the new code, not in the theory
+  — find it before sweeping anything.
+- Good KD values are often much smaller than KP. Start at a tenth of it and work up, or the first run
+  is uninformative violence.
+- Nobody adds a print() inside the loop today. Log to a list and print after — the sleep is load-bearing
+  now.
+result:
+  scene: chart
+  params:
+    ylab: peak error (offset)
+    bars:
+    - - bang-bang
+      - 92
+    - - P only
+      - 46
+    - - P + D
+      - 18
+    caption: each term buys a smaller worst case — measured, not asserted
+success:
+- PD follower runs, and KD = 0 reproduces Session 6 exactly
+- KD table with 5+ values, KP frozen throughout
+- Overshoot compared against the Session 7 trace with numbers
+parts:
+- id: robot_tank
+- id: tablet
+- id: map
+  note: same track as Session 6
+- id: timer
+  note: lap times
+- id: shield
+  note: same battery level across laps
+long:
+  goal: A champion KD defended from a table, and the twitch threshold found rather than avoided.
+  recap:
+    time: 10′
+    text: Predict the failure before producing it. Each pair writes what too much D will look like, in words,
+      before touching a number. Most will write "wobble" from Session 6 habit; watching a twitch instead is
+      the moment the two terms become genuinely different things in their heads rather than two letters in
+      an acronym.
+  extend:
+  - spec: KD = 0 reproduces S6
+    text: The new code with the D term switched off drives exactly like last week's. Anything else is a bug
+      hiding inside an experiment.
+  - spec: 5+ KD values, KP frozen
+    text: A second table with one change per row, and the champion KP unchanged in every row of it.
+  - spec: twitch threshold found
+    text: The KD at which the robot starts reacting to noise, located and recorded rather than stepped around.
+  log:
+    time: 10′
+    text: The KD table beside the KP table, champion circled, twitch value marked — and one sentence naming
+      what the robot was twitching at. "Noise" is the answer, but only if they can say where the noise came
+      from, which is the sensor reading the floor between two tape fibres a hundred times a second.
+  review:
+    time: 15′
+    text: Pairs defend their KD from the overlay plot. Criteria — does the PD trace actually settle sooner
+      than the P trace on their own axes, and if it does not, can they say honestly that this track was too
+      gentle to need a D term? That answer is a good one.
+  parts:
+  - id: timer
+  - id: map
+  success:
+  - The champion KD chosen from a table with KP frozen in every row
+  - The twitch threshold found, and what the robot was reacting to named
+

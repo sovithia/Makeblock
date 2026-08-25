@@ -1,0 +1,400 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>G8 Step 8 · A loop inside a loop</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "mBot2 Rover Program · Grade 8 · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #5f2b8a 70%, #8b3fc6 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #d8b4fe; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #d8b4fe; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #d8b4fe; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #8b3fc6; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #8b3fc6; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #f2e8fa; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #5f2b8a; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #f2e8fa; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #5f2b8a; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #5f2b8a;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #8b3fc6; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #5f2b8a; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #8b3fc6;
+  border-radius: 8px; background: #f2e8fa; font-size: 8.4pt; font-weight: bold;
+  color: #5f2b8a; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #f2e8fa; border-left: 3px solid #8b3fc6;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #5f2b8a; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #8b3fc6; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #5f2b8a; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #5f2b8a; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #8b3fc6; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #5f2b8a; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #5f2b8a; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #8b3fc6; background: #f2e8fa; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #8b3fc6; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #5f2b8a; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #8b3fc6; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #f2e8fa; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #5f2b8a; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #5f2b8a; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #f2e8fa; color: #5f2b8a;
+  border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #8b3fc6; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #f2e8fa; border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #f2e8fa; color: #5f2b8a;
+  border: 1px solid #8b3fc6; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #8b3fc6; }
+.result li.xtra { color: #5f2b8a; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style><style>
+@page { size: A4; margin: 12mm 13mm; }
+/* Each lesson is a table so that its heading lives in a <thead>, which the
+   print engine repeats on every page the lesson spills onto. Late lessons
+   carry a whole stage's cumulative script and genuinely need two sheets;
+   without this, sheet two is a page of anonymous blocks. */
+.tsheet { width: 100%; border-collapse: collapse; break-after: page;
+  padding-bottom: 4mm; }
+.tsheet:last-child { break-after: auto; }
+.tsheet > thead > tr > td { padding: 0; }
+.tsheet > tbody > tr > td { padding: 0 0 4mm 0; }
+.thead { display: flex; align-items: baseline; gap: 3mm; margin-bottom: 1.5mm;
+  padding-bottom: 1.2mm; border-bottom: 1.5px solid #e2e8f0; }
+.tno { font-size: 8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; }
+.tti { font-size: 12pt; font-weight: bold; }
+.tmeta { font-size: 8.4pt; color: #64748b; margin-bottom: 2.5mm; }
+.tmeta code { background: #f1f5f9; border-radius: 3px; padding: 0 1.2mm;
+  font-size: 8pt; }
+.trow { display: flex; flex-wrap: wrap; gap: 2mm 4mm; align-items: center;
+  margin-bottom: 2.5mm; font-size: 8.6pt; }
+.tdl { display: inline-block; font-weight: bold; text-decoration: none;
+  border: 1.2px solid currentColor; border-radius: 5px; padding: 0.8mm 2.4mm; }
+.tnew { font-size: 8.4pt; color: #334155; margin: 0 0 2.5mm 0; }
+.tnew b { color: #16a34a; }
+.tlist { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.tlist th { text-align: left; font-size: 7.4pt; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #64748b; padding: 1.4mm 2mm; }
+.tlist td { padding: 1.6mm 2mm; border-top: 1px solid #eef2f7;
+  vertical-align: baseline; }
+.tlist tr.cp td { background: #fffbeb; }
+.tlist code { font-size: 8.4pt; background: #f1f5f9; border-radius: 3px;
+  padding: 0 1.2mm; }
+.tnote { border-left: 3px solid #f59e0b; background: #fffbeb; padding: 2mm 3mm;
+  border-radius: 0 6px 6px 0; font-size: 8.8pt; margin-bottom: 4mm; }
+.tgrid { display: flex; flex-wrap: wrap; gap: 4mm; }
+.tcard { flex: 1 1 78mm; border: 1px solid #e2e8f0; border-radius: 9px;
+  padding: 3mm 3.5mm; }
+.tcard h3 { margin: 0 0 1mm 0; font-size: 12pt; }
+@media print { .noprint { display: none } }
+.inline-solution { break-before: page; page-break-before: always; margin-top: 8mm; }
+.inline-solution .tsheet { break-after: auto; }
+.solution-head { border-left: 4px solid #f59e0b; background: #fffbeb;
+  border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 4mm; }
+.solution-head h2 { margin: 0 0 1mm 0; font-size: 16pt; }
+.solution-head p { margin: 0; font-size: 8.8pt; color: #64748b; }
+@media print {
+  html.student-copy .inline-solution { display: none !important; }
+  html.solution-copy body > :not(.inline-solution) { display: none !important; }
+  html.solution-copy .inline-solution { break-before: auto; page-break-before: auto;
+    margin-top: 0; }
+}
+</style>
+<script>
+function printStudentLesson() {
+  document.documentElement.classList.add('student-copy');
+  window.print();
+}
+function printTeacherSolution() {
+  document.documentElement.classList.add('solution-copy');
+  window.print();
+}
+window.addEventListener('afterprint', function () {
+  document.documentElement.classList.remove('student-copy');
+  document.documentElement.classList.remove('solution-copy');
+});
+</script>
+</head><body><div class="chrome"><a href="../index.html">All grades</a><span class="dim">·</span><a href="steps.html">Grade 8</a><span class="dim">·</span><span>A loop inside a loop · ~14 h</span><span class="spacer"></span><a href="step-07.html">← Step 7</a><a href="step-09.html">Step 9 →</a><a href="#" onclick="printStudentLesson();return false">🖨 Print lesson only</a><a href="#" onclick="printTeacherSolution();return false">🖨 Print solution only</a><a class="glossary-link" href="../glossary.html" target="_blank" rel="noopener noreferrer">Open glossary in new tab</a><span class="langtog" role="group" aria-label="Language"><span class="on" lang="en">EN</span><a href="../km/grade8/step-08.html" lang="km" hreflang="km">ខ្មែរ</a></span></div>
+<div class="sess">
+  <div class="shead" style="background: linear-gradient(110deg, #5f2b8a, #a765d6)">
+    <div class="sno">Step 8 &nbsp;·&nbsp; ~14 h in &nbsp;·&nbsp; Algorithms on new hardware</div>
+    <h2>A loop inside a loop</h2>
+  </div>
+  <div class="goal"><b>Goal of these two hours:</b> The team predicts exactly how many times the inner blocks run, before pressing go. </div>
+  <div class="stripbox"><span class="k">Project name</span> <code class="proj">G8-B-08</code><br/><span class="k">New concept</span> <b>Nested loops</b><br/><span class="k">You build</span> A patrol pattern built from a loop inside a loop.<br/><span class="k">Blocks</span> <span class="bpill" style="background:#ffbf00;border-color:#ffbf00;color:#1e293b">Events</span><span class="bpill" style="background:#ffab19;border-color:#ffab19;color:#1e293b">Control</span><span class="bpill" style="background:#ff8c1a;border-color:#ff8c1a;color:#1e293b">Variables</span><span class="bpill" style="background:#ff6680;border-color:#ff6680;color:#1e293b">My Blocks</span><span class="bpill" style="background:#8b3fc6;border-color:#8b3fc6;color:#ffffff">Display</span><span class="bpill" style="background:#9966ff;border-color:#9966ff;color:#ffffff">LED</span><span class="bpill" style="background:#4c97ff;border-color:#4c97ff;color:#ffffff">mBot2 Chassis</span></div>
+  
+  <div class="mats"><div class="mhead">You need — pieces &amp; materials</div><div class="mat"><svg viewBox="0 0 64 44" width="52"><g><g transform="translate(32,21) rotate(0) scale(1.05)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#8b3fc6"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#5f2b8a"/></g></g></svg><div class="mlbl">Rover, assembled</div><div class="pill" style="background:#7c3aed">Rover add-on box</div></div><div class="mat"><svg viewBox="0 0 64 44" width="52"><g><circle cx="28" cy="20" r="12" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/><circle cx="28" cy="20" r="5" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/><rect x="38" y="26" width="18" height="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.2"/></g></svg><div class="mlbl">Masking tape</div><div class="mnote">patrol area</div><div class="pill" style="background:#64748b">Classroom</div></div></div>
+  
+  <table class="cols"><tr>
+    <td class="l">
+      <h4 class="blk">Teach it — the concept</h4>
+      <div class="teach"><p>A loop inside a loop multiplies. <b>repeat 3</b> wrapped around <b>repeat 4</b> runs the inside twelve times, and the question to ask before every single run is "how many times does the inner block happen?" A student who can answer that reliably has understood loops; one who cannot will guess for the rest of the year.</p><p>It is also how patterns get built without repetition. Three laps of a square, with a flash between laps, is two loops and four blocks — the alternative is thirty-six blocks and a mistake somewhere in the middle of them.</p></div>
+    </td>
+    <td class="r">
+      <div class="guidebox"><b class="h">Quick Start Guide — this session</b><table><tr><td class="k">Ask first</td><td>how many times does the inside run?</td></tr><tr><td class="k">Outer × inner</td><td>3 × 4 = 12</td></tr><tr><td class="k">Prove it</td><td>count it in a variable</td></tr><tr><td class="k">Floor</td><td>1 m clear — three squares of 20 cm sides</td></tr></table></div>
+      <div class="conceptnote"><div class="cnhead">Nested loops</div>A loop inside a loop. The inner one finishes completely on every single pass of the outer one, which is why three of an outer loop around four of an inner gives twelve — a pattern that shows up any time work has rows and columns.</div>
+      <div class="tips"><b>Watch out</b><ul><li>Ask "how many times?" before every run, every time, until it is automatic. It is the single best comprehension check in the course.</li><li>A counter inside the inner loop settles arguments instantly. Insist on it rather than letting teams debate.</li><li>Clear floor space. Three laps of a square is a lot more travel than teams expect.</li></ul></div>
+    </td>
+  </tr></table>
+  <h4 class="blk">Lesson flow — minute by minute</h4>
+  <div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">15′</span><span class="phx">Predict: repeat 3 around repeat 4 — how many sides get driven? Everyone writes a number before anything runs.</span></div><div class="phexp"><span class="phk">✓</span>Everyone has written a number down before a single block runs.</div></div><div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">25′</span><span class="phx">Build it and count for real, with a variable that increments inside the inner loop. Compare with your prediction.</span></div><div class="phblocks"><div class="hnew"><div class="hchip"><svg class="bsvg" width="20.18mm" height="16.30mm" viewBox="0 0 104 84"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 96.012 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 56 a 4,4 0 0 0 4,4 H 96.012 a 4,4 0 0 1 4,4 V 76 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">repeat</text><rect class="bf" x="60.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="72.0" y="20.0"></text></g></svg></div><div class="hnote"><span class="newtag">new</span>Repeats what is inside it a counted number of times, then carries on to whatever is below.</div></div><div class="hnew"><div class="hchip"><svg class="bsvg" width="45.41mm" height="8.54mm" viewBox="0 0 234 44"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 226.052 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">change</text><rect class="bm" x="66.0" y="8.0" width="94.0" height="24" rx="4"/><text class="bl" x="74.0" y="20.0">my variable</text><path class="bc" d="M 148.0,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="168.0" y="20.0">by</text><rect class="bf" x="190.1" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="202.1" y="20.0"></text></g></svg></div><div class="hnote"><span class="newtag">new</span>Adds to what is already in the box — which means it reads the old value first, so something must have set it.</div></div></div><div class="phexp"><span class="phk">✓</span>A counter that says how many sides really got driven, next to the number you predicted.</div></div><div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">25′</span><span class="phx">Make the pattern mean something: a square patrol per lap, with the CyberPi LED ring changing colour between laps.</span></div><div class="phblocks"><div class="hnew"><div class="hchip"><svg class="bsvg" width="59.63mm" height="8.54mm" viewBox="0 0 307 44"><g transform="translate(1.0,1.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 299.368 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#9966ff" stroke="#7a51cc"/><text class="bl" x="16.0" y="20.0">LED</text><rect class="bm" x="48.0" y="8.0" width="41.3" height="24" rx="4"/><text class="bl" x="56.0" y="20.0">all</text><path class="bc" d="M 77.3,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="97.3" y="20.0">displays R</text><rect class="bf" x="165.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="177.4" y="20.0"></text><text class="bl" x="197.4" y="20.0">G</text><rect class="bf" x="214.7" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="226.7" y="20.0"></text><text class="bl" x="246.7" y="20.0">B</text><rect class="bf" x="263.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="275.4" y="20.0"></text></g></svg></div><div class="hnote"><span class="newtag">new</span>Sets one of the five lights, or all of them, by mixing red, green and blue from 0 to 255.</div></div></div><div class="phexp"><span class="phk">✓</span>A square patrol per lap with the built-in LED ring changing colour between laps, so you can see the outer loop turning over.</div></div><div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">25′</span><span class="phx">Three predictions in a row, each with different numbers, all called before running. Three out of three is the target.</span></div><div class="phexp"><span class="phk">✓</span>Three predictions called before three runs. Three out of three is the target.</div></div><div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">20′</span><span class="phx">Swap programs and predict another team's count by reading it, without running it.</span></div><div class="phexp"><span class="phk">✓</span>Another team’s count predicted by reading their program, without running it.</div></div><div class="ph" style="border-left-color:#8b3fc6"><div class="phhead"><span class="pht">10′</span><span class="phx">Log the rule in your own words, with one worked example.</span></div><div class="phexp"><span class="phk">✓</span>The rule in your own words with one worked example beside it.</div></div>
+  
+  
+  <div class="result">
+    <span class="rk">◉ Expected result at the end of this session</span>
+    <table><tr>
+      <td class="img"><svg viewBox="0 0 310 148" width="250"><g font-family="Helvetica"><rect x="84" y="19" width="142" height="90" rx="8" fill="#334155"/><rect x="90" y="25" width="130" height="78" rx="4" fill="#0f172a"/><text x="155.0" y="40" font-size="10" fill="#7dd3fc" text-anchor="middle" font-weight="bold">outer loops: 3</text><text x="155.0" y="55" font-size="10" fill="#facc15" text-anchor="middle" >inner sides: 4</text><text x="155.0" y="70" font-size="11" fill="#22c55e" text-anchor="middle" font-weight="bold">total: 12</text><circle cx="105" cy="118" r="5" fill="#475569"/><circle cx="205" cy="118" r="5" fill="#475569"/><text x="155" y="142" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">three square laps make twelve inner-loop runs</text></g></svg></td>
+      <td class="crit"><div class="checks"><div class="ckrow"><div class="cktrig" style="background:#ffbf00"><span class="ckg">B</span><span class="ckk">BUTTON</span></div><div class="cksee">It drives three squares, changes colour after each, and shows 12.</div></div></div><div class="tcheck"><span class="tck">Teacher check</span>
+        <ul><li>The inner-loop count predicted correctly before running, three times</li><li>A pattern built from nested loops rather than repeated blocks</li><li>Another team's count predicted by reading their program</li></ul></div></td>
+    </tr></table>
+  </div>
+  <div class="nextlesson"><span class="nlk">Next lesson</span><a href="step-09.html">Step 9 · Smooth, not stepped &nbsp;→</a></div>
+</div><section class="inline-solution"><div class="solution-head"><h2>Teacher solution</h2><p>Print one complete copy for the teacher. Use “Print lesson only” for student copies.</p></div><table class="tsheet"><thead><tr><td><div class="thead"><span class="tno" style="color:#5f2b8a">Step 8</span><span class="tti">A loop inside a loop</span><span class="tno">G8-B-08</span></div></td></tr></thead><tbody><tr><td><div class="tmeta">Nested loops</div><div class="trow noprint"><a class="tdl" style="color:#5f2b8a" href="../assets/projects/G8-B-08.mblock">download .mblock</a></div><p class="tnew"><b>new</b> <code>repeat</code> — Repeats what is inside it a counted number of times, then carries on to whatever is below. · <code>change my variable by</code> — Adds to what is already in the box — which means it reads the old value first, so something must have set it. · <code>LED all displays R G B</code> — Sets one of the five lights, or all of them, by mixing red, green and blue from 0 to 255.</p><div class="blockstack"><svg class="bsvg" width="33.50mm" height="18.62mm" viewBox="0 0 173 96"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 161.368 a 4,4 0 0 1 4,4 V 48 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="34.0">when CyberPi starts up</text></g><g transform="translate(1.0,53.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 164.704 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">delete all of</text><rect class="bm" x="90.0" y="8.0" width="62.7" height="24" rx="4"/><text class="bl" x="98.0" y="20.0">poses</text><path class="bc" d="M 140.7,18.0 l 8,0 l -4,5 Z"/></g></svg><svg class="bsvg" width="122.76mm" height="31.82mm" viewBox="0 0 633 164"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 230.728 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when joystick</text><rect class="bm" x="102.7" y="24.0" width="116.0" height="24" rx="4"/><text class="bl" x="110.7" y="36.0">middle pressed</text><path class="bc" d="M 206.7,34.0 l 8,0 l -4,5 Z"/></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 374.584 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="24.0">add</text><g transform="translate(45.3,8.0)"><path d="M 16.0,0 H 211.24 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#05A6FF" stroke="#0484cc"/><text class="bl" x="12.0" y="16.0">servo</text><rect class="bm" x="52.0" y="4.0" width="60.7" height="24" rx="4"/><text class="bl" x="60.0" y="16.0">(1) S1</text><path class="bc" d="M 100.7,14.0 l 8,0 l -4,5 Z"/><text class="bl" x="120.7" y="16.0">current angle (°)</text></g><text class="bl" x="280.6" y="24.0">to</text><rect class="bm" x="299.9" y="12.0" width="62.7" height="24" rx="4"/><text class="bl" x="307.9" y="24.0">poses</text><path class="bc" d="M 350.6,22.0 l 8,0 l -4,5 Z"/></g><g transform="translate(1.0,105.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 624.764 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#6739B6" stroke="#522d91"/><text class="bl" x="16.0" y="28.0">show label</text><rect class="bm" x="85.4" y="16.0" width="34.7" height="24" rx="4"/><text class="bl" x="93.4" y="28.0">1</text><path class="bc" d="M 108.0,26.0 l 8,0 l -4,5 Z"/><g transform="translate(128.0,8.0)"><path d="M 20.0,0 H 229.356 a 20.0,20.0 0 0 1 0,40 H 20.0 a 20.0,20.0 0 0 1 0,-40 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="20.0">join</text><rect class="bf" x="41.3" y="8.0" width="54.7" height="24" rx="4"/><text class="bft" x="68.7" y="20.0">poses:</text><g transform="translate(104.0,4.0)"><path d="M 16.0,0 H 117.344 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="16.0">length of</text><rect class="bf" x="70.7" y="4.0" width="50.7" height="24" rx="4"/><text class="bft" x="96.0" y="16.0">poses</text></g></g><text class="bl" x="385.4" y="28.0">at x:</text><rect class="bf" x="418.1" y="16.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="430.1" y="28.0">0</text><text class="bl" x="450.1" y="28.0">y</text><rect class="bf" x="464.7" y="16.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="476.7" y="28.0">0</text><text class="bl" x="496.7" y="28.0">by</text><rect class="bm" x="518.7" y="16.0" width="58.7" height="24" rx="4"/><text class="bl" x="526.7" y="28.0">small</text><path class="bc" d="M 565.4,26.0 l 8,0 l -4,5 Z"/><text class="bl" x="585.4" y="28.0">pixel</text></g></svg><svg class="bsvg" width="77.09mm" height="48.89mm" viewBox="0 0 397 252"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">A</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 338.352 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="28.0">set</text><rect class="bm" x="41.3" y="16.0" width="53.3" height="24" rx="4"/><text class="bl" x="49.3" y="28.0">stop</text><path class="bc" d="M 82.7,26.0 l 8,0 l -4,5 Z"/><text class="bl" x="102.7" y="28.0">to</text><g transform="translate(122.0,8.0)"><path d="M 20.0,0 H 184.352 a 20.0,20.0 0 0 1 0,40 H 20.0 a 20.0,20.0 0 0 1 0,-40 Z" fill="#59c059" stroke="#479947"/><g transform="translate(12.0,4.0)"><path d="M 16.0,0 H 117.344 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="16.0">length of</text><rect class="bf" x="70.7" y="4.0" width="50.7" height="24" rx="4"/><text class="bft" x="96.0" y="16.0">poses</text></g><text class="bl" x="153.3" y="20.0">+</text><rect class="bf" x="168.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="180.4" y="20.0">1</text></g></g><g transform="translate(1.0,113.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 389.348 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 112 a 4,4 0 0 0 4,4 H 389.348 a 4,4 0 0 1 4,4 V 132 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FFAB19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">count with</text><rect class="bf" x="84.0" y="8.0" width="24.0" height="24" rx="4"/><text class="bft" x="96.0" y="20.0">i</text><text class="bl" x="116.0" y="20.0">from</text><rect class="bf" x="150.7" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="162.7" y="20.0">1</text><text class="bl" x="182.7" y="20.0">to</text><g transform="translate(202.0,8.0)"><path d="M 12.0,0 H 37.332 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">stop</text></g><text class="bl" x="259.3" y="20.0">by step</text><rect class="bf" x="309.3" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="321.3" y="20.0">1</text><text class="bl" x="341.3" y="20.0">repeat</text></g><g transform="translate(17.0,153.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 149.344 a 4,4 0 0 1 4,4 V 32 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ff6680" stroke="#cc5166"/><text class="bl" x="16.0" y="18.0">lift  (item (i) of poses)</text></g><g transform="translate(17.0,189.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 148.704 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FFAB19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">wait</text><rect class="bf" x="47.3" y="8.0" width="32.7" height="24" rx="12.0"/><text class="bft" x="63.7" y="20.0">0.4</text><text class="bl" x="88.0" y="20.0">seconds</text></g></svg><svg class="bsvg" width="115.39mm" height="84.58mm" viewBox="0 0 595 436"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">B</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 163.352 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">set</text><rect class="bm" x="41.3" y="8.0" width="58.7" height="24" rx="4"/><text class="bl" x="49.3" y="20.0">sides</text><path class="bc" d="M 88.0,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="108.0" y="20.0">to</text><rect class="bf" x="127.4" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="139.4" y="20.0">0</text></g><g transform="translate(1.0,97.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 96.012 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 264 a 4,4 0 0 0 4,4 H 96.012 a 4,4 0 0 1 4,4 V 284 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">repeat</text><rect class="bf" x="60.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="72.0" y="20.0">3</text></g><g transform="translate(17.0,137.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 96.012 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 64 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 20 a 4,4 0 0 0 -4,4 V 156 a 4,4 0 0 0 4,4 H 96.012 a 4,4 0 0 1 4,4 V 176 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#ffab19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">repeat</text><rect class="bf" x="60.0" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="72.0" y="20.0">4</text></g><g transform="translate(33.0,177.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 297.376 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="113.4" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">moves forward</text><path class="bc" d="M 117.4,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="137.4" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="152.0" y="20.0">20</text><rect class="bm" x="174.7" y="8.0" width="45.3" height="24" rx="4"/><text class="bl" x="182.7" y="20.0">cm</text><path class="bc" d="M 208.0,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="228.0" y="20.0">until done</text></g><g transform="translate(33.0,217.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 229.216 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="88.0" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns right</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="112.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="126.7" y="20.0">90</text><text class="bl" x="149.3" y="20.0">° until done</text></g><g transform="translate(33.0,257.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 190.7 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FF8C1A" stroke="#cc7014"/><text class="bl" x="16.0" y="20.0">change</text><rect class="bm" x="66.0" y="8.0" width="58.7" height="24" rx="4"/><text class="bl" x="74.0" y="20.0">sides</text><path class="bc" d="M 112.7,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="132.7" y="20.0">by</text><rect class="bf" x="154.7" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="166.7" y="20.0">1</text></g><g transform="translate(17.0,317.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 478.08 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#9300D8" stroke="#7500ac"/><text class="bl" x="16.0" y="24.0">LED</text><rect class="bm" x="48.0" y="12.0" width="41.3" height="24" rx="4"/><text class="bl" x="56.0" y="24.0">all</text><path class="bc" d="M 77.3,22.0 l 8,0 l -4,5 Z"/><text class="bl" x="97.3" y="24.0">displays R</text><g transform="translate(165.4,8.0)"><path d="M 16.0,0 H 174.696 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="16.0">pick random</text><rect class="bf" x="91.4" y="4.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="103.4" y="16.0">0</text><text class="bl" x="123.4" y="16.0">to</text><rect class="bf" x="142.7" y="4.0" width="36.0" height="24" rx="12.0"/><text class="bft" x="160.7" y="16.0">255</text></g><text class="bl" x="364.1" y="24.0">G</text><rect class="bf" x="381.4" y="12.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="393.4" y="24.0">0</text><text class="bl" x="413.4" y="24.0">B</text><rect class="bf" x="430.1" y="12.0" width="36.0" height="24" rx="12.0"/><text class="bft" x="448.1" y="24.0">120</text></g><g transform="translate(1.0,385.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 586.8000000000001 a 4,4 0 0 1 4,4 V 44 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#6739B6" stroke="#522d91"/><text class="bl" x="16.0" y="24.0">show label</text><rect class="bm" x="85.4" y="12.0" width="34.7" height="24" rx="4"/><text class="bl" x="93.4" y="24.0">2</text><path class="bc" d="M 108.0,22.0 l 8,0 l -4,5 Z"/><g transform="translate(128.0,8.0)"><path d="M 16.0,0 H 190.048 a 16.0,16.0 0 0 1 0,32 H 16.0 a 16.0,16.0 0 0 1 0,-32 Z" fill="#59C059" stroke="#479947"/><text class="bl" x="12.0" y="16.0">join</text><rect class="bf" x="41.3" y="4.0" width="90.0" height="24" rx="4"/><text class="bft" x="86.3" y="16.0">sides driven:</text><g transform="translate(139.4,4.0)"><path d="M 12.0,0 H 42.684 a 12.0,12.0 0 0 1 0,24 H 12.0 a 12.0,12.0 0 0 1 0,-24 Z" fill="#ff8c1a" stroke="#cc7014"/><text class="bl" x="12.0" y="12.0">sides</text></g></g><text class="bl" x="342.1" y="24.0">at x:</text><rect class="bf" x="374.7" y="12.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="386.7" y="24.0">0</text><text class="bl" x="406.7" y="24.0">y</text><rect class="bf" x="421.4" y="12.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="436.1" y="24.0">20</text><text class="bl" x="458.8" y="24.0">by</text><rect class="bm" x="480.8" y="12.0" width="58.7" height="24" rx="4"/><text class="bl" x="488.8" y="24.0">small</text><path class="bc" d="M 527.5,22.0 l 8,0 l -4,5 Z"/><text class="bl" x="547.5" y="24.0">pixel</text></g></svg></div></td></tr></tbody></table></section></body></html>

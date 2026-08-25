@@ -1,0 +1,115 @@
+n: 20
+stage: D
+stage_title: Voice
+kind: step
+title: Voice becomes one more input
+concept: Integrating AI into state
+hours: 2
+project: G8-D-listens
+goal: Speech, the controller and the sensors all feed the same job machine, and the team can say which
+  wins when they disagree.
+build: A Rover that takes orders from three places at once.
+builds_on:
+- Step 19 · robust listening
+- Step 12 · controller
+- Step 10 · jobs
+teach:
+- 'The robot now has three ways to be told what to do: a controller, a menu, and a voice. They all do
+  the same thing — <b>set the job variable</b> — which means the state machine you built in Step 10
+  has been quietly waiting for this all along. AI is not a special case; it is one more input with the
+  same shape as the others.'
+- 'Which raises the question that matters: <b>what if two of them disagree?</b> If someone shouts "stop"
+  while a thumb is on the drive stick, who wins? There is no right answer, but there is a <i>decided</i>
+  answer, and a robot without one behaves unpredictably. Most real systems give safety commands priority
+  — decide yours and write it down.'
+guide:
+- label: All inputs
+  value: joystick · menu · voice → set job
+- label: Conflict
+  value: decide who wins, and write it down
+- label: Usually
+  value: stop beats everything
+- label: Floor
+  value: 2 m, with a red patch and room to patrol
+steps:
+- time: 15′
+  text: List every way your robot can be given a job. There should be at least three by now.
+  expect: A written list of every way your robot can be given a job — there should be at least three
+    by now.
+- time: 25′
+  text: Make them all set the same variable, so the job loop does not care where the order came from.
+  use:
+  - my:match_command
+  - data_setvariableto
+  expect: Button, controller and voice all set the same variable, and the job loop cannot tell which
+    one was used.
+- time: 25′
+  text: 'Now the conflict: drive with the stick while someone says "stop". Decide what should win and
+    implement it.'
+  use:
+  - control_if
+  - my:do_fetch
+  - my:do_patrol
+  expect: Someone says “stop” while you are driving with the stick, and the robot does what you decided
+    should win.
+- time: 25′
+  text: Test all three inputs in one continuous run, switching between them without restarting.
+  expect: One continuous run switching between all three inputs without a restart.
+- time: 20′
+  text: Hand it to another team and ask them to make it behave badly. Fix whatever they find.
+  expect: Another team tries to make your robot misbehave, and whatever they find is fixed.
+- time: 10′
+  text: Log your priority rule in one sentence. Step 22 turns this rule into the job you design.
+  expect: Your priority rule in one sentence in the log. Step 22 turns this rule into the job you design.
+code:
+  lang: blocks
+  source: "define  match_command\n  set  heard  to  (speech recognition result)\n  set  matched  to\
+    \ 0\n  set  stop  to  ((length of commands) + 1)\n  count with  i  from 1 to (stop) by step 1 repeat\n\
+    \    if  ((heard) contains  (item (i) of commands) ?)  then\n      set  job  to  (item (i) of commands)\n\
+    \      set  matched  to 1\n      speak  auto  join  ok,   (item (i) of commands)\n      break\n\
+    \  if  (matched) = 0  then\n    stop encoder motor  all\n    speak  auto  I did not catch that\n\
+    \ndefine  do_fetch\n  moves forward  at 40  RPM\n  if  quad rgb sensor 1 probe (3) L1 detects  red\
+    \ ?  then\n    stop encoder motor  all\n    grip\n    set  job  to  idle\n\ndefine  do_patrol\n\
+    \  moves forward  at 30  RPM\n  if  quad rgb sensor 1 probe (3) L1 detects  line ?  then\n    turns\
+    \ right  90  ° until done\n\nwhen CyberPi starts up\n  connect to Wi-Fi  ssid  password  password\n\
+    \  wait until  network connected?\n  speak  auto  I am awake\n  delete all of  commands\n  add \
+    \ forward  to  commands\n  add  stop  to  commands\n  add  fetch  to  commands\n  add  patrol  to\
+    \  commands\n  set  job  to  idle\n  forever\n    show label 2  join  job:   (job)  at x: 0 y: 20\
+    \  by small pixel\n    if  button  R2  pressed  then\n      set  job  to  idle\n    if  (job) =\
+    \ fetch  then\n      do_fetch\n    if  (job) = patrol  then\n      do_patrol\n\nwhen button A pressed\n\
+    \  recognize  (4) English  3  secs\n  match_command\n  show label 1  join  heard:   (heard)  at\
+    \ x: 0 y: 0  by small pixel\n\nwhen button B pressed\n  speak  auto  (translate  (heard)  into \
+    \ French)"
+tips:
+- Every input setting the same variable is the whole design. If a team has three separate loops fighting
+  each other, that is the bug to fix today.
+- Safety first is the conventional answer to the conflict question, but make them argue it rather than
+  handing it to them.
+- This is the last build step before the mission. A robot that works reliably here needs almost nothing
+  new in Stage E.
+result:
+  scene: states
+  params:
+    states:
+    - [IDLE, '#64748b', waits for a word]
+    - [FETCH, '#16a34a', 'grips red, then idle']
+    - [PATROL, '#0891b2', turns at every line]
+    trans:
+    - [0, 1, 'say “fetch”']
+    - [0, 2, 'say “patrol”']
+    caption: three inputs set one variable — R2 always returns it to idle
+success:
+- Three different inputs all setting the same job variable
+- A written, implemented rule for what happens when two disagree
+- All three used in one continuous run without a restart
+check:
+- do: 'on'
+  see: The screen shows the job it is doing right now.
+- do: A
+  see: Say fetch and it starts fetching.
+- do: see
+  see: Press R2 on the controller and it goes back to idle.
+parts:
+- id: robot_tank
+- id: router
+

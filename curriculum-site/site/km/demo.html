@@ -1,0 +1,480 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ដំណើរទស្សនកិច្ចសាកល្បង · កម្មវិធីរូបយន្ត mBot2</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "កម្មវិធីរូបយន្ត mBot2 Rover · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #0a5c8c 70%, #0e7fc1 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #7dd3fc; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #7dd3fc; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #7dd3fc; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #0e7fc1; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #e3f1fa; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #0a5c8c; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #e3f1fa; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #0a5c8c; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #0a5c8c;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #0e7fc1; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #0a5c8c; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #0e7fc1;
+  border-radius: 8px; background: #e3f1fa; font-size: 8.4pt; font-weight: bold;
+  color: #0a5c8c; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #e3f1fa; border-left: 3px solid #0e7fc1;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #0a5c8c; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #0a5c8c; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #0a5c8c; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #0e7fc1; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #0a5c8c; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #0a5c8c; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #0e7fc1; background: #e3f1fa; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #0e7fc1; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #0a5c8c; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #0e7fc1; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #e3f1fa; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #0a5c8c; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #0a5c8c; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #0e7fc1; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #e3f1fa; border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #e3f1fa; color: #0a5c8c;
+  border: 1px solid #0e7fc1; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #0e7fc1; }
+.result li.xtra { color: #0a5c8c; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+body, .chrome, .buildson {
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN", Helvetica, Arial, sans-serif;
+  line-height: 1.62;
+}
+/* headings carry coeng too, and were tuned tight for Latin caps */
+.cover h1 { line-height: 1.35; font-size: 24pt; }
+.shead h2 { font-size: 13.5pt; line-height: 1.4; }
+h2.section { line-height: 1.4; }
+/* uppercase/letter-spacing are meaningless in Khmer and actively break clusters
+   by pulling diacritics away from their base consonant */
+.shead .sno, h4.blk, .codelabel, .guidebox b.h, .result .rk, .mats .mhead, .badge span,
+.cover .kicker, .vtag {
+  text-transform: none; letter-spacing: 0;
+}
+/* buy back the vertical space the extra leading costs, so a session still fits
+   one A4 page — measured against the English layout, not guessed */
+body { font-size: 8.8pt; }
+.teach p, table.flow td, .tips, .result li, .lane p { font-size: 8.3pt; }
+.goal { font-size: 8.9pt; }
+.guidebox { font-size: 7.6pt; line-height: 1.5; }
+.chal li { font-size: 8pt; }
+/* the code box stays Latin monospace — mBlock block names are not translated */
+.codebox { font-family: "DejaVu Sans Mono", monospace; line-height: 1.45; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style>
+<style>
+.reveal { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; font-size: 8.6pt; color: #7c4a06; margin-top: 2mm; }
+.gsec { margin-bottom: 12mm; }
+.ghead { border-radius: 10px; color: #fff; padding: 4mm 6mm; margin-bottom: 3mm; }
+.ghead .gk { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: .9; }
+.ghead h2 { margin: 1mm 0 0 0; font-size: 16pt; }
+.glede { color: #475569; font-size: 9.6pt; }
+.dmile { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 1.5px; margin: 5mm 0 3mm 0; }
+.dgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.dcard { border: 1.8px solid; border-radius: 10px; padding: 3.5mm 4mm; text-decoration: none;
+  color: #1e293b; display: block; background: #fff; }
+.dcard:hover, .dcap:hover { box-shadow: 0 2px 12px rgba(15,23,42,.15); }
+.dk { font-weight: bold; font-size: 10pt; margin-bottom: 1mm; }
+.dhook { font-size: 8.8pt; color: #475569; margin-bottom: 2mm; }
+.dimg { text-align: center; }
+.dimg svg { max-width: 100%; }
+.dcrit { margin: 1.5mm 0 0 0; padding-left: 0; list-style: none; font-size: 8.4pt; }
+.dcrit li { margin-bottom: 1mm; padding-left: 5mm; text-indent: -5mm; }
+.dcrit li::before { content: "\2611  "; color: #16a34a; }
+.dcap { display: block; border: 2.5px solid; border-radius: 12px; padding: 4mm 5mm;
+  margin-top: 4mm; text-decoration: none; color: #1e293b; }
+.dcaptab { width: 100%; border-collapse: collapse; }
+.dcaptab td { vertical-align: middle; }
+.dcaptab td:first-child { width: 55%; text-align: center; }
+.dmore { font-size: 8.8pt; font-weight: bold; margin-top: 2mm; }
+@media (max-width: 700px) { .dgrid { grid-template-columns: 1fr; } }
+</style>
+</head><body>
+<div class="chrome"><a href="index.html">គ្រប់ថ្នាក់</a><span class="spacer"></span><span class="dim">ដំណើរទស្សនកិច្ចសាកល្បង — ទិដ្ឋភាពរួមកម្មវិធីសម្រាប់ថ្នាក់ដឹកនាំសាលា</span><a class="glossary-link" href="glossary.html" target="_blank" rel="noopener noreferrer">បើកសទ្ទានុក្រមក្នុងផ្ទាំងថ្មី</a><span class="langtog" role="group" aria-label="ភាសា"><a href="../demo.html" lang="en" hreflang="en">EN</a><span class="on" lang="km">ខ្មែរ</span></span></div>
+<h2 class="section">កម្មវិធីរូបយន្ត mBot2 — ខ្សែសង្វាក់ ៦ ឆ្នាំ</h2>
+<p class="glede" style="margin-bottom:5mm">ឧបករណ៍មួយគ្រួសារ រយៈពេល ៦ ឆ្នាំ។ ថ្នាក់ទី ៤–៦ ប្រើតែប្រអប់ mBot2 ទី ១ ដោយប្រើប្លុក៖ បញ្ជាវា (ថ្នាក់ទី៤) → ធ្វើឲ្យវាដឹង និងសម្រេចចិត្ត (ថ្នាក់ទី៥) → ធ្វើឲ្យវាដំណើរការដោយខ្លួនឯង និងភ្ជាប់បណ្ដាញ (ថ្នាក់ទី៦) ដែលនីមួយៗមានកំណែ ១ ម៉ោង ឬ ២ ម៉ោង ក្នុងមួយសប្ដាហ៍។ បន្ទាប់មក ថ្នាក់ទី ៧–៩ បន្ថែមភាពជាក់លាក់ និងផ្នែករឹង៖ mBot2 កង់រុញដោយប្លុក (ថ្នាក់ទី៧) → Rover ខ្សែក្រវាត់ ជាមួយ AI និងការបញ្ចេញមុខមាត់ (ថ្នាក់ទី៨) → Rover ដដែល ដាក់ឲ្យធ្វើការដោយប្រើដៃចាប់ សរសេរដោយ Python ពេញលេញ (ថ្នាក់ទី៩)។ ឆ្នាំនីមួយៗជាជណ្ដើរ ២០ មេរៀនបន្តបន្ទាប់ បញ្ចប់ដោយព្រឹត្តិការណ៍សាធារណៈមានពិន្ទុ — កាតសមិទ្ធផលបួនក្នុងមួយថ្នាក់បង្ហាញជណ្ដើរនោះ ហើយកាតគម្រោងបញ្ចប់គឺជាទីដៅ។</p>
+
+<div class="gsec">
+  <div class="ghead" style="background: linear-gradient(110deg, #0a5c8c, #0e7fc1)">
+    <div class="gk">ថ្នាក់ទី ៧ · mBot2 · wheeled base · Block-based coding</div>
+    <h2>Foundations — Think Like a Robot</h2>
+  </div>
+  <p class="glede">25 steps · 44 hours · mBot2 · wheeled base · Block-based coding</p>
+  <h3 class="dmile" style="color:#0a5c8c">សមិទ្ធផលតាមផ្លូវ</h3>
+  <div class="dgrid">
+<a class="dcard" href="grade7/step-02.html" style="border-color:#0e7fc1">
+  <div class="dk" style="color:#0a5c8c">Finish it — sensors, shield, first power-on</div>
+  <div class="dhook">Command 100 cm, measure the miss with a ruler — a tolerance, in hour three</div>
+  <div class="dimg"><svg viewBox="0 0 320 145" width="275"><g font-family="Helvetica"><defs><marker id="ba" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/></marker></defs><g transform="translate(90,72) rotate(0) scale(1.7)"><rect x="-16" y="-13" width="32" height="26" rx="6" fill="#0e7fc1"/><rect x="-19" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-19" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-9" y="-8" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-3" r="2" fill="#facc15"/><circle cx="4" cy="-3" r="2" fill="#facc15"/><path d="M -4,1 Q 0,4 4,1" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#0a5c8c"/></g><text x="175" y="34" font-size="10" fill="#16a34a">☑</text><text x="188" y="34" font-size="9" fill="#334155">wheels turn freely</text><text x="175" y="56" font-size="10" fill="#16a34a">☑</text><text x="188" y="56" font-size="9" fill="#334155">cables tucked away</text><text x="175" y="78" font-size="10" fill="#16a34a">☑</text><text x="188" y="78" font-size="9" fill="#334155">battery secured</text><text x="175" y="100" font-size="10" fill="#16a34a">☑</text><text x="188" y="100" font-size="9" fill="#334155">nothing loose when shaken</text><text x="90" y="132" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">fully assembled + QC checklist passed</text></g></svg></div>
+  <ul class="dcrit"><li>The robot passes all four QC points, signed by another team</li><li>Sensors mounted straight and plugged into the right ports</li></ul>
+</a>
+<a class="dcard" href="grade7/step-13.html" style="border-color:#0e7fc1">
+  <div class="dk" style="color:#0a5c8c">រូបយន្តរក្សាពិន្ទុ</div>
+  <div class="dhook">Drive it by hand and it replays the route by itself — a list, made visible</div>
+  <div class="dimg"><svg viewBox="0 0 304 144" width="258"><g font-family="Helvetica"><rect x="90" y="10" width="124" height="70" rx="8" fill="#334155"/><rect x="96" y="16" width="112" height="58" rx="4" fill="#0f172a"/><text x="152" y="34" font-size="9" fill="#94a3b8" text-anchor="middle">obstacles</text><text x="152" y="66" font-size="28" font-weight="bold" fill="#7dd3fc" text-anchor="middle">7</text><rect x="28" y="98" width="26" height="20" fill="#d6bb6f"/><text x="41" y="134" font-size="9" font-weight="bold" fill="#0a5c8c" text-anchor="middle">+1</text><rect x="94" y="98" width="26" height="20" fill="#d6bb6f"/><text x="107" y="134" font-size="9" font-weight="bold" fill="#0a5c8c" text-anchor="middle">+1</text><rect x="160" y="98" width="26" height="20" fill="#d6bb6f"/><text x="173" y="134" font-size="9" font-weight="bold" fill="#0a5c8c" text-anchor="middle">+1</text><rect x="226" y="98" width="26" height="20" fill="#d6bb6f"/><text x="239" y="134" font-size="9" font-weight="bold" fill="#0a5c8c" text-anchor="middle">+1</text><text x="152" y="92" font-size="8" fill="#64748b" text-anchor="middle">every time it sees one, the number goes up by one</text></g></svg></div>
+  <ul class="dcrit"><li>ការរាប់កើនម្ដងក្នុងមួយជញ្ជាំង មិនមែនម្ដងក្នុងមួយរង្វិលជុំ</li><li>ផលបូកនៅលើអេក្រង់ និងមានស្លាក</li></ul>
+</a>
+<a class="dcard" href="grade7/step-18.html" style="border-color:#0e7fc1">
+  <div class="dk" style="color:#0a5c8c">ដាក់ឈ្មោះឲ្យអាកប្បកិរិយា</div>
+  <div class="dhook">Line following, written as a block the students named themselves</div>
+  <div class="dimg"><svg viewBox="0 0 302 152" width="258"><g font-family="Helvetica"><rect x="14" y="20" width="120" height="94" rx="7" fill="#fff" stroke="#64748b" stroke-width="2"/><rect x="14" y="20" width="120" height="20" rx="7" fill="#64748b"/><text x="74.0" y="34" font-size="8.6" font-weight="bold" fill="#fff" text-anchor="middle">define  wave</text><rect x="22" y="48" width="104" height="18" rx="4" fill="#e2e8f0"/><text x="74.0" y="60" font-size="7.4" fill="#1e293b" text-anchor="middle">move forward 20 cm</text><rect x="22" y="72" width="104" height="18" rx="4" fill="#e2e8f0"/><text x="74.0" y="84" font-size="7.4" fill="#1e293b" text-anchor="middle">turn right 90°</text><rect x="22" y="96" width="104" height="18" rx="4" fill="#e2e8f0"/><text x="74.0" y="108" font-size="7.4" fill="#1e293b" text-anchor="middle">play note G4</text><text x="150" y="72" font-size="16" fill="#64748b">→</text><rect x="176" y="30" width="112" height="26" rx="13" fill="#0e7fc1"/><text x="232" y="47" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">wave</text><rect x="176" y="66" width="112" height="20" rx="10" fill="#0e7fc1" opacity="0.6"/><text x="232" y="80" font-size="8.4" font-weight="bold" fill="#fff" text-anchor="middle">wave</text><rect x="176" y="92" width="112" height="20" rx="10" fill="#0e7fc1" opacity="0.39999999999999997"/><text x="232" y="106" font-size="8.4" font-weight="bold" fill="#fff" text-anchor="middle">wave</text><text x="232" y="132" font-size="7.8" fill="#64748b" text-anchor="middle">written once, used everywhere</text><text x="150" y="146" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">your own block, with a name you chose</text></g></svg></div>
+  <ul class="dcrit"><li>ប្លុកផ្ទាល់ខ្លួនយ៉ាងតិចពីរ ប្រើលើសពីម្ដងម្នាក់</li><li>មួយក្នុងចំណោមពួកវារាយការណ៍លទ្ធផលតាមរយៈអថេរ</li></ul>
+</a>
+<a class="dcard" href="grade7/step-19.html" style="border-color:#0e7fc1">
+  <div class="dk" style="color:#0a5c8c">ប្លុកដែលទទួលលេខ</div>
+  <div class="dhook">One variable decides what the robot is doing — a state machine, age 12</div>
+  <div class="dimg"><svg viewBox="0 0 304 146" width="262"><g font-family="Helvetica"><text x="152" y="20" font-size="8.4" font-weight="bold" fill="#64748b" text-anchor="middle">the team’s block library</text><rect x="20" y="32" width="84" height="23" rx="11.5" fill="#0d9488"/><text x="62" y="47.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">wave</text><rect x="115" y="32" width="84" height="23" rx="11.5" fill="#0891b2"/><text x="157" y="47.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">spin</text><rect x="210" y="32" width="84" height="23" rx="11.5" fill="#7c3aed"/><text x="252" y="47.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">beep twice</text><rect x="20" y="64" width="84" height="23" rx="11.5" fill="#d97706"/><text x="62" y="79.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">go home</text><rect x="115" y="64" width="84" height="23" rx="11.5" fill="#16a34a"/><text x="157" y="79.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">scan ahead</text><rect x="210" y="64" width="84" height="23" rx="11.5" fill="#e11d48"/><text x="252" y="79.5" font-size="8.2" font-weight="bold" fill="#fff" text-anchor="middle">celebrate</text><rect x="20" y="102" width="264" height="22" rx="6" fill="#f8fafc" stroke="#0e7fc1" stroke-width="1.5"/><text x="152" y="116" font-size="8" fill="#0a5c8c" text-anchor="middle">a good name says what it does — not how it does it</text><text x="152" y="138" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">six blocks the team wrote, named and reuse</text></g></svg></div>
+  <ul class="dcrit"><li>ប្លុកមួយមានធាតុចូលជាលេខ ប្រើជាមួយតម្លៃបីខុសគ្នា</li><li>turn_by(90) វាស់ធៀបនឹងរបស់ដែលភ្ជាប់មក បីដងម្នាក់</li></ul>
+</a></div>
+  <a class="dcap" href="grade7/step-25.html" style="border-color:#0e7fc1; background:#e3f1fa">
+    <div class="dk" style="color:#0a5c8c">★ មេរៀនទី ២០ — Rescue Run (ការបញ្ចប់ឆ្នាំ)</div>
+    <div class="dhook">An autonomous mission: follow the line, avoid a surprise obstacle, stop precisely in the rescue zone, celebrate. Two scored attempts + a short team presentation.</div>
+    <table class="dcaptab"><tr><td><svg viewBox="0 0 300 156" width="258"><g font-family="Helvetica"><path d="M 20,120 C 80,120 70,50 140,50 C 200,50 190,110 240,110" fill="none" stroke="#334155" stroke-width="5" stroke-linecap="round"/><rect x="130" y="35" width="24" height="24" fill="#ef4444" rx="4" transform="rotate(12 142 47)"/><text x="142" y="27" font-size="8" font-weight="bold" fill="#ef4444" text-anchor="middle">obstacle!</text><path d="M 118,58 Q 142,88 166,55" fill="none" stroke="#0e7fc1" stroke-width="2.2" stroke-dasharray="4,3"/><g transform="translate(52,113) rotate(-14) scale(0.95)"><rect x="-16" y="-13" width="32" height="26" rx="6" fill="#0e7fc1"/><rect x="-19" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-19" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-9" y="-8" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-3" r="2" fill="#facc15"/><circle cx="4" cy="-3" r="2" fill="#facc15"/><path d="M -4,1 Q 0,4 4,1" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#0a5c8c"/></g><line x1="12" y1="126" x2="12" y2="108" stroke="#334155" stroke-width="2"/><polygon points="12,108 26,112 12,116" fill="#16a34a"/><text x="14" y="137" font-size="7.5" font-weight="bold" fill="#16a34a">START</text><circle cx="262" cy="110" r="21" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-dasharray="5,4"/><text x="262" y="113" font-size="8" font-weight="bold" fill="#16a34a" text-anchor="middle">RESCUE</text><text x="150" y="150" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">line → avoid → precise stop → celebration, fully autonomous</text></g></svg></td><td><ul class="dcrit"><li>ការសាកល្បងផ្លូវការពីរដងបានបញ្ចប់ និងបានពិន្ទុតាមដំណាក់កាល</li><li>ការកំណត់ត្រូវបានបង្កកជាលាយលក្ខណ៍អក្សរ មុនដងទីមួយ</li><li>សិស្សគ្រប់រូបអាចប្រាប់ថារូបយន្តខ្លួនធ្វើអ្វី និងហេតុអ្វីវាបរាជ័យត្រង់នោះ</li></ul></td></tr></table>
+    <div class="dmore" style="color:#0a5c8c">បើកទំព័រគ្រូពេញលេញនៃមេរៀនទី ២០ →</div>
+  </a>
+</div>
+<div class="gsec">
+  <div class="ghead" style="background: linear-gradient(110deg, #5f2b8a, #8b3fc6)">
+    <div class="gk">ថ្នាក់ទី ៨ · mBot2 Rover · tracks + grip arms · Block-based coding</div>
+    <h2>Interaction & AI — Robots That Listen and Work</h2>
+  </div>
+  <p class="glede">24 steps · 42 hours · mBot2 Rover · tracks + grip arms · Block-based coding</p>
+  <h3 class="dmile" style="color:#5f2b8a">សមិទ្ធផលតាមផ្លូវ</h3>
+  <div class="dgrid">
+<a class="dcard" href="grade8/step-02.html" style="border-color:#8b3fc6">
+  <div class="dk" style="color:#5f2b8a">Build it — chassis, head, shells, arms</div>
+  <div class="dhook">Same brain, rebuilt on tracks — and every number from last year is now wrong</div>
+  <div class="dimg"><svg viewBox="0 0 304 148" width="262"><g font-family="Helvetica"><g transform="translate(152,67) rotate(0) scale(2.0)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#8b3fc6"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#5f2b8a"/></g><text x="152" y="112" font-size="8" fill="#64748b" text-anchor="middle">crossed motor cables · eight boards fitted · cables clear</text><text x="152" y="140" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">the Rover is assembled, secure, and rolls freely by hand</text></g></svg></div>
+  <ul class="dcrit"><li>Both tracks turn freely by hand, neither binding</li><li>Motor cables crossed correctly, checked by another team</li></ul>
+</a>
+<a class="dcard" href="grade8/step-11.html" style="border-color:#8b3fc6">
+  <div class="dk" style="color:#5f2b8a">ចំណុចត្រួតពិនិត្យទី ២ — បញ្ជី រង្វិលជុំ សញ្ញាប្រមាណវិធី ស្ថានភាព</div>
+  <div class="dhook">Two sticks and sixteen buttons, and why a controller must be asked, not told</div>
+  <div class="dimg"><svg viewBox="0 0 304 152" width="262"><g font-family="Helvetica"><g transform="translate(58,62) rotate(0) scale(1.4)"><rect x="-16" y="-13" width="32" height="26" rx="6" fill="#8b3fc6"/><rect x="-19" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-19" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="-15" width="7" height="10" rx="2" fill="#1e293b"/><rect x="12" y="5" width="7" height="10" rx="2" fill="#1e293b"/><rect x="-9" y="-8" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-3" r="2" fill="#facc15"/><circle cx="4" cy="-3" r="2" fill="#facc15"/><path d="M -4,1 Q 0,4 4,1" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#5f2b8a"/></g><text x="122" y="24" font-size="10.5" fill="#16a34a">☑</text><text x="138" y="24" font-size="8.4" fill="#334155">pose list replays</text><text x="122" y="43" font-size="10.5" fill="#16a34a">☑</text><text x="138" y="43" font-size="8.4" fill="#334155">nested-loop count predicted</text><text x="122" y="62" font-size="10.5" fill="#16a34a">☑</text><text x="138" y="62" font-size="8.4" fill="#334155">failure has an exit state</text><rect x="118" y="108" width="176" height="20" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.4"/><text x="206" y="122" font-size="8" fill="#991b1b" text-anchor="middle" font-weight="bold">one fault found → now find out why</text><text x="152" y="144" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">every student clears all three algorithm challenges</text></g></svg></div>
+  <ul class="dcrit"><li>សិស្សគ្រប់រូបបានបង្ហាញបញ្ហាទាំងបី</li><li>ដ្យាក្រាមការងារគ្រប់មួយមានព្រួញចេញពីការបរាជ័យ</li></ul>
+</a>
+<a class="dcard" href="grade8/step-17.html" style="border-color:#8b3fc6">
+  <div class="dk" style="color:#5f2b8a">Rover និយាយ និងស្ដាប់</div>
+  <div class="dhook">Say a word and the robot obeys — speech matched against a vocabulary it holds</div>
+  <div class="dimg"><svg viewBox="0 0 310 148" width="250"><g font-family="Helvetica"><rect x="84" y="19" width="142" height="90" rx="8" fill="#334155"/><rect x="90" y="25" width="130" height="78" rx="4" fill="#0f172a"/><text x="155.0" y="40" font-size="10" fill="#7dd3fc" text-anchor="middle" font-weight="bold">heard: hello</text><text x="155.0" y="55" font-size="10" fill="#facc15" text-anchor="middle" >says: hello</text><text x="155.0" y="70" font-size="9" fill="#22c55e" text-anchor="middle" >French: bonjour</text><circle cx="105" cy="118" r="5" fill="#475569"/><circle cx="205" cy="118" r="5" fill="#475569"/><text x="155" y="142" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">the Rover shows, repeats, and translates what it heard</text></g></svg></div>
+  <ul class="dcrit"><li>រូបយន្តនិយាយ និងបង្ហាញស្ថានភាពបណ្ដាញលើអេក្រង់</li><li>វានិយាយឡើងវិញនូវអ្វីដែលវាឮ បានត្រឹមត្រូវ យ៉ាងតិចជួនកាល</li></ul>
+</a>
+<a class="dcard" href="grade8/step-19.html" style="border-color:#8b3fc6">
+  <div class="dk" style="color:#5f2b8a">ពេលវាមិនយល់</div>
+  <div class="dhook">Voice, controller and sensors all feeding one job machine</div>
+  <div class="dimg"><svg viewBox="0 0 304 150" width="262"><g font-family="Helvetica"><rect x="12" y="34" width="64" height="50" rx="7" fill="#0891b2"/><text x="44" y="52" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">PREDICT</text><text x="44" y="65" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">say what it</text><text x="44" y="75" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">will do</text><text x="82" y="64" font-size="13" fill="#94a3b8" text-anchor="middle">→</text><rect x="84" y="34" width="64" height="50" rx="7" fill="#16a34a"/><text x="116" y="52" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">TEST</text><text x="116" y="65" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">run it</text><text x="116" y="75" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">once</text><text x="154" y="64" font-size="13" fill="#94a3b8" text-anchor="middle">→</text><rect x="156" y="34" width="64" height="50" rx="7" fill="#d97706"/><text x="188" y="52" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">OBSERVE</text><text x="188" y="65" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">what actually</text><text x="188" y="75" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">happened</text><text x="226" y="64" font-size="13" fill="#94a3b8" text-anchor="middle">→</text><rect x="228" y="34" width="64" height="50" rx="7" fill="#7c3aed"/><text x="260" y="52" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">FIX</text><text x="260" y="65" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">change ONE</text><text x="260" y="75" font-size="6.4" fill="#fff" opacity="0.9" text-anchor="middle">thing</text><defs><marker id="dbg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/></marker></defs><path d="M 276,86 C 292,114 150,124 44,112 C 32,110 28,100 30,90" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#dbg)"/><text x="152" y="20" font-size="8.4" font-weight="bold" fill="#64748b" text-anchor="middle">the bug hunt, every time, in this order</text><text x="152" y="142" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">guessing is not debugging — predicting is</text></g></svg></div>
+  <ul class="dcrit"><li>ផ្លូវគ្មានការត្រូវគ្នាច្បាស់លាស់ ដែលនិយាយ ហើយមិនផ្លាស់ទី</li><li>បញ្ជាស្រដៀងគ្នាពីររកឃើញ ហើយមួយត្រូវបានប្ដូរ</li></ul>
+</a></div>
+  <a class="dcap" href="grade8/step-24.html" style="border-color:#8b3fc6; background:#f2e8fa">
+    <div class="dk" style="color:#5f2b8a">★ មេរៀនទី ២០ — A Job Worth Doing (ការបញ្ចប់ឆ្នាំ)</div>
+    <div class="dhook">An autonomous job the team specified themselves — navigate, pick something up with the arm, deliver it, and take an instruction from a person by voice or controller. Scored against the team's own written criteria.</div>
+    <table class="dcaptab"><tr><td><svg viewBox="0 0 315 158" width="260"><g font-family="Helvetica"><rect x="60" y="88" width="190" height="12" rx="4" fill="#94a3b8"/><g transform="translate(155,74) rotate(0) scale(1.15)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#8b3fc6"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><line x1="16" y1="0" x2="32" y2="-12" stroke="#5f2b8a" stroke-width="4" stroke-linecap="round"/><line x1="32" y1="-12" x2="40" y2="-4" stroke="#5f2b8a" stroke-width="4" stroke-linecap="round"/><rect x="36" y="-6" width="9" height="8" rx="1.5" fill="#facc15" stroke="#ca8a04"/></g><circle cx="30" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="24" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="55" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="49" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="255" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="249" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="280" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="274" y="127" width="12" height="13" rx="3" fill="#64748b"/><rect x="228" y="20" width="76" height="34" rx="5" fill="#fff" stroke="#94a3b8"/><text x="266" y="33" font-size="7" fill="#334155" text-anchor="middle">mission score</text><text x="266" y="47" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">9 / 10 tasks</text><text x="60" y="34" font-size="8" fill="#334155" text-anchor="middle">5-min pitch +</text><text x="60" y="45" font-size="8" fill="#334155" text-anchor="middle">live demo</text><text x="158" y="152" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">Demo Day: scored run in front of a real audience</text></g></svg></td><td><ul class="dcrit"><li>ការសាកល្បងផ្លូវការពីរដងបានពិន្ទុធៀបនឹងលក្ខណៈវិនិច្ឆ័យចុះហត្ថលេខាផ្ទាល់របស់ក្រុម</li><li>ការកំណត់បង្កកជាលាយលក្ខណ៍អក្សរមុនការសាកល្បងដំបូង</li><li>ក្រុមគ្រប់ក្រុមបានប្រាប់រឿងបរាជ័យស្មោះត្រង់មួយ និងអ្វីដែលវាបង្រៀនពួកគេ</li></ul></td></tr></table>
+    <div class="dmore" style="color:#5f2b8a">បើកទំព័រគ្រូពេញលេញនៃមេរៀនទី ២០ →</div>
+  </a>
+</div>
+<div class="gsec">
+  <div class="ghead" style="background: linear-gradient(110deg, #9a4f08, #d97706)">
+    <div class="gk">ថ្នាក់ទី ៩ · mBot2 Rover · tracked base + twin grip arms · Full Python</div>
+    <h2>Engineering & Autonomy — Robots That Work</h2>
+  </div>
+  <p class="glede">២០ 2 h មេរៀន ក្នុង ៥ ឯកតា (40 h) — មេរៀននីមួយៗជាឯកសារណែនាំគ្រូ មួយទំព័រស្រេច (លំដាប់តាមម៉ោង កូដ ចំណុចប្រឈម លក្ខណៈវិនិច្ឆ័យជោគជ័យ)។ ជំនាញកកើតឡើងតាមឯកតានីមួយៗ ហើយបញ្ចប់ដោយព្រឹត្តិការណ៍សាធារណៈមានពិន្ទុនៅមេរៀនទី ២០។</p>
+  <div class="center"><svg viewBox="0 0 660 100" width="620"><g font-family="Khmer OS Battambang, Khmer MN, Khmer Sangam MN, Helvetica"><rect x="20" y="34" width="117" height="34" fill="#d97706" rx="5"/><text x="35" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">1</text><text x="64" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">2</text><text x="93" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">3</text><text x="122" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">4</text><text x="78" y="24" font-size="9" font-weight="bold" fill="#d97706" text-anchor="middle">Python Bootcamp</text><rect x="140" y="34" width="147" height="34" fill="#f0a13c" rx="5"/><text x="155" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">5</text><text x="184" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">6</text><text x="214" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">7</text><text x="243" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">8</text><text x="272" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">9</text><text x="214" y="24" font-size="9" font-weight="bold" fill="#f0a13c" text-anchor="middle">Better Control</text><rect x="290" y="34" width="87" height="34" fill="#9a4f08" rx="5"/><text x="304" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">10</text><text x="334" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">11</text><text x="362" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">12</text><text x="334" y="86" font-size="9" font-weight="bold" fill="#9a4f08" text-anchor="middle">The Arms</text><rect x="380" y="34" width="57" height="34" fill="#f0a13c" rx="5"/><text x="394" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">13</text><text x="423" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">14</text><text x="408" y="24" font-size="9" font-weight="bold" fill="#f0a13c" text-anchor="middle">Integration</text><rect x="440" y="34" width="177" height="34" fill="#16a34a" rx="5"/><text x="455" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">15</text><text x="484" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">16</text><text x="514" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">17</text><text x="543" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">18</text><text x="573" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">19</text><text x="602" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">20</text><text x="528" y="24" font-size="9" font-weight="bold" fill="#16a34a" text-anchor="middle">Capstone: Robots at Work</text></g></svg></div>
+  <h3 class="dmile" style="color:#9a4f08">សមិទ្ធផលតាមផ្លូវ</h3>
+  <div class="dgrid">
+<a class="dcard" href="grade9/session-06.html" style="border-color:#d97706">
+  <div class="dk" style="color:#9a4f08">មេរៀនទី ៦ · ការគ្រប់គ្រងបែប P</div>
+  <div class="dhook">Proportional control defeats the wobble planted in Grade 7</div>
+  <div class="dimg"><svg viewBox="0 0 315 148" width="268"><g font-family="Helvetica"><path d="M 20,110 C 90,110 90,45 160,45 C 230,45 230,95 295,95" fill="none" stroke="#1e293b" stroke-width="7" stroke-linecap="round"/><path d="M 20,110 C 90,110 90,45 160,45 C 230,45 230,95 295,95" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3" transform="translate(0,-6)"/><g transform="translate(160,45) rotate(8) scale(0.95)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#d97706"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><polygon points="16,-5 24,0 16,5" fill="#9a4f08"/></g><text x="157" y="140" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">P-control: the trajectory finally hugs the line</text></g></svg></div>
+  <ul class="dcrit"><li>កម្មវិធីដើរតាមខ្សែបែប P បញ្ចប់ជុំដោយរលូនជាង bang-bang ឃើញច្បាស់</li><li>តារាង gain មាន ៥ តម្លៃឡើងទៅ ជាមួយវិន័យប្ដូរម្ដងមួយ</li></ul>
+</a>
+<a class="dcard" href="grade9/session-07.html" style="border-color:#d97706">
+  <div class="dk" style="color:#9a4f08">មេរៀនទី ៧ · វាស់វា</div>
+  <div class="dhook">Engineering arguments are graphs, not opinions</div>
+  <div class="dimg"><svg viewBox="0 0 320 140" width="268"><g font-family="Helvetica"><line x1="40" y1="15" x2="40" y2="105" stroke="#334155" stroke-width="1.5"/><line x1="40" y1="60" x2="300" y2="60" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3"/><line x1="40" y1="105" x2="300" y2="105" stroke="#334155" stroke-width="1.5"/><text x="18" y="62" font-size="7" fill="#64748b" transform="rotate(-90 18 62)" text-anchor="middle">line error</text><text x="170" y="118" font-size="7.5" fill="#64748b" text-anchor="middle">time →</text><path d="M 45,60 L 65,30 L 85,88 L 105,32 L 125,86 L 145,35 L 165,84" fill="none" stroke="#ef4444" stroke-width="2"/><text x="105" y="22" font-size="8" font-weight="bold" fill="#ef4444" text-anchor="middle">bang-bang</text><path d="M 175,78 C 205,42 225,68 250,58 C 270,52 285,62 298,60" fill="none" stroke="#16a34a" stroke-width="2.2"/><text x="245" y="40" font-size="8" font-weight="bold" fill="#16a34a" text-anchor="middle">proportional</text><text x="170" y="134" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">error shrinks and settles instead of bouncing</text></g></svg></div>
+  <ul class="dcrit"><li>ក្រាហ្វកំហុស-ពេលវេលាទាំងពីរ ផលិតចេញពីទិន្នន័យកត់ត្រាពិត</li><li>សេចក្ដីសន្និដ្ឋានសរសេរ យោងលេខចេញពីក្រាហ្វ</li></ul>
+</a>
+<a class="dcard" href="grade9/session-11.html" style="border-color:#d97706">
+  <div class="dk" style="color:#9a4f08">មេរៀនទី ១១ · Pick & Place</div>
+  <div class="dhook">The arms earn their keep: grip, carry through a turn, release on target</div>
+  <div class="dimg"><svg viewBox="0 0 320 148" width="262"><g font-family="Helvetica"><g transform="translate(95,85) rotate(0) scale(1.6)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#d97706"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><line x1="16" y1="0" x2="32" y2="-12" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><line x1="32" y1="-12" x2="40" y2="-4" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><rect x="36" y="-6" width="9" height="8" rx="1.5" fill="#facc15" stroke="#ca8a04"/></g><rect x="215" y="98" width="24" height="20" rx="3" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/><rect x="205" y="88" width="46" height="36" rx="4" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,4"/><text x="160" y="142" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">carried, then released inside the target zone</text></g></svg></div>
+  <ul class="dcrit"><li>Rung 2 (carry & release) reached by every team</li><li>Rung 3 attempted with logged one-change attempts</li></ul>
+</a>
+<a class="dcard" href="grade9/session-13.html" style="border-color:#d97706">
+  <div class="dk" style="color:#9a4f08">មេរៀនទី ១៣ · Navigate + Manipulate ✱</div>
+  <div class="dhook">The full pipeline in miniature: navigate, detect, pick, deliver</div>
+  <div class="dimg"><svg viewBox="0 0 315 156" width="262"><g font-family="Helvetica"><line x1="12" y1="112" x2="300" y2="112" stroke="#334155" stroke-width="4" stroke-linecap="round"/><rect x="140" y="103" width="17" height="17" fill="#16a34a" transform="rotate(45 148 111)"/><text x="148" y="136" font-size="7.5" fill="#16a34a" font-weight="bold" text-anchor="middle">marker</text><g transform="translate(50,92) rotate(0) scale(1.15)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#d97706"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><line x1="16" y1="0" x2="32" y2="-12" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><line x1="32" y1="-12" x2="40" y2="-4" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><rect x="36" y="-6" width="9" height="8" rx="1.5" fill="#facc15" stroke="#ca8a04"/></g><rect x="238" y="62" width="48" height="46" rx="5" fill="none" stroke="#16a34a" stroke-width="2.4" stroke-dasharray="6,4"/><rect x="252" y="90" width="17" height="14" rx="2" fill="#facc15" stroke="#ca8a04" stroke-width="1.4"/><text x="262" y="55" font-size="8" font-weight="bold" fill="#16a34a" text-anchor="middle">deliver</text><defs><marker id="wk" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#94a3b8"/></marker></defs><path d="M 100,48 Q 165,24 235,45" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#wk)"/><text x="165" y="24" font-size="8" fill="#64748b" text-anchor="middle">fully autonomous</text><text x="155" y="150" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">navigate → detect → pick → deliver, no human touch</text></g></svg></div>
+  <ul class="dcrit"><li>Full pipeline ran end-to-end at least once</li><li>Both seams named with their observed failure mode</li></ul>
+</a></div>
+  <a class="dcap" href="grade9/session-20.html" style="border-color:#d97706; background:#fdf0dd">
+    <div class="dk" style="color:#9a4f08">★ មេរៀនទី ២០ — Robots at Work (ការបញ្ចប់ឆ្នាំ)</div>
+    <div class="dhook">An autonomous mission simulating a real job: follow a line under closed-loop control, detect a colour marker, pick an object with the grip arms and deliver it — pitched and scored at Demo Day.</div>
+    <table class="dcaptab"><tr><td><svg viewBox="0 0 315 158" width="260"><g font-family="Helvetica"><rect x="60" y="88" width="190" height="12" rx="4" fill="#94a3b8"/><g transform="translate(155,74) rotate(0) scale(1.15)"><rect x="-20" y="-16" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-20" y="8" width="40" height="8" rx="4" fill="#1e293b"/><rect x="-16" y="-11" width="32" height="22" rx="5" fill="#d97706"/><rect x="-9" y="-7" width="18" height="12" rx="2" fill="#0f172a"/><circle cx="-4" cy="-2" r="2" fill="#facc15"/><circle cx="4" cy="-2" r="2" fill="#facc15"/><path d="M -4,2 Q 0,5 4,2" stroke="#facc15" stroke-width="1.4" fill="none"/><line x1="16" y1="0" x2="32" y2="-12" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><line x1="32" y1="-12" x2="40" y2="-4" stroke="#9a4f08" stroke-width="4" stroke-linecap="round"/><rect x="36" y="-6" width="9" height="8" rx="1.5" fill="#facc15" stroke="#ca8a04"/></g><circle cx="30" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="24" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="55" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="49" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="255" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="249" y="127" width="12" height="13" rx="3" fill="#64748b"/><circle cx="280" cy="118" r="8" fill="#fde68a" stroke="#ca8a04" stroke-width="1.4"/><rect x="274" y="127" width="12" height="13" rx="3" fill="#64748b"/><rect x="228" y="20" width="76" height="34" rx="5" fill="#fff" stroke="#94a3b8"/><text x="266" y="33" font-size="7" fill="#334155" text-anchor="middle">mission score</text><text x="266" y="47" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="middle">9 / 10 tasks</text><text x="60" y="34" font-size="8" fill="#334155" text-anchor="middle">5-min pitch +</text><text x="60" y="45" font-size="8" fill="#334155" text-anchor="middle">live demo</text><text x="158" y="152" font-size="8.5" fill="#334155" text-anchor="middle" font-weight="bold">Demo Day: scored run in front of a real audience</text></g></svg></td><td><ul class="dcrit"><li>Every team: two scored attempts + a complete 5-minute pitch</li><li>Failure stories told and applauded</li><li>Scoreboard archived; three-year arc closed</li></ul></td></tr></table>
+    <div class="dmore" style="color:#9a4f08">បើកទំព័រគ្រូពេញលេញនៃមេរៀនទី ២០ →</div>
+  </a>
+</div></body></html>

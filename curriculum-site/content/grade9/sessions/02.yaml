@@ -1,0 +1,92 @@
+n: 2
+title: Functions
+goal: Motion wrapped into reusable, parameterized functions — the vocabulary of clean code.
+builds_on:
+- S1 · first Python programs
+teach:
+- 'A function is a named behavior: define <code>square(size)</code> once, call it anywhere, change it
+  in one place. Connect backwards: functions are to code what loops were to repeated blocks in Grade 7
+  — the next rung on the same ladder (don’t repeat yourself). The parameter is the power move: <code>square(20)</code>,
+  <code>square(40)</code> — one definition, infinite squares.'
+- 'Build a small personal library today: <code>square(size)</code>, <code>polygon(n, size)</code>, <code>celebrate()</code>
+  (LEDs + sound). This library literally gets imported into the capstone — tell them that now, so “write
+  it well” has a reason. Naming matters: <code>celebrate()</code> reads like English; <code>func2()</code>
+  reads like regret.'
+steps:
+- time: 10′
+  text: Live-code square() together; call it three times with different sizes.
+- time: 15′
+  text: Pairs build polygon(n, size) — the 360/N rule becomes one line of math in code.
+- time: 12′
+  text: 'Design celebrate() freely: lights + sound + a wiggle; must be a single call.'
+- time: 8′
+  text: 'Library review: swap code with another pair; can they use your functions without asking you?'
+code:
+  lang: python
+  source: |-
+    import mbot2, cyberpi
+
+    def polygon(n, size):
+        for i in range(n):
+            mbot2.straight(size)
+            mbot2.turn(360 / n)
+
+    def celebrate():
+        cyberpi.led.on(255, 180, 0)
+        cyberpi.audio.play('yay')
+
+    polygon(5, 25)   # pentagon, one line
+    celebrate()
+tips:
+- The another-pair-can-use-it test is the real definition of a good function.
+- 'Watch for logic vs. syntax confusion: polygon(3, ...) turning 120° is correct — remind them of the
+  exterior angle.'
+result:
+  scene: pyeditor
+  params:
+    shape: square
+    caption: one function, many shapes — the personal library begins
+    code_lines:
+    - 'def polygon(n, size):'
+    - '  for i in range(n):'
+    - '    mbot2.straight(size)'
+    - '    mbot2.turn(360/n)'
+    - ''
+    - polygon(4, 30)
+success:
+- polygon(n, size) draws at least three different shapes
+- celebrate() runs as a single call
+- Another pair used the library without explanations
+parts:
+- id: robot_tank
+- id: tablet
+  note: library design notes
+long:
+  goal: A function library another pair can use cold, with no explanation offered and no questions answered.
+  recap:
+    time: 10′
+    text: Run the swap test properly. Hand your library to another pair with no README and no talking, then
+      watch what they get wrong. Every misuse is a naming problem or a parameter problem, and both are visible
+      within seconds — which is why this is the real definition of a good function, not a nice-to-have.
+  extend:
+  - spec: used cold, no questions
+    text: Another pair calls your functions with no explanation given and none asked for.
+  - spec: polygon(n, size), 3 shapes
+    text: One function, three different shapes, exterior angles correct in every case.
+  - spec: celebrate() as a single call
+    text: Everything inside the function; nothing left over at the call site.
+  log:
+    time: 10′
+    text: The library with a one-line comment per function saying what it does and what the parameters mean.
+      This code is imported by the capstone in Session 15, so it is being written for a reader fifteen weeks
+      from now — and that reader is usually its author.
+  review:
+    time: 15′
+    text: The receiving pair reports what they got wrong. Criteria — was the confusion caused by a name or
+      by a parameter? Both are free to fix today and expensive to fix during a build sprint.
+  parts:
+  - id: tablet
+  success:
+  - Another pair used the library cold, with no explanation
+  - Every function carries a one-line comment aimed at a future reader
+

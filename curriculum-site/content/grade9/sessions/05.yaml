@@ -1,0 +1,79 @@
+n: 5
+title: The Wobble, Explained
+goal: Students understand proportional control conceptually — correction proportional to error.
+builds_on:
+- Grade 7 S14 · the wobble question, finally answered
+teach:
+- 'Resurrect Grade 7’s board question: <i>why does the line follower zig-zag?</i> Now they can answer
+  it. Bang-bang control knows only three answers (hard left / straight / hard right) — it always overcorrects,
+  overshoots, and corrects back: the wobble is built into the logic. The fix is one idea: <b>make the
+  correction proportional to the error</b>. Slightly off → tiny steering nudge; far off → strong steering.
+  In code it will be one line: <code>steer = error × gain</code>.'
+- 'Teach it with the blindfold walk before any code: one student walks a taped line blindfolded; their
+  partner may only say “left”/“right” (bang-bang) — watch them wobble. Then allow “a little left” / “way
+  left” (proportional) — the walk visibly smooths. Ten minutes of theatre worth a thousand words. Then
+  define terms on the board: <b>error</b> (the line offset they measured in Session 3), <b>gain</b> (how
+  aggressively we respond), and predict together what too-low gain (drifts off curves) and too-high gain
+  (wobbles again!) will look like tomorrow.'
+steps:
+- time: 12′
+  text: Blindfold line-walk, bang-bang vs. proportional instructions; debrief what changed.
+- time: 12′
+  text: 'Board the model: error → × gain → steering; connect error to Session 3’s offset number.'
+- time: 14′
+  text: 'Paper-trace the algorithm on drawn scenarios: offset −60, gain 0.5 → motors? Teams compute by
+    hand.'
+- time: 7′
+  text: 'Predictions in the lesson sheet: sketch what gain-too-low and gain-too-high trajectories will look
+    like.'
+tips:
+- Do NOT code today — the concept needs its own hour; tomorrow’s implementation then takes minutes.
+- The hand computation (offset × gain → two motor speeds) is the comprehension gate; don’t skip it.
+result:
+  scene: graph2
+  params:
+    caption: 'the prediction: proportional control should tame the wobble'
+success:
+- Class answered the Grade 7 wobble question in control terms
+- Teams hand-computed motor speeds from offset × gain correctly
+- Both failure predictions (low/high gain) sketched
+parts:
+- id: tape
+  note: taped line on the floor
+- id: blindfold
+  note: the control-theory theatre
+- id: cards
+  note: printed offset scenarios
+long:
+  goal: The Grade 7 wobble question answered in control terms, with motor speeds computed by hand before a
+    single line of code exists.
+  recap:
+    time: 10′
+    text: Walk it again, harder. The blindfolded partner now gets proportional instructions only — "a little
+      left", "way left" — and the pair must agree in advance what "a little" means in steps. Quantifying the
+      vague word <i>is</i> the gain, and discovering that is worth far more than being handed the term.
+  extend:
+  - spec: 4 hand computations
+    text: Offset and gain given, both motor speeds computed on paper, all four correct with working shown.
+  - spec: 2 failure sketches
+    text: Gain too low and gain too high, trajectories drawn before either is ever run.
+  - spec: the Grade 7 question, answered
+    text: The wobble explained in one paragraph using error, gain and overcorrection.
+  log:
+    time: 10′
+    text: The four computations with working, and the two predicted trajectories. Tomorrow the robot either
+      matches these sketches or it does not — both outcomes are useful, and neither is available unless the
+      sketches exist first.
+  review:
+    time: 15′
+    text: Pairs present their answer to the board question that has been open since Grade 7. Criteria — does
+      the explanation use error and correction, rather than "it's just jerky"? Two years of waiting has earned
+      a real answer.
+  parts:
+  - id: blindfold
+  - id: tape
+    note: the walked line
+  success:
+  - Four motor-speed computations correct by hand, with no code written all hour
+  - Both failure trajectories sketched in advance of any run
+

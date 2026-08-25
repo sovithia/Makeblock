@@ -1,0 +1,85 @@
+n: 7
+title: Measure It
+goal: 'Claims become graphs: error over time proves proportional beats bang-bang.'
+builds_on:
+- S6 · tuned P-controller
+- S3 · data logging
+teach:
+- 'Engineers don’t say “it looks smoother” — they show a graph. Today: log the error signal while driving
+  (append offset values to a list, or print them and transcribe), then plot error-vs-time for bang-bang
+  and for P-control. The bang-bang plot is a square wave bouncing between extremes; the P-control plot
+  shrinks and settles. One picture, whole argument.'
+- 'Pair it with lap-time data: P-control is usually both smoother AND faster — a rare free lunch, and
+  worth noticing. Fast teams get the D-term teaser: error × gain still overshoots a little because it
+  reacts to where the robot IS, not where it’s HEADING; adding a term based on how fast error is changing
+  (the derivative) damps that. Even implementing nothing, knowing PID exists — and that they built the
+  P — is the doorway out of this course into real control engineering.'
+steps:
+- time: 15′
+  text: Add error logging to both followers; drive 20 s each, capture the series.
+- time: 15′
+  text: Plot both series (paper grid or spreadsheet); overlay or side-by-side.
+- time: 10′
+  text: Compare + write the two-sentence evidence-based conclusion under the graphs.
+- time: 5′
+  text: D-term teaser for all; extension pairs may prototype it.
+code:
+  lang: python
+  source: |-
+    errors = []
+    for i in range(200):     # ~20 s of driving
+        err = cyberpi.quad_rgb_sensor.get_offset_track()
+        errors.append(err)
+        steer = err * GAIN
+        mbot2.drive_speed(BASE + steer,
+                          BASE - steer)
+        time.sleep(0.1)
+
+    print(errors)            # copy out to plot
+tips:
+- Transcribing 200 numbers is misery — sample every 5th, or screenshot the console.
+- The conclusion sentence must cite the graph (‘peak error fell from ~90 to ~25’), not vibes.
+result:
+  scene: graph2
+success:
+- Both error-time plots produced from real logged data
+- Written conclusion cites numbers from the graphs
+- Team can say what the D in PID would add
+parts:
+- id: robot_tank
+- id: tablet
+- id: map
+  note: graph paper
+- id: cards
+  note: or spreadsheet
+long:
+  goal: A written conclusion that cites numbers from graphs the team produced out of its own logged data.
+  recap:
+    time: 10′
+    text: Sketch the shape before plotting the numbers. From memory of yesterday's driving, draw what the
+      bang-bang error trace and the P-control trace should look like. Then plot the real data. A square wave
+      against a damped curve is visible before any statistics happen — and predicting it first is what makes
+      the plot mean something.
+  extend:
+  - spec: 2 series, real data
+    text: Both followers logged over 20 s and plotted with axes and units.
+  - spec: conclusion cites numbers
+    text: Peak error fell from X to Y; lap time from A to B. Named figures, taken from your own plot.
+  - spec: D-term in your words
+    text: What a derivative term would add, in one sentence, without reciting the acronym.
+  log:
+    time: 10′
+    text: Both plots, and the two-sentence conclusion written underneath citing the figures. "It looks smoother"
+      is not a conclusion — it is precisely the sentence the graph was made in order to replace.
+  review:
+    time: 15′
+    text: Teams challenge each other's conclusions. Criteria — is every claim traceable to a number on the
+      plot, and does the axis actually measure what the claimant thinks it measures?
+  parts:
+  - id: tablet
+    note: spreadsheet, or paper grids
+  - id: craft
+  success:
+  - The written conclusion cites specific figures from the team's own plots
+  - The D-term explained in the team's own words, not recited
+

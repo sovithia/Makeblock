@@ -1,0 +1,73 @@
+n: 16
+title: Build Sprint I ✱
+goal: 'Navigation milestone: the robot completes its course path end-to-end, reliably.'
+builds_on:
+- S15 · the signed mission spec
+teach:
+- 'Sprint rules, borrowed from real teams: a 2-minute standup at the top (each team: done / doing / blocked
+  — blockers get teacher attention first), then heads-down build, then a milestone check at the end. Today’s
+  milestone for everyone regardless of mission: <b>navigation end-to-end</b> — the robot travels its full
+  course path and stops where the mission needs it, three times in a row.'
+- 'Hold the line on order: teams itching to get the arms working show first that the robot can reliably <i>arrive</i>.
+  Navigation is the foundation every later behavior stands on; a wobbly foundation makes every arm bug
+  ambiguous (‘did the grip fail or did we stop 4 cm short?’). Reliability before features — it’s the sprint’s
+  only commandment.'
+steps:
+- time: 5′
+  text: 'Standup circle: done / doing / blocked; blockers triaged.'
+- time: 33′
+  text: 'Build: course laid out to the sketch’s dimensions; navigation tuned on the real course.'
+- time: 7′
+  text: 'Milestone check: 3 consecutive end-to-end navigation runs, witnessed and logged.'
+tips:
+- 'Buffer session: teams behind on P-control tuning catch up here — that IS their navigation work.'
+- Courses on the floor get shuffled between sessions; photograph the layout with a tape measure in frame.
+result:
+  scene: kanban
+success:
+- 3 consecutive clean navigation runs on the team’s own course
+- Standup done in under 2 minutes with a real blocked-list
+- Course layout photographed for exact rebuild
+parts:
+- id: robot_arm
+- id: tablet
+- id: map
+  note: or taped path
+- id: tape
+  note: course build
+- id: foam
+- id: timer
+- id: phone
+  note: photograph the layout + tape measure
+long:
+  goal: Navigation that arrives reliably three times running, on a course the team can rebuild exactly from
+    its own photograph.
+  recap:
+    time: 10′
+    text: Standup, and time it visibly. Done, doing, blocked — two minutes total, with blockers going to the
+      teacher first. A standup that runs to six minutes has become a status meeting and helps nobody; holding
+      the clock is the whole discipline.
+  extend:
+  - spec: 3 consecutive clean runs
+    text: Witnessed and logged on the team's own course — three in a row, not the best three of six.
+  - spec: course rebuilt from photo
+    text: The layout reproduced from a photograph taken with a tape measure in frame.
+  - spec: arrives before anything else
+    text: No arm work until navigation is reliable, so that later arm bugs are unambiguous.
+  log:
+    time: 10′
+    text: The run ledger and the course photograph with dimensions. Floors get shuffled between sessions,
+      and a course that cannot be rebuilt exactly makes every measurement taken on it incomparable with the
+      next one.
+  review:
+    time: 15′
+    text: Milestone check with a witness from another team. Criteria — three consecutive runs, and was the
+      course rebuilt to the sketch's dimensions rather than to roughly the right shape?
+  parts:
+  - id: tape
+    note: in frame in the layout photo
+  - id: map
+  success:
+  - Three consecutive clean navigation runs witnessed by another team
+  - The course rebuilt from a photograph with dimensions visible
+

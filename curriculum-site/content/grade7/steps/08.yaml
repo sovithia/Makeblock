@@ -1,0 +1,97 @@
+n: 8
+stage: B
+stage_title: The robot decides
+kind: step
+title: What the robot can feel
+concept: Sensors as live values
+hours: 2
+project: G7-B-decides
+goal: An instrument panel on the robot's own screen showing every sensor at once, updating live.
+build: A dashboard the robot carries with it.
+builds_on:
+- Step 6 · forever
+- Step 3 · there is no stage
+teach:
+- Every sensor answers with a <b>number</b>, all the time, whether you look or not. Distance in centimetres,
+  light as a level, loudness as a level. Today the robot stops being something you command and starts
+  being something that <i>knows things</i>.
+- There is no watcher window, so you build the panel yourself — and there are three ways to show a number,
+  which is a real choice. <b>print</b> scrolls, so it is right for a log you want to read backwards.
+  <b>show label</b> overwrites in place, so it is right for a live value. A <b>line chart</b> shows
+  history, so it is right when the shape over time matters more than the number now. <b>join</b> glues
+  a word to a number so a reading says what it is.
+guide:
+- label: Live value
+  value: show label n … at x, y
+- label: Log
+  value: print … and move to a newline
+- label: History
+  value: line chart, add data
+steps:
+- time: 15′
+  text: 'One sensor, one label: distance on the screen, updating forever. Wave your hand at it.'
+  use: [cyberpi_when_launch, control_forever, cyberpi_display_label_show_label_xy_with_size]
+  expect: A distance number on the screen that changes the moment you wave your hand at the sensor.
+- time: 25′
+  text: Add light and loudness on their own lines. Use join so each reading is labelled — a bare number
+    on a screen is useless in a month.
+  expect: Three labelled lines on the screen — distance, light, loudness — each one saying what it is,
+    not just a bare number.
+- time: 25′
+  text: Add the line chart for distance. Walk towards the robot slowly and watch the trace. Now walk
+    quickly. The chart shows something the number cannot.
+  use: [cyberpi_display_line_chart_add_data]
+  expect: A chart that draws a gentle slope when you walk slowly and a cliff when you walk fast. The number
+    alone could not show you that.
+- time: 25′
+  text: 'Sensor limits lab: how close before distance stops making sense? How far? What does a soft
+    jumper read compared with a book? Record it.'
+  expect: 'A written table of where the sensor stops telling the truth: too close, too far, and what a
+    soft jumper reads next to a book.'
+- time: 20′
+  text: Swap robots with another team and read their panel. If you cannot tell what a number means,
+    their labels need work.
+  expect: You can read another team’s panel without asking them what a number means. If you cannot, their
+    labels need work.
+- time: 10′
+  text: Log the limits table. Step 9 depends on knowing where the sensor lies.
+  expect: The limits table in your log — Step 9 depends on knowing where this sensor lies.
+code:
+  lang: blocks
+  source: |-
+    when CyberPi starts up
+      forever
+        show label 1  join  dist:   (ultrasonic 2 1 distance to an object (cm))  at x: 0 y: 0  by small pixel
+        show label 2  join  light:  (ambient light intensity)  at x: 0 y: 20  by small pixel
+        show label 3  join  loud:   (loudness)  at x: 0 y: 40  by small pixel
+        line chart, add data  (ultrasonic 2 1 distance to an object (cm))
+tips:
+- Use show label rather than print for live values, or the screen scrolls too fast to read and students
+  conclude the sensor is broken.
+- Below about 4 cm and beyond about 3 m the distance reading goes strange. Let teams find those edges
+  themselves rather than announcing them.
+- Soft and angled surfaces scatter the echo. A jumper is a genuinely different reading from a book,
+  and that is a real sensor lesson, not a fault.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["distance: 24 cm", "#7dd3fc", 10, true]
+    - ["light: 63", "#facc15", 10, false]
+    - ["loudness: 18", "#22c55e", 10, false]
+    caption: three labelled sensor readings update live on the robot
+success:
+- Three sensors visible at once, each labelled, updating live
+- A line chart that visibly responds to movement
+- A written note of where the distance sensor stops being trustworthy
+check:
+- do: "on"
+  see: Three numbers appear and keep changing as you move your hand.
+- do: "see"
+  see: The wiggly line on the screen is the sensor being noisy.
+parts:
+- id: robot_wheel
+- id: ultra
+- id: foam
+  note: a soft target
+- id: ruler

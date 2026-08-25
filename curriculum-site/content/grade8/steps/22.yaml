@@ -1,0 +1,64 @@
+n: 22
+stage: E
+stage_title: The mission
+kind: step
+title: Design a job worth doing
+concept: Specifying with numbers
+hours: 1
+project: G8-E-mission
+goal: A signed mission spec whose success criteria contain numbers, and whose every task names a block
+  the team already owns.
+build: A specification, and nothing else.
+builds_on:
+- Steps 16–19 · every input the robot has
+teach:
+- 'Design a job a real robot might do: sort by colour, deliver between two zones, fetch on command,
+  patrol and report. It must <b>navigate</b>, <b>manipulate</b> something with the arm, and take an
+  instruction from a <b>person</b> — voice or controller, your choice.'
+- 'The spec has to be measurable. "Works well" is not a criterion; "delivers two blocks to the correct
+  zone in under ninety seconds, two runs out of three" is. And write your <b>cut line</b> today: the
+  feature you will drop first if time runs short. Deciding it now, while it is abstract, is much easier
+  than deciding it in the last twenty minutes of Step 23.'
+guide:
+- label: Must
+  value: navigate · manipulate · take an instruction
+- label: Criteria
+  value: numbers, not adjectives
+- label: Cut line
+  value: decided today, in writing
+steps:
+- time: 10′
+  text: Brief and rubric. Two or three example jobs pitched fast, to be stolen from.
+  expect: Two or three example jobs heard fast, and permission to steal from them.
+- time: 20′
+  text: Write the problem and the success criteria. Every criterion needs a number in it.
+  expect: A written problem and success criteria where every single criterion contains a number.
+- time: 20′
+  text: 'Task breakdown: each task names the block that will do it. Circle anything with no block behind
+    it.'
+  expect: A task list with the block that will do each one beside it, and a circle around anything with
+    no block behind it.
+- time: 10′
+  text: 'Sign-off: which task is riskiest, and what is your cut line? Vague answers send the spec back.'
+  expect: A named riskiest task and a stated cut line. A vague answer sends the spec back.
+blocks:
+- My Blocks
+- Variables
+tips:
+- Ban criteria without numbers. It is the single most useful rule in this step and teams will fight
+  it.
+- Steer the human-instruction part towards whichever of voice or controller that team has working best.
+  This is not the day for their weakest link.
+- A team with no cut line will drop something at random under pressure. Make them choose now.
+result:
+  scene: kanban
+success:
+- Every success criterion contains a number
+- Every task names a block the team already has
+- A written cut line, agreed before any pressure exists
+parts:
+- id: craft
+- id: cards
+- id: foam
+- id: patches
+

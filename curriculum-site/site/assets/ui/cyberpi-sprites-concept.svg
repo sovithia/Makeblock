@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="410" viewBox="0 0 800 410" role="img" aria-labelledby="title desc">
+  <title id="title">Independent sprites on the CyberPi screen</title>
+  <desc id="desc">A CyberPi screen contains a score text sprite, a spaceship sprite and a target sprite, each with its own name, position and appearance.</desc>
+  <rect width="800" height="410" rx="24" fill="#f8fafc"/>
+  <rect x="84" y="45" width="500" height="310" rx="46" fill="#172033"/>
+  <rect x="130" y="76" width="408" height="248" rx="13" fill="#111827" stroke="#64748b" stroke-width="3"/>
+  <circle cx="105" cy="199" r="13" fill="#334155"/><circle cx="563" cy="199" r="13" fill="#334155"/>
+  <text x="158" y="112" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#f8fafc">Score: 3</text>
+  <g transform="translate(286 218)">
+    <path d="M0-34 L25 24 L0 14 L-25 24 Z" fill="#38bdf8" stroke="#e0f2fe" stroke-width="3"/>
+    <circle cx="0" cy="-5" r="8" fill="#fef3c7"/>
+  </g>
+  <g transform="translate(462 164)">
+    <circle r="31" fill="#ef4444"/><circle r="21" fill="#fff"/><circle r="11" fill="#ef4444"/><circle r="4" fill="#fff"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="15" font-weight="700">
+    <path d="M220 105 C255 87 274 74 318 76" fill="none" stroke="#a78bfa" stroke-width="2"/>
+    <text x="326" y="81" fill="#7c3aed">sprite “score”</text>
+    <path d="M286 253 C314 280 338 289 372 286" fill="none" stroke="#38bdf8" stroke-width="2"/>
+    <text x="380" y="292" fill="#0284c7">sprite “ship”</text>
+    <path d="M490 148 C538 119 572 112 615 120" fill="none" stroke="#ef4444" stroke-width="2"/>
+    <text x="623" y="126" fill="#dc2626">sprite “target”</text>
+  </g>
+  <g transform="translate(613 164)" font-family="Arial,sans-serif">
+    <text x="0" y="0" font-size="17" font-weight="700" fill="#334155">Each named sprite keeps its own:</text>
+    <text x="0" y="32" font-size="16" fill="#475569">• picture or text</text>
+    <text x="0" y="59" font-size="16" fill="#475569">• x and y position</text>
+    <text x="0" y="86" font-size="16" fill="#475569">• size and direction</text>
+    <text x="0" y="113" font-size="16" fill="#475569">• colour and visibility</text>
+  </g>
+  <text x="400" y="389" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#475569">Moving “ship” does not move “score” or “target”.</text>
+</svg>

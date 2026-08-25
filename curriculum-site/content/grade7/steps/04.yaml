@@ -1,0 +1,105 @@
+n: 4
+stage: A
+stage_title: The robot obeys
+kind: step
+title: Commanded, and actual
+concept: Motion · commanded vs actual
+hours: 2
+project: G7-A-obeys
+goal: The robot drives a distance you asked for, and the team can say — with numbers — how far off it
+  really was and why.
+build: A robot that parks in a taped garage and shows what it thinks it did.
+builds_on:
+- Step 3 · it starts itself
+teach:
+- '<b>moves forward 100 cm until done</b> does not guess. The motors are <b>encoder</b> motors: they
+  count how far they have turned, and the block stops when the count says 100 cm. The robot has been
+  measuring itself all along.'
+- 'Contrast <b>power</b> with <b>position</b>. A command such as <b>50% power</b> is like holding an
+  accelerator halfway down: it says how strongly to drive a motor, not how fast it will actually go
+  or where it should stop. Battery, friction and load all change the resulting speed. A plain DC motor
+  has no sensor, so it cannot accept an angle — it simply keeps spinning until another block stops it.
+  An encoder motor can accept a distance or angle because its sensor counts the rotation and gives the
+  controller feedback about when the target has been reached.'
+- 'The plain-motor block has an <b>M1 / M2 / all</b> menu. M1 controls the added DC motor plugged into
+  extension port M1; M2 controls the one in port M2; <b>all</b> sends the same command to both ports at
+  once. Do not confuse these with <b>EM1 / EM2</b>, which are the encoder-motor ports used by the two
+  driving wheels: M means a plain extension motor, while EM means encoder motor.'
+- 'So there are three numbers today, not one: what you <b>asked for</b>, what the <b>ruler</b> says,
+  and what the <b>robot thinks</b> it did. When they disagree — and they will, because of wheel slip,
+  battery level and floor surface — that gap is not a mistake. It is information, and every tuning decision
+  for the rest of the year comes out of it.'
+guide:
+- label: Try it
+  value: joystick middle → drive and compare
+- label: Course
+  value: start line + garage taped 100 cm apart
+- label: Rule
+  value: same start line every run — tape it
+- label: Record
+  value: asked / ruler / robot, three runs
+- label: Floor
+  value: 1.5 m clear, straight, with a start line
+steps:
+- time: 10′
+  text: Add one drive block to yesterday's greeting. Park the robot on the start line and send it 100
+    cm.
+  use:
+  - cyberpi_when_direction_key_press
+  - mbot2_move_straight_with_cm_and_inch
+  expect: Push the joystick and the robot leaves the start line, stopping somewhere near 100 cm.
+- time: 25′
+  text: Three runs, same code. Measure each with a ruler and write all three down — not just the best
+    one. They will differ, and that is the point.
+  expect: Three different numbers written down — all three, not just the best one.
+- time: 25′
+  text: 'Change one thing: a different floor, or a lower speed. Three more runs. Which change mattered
+    more?'
+  expect: Three more runs after changing one thing, and a stated answer to which change mattered more.
+- time: 20′
+  text: Put the robot's own count on the screen beside your ruler number. Now you can see what it believes
+    versus what is true.
+  use:
+  - mbot2_encoder_motor_reset_angle
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: 'Two numbers you can see at once: what the robot believes it did, and what your ruler says
+    it did.'
+- time: 15′
+  text: Class data on the board. Same code, same floor, different robots — who drifted most? Argue about
+    why.
+  expect: Every team's numbers on the board, and an argument about why one robot drifts more than another.
+- time: 5′
+  text: Log the table. It is the reference every time the robot misbehaves this year.
+  expect: The table copied into your log — the page you will turn back to every time the robot misbehaves.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set print size to  big\n  print  Team Rocket  and move to a newline\n\
+    \  LED all displays R 0 G 128 B 255\n  play LED animation  rainbow  until done\n\nwhen button A\
+    \ pressed\n  play recording\n  ultrasonic 2 1 displays emotion  happy\n\nwhen button B pressed\n\
+    \  clear screen\n  print  bye!\n  turn off LED all\n\nwhen joystick  middle pressed\n  reset encoder\
+    \ motor  (1) EM1  rotated angle\n  moves forward  100  cm  until done\n  show label 1  join  robot\
+    \ says:  (encoder motor (1) EM1 rotated angle (°))  at x: 0 y: 0  by small pixel"
+tips:
+- Tape the start line. "It worked last time" is nearly always a different starting spot.
+- Note the battery level beside each run. A robot that has driven all morning undershoots, and teams
+  who do not record it will blame their code.
+- Do not let anyone average the three runs into one number yet. The spread <i>is</i> the finding.
+result:
+  scene: calibrate
+  params:
+    target: 100 cm
+    caption: three measured runs compare commanded distance with actual distance
+success:
+- Three runs measured with a ruler and all three recorded
+- The robot's own count is on screen next to the measured distance
+- The team can name one physical reason commanded and actual differ
+check:
+- do: mid
+  see: It drives one metre, then shows the number it counted.
+- do: see
+  see: That number is not quite what your ruler says. Both are right.
+parts:
+- id: robot_wheel
+- id: ruler
+- id: tape
+  note: start line + garage

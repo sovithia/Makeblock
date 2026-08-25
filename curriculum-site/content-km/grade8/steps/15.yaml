@@ -1,0 +1,95 @@
+n: 15
+stage: C
+stage_title: អន្តរកម្ម
+kind: step
+title: ការសាកល្បងដែលអ្នកអានបាន
+concept: បញ្ជីជាសំណុំទិន្នន័យ
+hours: 2
+project: G8-C-connects
+goal: ការសាកល្បងត្រូវបានកត់ត្រាចូលបញ្ជី ហើយគូរត្រឡប់វិញលើអេក្រង់របស់ Rover ជាតារាងក្រាហ្វ។
+build: រូបយន្តដែលបង្ហាញអ្នកនូវទិន្នន័យរបស់វាផ្ទាល់។
+builds_on:
+- ជំហានទី ៦ · បញ្ជី
+- ជំហានទី ៨ · តម្លៃឧបករណ៍ចាប់សញ្ញា
+teach:
+- បញ្ជីមិនចាំបាច់ផ្ទុកសេចក្ដីណែនាំទេ។ បំពេញមួយដោយ <b>តម្លៃមួយក្នុងមួយជុំ</b> — ចម្ងាយ ពេលវេលា ថ្ម —
+  ហើយអ្នកមានសំណុំទិន្នន័យដែលរូបយន្តប្រមូលដោយខ្លួនឯង។ <b>add</b> កំឡុងពេលសាកល្បង រួចអានវាត្រឡប់វិញក្រោយមក។
+- ហើយ CyberPi អាចគូរវា។ <b>bar chart, add data</b> ដាក់របារមួយក្នុងមួយតម្លៃ ដូច្នេះការសាកល្បងទាំងមូលលេចឡើងលើអេក្រង់របស់រូបយន្ត
+  ដោយគ្មានកុំព្យូទ័រ និងគ្មានតារាងទិន្នន័យ។ ការឃើញទិន្នន័យផ្ទាល់របស់អ្នកគូរដោយម៉ាស៊ីនដែលប្រមូលវា ជាបទពិសោធន៍ខុសពីការចម្លងលេខចូលតារាង
+  ហើយវាជាពេលដែលការវាស់វែងឈប់មានអារម្មណ៍ដូចកិច្ចការផ្ទះ។
+guide:
+- label: សាកល្បង
+  value: joystick ← times five laps · → draws them
+- label: ប្រមូល
+  value: add <តម្លៃ> to run
+- label: គូរ
+  value: bar chart, add data — មួយក្នុងមួយធាតុ
+- label: សួរ
+  value: តើរូបរាងប្រាប់អ្នកអ្វី?
+- label: ឥដ្ឋ
+  value: ជុំមួយប្រហែល ២ ម៉ែត្រក្នុងមួយជ្រុងនៃវគ្គ
+steps:
+- time: 15′
+  text: សម្រេចថាអ្វីគួរវាស់ក្នុងមួយជុំ និងហេតុអ្វី។ លេខដែលគ្មាននរណាមើល មិនគួរប្រមូលទេ។
+  expect: ការសម្រេចថាអ្វីគួរវាស់ក្នុងមួយជុំ ជាមួយហេតុផល។ លេខដែលគ្មាននរណាមើល មិនគួរប្រមូលទេ។
+- time: 25′
+  text: កត់ត្រាតម្លៃមួយក្នុងមួយជុំចូលបញ្ជី។ បង្ហាញចំនួនលើអេក្រង់ ដើម្បីឲ្យអ្នកដឹងថាវាដំណើរការ។
+  expect: ការអានមួយរក្សាទុកក្នុងមួយជុំ ដោយមានចំនួនលើអេក្រង់ ដូច្នេះអ្នកឃើញថាវាដំណើរការ។
+- time: 25′
+  text: អានវាត្រឡប់វិញក្រោយមក៖ ដើរតាមបញ្ជី ហើយបោះពុម្ពតម្លៃនីមួយៗជាមួយទីតាំងរបស់វា។
+  expect: គ្រប់តម្លៃបោះពុម្ពវិញជាមួយទីតាំងរបស់វា បន្ទាប់ពីការសាកល្បងចប់។
+- time: 25′
+  text: គូរវាជាតារាងក្រាហ្វរបារលើរូបយន្ត។ ដំណើរការប្រាំជុំ ហើយមើលរូបរាង។
+  expect: ជុំប្រាំគូរជារបារលើអេក្រង់រូបយន្តផ្ទាល់ ជាមួយរូបរាងដែលអ្នកអាចចង្អុលបាន។
+- time: 20′
+  text: ប្ដូរអ្វីមួយពិត — ថ្មទាបជាង ឬឥដ្ឋផ្សេង — ហើយប្រៀបធៀបតារាងក្រាហ្វទាំងពីរ។ អ្វីបានប្ដូរ ហើយអ្នកអាចពន្យល់វាបានទេ?
+  expect: ក្រាហ្វិកពីរពីលក្ខខណ្ឌពិតពីរដាក់ក្បែរគ្នា និងការពន្យល់ថាអ្វីបានប្ដូររវាងវា។
+- time: 10′
+  text: កត់ត្រាតារាងក្រាហ្វ និងប្រយោគមួយអំពីអ្វីដែលរូបរាងបង្ហាញ។
+  expect: ក្រាហ្វិកក្នុងកំណត់ហេតុ និងឃ្លាមួយអំពីអ្វីដែលរូបរាងរបស់វាបង្ហាញ។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  follow_lap\n  repeat 4\n    moves forward  50  cm  until\
+    \ done\n    turns right  90  ° until done\n\nwhen button A pressed\n  forever\n    encoder motor\
+    \ EM1 rotates at ((joystick LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n\
+    \    if  button  L1  pressed  then\n      grip\n    if  button  R1  pressed  then\n      release\n\
+    \    if  button  1  pressed  then\n      celebrate\n\nwhen CyberPi starts up\n  set LAN channel\
+    \ to  6 (default)\n  delete all of  menu\n  add  fetch  to  menu\n  add  patrol  to  menu\n  add\
+    \  dance  to  menu\n  set  pick  to 1\n  forever\n    clear screen\n    set  stop  to  ((length\
+    \ of menu) + 1)\n    count with  i  from 1 to (stop) by step 1 repeat\n      if  (i) = (pick)  then\n\
+    \        print  join  PICK   (item (i) of menu)  and move to a newline\n      else\n        print\
+    \  (item (i) of menu)  and move to a newline\n\nwhen joystick  pulled↓\n  change  pick  by 1\n \
+    \ if  (pick) > (length of menu)  then\n    set  pick  to 1\n\nwhen joystick  middle pressed\n  set\
+    \  job  to  (item (pick) of menu)\n\nwhen button B pressed\n  reset timer\n  moves forward  at 40\
+    \  RPM\n  wait until  (quad rgb sensor 1 probe (3) L1 detects  red ?)\n  stop encoder motor  all\n\
+    \  broadcast message  found  with value  (timer(s))  on LAN\n\nwhen receiving  found  broadcast\
+    \ on LAN\n  show label 1  join  partner took:   (LAN broadcast  found  value received)  at x: 0\
+    \ y: 0  by small pixel\n  set  job  to  fetch\n\nwhen joystick  pulled←\n  delete all of  run\n\
+    \  repeat 5\n    reset timer\n    follow_lap\n    add  (timer(s))  to  run\n    show label 2  join\
+    \  laps:   (length of run)  at x: 0 y: 20  by small pixel\n\nwhen joystick  pulled→\n  clear screen\n\
+    \  set  stop  to  ((length of run) + 1)\n  count with  i  from 1 to (stop) by step 1 repeat\n  \
+    \  bar chart, add data  (item (i) of run)"
+tips:
+- សម្រេចថាត្រូវវាស់អ្វី មុនសរសេរប្លុកណាមួយ។ ទិន្នន័យប្រមូលដោយគ្មានសំណួរ ជាទិន្នន័យដែលគ្មាននរណាអាន។
+- ប្រាំជុំគ្រប់គ្រាន់ដើម្បីឃើញរូបរាង និងខ្លីល្មមធ្វើម្ដងទៀត។ ម្ភៃជាមេរៀនអំពីភាពធុញទ្រាន់។
+- បើរបារទាំងអស់មើលទៅដូចគ្នា នោះក៏ជាការរកឃើញដែរ — វាមានន័យថាអ្វីដែលពួកគេប្ដូរមិនសំខាន់ដូចដែលពួកគេគិត។
+result:
+  scene: chart
+  params:
+    bars: [[lap 1, 58], [lap 2, 72], [lap 3, 64], [lap 4, 81], [lap 5, 69]]
+    ylab: lap time
+    caption: five readings logged during the run and drawn afterward
+success:
+- យ៉ាងតិចតម្លៃប្រាំប្រមូលចូលបញ្ជីកំឡុងការសាកល្បងពិត
+- ការសាកល្បងគូរជាតារាងក្រាហ្វលើអេក្រង់របស់រូបយន្ត
+- ការសាកល្បងពីរប្រៀបធៀបគ្នា ជាមួយមូលហេតុសម្រាប់ភាពខុសគ្នា
+check:
+- do: left
+  see: It runs five laps and counts them on the screen.
+- do: right
+  see: The five lap times appear as five bars.
+parts:
+- id: robot_tank
+- id: map
+- id: timer

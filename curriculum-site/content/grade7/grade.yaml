@@ -1,0 +1,50 @@
+# 25 steps = 44 h scheduled (39 h through Checkpoint 4, then the 5 h capstone), delivered weekly. Includes the build:
+# the robot is assembled in the course, not before it.
+per: "2 h"
+total: "44 h"
+num: '7'
+theme: Foundations — Think Like a Robot
+form: mBot2 · wheeled base
+codemode: Block-based coding
+capstone: Rescue Run
+colors:
+  color: '#0e7fc1'
+  dark: '#0a5c8c'
+  light: '#e3f1fa'
+  tint: '#7dd3fc'
+units:
+- name: Meet Your Robot
+  sessions: 4
+  color: '#0e7fc1'
+- name: Motion & Geometry
+  sessions: 3
+  color: '#2a9fd8'
+- name: Loops & Expression
+  sessions: 2
+  color: '#55b7e4'
+- name: 'Sensing: Ultrasonic'
+  sessions: 4
+  color: '#0a5c8c'
+- name: Line Following
+  sessions: 3
+  color: '#2a9fd8'
+- name: 'Capstone: Rescue Run'
+  sessions: 4
+  color: '#f59e0b'
+objectives:
+- Assemble and maintain the mBot2 wheeled robot
+- Explain the sense–decide–act loop and each sensor’s role
+- 'Write block programs: sequences, loops, conditionals, variables, events'
+- Calibrate precise motion; debug with predict → test → observe → fix
+- Complete an autonomous line + obstacle mission (Rescue Run)
+friction: first firmware pairing is slow (teacher dry run before Session 4) · the Shield’s battery is
+  built in — charge robots via USB-C before class · sensors must be mounted straight · recalibrate the
+  line sensor whenever floor or light changes · the Rover box stays sealed all year.
+capstone_blurb:
+  name: Rescue Run
+  text: 'An autonomous mission: follow the line, avoid a surprise obstacle, stop precisely in the rescue
+    zone, celebrate. Two scored attempts + a short team presentation.'
+  scene: rescue
+box_usage: Grade 7 uses only Box 1. The Rover add-on box stays sealed until Grade 8 — store it safely.
+boxes:
+- mbot2

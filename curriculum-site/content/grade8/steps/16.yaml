@@ -1,0 +1,67 @@
+n: 16
+stage: C
+stage_title: Interaction
+kind: checkpoint
+title: Checkpoint 3 — interfaces and messages
+concept: Catch-up gate
+hours: 1
+project: G8-C-connects
+goal: Every student can take input from a person, from another robot, and turn a run into data — before
+  the robot is given a voice.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 11–14
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only
+  if the class is not level. The stated hours are what the course takes when nobody needs catching up.
+  If the class <i>is</i> level, spend it on the extension: coaches build a two-robot job where each
+  does a different half, handing off twice.'
+- 'Stage D adds one more input — speech — to a robot that already takes them from a controller, a menu
+  and a partner. The pattern is identical every time: something arrives, it is matched against what
+  the robot knows, and it changes the job. A student who has that pattern will find the AI stage easy;
+  one who does not will find it magic, which is worse than hard.'
+- Coaches, hands off, buffer where it is needed.
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up three stations.
+  expect: Three stations ready, one per challenge.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> drive the slalom from another team''s written mapping card,
+    using their Bluetooth Controller. <b>(2)</b> send a message with a value to another robot and have
+    it act on the value, not just on the message. <b>(3)</b> explain why the controller must be polled
+    while the CyberPi''s own buttons need not be.'
+  expect: 'Three challenges shown: the slalom driven from another team’s card, a message whose value
+    is acted on, and an explanation of why the controller must be polled.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- Bluetooth controller
+- LAN
+- Display
+- Variables
+tips:
+- Challenge 3 is the conceptual one. "Because that is how it works" is not a pass — ask what the robot
+  would have to do to notice a press it was not asking about.
+- Challenge 2 is easy to fake by ignoring the value. Ask them to send a different number and show the
+  behaviour change.
+- Rotate coaching pairs again.
+result:
+  scene: healthcheck
+  params:
+    checks: [controller card followed, message carries a value, event and poll explained]
+    caption: every student clears all three interface challenges
+success:
+- Every student demonstrated all three challenges
+- Every student can distinguish an event from a poll and say why each exists
+- The class starts Stage D together
+parts:
+- id: robot_tank
+- id: controller

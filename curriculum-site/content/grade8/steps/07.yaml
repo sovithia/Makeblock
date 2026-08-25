@@ -1,0 +1,97 @@
+n: 7
+stage: B
+stage_title: Algorithms on new hardware
+kind: step
+title: A list of poses
+concept: List of structured data
+hours: 2
+project: G8-B-thinks
+goal: A sequence of arm positions stored as a list and played back on demand.
+build: A choreography the arm can repeat exactly.
+builds_on:
+- Step 5 · arm blocks
+- Grade 7 · lists
+teach:
+- Last year a list held a route. This year it holds <b>positions</b> — and it is the same idea wearing
+  different clothes, which is worth saying out loud, because recognising a familiar pattern in unfamiliar
+  hardware is most of what experience is.
+- <b>add</b> a pose to the list, <b>count with i</b> to walk it, <b>item (i) of poses</b> to fetch each
+  one. Now the arm has a routine it can repeat identically every time — and changing the routine means
+  changing data, not code.
+guide:
+- label: Store
+  value: add <angle> to poses
+- label: Play
+  value: count with i · item (i) of poses
+- label: Edit
+  value: replace item n — no re-recording
+steps:
+- time: 15′
+  text: Perform a three-pose salute by hand, calling lift() with three numbers. Notice you have hard-coded
+    a routine.
+  use: [my:lift]
+  expect: A three-pose salute performed — and the realisation that the routine is hard-coded into the
+    program.
+- time: 25′
+  text: Put the three angles in a list instead, and play them back with count with i.
+  use: [data_deletealloflist, data_addtolist, control_for_new]
+  expect: The same salute, but the three angles now live in a list the loop reads.
+- time: 25′
+  text: Make it longer — eight poses — and add a wait so the movement reads. Changing the dance is now
+    changing numbers.
+  use: [control_wait]
+  expect: An eight-pose routine that reads as movement — and changing the dance is now changing numbers,
+    not blocks.
+- time: 25′
+  text: 'Record poses live: joystick moves the arm, a button adds the current angle to the list. Teach
+    it by hand, then watch it repeat.'
+  use: [cyberpi_when_direction_key_press, cyberpi_display_label_show_label_xy_with_size]
+  expect: You move the arm by hand with the joystick, press a button, and the robot repeats what you taught
+    it.
+- time: 20′
+  text: 'Edit without re-recording: replace the pose you do not like, delete the last one, insert a
+    new one in the middle.'
+  expect: A pose replaced, one deleted and one inserted in the middle — with nothing re-recorded.
+- time: 10′
+  text: 'Log: what else on this robot could be stored as a list?'
+  expect: A log answer naming something else on this robot that could be stored as a list.
+code:
+  lang: blocks
+  source: |-
+    when CyberPi starts up
+      delete all of  poses
+
+    when joystick  middle pressed
+      add  (servo (1) S1 current angle (°))  to  poses
+      show label 1  join  poses:   (length of poses)  at x: 0 y: 0  by small pixel
+
+    when button A pressed
+      set  stop  to  ((length of poses) + 1)
+      count with  i  from 1 to (stop) by step 1 repeat
+        lift  (item (i) of poses)
+        wait 0.4 seconds
+tips:
+- Reading the servo's <i>current</i> angle to record it is the trick that makes teach-by-hand work.
+  Point at the block; teams rarely find it themselves.
+- Clear the list before recording, or the second routine is glued to the first.
+- Keep every angle inside the Step 4 limits. A recorded pose is still a pose the guard must check.
+result:
+  scene: screen
+  params:
+    lines:
+    - ["poses: 25, 60, 95", "#7dd3fc", 10, true]
+    - ["saved: 6", "#facc15", 10, false]
+    caption: the arm replays every saved pose in order
+success:
+- A routine of at least six poses stored in a list and replayed identically
+- Poses recorded by moving the arm by hand, not typed in
+- The routine edited without re-recording it
+check:
+- do: "mid"
+  see: The arm's position is saved and the counter goes up.
+- do: "A"
+  see: The arm plays back every pose you saved, in order.
+parts:
+- id: robot_tank
+- id: servopack
+- id: foam

@@ -1,0 +1,107 @@
+n: 3
+title: Sensing in Python
+goal: Live sensor values read, displayed and logged — the robot’s senses in text form.
+builds_on:
+- S2 · parameterized functions
+teach:
+- 'Sensors in Python return numbers you can hold in a variable: <code>off = cyberpi.quad_rgb_sensor.get_offset_track()</code>.
+  That one line changes the relationship — in blocks, values flowed invisibly; in Python, students capture,
+  print, compare and compute with them. Build the classic diagnostic tool first: a loop printing the live
+  readings to the screen ten times a second (a dashboard, and their debugging best friend for the rest
+  of the year).'
+- 'This robot senses the <b>floor</b> and its own <b>wheels</b> — there is no ultrasonic anywhere on the
+  Rover, so nothing here measures the air in front of it. Two numbers matter all year. The Quad RGB reports
+  how far off-centre the line is (an <b>offset</b>, roughly −100…+100): push the robot along a line by
+  hand and watch it swing negative–zero–positive — that number IS next week’s error signal. The encoders
+  report how far each motor has turned in degrees: push the robot forward by hand and watch the angle
+  climb — that number is Session 9’s ruler.'
+steps:
+- time: 12′
+  text: Build the dashboard; three live values on screen at once, updating without flicker.
+- time: 12′
+  text: 'Threshold play: print ‘MARKER!’ when the L1 probe sees red — an if on a captured value.'
+- time: 15′
+  text: 'Line offset explorer: hand-push the robot along a line, watch the offset swing; sketch its meaning.'
+- time: 6′
+  text: 'On your lesson sheet: what does offset = −60 mean physically? Draw it.'
+code:
+  lang: python
+  source: |-
+    import cyberpi, mbot2, time
+
+    mbot2.EM_reset_angle('EM1')
+
+    while True:
+        off = cyberpi.quad_rgb_sensor.get_offset_track()
+        deg = mbot2.EM_get_angle('EM1')
+        cyberpi.display.show_label(
+            'off=' + str(off), 16, 'top')
+        cyberpi.display.show_label(
+            'deg=' + str(deg), 16, 'center')
+        if cyberpi.quad_rgb_sensor.is_color('red', 'l1'):
+            cyberpi.display.show_label(
+                'MARKER!', 24, 'bottom')
+        time.sleep(0.1)
+tips:
+- 'Function names below follow mBlock’s CyberPi Python API; minor names vary by version — the class rule
+  is: trust the editor’s autocomplete.'
+- str(off) trips everyone — numbers must become text to display; let them hit the error, then explain.
+- Calibrate the line sensor first (the Grade 7 ritual) or the offset numbers are noise.
+- 'Someone will go looking for the distance sensor: the Rover does not carry one, and that absence is
+  the reason Session 9 exists.'
+result:
+  scene: pyeditor
+  params:
+    shape: log
+    caption: a live sensor dashboard — the year’s debugging companion
+    code_lines:
+    - 'while True:'
+    - '  off = get_offset_track()'
+    - '  show(''off='' + str(off))'
+    - '  if is_color(''red''):'
+    - '    show(''MARKER!'')'
+    - '  time.sleep(0.1)'
+success:
+- Dashboard shows live line offset and encoder angle
+- MARKER! fires on the red patch and nowhere else
+- Team can explain offset’s sign and rough magnitude physically
+parts:
+- id: robot_tank
+- id: tablet
+- id: map
+  note: line for the offset explorer
+- id: patches
+  note: red marker for the threshold
+long:
+  goal: The line offset understood physically — its sign and rough size predicted before the robot is pushed
+    anywhere.
+  recap:
+    time: 10′
+    text: 'Predict the number first. Before pushing the robot along the line, each pair writes what the offset
+      will read in three positions: line hard left, dead centre, line hard right. Then push and check. Getting
+      the sign backwards is common, and it is far cheaper to discover here than in Session 6, where an inverted
+      sign makes the robot flee the line.'
+  extend:
+  - spec: 3 values live
+    text: Offset, encoder angle and the marker flag all updating on the dashboard at once.
+  - spec: encoder read against a ruler
+    text: Push the robot exactly 30 cm by hand and write down the degrees. Session 9 turns that pair of numbers
+      into a conversion.
+  - spec: offset explained physically
+    text: What offset = −60 means, drawn, with the sign convention written down explicitly.
+  log:
+    time: 10′
+    text: The sign convention in a box on the printed lesson sheet — which way is positive — plus the three predicted and
+      actual offsets side by side. Session 6 reads this box, so a convention recorded vaguely costs a session's
+      tuning to an inverted term.
+  review:
+    time: 15′
+    text: Pairs explain their sign convention to another pair. Criteria — do the two pairs agree, and where
+      they do not, is it a genuine difference in how the sensor is mounted or simply a drawing error?
+  parts:
+  - id: map
+  - id: ruler
+  - id: tablet
+  success:
+  - Offset sign predicted correctly before the robot was pushed
+  - The sign convention written where Session 6 can find it

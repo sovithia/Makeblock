@@ -1,0 +1,119 @@
+n: 3
+stage: A
+stage_title: The robot obeys
+kind: step
+title: Hello, robot
+concept: Sequence · Event
+hours: 1.5
+project: G7-A-obeys
+goal: The robot switches on and greets the class by itself, with no tablet attached — and answers its
+  two buttons differently.
+build: A robot that introduces itself on power-up and plays back your own recorded voice.
+builds_on:
+- nothing — this is hour zero
+teach:
+- There are two ways to run a program, and this year you normally use <b>Upload</b>. In Upload mode
+  mBlock translates your blocks and sends the whole program <i>into</i> the robot; it then runs by
+  itself with the computer disconnected. In <b>Live</b> mode the program runs on the computer and
+  sends commands to the connected robot, so mBlock must stay open and the robot stops when the
+  connection drops. Upload is like handing someone a written recipe and leaving the kitchen; Live
+  is standing beside them dictating each step. Prove the difference by unplugging the cable at the
+  end of this lesson.
+- A program is a list of instructions that run <b>in order</b>. That is a <b>sequence</b>, and swapping
+  two lines changes what happens — which students should do once, on purpose, in the first ten minutes.
+- 'Nothing runs until something <b>starts</b> it. That is an <b>event</b>. On this robot there is no
+  green flag and no keyboard: it starts itself with <b>when CyberPi starts up</b>, or you press <b>button
+  A</b> or <b>B</b> on the robot. Say this out loud today, because everything else this year depends
+  on it — <i>the robot has no stage. If you want to see something, you put it on its screen.</i>'
+guide:
+- label: Device
+  value: mBot2 — NOT CyberPi (CyberPi alone has no wheels)
+- label: Mode
+  value: Upload — the program lives on the robot, not the tablet
+- label: Proof
+  value: unplug the cable; it must still run
+steps:
+- time: 10′
+  text: 'Connect: add device <b>mBot2</b>, choose <b>Upload</b> mode, and run a one-block test (an LED
+    flash) before trusting anything else. Anyone whose device says CyberPi has the wrong robot — they
+    will have no motors later.'
+  use:
+  - cyberpi_led_show_single_with_rgb_2
+  expect: One LED lights up on command — and the device list says mBot2, not CyberPi.
+- time: 20′
+  text: 'Sequence: on start-up, show your team name and light the LEDs. Then swap two blocks and run
+    it again. Write down what changed — that is the whole idea of order.'
+  use:
+  - cyberpi_when_launch
+  - cyberpi_console_set_font
+  - cyberpi_display_println
+  expect: Your team name on the screen and the LEDs lit at start-up. After swapping two blocks, a written
+    note of what changed.
+- time: 20′
+  text: 'Your voice: <b>start recording</b>, say something, <b>stop recording</b>, then play it back
+    when button A is pressed. The robot is now yours.'
+  use:
+  - cyberpi_when_button_press
+  - cyberpi_play_record
+  expect: Press A and the robot plays back your own voice.
+- time: 20′
+  text: Two buttons, two behaviours. Predict out loud what B will do <i>before</i> pressing it. Then
+    make the ultrasonic sensor's eyes show an emotion to match.
+  use:
+  - cyberpi_display_clear
+  - cyberpi_display_print
+  - cyberpi_led_off_2
+  - mbuild_ultrasonic2_show_emotion
+  expect: A and B do two different things, you said out loud what B would do before pressing it, and
+    you were right.
+- time: 15′
+  text: 'Make it yours: name, colour, sound, face. Show the robot to another team without touching their
+    table.'
+  use:
+  - cyberpi_play_led_animation_until
+  expect: A robot with your name, your colour, your sound and your face — shown to another team without
+    touching their table.
+- time: 5′
+  text: Unplug the USB and press the button. It still works — that is Upload mode, and it is why nobody
+    is tethered to a tablet this year.
+  expect: USB unplugged, button pressed, robot still runs. Nobody is tied to a tablet.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set print size to  big\n  print  Team Rocket  and move to a newline\n\
+    \  LED all displays R 0 G 128 B 255\n  play LED animation  rainbow  until done\n\nwhen button A\
+    \ pressed\n  play recording\n  ultrasonic 2 1 displays emotion  happy\n\nwhen button B pressed\n\
+    \  clear screen\n  print  bye!\n  turn off LED all"
+tips:
+- <b>Device check, before anything else.</b> This course needs mBlock with an <b>mBot2</b> device. That
+  works on an <b>Android tablet in Chrome</b> at ide.mblock.cc — and nowhere
+  else. An <b>iPad cannot run it in any browser</b>, and the mBlock <b>mobile apps on both iOS and Android
+  support only the original mBot</b>, not the mBot2. Sort this out before the first lesson, not during
+  it.
+- The device must be <b>mBot2</b>. If a team picked CyberPi they will get through today happily and
+  hit a wall in Step 4 when there are no motion blocks — check every screen now.
+- Recording overwrites the previous one. Agree a signal for "recording now" or twelve robots record
+  each other.
+- There is no green flag on a robot. Teams who ask where it is have understood the question — answer
+  it with <b>when CyberPi starts up</b>.
+result:
+  scene: hello
+success:
+- The greeting runs from power-on with no cable attached
+- Buttons A and B do visibly different things
+- The team can say why the robot has no green flag and no stage
+- Every robot's device is set to mBot2, not CyberPi
+check:
+- do: 'on'
+  see: The robot writes your team name and glows.
+- do: A
+  see: It plays back your own voice.
+- do: B
+  see: The screen clears and the lights go out.
+parts:
+- id: robot_wheel
+  note: built and charged
+- id: tablet
+  note: mBlock 5, device = mBot2
+- id: usb
+  note: first connection, then unplug it
+

@@ -1,0 +1,61 @@
+n: 6
+stage: A
+stage_title: A new machine
+kind: checkpoint
+title: Checkpoint 1 — the rebuild
+concept: Catch-up gate
+hours: 1
+project: G8-A-rebuilt
+goal: Every student has a Rover that turns accurately and an arm that cannot hurt itself — before any
+  algorithm is built on top.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 1–4
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches build a catch-and-place sequence — grip, lift, drive, lower, release — as a single named block.'
+- This gate is about the machine, not the code. Everything in Stages B, C and D assumes a Rover that
+  turns where it is told and an arm with limits. A team whose tracks are twins instead of mirrors will
+  fail every later step for reasons that look like software.
+- Coaches, hands off other people's robots, buffer hour where it is needed — as in Grade 7.
+guide:
+- label: Pass
+  value: all three, demonstrated on your own robot
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up. This gate is mechanical as much as it is code.
+  expect: A class that understands this gate is mechanical as much as it is code.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> show your two track modules against the guide and prove they
+    mirror. <b>(2)</b> turn 90° within 5°, three times running, measured. <b>(3)</b> state your arm''s
+    safe range and show the guard that enforces it — then try to break it in front of the teacher.'
+  expect: 'Three challenges shown: mirrored track modules against the guide, three 90° turns within 5°,
+    and the arm’s safe range with a guard that survives an attempt to break it.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- mBot2 Chassis
+- mBot2 Extension Port
+- My Blocks
+tips:
+- Fix mechanical problems before code problems. A robot that turns badly will make every later lesson
+  look like a programming failure.
+- Challenge 3 is a safety gate as much as a learning one. Do not wave it through.
+- If several teams' turns are out by the same amount, the calibration is the problem, not the teams.
+result:
+  scene: healthcheck
+  params:
+    checks: [mirrored track modules, 90° turn within 5°, guarded arm range]
+    caption: every Rover passes the mechanical and safety gate
+success:
+- Every team's modules verified as mirrored
+- Every robot turns 90° within 5°, three times running
+- Every arm has hand-measured limits and a guard that holds
+parts:
+- id: robot_tank
+- id: protractor
+- id: guide

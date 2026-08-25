@@ -1,0 +1,91 @@
+n: 16
+stage: C
+stage_title: រូបយន្តចងចាំ
+kind: step
+title: ការកែ និងការស្វែងរកផ្លូវ
+concept: បញ្ជី៖ កែ និងស្វែងរក · break
+hours: 2
+project: G7-C-remembers
+goal: ក្រុមអាចដកវិញ បិទភ្ជាប់ និងស្វែងរកផ្លូវដែលកត់ត្រា ដោយមិនចាំបាច់បើកបរឡើងវិញ។
+build: ផ្លូវដែលអ្នកអាចកែដូចឯកសារ។
+builds_on:
+- ជំហានទី ១៣ · បញ្ជី
+teach:
+- ផ្លូវដែលកត់ត្រាគឺជាទិន្នន័យ ដូច្នេះវាអាច <b>កែ</b> បាន។ <b>delete n of</b> ដក, <b>insert … at n</b>
+  ស៊កចូល, <b>replace item n</b> ប្ដូរចេញ។ ការដកវិញគឺគ្រាន់តែ <b>delete (length of route) of route</b>
+  — ដករបស់អ្វីក៏ដោយដែលនៅចុង ដោយមិនចាំបាច់ដឹងថាបញ្ជីវែងប៉ុនណា។
+- វាក៏អាច <b>ស្វែងរក</b> បានដែរ។ <b>route contains …?</b> ឆ្លើយថាបាទឬទេ។ ដើម្បីរក <i>កន្លែង</i> ដើរតាមវាដោយ
+  count-with-i — ហើយពេលអ្នករកឃើញ <b>break</b> ចេញ។ គ្មានប្រយោជន៍ពិនិត្យរបស់សែសិបផ្សេងទៀតពេលអ្នកមានចម្លើយហើយ
+  ហើយនោះជាទម្លាប់ដែលគួរបង្កើតតាំងពីដំបូង។
+guide:
+- label: សាកល្បង
+  value: joystick middle undoes · button B searches
+- label: ដកវិញ
+  value: delete (length of route) of route
+- label: ស្វែងរក
+  value: 'contains …? · item # of … in …'
+- label: ឈប់មុន
+  value: break នៅក្នុងរង្វិលជុំ
+- label: ឥដ្ឋ
+  value: ទំនេរ ១,៥ ម៉ែត្រ ដើម្បីបើកផ្លូវ
+steps:
+- time: 15′
+  text: កត់ត្រាផ្លូវមួយដែលមានកំហុសមួយដោយចេតនានៅកណ្ដាល។ កុំបើកបរឡើងវិញ — អ្នកនឹងកែទិន្នន័យ។
+  expect: ផ្លូវថតមួយដែលមានចលនាខុសមួយនៅកណ្ដាល ទុកដោយចេតនា។ គ្មាននរណាបើកឡើងវិញទេ។
+- time: 25′
+  text: ដកចលនាចុងក្រោយវិញដោយ delete។ រួចដកបី។ កត់សម្គាល់ថាអ្នកមិនដែលត្រូវដឹងថាបញ្ជីវែងប៉ុនណាទេ។
+  expect: ចលនាចុងក្រោយបាត់ រួចបីទៀតបាត់ — ហើយអ្នកមិនដែលចាំបាច់ដឹងថាបញ្ជីវែងប៉ុនណាទេ។
+- time: 25′
+  text: បិទភ្ជាប់កណ្ដាល៖ ជំនួសចលនាខុសដោយ replace ហើយស៊កចលនាដែលអ្នកភ្លេចដោយ insert។ ចាក់ឡើងវិញ ហើយពិនិត្យ។
+  expect: ចលនាខុសត្រូវជំនួស ចលនាភ្លេចត្រូវដាក់វិញ ហើយការចាក់ឡើងវិញឥឡូវត្រូវនឹងអ្វីដែលអ្នកចង់បើក។
+- time: 25′
+  text: ស្វែងរកវា៖ តើផ្លូវនេះមានការបង្វិលឆ្វេងទេ? ការបង្វិលឆ្វេងដំបូងនៅឯណា? ប្រើ break ដើម្បីឲ្យរង្វិលជុំឈប់ពេលវារកឃើញមួយ។
+  expect: រូបយន្តឆ្លើយថា «តើមានការបង្វិលឆ្វេងក្នុងនេះទេ ហើយមួយដំបូងនៅឯណា?» ដោយមិនដើរបញ្ជីដែលនៅសល់។
+- time: 20′
+  text: បញ្ជាក់ថា break កំពុងធ្វើអ្វីមួយ៖ បង្ហាញ i លើអេក្រង់ ហើយមើលរង្វិលជុំឈប់មុនកាលកំណត់ ជំនួសឲ្យការរត់ដល់ចប់។
+  expect: i បង្ហាញលើអេក្រង់ ឈប់ពាក់កណ្ដាលជំនួសឲ្យរាប់ដល់ចប់ — ភស្តុតាងថា break ពិតជាបញ្ឈប់រង្វិលជុំ។
+- time: 10′
+  text: កត់ត្រាប្រតិបត្តិការបញ្ជីទាំងបួន និងប្រយោគមួយអំពីអ្វីដែលនីមួយៗសម្រាប់។
+  expect: ប្រតិបត្តិការបញ្ជីបួនក្នុងកំណត់ហេតុ មួយឃ្លាក្នុងមួយ ប្រាប់ថាវាមានសម្រាប់អ្វី។
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  set  speed  to 40\n  delete all of  route\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 1  join  walls:   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 15  then\n      change  walls  by 1\n      turns right  90 \
+    \ ° until done\n      wait until  (ultrasonic 2 1 distance to an object (cm)) > 25\n    else\n \
+    \     moves forward  at (speed)  RPM\n\nwhen joystick  pulled↑\n  change  speed  by 5\n  if  (speed)\
+    \ > 100  then\n    set  speed  to 100\n\nwhen joystick  pulled↓\n  change  speed  by -5\n  if  (speed)\
+    \ < 10  then\n    set  speed  to 10\n\nwhen joystick  pulled→\n  add  fwd  to  route\n  moves forward\
+    \  10  cm  until done\n\nwhen joystick  pulled←\n  add  left  to  route\n  turns left  90  ° until\
+    \ done\n\nwhen button A pressed\n  set  stop  to  ((length of route) + 1)\n  count with  i  from\
+    \ 1 to (stop) by step 1 repeat\n    if  (item (i) of route) = fwd  then\n      moves forward  10\
+    \  cm  until done\n    else\n      turns left  90  ° until done\n\nwhen joystick  middle pressed\n\
+    \  if  (length of route) > 0  then\n    delete  (length of route)  of  route\n    show label 2 \
+    \ join  undone. left:   (length of route)  at x: 0 y: 20  by small pixel\n  else\n    show label\
+    \ 2  nothing to undo  at x: 0 y: 20  by small pixel\n\nwhen button B pressed\n  if  (route contains\
+    \  left ?)  then\n    set  stop  to  ((length of route) + 1)\n    count with  i  from 1 to (stop)\
+    \ by step 1 repeat\n      if  (item (i) of route) = left  then\n        show label 3  join  first\
+    \ left at:   (i)  at x: 0 y: 40  by small pixel\n        break\n  else\n    show label 3  no left\
+    \ turns at all  at x: 0 y: 40  by small pixel"
+tips:
+- delete (length of) គឺជាការដកវិញ។ ក្រុមដែលវាយលេខចូល មិនទាន់យល់វាទេ — សួរពួកគេថាកើតអ្វីបន្ទាប់ពីដកវិញពីរដង។
+- បើគ្មាន break រង្វិលជុំរាយការណ៍ការត្រូវគ្នា <i>ចុងក្រោយ</i> មិនមែនដំបូងទេ។ ទុកឲ្យក្រុមមួយប៉ះវាហើយរកមូលហេតុ។
+- Insert រុញអ្វីៗទាំងអស់ខាងក្រោយវាទៅមុខ។ គូរបញ្ជីលើក្ដារ មុននិងក្រោយ។
+result:
+  scene: debug
+success:
+- ការដកវិញដំណើរការម្ដងហើយម្ដងទៀត ដោយមិនដឹងប្រវែងបញ្ជី
+- ចលនាកណ្ដាលត្រូវបានបិទភ្ជាប់ដោយ replace ហើយការចាក់ឡើងវិញបញ្ជាក់វា
+- ការស្វែងរករកឃើញការត្រូវគ្នាដំបូង ហើយឈប់នៅទីនោះ
+check:
+- do: mid
+  see: The last move disappears off the end of the list.
+- do: B
+  see: It tells you where the first left turn is.
+- do: see
+  see: Undo with nothing recorded says nothing to undo. It does not crash.
+parts:
+- id: robot_wheel
+- id: tape
+

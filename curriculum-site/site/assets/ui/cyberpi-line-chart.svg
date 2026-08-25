@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" role="img" aria-labelledby="title desc">
+  <title id="title">A line chart shown on the CyberPi screen</title>
+  <desc id="desc">Successive distance readings are plotted from left to right and connected, forming a falling line as the robot approaches a wall.</desc>
+  <rect width="760" height="360" rx="24" fill="#f8fafc"/>
+  <rect x="104" y="35" width="552" height="290" rx="48" fill="#172033"/>
+  <rect x="154" y="67" width="452" height="226" rx="13" fill="#f1f5f9" stroke="#64748b" stroke-width="3"/>
+  <text x="176" y="96" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#334155">distance (cm)</text>
+  <line x1="184" y1="257" x2="579" y2="257" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="184" y1="112" x2="184" y2="257" stroke="#94a3b8" stroke-width="2"/>
+  <g stroke="#cbd5e1" stroke-width="1">
+    <line x1="184" y1="145" x2="579" y2="145"/><line x1="184" y1="182" x2="579" y2="182"/><line x1="184" y1="219" x2="579" y2="219"/>
+  </g>
+  <polyline points="202,128 247,137 292,149 337,166 382,180 427,199 472,218 517,236 562,246" fill="none" stroke="#0ea5e9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#0284c7" stroke="#fff" stroke-width="2">
+    <circle cx="202" cy="128" r="6"/><circle cx="247" cy="137" r="6"/><circle cx="292" cy="149" r="6"/><circle cx="337" cy="166" r="6"/><circle cx="382" cy="180" r="6"/><circle cx="427" cy="199" r="6"/><circle cx="472" cy="218" r="6"/><circle cx="517" cy="236" r="6"/><circle cx="562" cy="246" r="6"/>
+  </g>
+  <path d="M480 114h72l-13-11m13 11-13 11" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="474" y="96" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#c2410c">new readings</text>
+  <circle cx="126" cy="180" r="13" fill="#334155"/><circle cx="634" cy="180" r="13" fill="#334155"/>
+  <text x="380" y="344" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#475569">Each added number becomes the next point; older points move left as the chart fills.</text>
+</svg>

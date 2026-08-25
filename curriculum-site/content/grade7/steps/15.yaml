@@ -1,0 +1,103 @@
+n: 15
+stage: C
+stage_title: The robot remembers
+kind: step
+title: A route you can replay
+concept: List · count with i
+hours: 2
+project: G7-C-remembers
+goal: The robot records the moves you drive by hand and drives them again by itself.
+build: A record-and-replay robot.
+builds_on:
+- Step 14 · variables hold settings
+- Step 6 · events
+teach:
+- A variable holds one thing. A <b>list</b> holds many, in order — and order is exactly what a route
+  is. <b>add … to</b> puts a move on the end, <b>length of</b> says how many you have, <b>item n of</b>
+  fetches the nth one.
+- 'Replaying it needs a loop that walks the list one place at a time, and there is a block built for
+  precisely that: <b>count with i from 1 to (length of route)</b>. The <b>i</b> is the position, so
+  <b>item (i) of route</b> is "the move I am up to". Two blocks, and a robot that repeats anything you
+  taught it.'
+guide:
+- label: Try it
+  value: joystick ← / → record · button A replays
+- label: Record
+  value: joystick drives, each move added
+- label: Replay
+  value: count with i · item (i) of route
+- label: Clear
+  value: delete all of route — before recording
+- label: Floor
+  value: 1.5 m clear to drive a route in
+steps:
+- time: 15′
+  text: Drive the robot around with the joystick. Now do it again <i>exactly</i> the same. You cannot
+    — and that is the problem to solve.
+  expect: Two drives of “the same” route that visibly are not the same. That gap is the problem the
+    lesson solves.
+- time: 25′
+  text: 'Record: every joystick move also adds a word to the list. Put <b>length of route</b> on the
+    screen and watch it grow as you drive.'
+  use:
+  - data_deletealloflist
+  - data_addtolist
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: Drive the robot and a number on the screen counts up — one entry per move, growing as you
+    steer.
+- time: 25′
+  text: Replay with count with i. Press B and watch it retrace your path.
+  use:
+  - control_for_new
+  expect: Press B and the robot retraces the path you drove, on its own.
+- time: 20′
+  text: A longer route — at least ten moves. Does it still replay? Where does it start drifting from
+    your original?
+  expect: A ten-move route replayed, and the point on the floor where it starts drifting away from your
+    original.
+- time: 20′
+  text: 'Swap: record a route on your robot, hand it to another team, and see whether their robot ends
+    up where yours did.'
+  expect: Another team’s robot, running your recorded route, ending up somewhere you can measure against
+    yours.
+- time: 10′
+  text: 'Log: how many moves before the replay is visibly off, and why.'
+  expect: 'A number in the log: how many moves before the replay is visibly wrong, and your reason why.'
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  set  speed  to 40\n  delete all of  route\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 1  join  walls:   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 15  then\n      change  walls  by 1\n      turns right  90 \
+    \ ° until done\n      wait until  (ultrasonic 2 1 distance to an object (cm)) > 25\n    else\n \
+    \     moves forward  at (speed)  RPM\n\nwhen joystick  pulled↑\n  change  speed  by 5\n  if  (speed)\
+    \ > 100  then\n    set  speed  to 100\n\nwhen joystick  pulled↓\n  change  speed  by -5\n  if  (speed)\
+    \ < 10  then\n    set  speed  to 10\n\nwhen joystick  pulled→\n  add  fwd  to  route\n  moves forward\
+    \  10  cm  until done\n\nwhen joystick  pulled←\n  add  left  to  route\n  turns left  90  ° until\
+    \ done\n\nwhen button A pressed\n  set  stop  to  ((length of route) + 1)\n  count with  i  from\
+    \ 1 to (stop) by step 1 repeat\n    if  (item (i) of route) = fwd  then\n      moves forward  10\
+    \  cm  until done\n    else\n      turns left  90  ° until done"
+tips:
+- Clear the list before recording or the second route is glued onto the first — a bug that looks like
+  magic until they find it.
+- Start counting at 1, not 0. Item 0 of a list is not a thing.
+- Replay drift is real and it is not a bug in their code — it is the same commanded-versus-actual gap
+  from Step 4, now stacked ten times.
+result:
+  scene: path
+success:
+- A route of at least ten moves records and replays
+- The list length is visible on screen while recording
+- The team can explain what i is doing in the replay loop
+check:
+- do: right
+  see: It steps forward and the list gets one longer.
+- do: left
+  see: It turns left and the list gets one longer.
+- do: A
+  see: It drives your whole route again, by itself.
+parts:
+- id: robot_wheel
+- id: tape
+  note: a route to drive
+

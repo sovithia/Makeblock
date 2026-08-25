@@ -1,0 +1,53 @@
+# 24 steps = 42 h scheduled (37 h through Checkpoint 4, then the 5 h capstone), delivered weekly. Includes the build:
+# the robot is assembled in the course, not before it.
+per: "2 h"
+total: "42 h"
+num: '8'
+theme: Interaction & AI — Robots That Listen and Work
+form: mBot2 Rover · tracks + grip arms
+codemode: Block-based coding
+capstone: A Job Worth Doing
+colors:
+  color: '#8b3fc6'
+  dark: '#5f2b8a'
+  light: '#f2e8fa'
+  tint: '#d8b4fe'
+units:
+- name: The Rebuild
+  sessions: 5
+  color: '#8b3fc6'
+- name: Give It a Face
+  sessions: 4
+  color: '#a765d6'
+- name: Machine Learning
+  sessions: 4
+  color: '#5f2b8a'
+- name: Generative AI
+  sessions: 2
+  color: '#c48be3'
+- name: Control & Code
+  sessions: 2
+  color: '#a765d6'
+- name: 'Capstone: Companion Robot'
+  sessions: 3
+  color: '#f59e0b'
+objectives:
+- Rebuild into the Rover tank; explain tracked vs. wheeled trade-offs
+- Design custom emojis and animations; build sensor-driven personality
+- Train, break and de-bias an image-recognition model
+- Use generative AI deliberately; write reusable prompt recipes
+- Master the controller; read and edit first Python
+friction: the two Track assemblies mirror each other (classic build error) · the Boards ship covered in
+  paper film — peel while sorting · turn calibration changes on tracks — redo it · ML sessions need good lighting on the tablet camera
+  + good light · the Bluetooth Controller (Rover box) only responds after the robot is programmed (Step
+  12 teaches it explicitly).
+capstone_blurb:
+  name: A Job Worth Doing
+  text: An autonomous job the team specified themselves — navigate, pick something up
+    with the arm, deliver it, and take an instruction from a person by voice or
+    controller. Scored against the team's own written criteria.
+  scene: fair
+box_usage: Both boxes are used this year. Session parts panels tag every piece with its source box.
+boxes:
+- mbot2
+- rover

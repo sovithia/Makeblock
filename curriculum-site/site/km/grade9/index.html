@@ -1,0 +1,396 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ថ្នាក់ទី ៩ · Engineering & Autonomy — Robots That Work (2 h)</title><style>
+@page { size: A4; margin: 14mm 13mm 16mm 13mm;
+  @bottom-center { content: "mBot2 Rover Program · ថ្នាក់ទី ៩ · " counter(page);
+    font-size: 8pt; color: #94a3b8; font-family: Helvetica; } }
+@page cover { margin: 0; @bottom-center { content: none; } }
+* { box-sizing: border-box; }
+/* margin: 0 added to legacy rule — WeasyPrint's paged UA sheet already yields a
+   zero body margin, but Chrome's print engine applies its 8px default, which
+   pushes the full-bleed cover onto a blank second page */
+body { font-family: Helvetica, Arial, sans-serif; color: #1e293b; font-size: 9.2pt; line-height: 1.42; margin: 0; }
+p { margin: 0 0 2.2mm 0; }
+.muted { color: #64748b; font-size: 8.4pt; }
+.center { text-align: center; }
+
+/* deviation from legacy css(): 296.5mm (not 297mm) + explicit break — Chrome's print
+   engine spills a 297mm full-bleed box onto a blank second page by a rounding hair */
+.cover { page: cover; height: 296.5mm; page-break-after: always; color: #fff; padding: 28mm 20mm; position: relative;
+  background: linear-gradient(160deg, #0f172a 0%, #9a4f08 70%, #d97706 130%); }
+.cover .kicker { text-transform: uppercase; letter-spacing: 3px; font-size: 10pt; font-weight: bold; color: #fcd34d; }
+.cover h1 { font-size: 27pt; margin: 5mm 0 2mm 0; line-height: 1.1; }
+.cover .sub { font-size: 12pt; color: #e2e8f0; }
+.badges { margin: 9mm 0; }
+.badge { display: inline-block; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 10px; padding: 4mm 5.5mm; margin-right: 3.5mm; text-align: center; }
+.badge b { display: block; font-size: 15pt; color: #fcd34d; }
+.badge span { font-size: 7.5pt; color: #e2e8f0; text-transform: uppercase; letter-spacing: 1px; }
+.coverbox { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 6mm; margin-top: 8mm; }
+.coverbox h3 { margin: 0 0 2mm 0; color: #fcd34d; font-size: 11pt; }
+.coverbox p { color: #e2e8f0; font-size: 9.5pt; }
+.coverfoot { position: absolute; bottom: 16mm; left: 20mm; right: 20mm; font-size: 8.5pt; color: #cbd5e1;
+  border-top: 1px solid rgba(255,255,255,0.25); padding-top: 3.5mm; }
+
+h2.section { font-size: 15pt; color: #0f172a; border-bottom: 3px solid #d97706; padding-bottom: 1.5mm; margin: 0 0 4mm 0; }
+.notecard { background: #f8fafc; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.warncard { background: #fef9ec; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0; padding: 3mm 4mm; margin-bottom: 3mm; font-size: 8.8pt; }
+.objbox { background: #fdf0dd; border-radius: 10px; padding: 4mm 5mm; margin-bottom: 4mm; }
+.objbox h4 { margin: 0 0 2mm 0; font-size: 10.5pt; color: #9a4f08; }
+.objbox ul { margin: 0; padding-left: 5mm; } .objbox li { margin-bottom: 1mm; }
+
+.sess { page-break-before: always; }
+.shead { border-radius: 10px; color: #fff; padding: 3.5mm 5mm; margin-bottom: 3mm; }
+.shead .sno { font-size: 8pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+.shead h2 { margin: 0.5mm 0 0 0; font-size: 15pt; }
+.goal { background: #fdf0dd; border-radius: 8px; padding: 2.5mm 4mm; margin-bottom: 3mm; font-size: 9.4pt; }
+.goal b { color: #9a4f08; }
+
+.cols { width: 100%; border-collapse: collapse; }
+.cols td { vertical-align: top; }
+.cols td.l { width: 57%; padding-right: 4.5mm; }
+.cols td.r { width: 43%; }
+h4.blk { font-size: 9.5pt; text-transform: uppercase; letter-spacing: 1.4px; color: #9a4f08;
+  margin: 0 0 1.6mm 0; border-bottom: 1.5px solid #d97706; padding-bottom: 0.8mm; }
+.teach p { margin-bottom: 2mm; }
+table.flow { width: 100%; border-collapse: collapse; margin-bottom: 3mm; }
+table.flow td { padding: 1.2mm 1.8mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 8.8pt; }
+table.flow td.t { width: 9mm; font-weight: bold; color: #9a4f08; white-space: nowrap; }
+.codebox { background: #0f172a; color: #e2e8f0; border-radius: 8px; padding: 3mm 3.5mm; font-family: "DejaVu Sans Mono", monospace;
+  font-size: 7.6pt; line-height: 1.5; margin-bottom: 3mm; white-space: pre-wrap; }
+.codebox .cm { color: #94a3b8; }
+.codelabel { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 1mm; }
+.codewide { margin: 2mm 0 1mm 0; }
+.fortyline { margin: 4mm 0 3mm 0; padding: 2mm 3mm; border: 1.5px dashed #d97706;
+  border-radius: 8px; background: #fdf0dd; font-size: 8.4pt; font-weight: bold;
+  color: #9a4f08; }
+/* the official assembly diagrams, straight from the manual */
+.buildstrip { margin: 0 0 3mm 0; }
+.bsh { font-size: 7.6pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 1px; color: #64748b; margin-bottom: 1.4mm; }
+.bscap { font-weight: normal; text-transform: none; letter-spacing: 0;
+  color: #94a3b8; }
+.bsgrid { display: flex; flex-wrap: wrap; gap: 2.5mm; }
+.bimgcell { flex: 1 1 78mm; min-width: 60mm; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 1.6mm; background: #fff; break-inside: avoid; }
+.bimgcell img { display: block; width: 100%; height: auto; }
+.conceptnote { background: #fdf0dd; border-left: 3px solid #d97706;
+  border-radius: 0 8px 8px 0; padding: 2.4mm 3.2mm; margin: 0 0 2.5mm 0;
+  font-size: 8.6pt; line-height: 1.5; break-inside: avoid; }
+.cnhead { font-size: 7.2pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #9a4f08; margin-bottom: 1mm; }
+.tips { background: #fef9ec; border-radius: 8px; padding: 2.6mm 3.5mm; font-size: 8.6pt; margin-bottom: 3mm; }
+.tips b { color: #9a4f08; }
+.tips ul { margin: 1mm 0 0 0; padding-left: 4.5mm; } .tips li { margin-bottom: 0.8mm; }
+.guidebox { background: #eef4fb; border-left: 3px solid #d97706; border-radius: 0 8px 8px 0;
+  padding: 1.8mm 3mm; font-size: 8pt; line-height: 1.25; margin-bottom: 2.4mm; }
+.guidebox b.h { font-size: 7.6pt; text-transform: uppercase; letter-spacing: 1px; color: #9a4f08; }
+.guidebox table { border-collapse: collapse; margin-top: 1mm; }
+.guidebox td { vertical-align: top; padding: 0.5mm 0; }
+.guidebox td.k { font-weight: bold; color: #9a4f08; padding-right: 3mm; white-space: nowrap; }
+
+.result { border: 2px solid #d97706; border-radius: 12px; margin-top: 2mm; padding: 3mm 4mm; background: #ffffff;
+  page-break-inside: avoid; }
+.result .rk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #9a4f08; }
+.result table { width: 100%; border-collapse: collapse; }
+.result td { vertical-align: middle; }
+.result td.img { width: 55%; text-align: center; }
+.result td.crit { width: 45%; padding-left: 4mm; }
+.result ul { margin: 1mm 0 0 0; padding-left: 0; list-style: none; }
+.result li { margin-bottom: 1.2mm; font-size: 8.8pt; padding-left: 5.5mm; text-indent: -5.5mm; }
+.result li::before { content: "\2611  "; color: #16a34a; font-size: 10pt; }
+/* the child-facing half of the result box */
+.checks { margin-bottom: 2mm; }
+.ckrow { display: flex; align-items: flex-start; gap: 2.4mm; margin-bottom: 1.8mm;
+  break-inside: avoid; }
+.cktrig { flex: 0 0 auto; width: 15mm; border-radius: 7px; color: #fff;
+  text-align: center; padding: 1mm 0 0.8mm 0; }
+.ckg { display: block; font-size: 13pt; font-weight: bold; line-height: 1.05; }
+.ckk { display: block; font-size: 5.2pt; font-weight: bold; letter-spacing: 0.06em; }
+.cksee { font-size: 10pt; line-height: 1.35; color: #0f172a; padding-top: 0.6mm; }
+.tcheck { border-top: 1px solid #e2e8f0; padding-top: 1.4mm; margin-top: 1mm; }
+.tck { font-size: 6.4pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.08em; color: #94a3b8; }
+.tcheck ul { margin-top: 0.8mm; }
+.tcheck li { font-size: 7.6pt; color: #64748b; }
+.tcheck li::before { font-size: 8pt; }
+
+.mats { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 1.6mm 2mm 1mm 2mm; margin-bottom: 2.6mm; background: #fcfcfd; }
+.mats .mhead { font-size: 7.6pt; font-weight: bold; text-transform: uppercase; letter-spacing: 1.6px; color: #9a4f08; margin: 0.4mm 0 1mm 1mm; }
+.mat { display: inline-block; width: 20.5mm; text-align: center; vertical-align: top; margin: 0 0.6mm 1mm 0.6mm; }
+.mat .mlbl { font-size: 6.9pt; font-weight: bold; color: #1e293b; line-height: 1.15; margin-top: 0.4mm; }
+.mat .mnote { font-size: 6.3pt; color: #64748b; line-height: 1.12; }
+.mat .pill { display: inline-block; font-size: 5.6pt; font-weight: bold; color: #fff; border-radius: 6px; padding: 0.25mm 1.5mm; margin-top: 0.6mm; letter-spacing: 0.4px; }
+/* addition to legacy css(): real manual photos in the parts panel, constrained
+   to the exact 52x36px footprint of the hand-drawn SVG icons so pagination
+   and cell alignment are unchanged */
+.mat .mimg { height: 36px; }
+.mat .mimg img { max-width: 50px; max-height: 36px; }
+
+.boxcard { border: 2px solid; border-radius: 12px; margin-bottom: 4mm; overflow: hidden; }
+.boxhead { color: #fff; font-weight: bold; font-size: 10pt; padding: 2mm 4mm; letter-spacing: 1px; }
+.pgrid { padding: 2.5mm 3mm; column-count: 3; column-gap: 4mm; }
+.pitem { font-size: 8.4pt; padding: 0.9mm 0; border-bottom: 1px solid #f1f5f9; break-inside: avoid; }
+.pitem span { color: #64748b; font-size: 7.8pt; }
+.boxnote { font-size: 7.8pt; color: #64748b; padding: 1.5mm 4mm 2.5mm 4mm; border-top: 1px solid #e2e8f0; }
+
+.capstone { page-break-before: always; border-radius: 14px; padding: 5mm 6mm; border: 2.5px solid #d97706; background: #fdf0dd; }
+.chips { margin-top: 2mm; }
+.chip { display: inline-block; background: #fff; border: 1.2px solid #d97706; border-radius: 20px;
+  padding: 0.8mm 3mm; font-size: 8pt; font-weight: bold; color: #9a4f08; margin: 0 1.5mm 1.5mm 0; }
+
+/* ---- 2-hour version lanes (grades 4-6; rendered only when variant == "long") ---- */
+.longband { border: 1.8px solid #d97706; border-radius: 12px; padding: 2.6mm 3.5mm 1.6mm 3.5mm;
+  margin: 1mm 0 2.6mm 0; background: #fdf0dd; page-break-inside: avoid; }
+.longband .lk { font-size: 8pt; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+  color: #9a4f08; margin-bottom: 1.8mm; }
+.lanes { width: 100%; border-collapse: collapse; }
+.lanes td { vertical-align: top; width: 50%; padding: 0 2.5mm 2mm 0; }
+.lane h5 { margin: 0 0 1mm 0; font-size: 8.4pt; text-transform: uppercase; letter-spacing: 1.1px;
+  color: #9a4f08; }
+.lane h5 span { float: right; font-weight: normal; color: #64748b; letter-spacing: 0; }
+.lane p { font-size: 8.5pt; margin: 0 0 1.4mm 0; }
+.chal { margin: 0; padding: 0; list-style: none; }
+.chal li { font-size: 8.4pt; margin-bottom: 1.2mm; padding-left: 9mm; text-indent: -9mm; }
+.chal .st { color: #d97706; font-weight: bold; letter-spacing: -0.5px; }
+/* Grades 7-9 extend tasks carry a tolerance instead of a star tier. The star
+   list's 9mm hanging indent is sized for "★★☆" and splits a wider spec chip
+   across lines, so spec lists opt out of it. */
+.chal.specs li { padding-left: 0; text-indent: 0; margin-bottom: 1.6mm; }
+.chal .spec { display: inline-block; background: #fdf0dd; color: #9a4f08;
+  border: 1px solid #d97706; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin-right: 1.2mm; font-size: 7.2pt; font-weight: bold; white-space: nowrap; }
+/* Contingent, not scheduled: dashed border and no time budget, so it reads as
+   "only if there is time left" beside the solid-bordered result box below it. */
+.stripbox { background: #f8fafc; border-left: 4px solid #d97706; border-radius: 0 8px 8px 0;
+  padding: 2.4mm 3.5mm; margin-bottom: 3mm; font-size: 8.8pt; line-height: 1.55; }
+.stripbox.cp { border-left-color: #d97706; background: #fef9ec; }
+.stripbox .proj { font-family: "DejaVu Sans Mono", monospace; font-size: 8pt;
+  background: #fdf0dd; border: 1px solid #d97706; border-radius: 4px; padding: 0.2mm 1.4mm; }
+.stripbox .k { font-size: 7.4pt; text-transform: uppercase; letter-spacing: 1.4px;
+  color: #64748b; margin-right: 1.5mm; }
+.bpill { display: inline-block; background: #fdf0dd; color: #9a4f08;
+  border: 1px solid #d97706; border-radius: 4px; padding: 0.1mm 1.4mm;
+  margin: 0 1mm 0.6mm 0; font-size: 7.2pt; font-weight: bold; }
+.result li.xtra::before { content: "\2610  "; color: #d97706; }
+.result li.xtra { color: #9a4f08; }
+.vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
+  font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+
+.blockstack { margin-bottom: 3mm; }
+.brow { line-height: 0; }
+/* one uniform scale, set per image in mm — each block keeps its true relative
+   size instead of every block being forced to the same height */
+.bimg { width: auto; max-width: 100%; display: block; margin-bottom: 0.35mm; }
+/* fallback until a block has been photographed — same silhouette and palette
+   colour, sized to match a photographed bar so a half-migrated script does not
+   look like two different things stacked together */
+.bpill { display: inline-block; color: #fff; font-size: 7pt; line-height: 1.25;
+  font-weight: bold; border-radius: 4px; padding: 1mm 2.2mm; margin-bottom: 0.35mm;
+  font-family: Helvetica, Arial, sans-serif; }
+/* un-photographed C-block: children indent, spine drawn in the block's colour */
+.bwrap { margin-left: 1.6mm; padding-left: 1.6mm; border-left-width: 1.2mm;
+  border-left-style: solid; }
+.bfoot { height: 1.2mm; width: 6mm; border-radius: 0 0 2px 2px; margin-bottom: 0.35mm; }
+/* photographed C-block: the 1px spine tile repeats down behind the children, so
+   the block stretches to whatever height its contents need */
+.bwrapimg { background-repeat: repeat-y; background-position: left top; }
+.bfoot-img { margin-bottom: 0.35mm; }
+.bcomment { font-size: 6.6pt; color: #64748b; font-style: italic; margin: 0.5mm 0; }
+
+/* width/height are in mm and the viewBox carries the aspect ratio, so a narrow
+   column scales the whole script down rather than clipping or distorting it */
+.bsvg { display: block; max-width: 100%; height: auto; margin-bottom: 2.5mm;
+        break-inside: avoid; page-break-inside: avoid; }
+.bl { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      fill: #fff; dominant-baseline: central; }
+.bft { font: 600 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #575e75; dominant-baseline: central; text-anchor: middle; }
+.bf { fill: #fff; stroke: rgba(0,0,0,.15); }
+.bm { fill: rgba(0,0,0,.18); stroke: none; }
+.bc { fill: #fff; }
+.bcm { font: italic 500 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+       fill: #64748b; dominant-baseline: central; }
+.bsvg path { stroke-width: 1; }
+
+/* ---- timed phase cards: minutes, blocks and the result in one place ---- */
+.ph { break-inside: avoid; margin-bottom: 2.6mm; padding: 2mm 2.6mm 2mm 2.6mm;
+  border: 1px solid #e2e8f0; border-left-width: 2.6px; border-radius: 7px;
+  background: #fff; }
+.phhead { display: flex; gap: 2.6mm; align-items: baseline; }
+.pht { flex: 0 0 auto; min-width: 9mm; font-size: 8.6pt; font-weight: bold;
+  color: #64748b; font-variant-numeric: tabular-nums; }
+.phx { flex: 1 1 auto; font-size: 8.8pt; line-height: 1.42; }
+.ph .phblocks { margin: 1.6mm 0 0 11.6mm; }
+.ph .hnew { margin-bottom: 1.4mm; }
+.ph .hchips { gap: 1.2mm 2.4mm; }
+/* what the class should be able to point at before the next phase starts */
+.phexp { margin: 1.6mm 0 0 11.6mm; padding: 1.1mm 2.2mm; border-radius: 5px;
+  background: #f0fdf4; border: 0.8px solid #bbf7d0; font-size: 8.1pt;
+  line-height: 1.4; color: #14532d; break-inside: avoid; }
+.phexp .phk { font-weight: bold; color: #16a34a; margin-right: 1.2mm; }
+.hints { margin-bottom: 2mm; }
+.hcat { margin-bottom: 2mm; break-inside: avoid; }
+.hcatname { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 0.8mm; }
+.hchips { display: flex; flex-wrap: wrap; gap: 1.2mm 2.4mm; align-items: flex-start; }
+.hchip { break-inside: avoid; }
+.hchip .bsvg { margin-bottom: 0; }
+/* a newly-met block gets a line of its own, its explanation directly under it */
+.hnew { break-inside: avoid; margin-bottom: 1.8mm; }
+.hnote { font-size: 8pt; line-height: 1.4; color: #334155; margin-top: 0.5mm; }
+.newtag { display: inline-block; font-size: 5.6pt; font-weight: bold;
+  text-transform: uppercase; letter-spacing: 0.08em; color: #16a34a;
+  border: 0.8px solid #86efac; border-radius: 3px; padding: 0 0.8mm;
+  margin-right: 1.4mm; vertical-align: 1.5px; }
+.bnotes { background: #f8fafc; border-left: 3px solid #cbd5e1; border-radius: 0 6px 6px 0;
+  padding: 2mm 3mm; margin: 2mm 0 2mm 0; break-inside: avoid; }
+.bnoteshead { font-size: 6.8pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: 0.06em; color: #64748b; margin-bottom: 1mm; }
+.bnotes ul { margin: 0; padding-left: 4mm; font-size: 8.2pt; line-height: 1.45; }
+.bnotes li { margin-bottom: 0.8mm; }
+.bnotes b { color: #0f172a; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+body, .chrome, .buildson {
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN", Helvetica, Arial, sans-serif;
+  line-height: 1.62;
+}
+/* headings carry coeng too, and were tuned tight for Latin caps */
+.cover h1 { line-height: 1.35; font-size: 24pt; }
+.shead h2 { font-size: 13.5pt; line-height: 1.4; }
+h2.section { line-height: 1.4; }
+/* uppercase/letter-spacing are meaningless in Khmer and actively break clusters
+   by pulling diacritics away from their base consonant */
+.shead .sno, h4.blk, .codelabel, .guidebox b.h, .result .rk, .mats .mhead, .badge span,
+.cover .kicker, .vtag {
+  text-transform: none; letter-spacing: 0;
+}
+/* buy back the vertical space the extra leading costs, so a session still fits
+   one A4 page — measured against the English layout, not guessed */
+body { font-size: 8.8pt; }
+.teach p, table.flow td, .tips, .result li, .lane p { font-size: 8.3pt; }
+.goal { font-size: 8.9pt; }
+.guidebox { font-size: 7.6pt; line-height: 1.5; }
+.chal li { font-size: 8pt; }
+/* the code box stays Latin monospace — mBlock block names are not translated */
+.codebox { font-family: "DejaVu Sans Mono", monospace; line-height: 1.45; }
+</style><style>
+@media screen {
+  html { background: #e8edf3; }
+  body { max-width: 210mm; margin: 0 auto 20mm auto; background: #fff;
+         padding: 12mm 13mm; box-shadow: 0 2px 18px rgba(15,23,42,.14); }
+  .sess { page-break-before: auto; }
+}
+@media print { .chrome, .buildson, .nextlesson { display: none !important; } }
+/* Where you actually are when you have finished reading a lesson. Screen only —
+   on paper the next sheet is the next lesson. */
+.nextlesson { font-family: Helvetica, Arial, sans-serif; margin-top: 6mm;
+  padding-top: 3mm; border-top: 1px solid #e2e8f0; text-align: right; }
+.nextlesson a { color: #0e7fc1; text-decoration: none; font-weight: bold;
+  font-size: 10.5pt; }
+.nextlesson a:hover { text-decoration: underline; }
+.nextlesson .nlk { display: block; font-size: 7.6pt; color: #94a3b8;
+  text-transform: uppercase; letter-spacing: 0.08em; font-weight: bold; }
+.buildson { font-family: Helvetica, Arial, sans-serif; font-size: 8.2pt; color: #64748b;
+  margin: -1.5mm 0 3mm 1mm; }
+.buildson b { color: #334155; font-weight: bold; }
+.chrome { font-family: Helvetica, Arial, sans-serif; font-size: 9.5pt; margin-bottom: 6mm;
+  padding-bottom: 3mm; border-bottom: 1px solid #e2e8f0; display: flex; gap: 4mm;
+  align-items: center; flex-wrap: wrap; }
+.chrome a { color: #0e7fc1; text-decoration: none; font-weight: bold; }
+.chrome a:hover { text-decoration: underline; }
+.chrome .spacer { flex: 1; }
+.chrome .dim { color: #94a3b8; }
+
+@font-face {
+  font-family: "Khmer OS Battambang";
+  src: local("Khmer OS Battambang"),
+       url("assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype"),
+       url("../assets/fonts/KhmerOSBattambang-Regular.ttf") format("truetype");
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+/* margin-left:auto, not the .chrome .spacer: the bar wraps, and the spacer only
+   pushes to the right edge of the FIRST line. This keeps the switch at the right
+   edge of whichever line it lands on. */
+.langtog { display: inline-flex; margin-left: auto; border: 1px solid #cbd5e1;
+  border-radius: 4px; overflow: hidden; line-height: 1; font-size: 8.5pt; }
+.langtog > * { padding: 1.5mm 2.4mm; font-weight: bold; white-space: nowrap;
+  font-family: "Khmer OS Battambang", "Khmer MN", "Khmer Sangam MN",
+               Helvetica, Arial, sans-serif; }
+.langtog > * + * { border-left: 1px solid #cbd5e1; }
+.langtog .on { background: #0e7fc1; color: #fff; }
+.langtog a { background: #fff; color: #475569; text-decoration: none; }
+.langtog a:hover { background: #e3f1fa; color: #0a5c8c; text-decoration: none; }
+</style>
+<style>
+.searchbox { width: 100%; font-size: 11pt; padding: 3mm; border: 1.5px solid #cbd5e1;
+  border-radius: 8px; font-family: inherit; margin-bottom: 4mm; }
+.hit { display: block; padding: 2.5mm 3mm; border: 1px solid #e2e8f0; border-radius: 8px;
+  margin-bottom: 2mm; text-decoration: none; color: #1e293b; }
+.hit:hover { border-color: #0e7fc1; background: #f0f7fc; }
+.hitgrade { display: inline-block; background: #0e7fc1; color: #fff; border-radius: 6px;
+  padding: 0.4mm 2mm; font-size: 7.5pt; font-weight: bold; margin-right: 2mm; }
+.hitgoal { display: block; color: #64748b; font-size: 8.5pt; margin-top: 1mm; }
+.gradecard { display: block; border: 2px solid; border-radius: 12px; padding: 5mm;
+  margin-bottom: 4mm; text-decoration: none; color: #1e293b; }
+.gradecard h3 { margin: 0 0 1mm 0; }
+.gradecard a { text-decoration: none; }
+.gradecard a:hover { text-decoration: underline; }
+.gradecard:hover { background: #f8fafc; }
+.slist { list-style: none; padding: 0; }
+.slist li { margin-bottom: 1.5mm; }
+.slist .dl { margin-left: 2mm; white-space: nowrap; font-size: 8.4pt; }
+.slist a { text-decoration: none; color: #0e7fc1; font-weight: bold; }
+.slist .todo { color: #94a3b8; }
+.slist .un { color: #64748b; font-size: 8.4pt; margin-left: 2mm; }
+.course-intro { margin: 5mm 0 7mm; }
+.course-intro > h2 { margin-bottom: 1.5mm; }
+.course-intro .intro-lede { color: #475569; margin: 0 0 4mm; max-width: 175mm; }
+.orient-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 4mm; }
+.orient-card { border: 1.5px solid #dbe7ef; border-radius: 10px; padding: 4mm 4.5mm;
+  background: #fff; break-inside: avoid; }
+.orient-card.wide { grid-column: 1 / -1; }
+.orient-card h3 { margin: 0 0 2mm; color: #0a5c8c; font-size: 13pt; }
+.orient-card p { margin: 0 0 2mm; }
+.orient-card p:last-child { margin-bottom: 0; }
+.orient-card ul, .orient-card ol { margin: 1.5mm 0 0; padding-left: 6mm; }
+.orient-card li { margin-bottom: 1.4mm; }
+.session-flow { counter-reset: flow; list-style: none; padding: 0 !important; display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2.5mm; }
+.session-flow li { counter-increment: flow; border-left: 3px solid #0e7fc1;
+  background: #f4f9fc; border-radius: 0 7px 7px 0; padding: 2.5mm 3mm; }
+.session-flow li::before { content: counter(flow); display: inline-grid; place-items: center;
+  width: 5mm; height: 5mm; margin-right: 1.5mm; border-radius: 50%;
+  background: #0e7fc1; color: white; font-size: 7.5pt; font-weight: bold; }
+.session-flow small { display: block; color: #64748b; margin: 1mm 0 0 6.5mm; }
+@media (max-width: 760px) {
+  .orient-grid, .session-flow { grid-template-columns: 1fr; }
+  .orient-card.wide { grid-column: auto; }
+}
+</style>
+</head><body><div class="chrome"><a href="../index.html">គ្រប់ថ្នាក់</a><span class="spacer"></span><a href="materials.html">សម្ភារៈថ្នាក់រៀន</a><a href="print.html">មគ្គុទ្ទេសក៍ពេញលេញសម្រាប់បោះពុម្ព →</a><a class="glossary-link" href="../glossary.html" target="_blank" rel="noopener noreferrer">បើកសទ្ទានុក្រមក្នុងផ្ទាំងថ្មី</a><span class="langtog" role="group" aria-label="ភាសា"><a href="../../grade9/index.html" lang="en" hreflang="en">EN</a><span class="on" lang="km">ខ្មែរ</span></span></div>
+<h2 class="section">ថ្នាក់ទី ៩ — Engineering & Autonomy — Robots That Work</h2>
+<p class="muted">mBot2 Rover · tracked base + twin grip arms · Full Python · គម្រោងបញ្ចប់: Robots at Work
+ &nbsp;·&nbsp; <b>កំណែ ២ ម៉ោង៖ 2 h × ២០ មេរៀន = 40 h</b></p>
+<h4 class="blk" style="margin-top:5mm">មេរៀន</h4>
+<ul class="slist"><li><a href="session-01.html">S១ · រូបយន្តដដែល ភាសាថ្មី</a><span class="un" style="color:#d97706">Python Bootcamp</span></li><li><a href="session-02.html">S២ · អនុគមន៍</a><span class="un" style="color:#d97706">Python Bootcamp</span></li><li><a href="session-03.html">S៣ · ការយល់ដឹងតាមឧបករណ៍ចាប់ ក្នុង Python</a><span class="un" style="color:#d97706">Python Bootcamp</span></li><li><a href="session-04.html">S៤ · តក្កវិជ្ជា និងការរៀបចំកូដឡើងវិញ</a><span class="un" style="color:#d97706">Python Bootcamp</span></li><li><a href="session-05.html">S៥ · ការយោល ពន្យល់រួច</a><span class="un" style="color:#f0a13c">Better Control</span></li><li><a href="session-06.html">S៦ · ការគ្រប់គ្រងបែប P</a><span class="un" style="color:#f0a13c">Better Control</span></li><li><a href="session-07.html">S៧ · វាស់វា</a><span class="un" style="color:#f0a13c">Better Control</span></li><li><a href="session-08.html">S៨ · The D Term</a><span class="un" style="color:#f0a13c">Better Control</span></li><li><a href="session-09.html">S៩ · Dead Reckoning</a><span class="un" style="color:#f0a13c">Better Control</span></li><li><a href="session-10.html">S១០ · The Arms, in Python</a><span class="un" style="color:#9a4f08">The Arms</span></li><li><a href="session-11.html">S១១ · Pick & Place</a><span class="un" style="color:#9a4f08">The Arms</span></li><li><a href="session-12.html">S១២ · Reusable Arm Code</a><span class="un" style="color:#9a4f08">The Arms</span></li><li><a href="session-13.html">S១៣ · Navigate + Manipulate ✱</a><span class="un" style="color:#f0a13c">Integration</span></li><li><a href="session-14.html">S១៤ · Program Structure</a><span class="un" style="color:#f0a13c">Integration</span></li><li><a href="session-15.html">S១៥ · Design Sprint</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li><li><a href="session-16.html">S១៦ · Build Sprint I ✱</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li><li><a href="session-17.html">S១៧ · Build Sprint II + Code Review</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li><li><a href="session-18.html">S១៨ · Build Sprint III</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li><li><a href="session-19.html">S១៩ · Rehearsal & Pitch Prep ✱</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li><li><a href="session-20.html">S២០ · Demo Day</a><span class="un" style="color:#16a34a">Capstone: Robots at Work</span></li></ul>
+<h2 class="section">ទិដ្ឋភាពរួមថ្នាក់ទី ៩</h2>
+<div class="objbox"><h4>គោលបំណងសិក្សា — នៅចុងឆ្នាំសិក្សា សិស្សអាច៖</h4><ul><li>Write, structure and review Python: functions, constants, state machines</li><li>Implement and tune closed-loop control: P, then PD, then encoder feedback; argue with graphs</li><li>Program the Rover's twin grip arms for safe, reliable pick & place</li><li>Run an engineering project: spec, sprints, reviews, recovery</li><li>Deliver an autonomous mission and pitch it (Robots at Work)</li></ul></div>
+<p><b>មេរៀនទាំង ២០ ដាក់ពណ៌តាមឯកតា</b> &nbsp;<span class="muted">✱ ក្នុងចំណងជើងមេរៀន = មេរៀនបម្រុង (អាចបង្រួមបាន បើកាលវិភាគយឺត)</span></p>
+<div class="center"><svg viewBox="0 0 660 100" width="620"><g font-family="Khmer OS Battambang, Khmer MN, Khmer Sangam MN, Helvetica"><rect x="20" y="34" width="117" height="34" fill="#d97706" rx="5"/><text x="35" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">1</text><text x="64" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">2</text><text x="93" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">3</text><text x="122" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">4</text><text x="78" y="24" font-size="9" font-weight="bold" fill="#d97706" text-anchor="middle">Python Bootcamp</text><rect x="140" y="34" width="147" height="34" fill="#f0a13c" rx="5"/><text x="155" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">5</text><text x="184" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">6</text><text x="214" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">7</text><text x="243" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">8</text><text x="272" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">9</text><text x="214" y="24" font-size="9" font-weight="bold" fill="#f0a13c" text-anchor="middle">Better Control</text><rect x="290" y="34" width="87" height="34" fill="#9a4f08" rx="5"/><text x="304" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">10</text><text x="334" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">11</text><text x="362" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">12</text><text x="334" y="86" font-size="9" font-weight="bold" fill="#9a4f08" text-anchor="middle">The Arms</text><rect x="380" y="34" width="57" height="34" fill="#f0a13c" rx="5"/><text x="394" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">13</text><text x="423" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">14</text><text x="408" y="24" font-size="9" font-weight="bold" fill="#f0a13c" text-anchor="middle">Integration</text><rect x="440" y="34" width="177" height="34" fill="#16a34a" rx="5"/><text x="455" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">15</text><text x="484" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">16</text><text x="514" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">17</text><text x="543" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">18</text><text x="573" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">19</text><text x="602" y="55" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">20</text><text x="528" y="24" font-size="9" font-weight="bold" fill="#16a34a" text-anchor="middle">Capstone: Robots at Work</text></g></svg></div>
+<p style="margin-top:4mm"><b>មេរៀនទាំងអស់ដំណើរការតាមចង្វាក់ដូចគ្នា</b></p>
+<div class="center"><svg viewBox="0 0 660 100" width="620"><g font-family="Khmer OS Battambang, Khmer MN, Khmer Sangam MN, Helvetica"><rect x="30" y="30" width="25" height="34" fill="#d97706" rx="4"/><text x="42" y="82" font-size="9" font-weight="bold" fill="#d97706" text-anchor="middle">រៀបចំ</text><rect x="55" y="30" width="50" height="34" fill="#9a4f08" rx="4"/><text x="80" y="94" font-size="9" font-weight="bold" fill="#9a4f08" text-anchor="middle">① ពិនិត្យ និងកែកំហុស</text><rect x="105" y="30" width="225" height="34" fill="#16a34a" rx="4"/><text x="218" y="51" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">② បង្រៀន និងអនុវត្ត — ស្នូល</text><rect x="330" y="30" width="25" height="34" fill="#94a3b8" rx="4"/><text x="342" y="82" font-size="9" font-weight="bold" fill="#94a3b8" text-anchor="middle">③ សម្រាក</text><rect x="355" y="30" width="125" height="34" fill="#0891b2" rx="4"/><text x="418" y="51" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">④ ពង្រីកតាមស្តង់ដារ</text><rect x="480" y="30" width="50" height="34" fill="#7c3aed" rx="4"/><text x="505" y="94" font-size="9" font-weight="bold" fill="#7c3aed" text-anchor="middle">⑤ កំណត់ហេតុ</text><rect x="530" y="30" width="75" height="34" fill="#d97706" rx="4"/><text x="568" y="82" font-size="9" font-weight="bold" fill="#d97706" text-anchor="middle">⑥ ត្រួតពិនិត្យការរចនា</text><rect x="605" y="30" width="25" height="34" fill="#64748b" rx="4"/><text x="618" y="94" font-size="9" font-weight="bold" fill="#64748b" text-anchor="middle">សម្អាត</text><line x1="30" y1="26" x2="30" y2="68" stroke="#334155" stroke-width="1"/><text x="30" y="20" font-size="9" fill="#334155" text-anchor="middle">0′</text><line x1="105" y1="26" x2="105" y2="68" stroke="#334155" stroke-width="1"/><text x="105" y="20" font-size="9" fill="#334155" text-anchor="middle">15′</text><line x1="330" y1="26" x2="330" y2="68" stroke="#334155" stroke-width="1"/><text x="330" y="20" font-size="9" fill="#334155" text-anchor="middle">60′</text><line x1="355" y1="26" x2="355" y2="68" stroke="#334155" stroke-width="1"/><text x="355" y="20" font-size="9" fill="#334155" text-anchor="middle">65′</text><line x1="480" y1="26" x2="480" y2="68" stroke="#334155" stroke-width="1"/><text x="480" y="20" font-size="9" fill="#334155" text-anchor="middle">90′</text><line x1="530" y1="26" x2="530" y2="68" stroke="#334155" stroke-width="1"/><text x="530" y="20" font-size="9" fill="#334155" text-anchor="middle">100′</text><line x1="630" y1="26" x2="630" y2="68" stroke="#334155" stroke-width="1"/><text x="630" y="20" font-size="9" fill="#334155" text-anchor="middle">120′</text></g></svg></div>
+<div class="notecard"><b>លក្ខខណ្ឌចាំបាច់សម្រាប់មេរៀន ២ ម៉ោង៖</b> កំណត់ហេតុវិស្វកម្មត្រូវសរសេរក្នុងអំឡុងមេរៀន មិនមែនក្រោយមកទេ — ការផ្លាស់ប្ដូរដែលគ្មានការវាស់វែងជាប់នឹងវា មិនរាប់បញ្ចូលទេ · កិច្ចការពង្រីកនីមួយៗត្រូវប្រាប់ស្តង់ដារជាមុន មុនពេលនរណាម្នាក់ដំណើរការរូបយន្ត · ការត្រួតពិនិត្យការរចនាធ្វើតាមលក្ខណៈវិនិច្ឆ័យដែលបានកំណត់ មិនមែនតាមចំណូលចិត្តទេ · រូបយន្តត្រូវទុកឲ្យផ្គុំរួចនៅលើធ្នើររទេះមានស្លាក និងសាកថ្មតាម USB-C រវាងមេរៀននីមួយៗ។</div>
+<div class="warncard"><b>ចំណុចលំបាកដែលគេដឹងក្នុងឆ្នាំនេះ៖</b> no build year — the Rover comes forward from Grade 8 standing, calibrated and with both servos on S1/S2; if the kits were stripped over the break, budget a rebuild from the printed booklet BEFORE Session 1 · this robot has no ultrasonic: every distance is an encoder count and every marker is a colour under the Quad RGB · never force an arm past resistance (gears strip) · exact Python function names vary by mBlock version: trust autocomplete · rebuild capstone courses from tape-measure photos.</div>
+
+<div style="page-break-before: always"></div>
+<h2 class="section">ប្រអប់ឧបករណ៍ — ឯកសារយោងមាតិកាផ្លូវការ</h2>
+<p class="muted" style="margin-bottom:3mm">Both boxes are already in the robot: Grade 9 builds nothing and unscrews nothing. Session parts panels tag every piece with its source box.</p>
+<div class="boxcard" style="border-color:#2563eb"><div class="boxhead" style="background:#2563eb">BOX 1 · “mBot2”</div><div class="pgrid"><div class="pitem"><b>CyberPi</b> <span>×1</span></div><div class="pitem"><b>mBot2 Shield</b> <span>×1 · battery built in</span></div><div class="pitem"><b>Chassis</b> <span>×1</span></div><div class="pitem"><b>Encoder motor</b> <span>×2</span></div><div class="pitem"><b>Wheel hub</b> <span>×2</span></div><div class="pitem"><b>Slick tyre</b> <span>×2</span></div><div class="pitem"><b>Mini wheel</b> <span>×1</span></div><div class="pitem"><b>Ultrasonic Sensor 2</b> <span>×1</span></div><div class="pitem"><b>Quad RGB Sensor</b> <span>×1</span></div><div class="pitem"><b>Motor cable</b> <span>×2</span></div><div class="pitem"><b>mBuild cable 10 cm</b> <span>×2</span></div><div class="pitem"><b>mBuild cable 20 cm</b> <span>×1</span></div><div class="pitem"><b>M4×25 mm screw</b> <span>×6</span></div><div class="pitem"><b>M4×14 mm screw</b> <span>×6</span></div><div class="pitem"><b>M4×8 mm screw</b> <span>×6</span></div><div class="pitem"><b>M2.5×12 mm screw</b> <span>×4</span></div><div class="pitem"><b>Line-following track map</b> <span>×1</span></div><div class="pitem"><b>USB cable</b> <span>×1</span></div><div class="pitem"><b>Screwdriver</b> <span>×1</span></div></div><div class="boxnote">Quantities from the official packing list. A Bluetooth dongle is NOT included and this program does not use one — it is only needed by computers with no built-in Bluetooth, and USB pairing is the documented fallback in every session that connects a robot.</div></div><div class="boxcard" style="border-color:#7c3aed"><div class="boxhead" style="background:#7c3aed">BOX 2 · “Rover Robotics Add-on Pack”</div><div class="pgrid"><div class="pitem"><b>Servo pack</b> <span>×2 used</span></div><div class="pitem"><b>Bluetooth Controller</b> <span>×1</span></div><div class="pitem"><b>Track</b> <span>×2</span></div><div class="pitem"><b>Wheel hub</b> <span>×4 halves used</span></div><div class="pitem"><b>Small wheel hub</b> <span>×2 used</span></div><div class="pitem"><b>D shaft</b> <span>≥×6</span></div><div class="pitem"><b>Bracket 90° 3×3</b> <span>≥×6</span></div><div class="pitem"><b>Bracket 120° 3×3</b> <span>≥×3</span></div><div class="pitem"><b>U bracket</b> <span>≥×4</span></div><div class="pitem"><b>T plate</b> <span>×2 used</span></div><div class="pitem"><b>Slide beam 2×4</b> <span>≥×1</span></div><div class="pitem"><b>Slide beam 2×6</b> <span>≥×1</span></div><div class="pitem"><b>Plate 3×8</b> <span>≥×1</span></div><div class="pitem"><b>Shaft collar</b> <span>×12 used</span></div><div class="pitem"><b>Flange bearing</b> <span>≥×4</span></div><div class="pitem"><b>Socket wrench</b> <span>×1</span></div><div class="pitem"><b>Screw M3×6 mm</b> <span>×12 used</span></div><div class="pitem"><b>Screw M4×10 mm</b> <span>≥×30</span></div><div class="pitem"><b>Screw M4×22 mm</b> <span>≥×14</span></div><div class="pitem"><b>Screw M4×30 mm</b> <span>≥×8</span></div><div class="pitem"><b>Nut</b> <span>≥×30</span></div><div class="pitem"><b>Plastic shock absorber</b> <span>spares — unused in build</span></div><div class="pitem"><b>Metal shock absorber</b> <span>×4 used</span></div><div class="pitem"><b>Long plastic ring</b> <span>≥×2</span></div><div class="pitem"><b>Short plastic ring</b> <span>≥×8</span></div><div class="pitem"><b>Rubber band</b> <span>≥×6</span></div><div class="pitem"><b>Board 1–8 (body shells)</b> <span>peel paper film</span></div><div class="pitem"><b>Quick Start Guide</b> <span>×1</span></div></div><div class="boxnote">As printed on the box (no quantities given). Online docs: search “mBot2 Rover” at support.makeblock.com.</div></div>
+
+</body></html>

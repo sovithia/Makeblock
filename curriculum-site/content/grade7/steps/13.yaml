@@ -1,0 +1,93 @@
+n: 13
+stage: C
+stage_title: The robot remembers
+kind: step
+title: The robot keeps score
+concept: Variable
+hours: 2
+project: G7-C-remembers
+goal: The robot counts something nobody built a block for, and shows the running total on its own screen.
+build: A robot that counts the walls it meets.
+builds_on:
+- Step 9 · if
+- Step 8 · the screen is yours
+teach:
+- 'The CyberPi already counts things — <b>button A press counts</b> is right there in the palette. So
+  why build your own? Because it counts what Makeblock chose to count. The moment you want walls met,
+  laps run or points scored, nobody has made you a block. You need a <b>variable</b>: a named box holding
+  a number the robot remembers. <b>set</b> puts a value in, <b>change by</b> adjusts it.'
+- The first counter every class builds is wrong, and it is worth letting it be wrong. The forever loop
+  runs many times a second, so one wall gets counted twenty times. Fixing that — wait until the wall
+  is gone before counting again — is the real lesson, and it is the same bug that will bite them in
+  the capstone.
+guide:
+- label: New box
+  value: Variables → Make a Variable
+- label: Set
+  value: set walls to 0 — once, at the start
+- label: Trap
+  value: one wall counts 20× without a pause
+- label: Floor
+  value: an arena about 1.5 m across, walls on all sides
+steps:
+- time: 15′
+  text: Put <b>button A press counts</b> on the screen and press the button. It counts perfectly. Now
+    try to count walls — go and look for the block. There isn't one.
+  expect: The button counter works perfectly — and a class that has searched the palette for a wall
+    counter and found there isn’t one.
+- time: 25′
+  text: Make a variable, set it to 0, change it by 1 when the robot meets a wall. Run it. Watch it leap
+    by twenty and work out why.
+  use:
+  - data_setvariableto
+  - data_changevariableby
+  expect: A counter that leaps by twenty at one wall, and a team that can say why before being told.
+- time: 20′
+  text: 'Fix it: count once per wall, not once per loop. Wait until the wall is out of range before
+    you are allowed to count again.'
+  use:
+  - control_wait_until
+  expect: One wall, one count. Drive past five walls and the screen says 5.
+- time: 20′
+  text: 'Show the count with <b>join</b> so it reads "walls: 4", and celebrate when it reaches five.'
+  use:
+  - cyberpi_display_label_show_label_xy_with_size
+  expect: 'The screen reads “walls: 4”, not “4”, and the robot celebrates when it reaches five.'
+- time: 20′
+  text: 'Arena run: how many walls in sixty seconds? Compare across the class — same code, different
+    totals, argue about why.'
+  expect: A wall count for sixty seconds, compared across the class — same code, different totals, and
+    an argument about why.
+- time: 10′
+  text: Log the bug you hit and the fix. It comes back in Step 24.
+  expect: The bug and its fix written in the log. It comes back in Step 24.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  show label 1  press A to start  at x: 0 y:\
+    \ 0  by small pixel\n  wait until  button  A  pressed?\n  forever\n    show label 1  join  walls:\
+    \   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic 2 1 distance to an object (cm)) <\
+    \ 15  then\n      change  walls  by 1\n      turns right  90  ° until done\n      wait until  (ultrasonic\
+    \ 2 1 distance to an object (cm)) > 25\n    else\n      moves forward  at 40  RPM"
+tips:
+- Set the variable to 0 <i>once</i>, before the forever loop. Inside it, the count resets every pass
+  and never gets above 1 — the second-most-common bug today.
+- The wait-until fix is better than a plain wait, because it works at any speed. Let teams try a fixed
+  wait first and find the case where it fails.
+- A count with no label on screen is unreadable in a week. Insist on join from the start.
+result:
+  scene: counter
+success:
+- The counter goes up once per wall, not once per loop
+- The total is on screen and labelled
+- The team can say why button press counts was not enough
+check:
+- do: A
+  see: It drives, turns at each wall, and the number goes up by one.
+- do: see
+  see: One wall, one count — even if it sits there for a while.
+parts:
+- id: robot_wheel
+- id: boxes
+  note: walls for the arena
+- id: timer
+

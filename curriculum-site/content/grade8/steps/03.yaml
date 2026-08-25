@@ -1,0 +1,91 @@
+n: 3
+stage: A
+stage_title: A new machine
+kind: step
+title: The Rover drives
+concept: Skid steering · recalibration
+hours: 2
+project: G8-A-rebuilt
+goal: The Rover turns to within 5° three times running — and the team can say why last year's turn numbers
+  were wrong.
+build: A tracked robot that turns accurately on your floor.
+builds_on:
+- Step 1 · the modules
+- Grade 7 · turns you trusted
+teach:
+- 'The Rover has no steering wheels. It turns by running the two tracks at <b>different speeds</b> —
+  run them opposite ways and it spins on the spot, which last year''s robot could never do. That is
+  <b>skid steering</b>, and the name is honest: the tracks scrub sideways across the floor while it
+  happens.'
+- Which is exactly why every turn value from Grade 7 is now wrong. Scrubbing depends on the floor, the
+  track tension and the weight on top. Run <b>calibrate chassis parameters</b> so the robot learns its
+  new geometry, then measure a 90° turn with a protractor and see how close it gets. Do not trust a
+  number you have not measured on this robot, on this floor.
+guide:
+- label: Spin
+  value: EM1 forward, EM2 backward — on the spot
+- label: First
+  value: calibrate chassis parameters
+- label: Measure
+  value: protractor, three turns, not one
+- label: Floor
+  value: 1 m clear — it turns on the spot
+steps:
+- time: 25′
+  text: 'Finish the build: chassis, head, shells, cables tucked. Cross-team QC before anything is powered
+    on.'
+  expect: A finished, cable-tucked robot signed off by another team before anything is powered on.
+- time: 15′
+  text: First drive on the floor — never a table. Then spin on the spot and watch a thing last year's
+    robot could not do.
+  use:
+  - cyberpi_when_button_press
+  - mbot2_cw_and_ccw_with_angle
+  expect: It drives on the floor and spins on the spot — something last year’s wheeled robot could not
+    do.
+- time: 20′
+  text: Run <b>calibrate chassis parameters</b>. Ask what you think it is measuring before you run it.
+  use:
+  - mbot2_set_para
+  - control_wait
+  expect: Calibration run, and a team answer to what it was measuring, given before it ran.
+- time: 25′
+  text: Measure a 90° turn with a protractor, three times. Compare against your Grade 7 numbers. How
+    far out were they?
+  expect: Three protractor readings of a 90° turn, and the number of degrees your Grade 7 settings were
+    out by.
+- time: 25′
+  text: Tune until three consecutive turns land within 5°. Log the values — everything this year sits
+    on top of them.
+  expect: Three turns in a row landing within 5°, and the values in the log. Everything this year sits
+    on them.
+- time: 10′
+  text: Log two things tracks do better than wheels, and two things wheels did better. Both lists are
+    real.
+  expect: Two things tracks do better and two things wheels did better, in the log. Both lists are real.
+code:
+  lang: blocks
+  source: "when button A pressed\n  calibrate  chassis parameters\n\nwhen button B pressed\n  turns\
+    \ right  90  ° until done\n  wait 1 seconds\n  turns left  90  ° until done"
+tips:
+- The guide <b>crosses</b> the motor cables on the Rover — left goes to the right port. If a team's
+  robot turns when told to go straight, that is why.
+- Calibrate on the floor the class actually uses. A robot calibrated on carpet and run on tile is a
+  robot that lies.
+- Keep the Grade 7 turn numbers in the log rather than deleting them. The comparison is the lesson.
+result:
+  scene: tank_compare
+success:
+- Three consecutive 90° turns within 5°, measured with a protractor
+- Chassis calibration run and its effect observed
+- The tracks-versus-wheels trade-off stated with a number on each side
+check:
+- do: A
+  see: It measures itself and learns how it turns.
+- do: B
+  see: It turns right, waits, turns back, and lands where it started.
+parts:
+- id: robot_tank
+- id: protractor
+- id: tape
+

@@ -1,0 +1,108 @@
+n: 16
+stage: C
+stage_title: The robot remembers
+kind: step
+title: Fixing and searching the route
+concept: List edit & search · break
+hours: 2
+project: G7-C-remembers
+goal: The team can undo, patch and search a recorded route without re-driving it.
+build: A route you can edit like a document.
+builds_on:
+- Step 15 · lists
+teach:
+- A recorded route is data, so it can be <b>edited</b>. <b>delete n of</b> removes an item, <b>insert
+  … at n</b> squeezes one in, <b>replace item n</b> swaps one out. Undo is just <b>delete (length of
+  route) of route</b> — remove whatever is on the end, without needing to know how long the list is.
+- It can also be <b>searched</b>. <b>route contains …?</b> answers yes or no. To find <i>where</i>,
+  walk it with count-with-i — and the moment you find it, <b>break</b> out. There is no point checking
+  the other forty items once you have your answer, and that is a habit worth forming early.
+guide:
+- label: Try it
+  value: joystick middle undoes · button B searches
+- label: Undo
+  value: delete (length of route) of route
+- label: Search
+  value: 'contains …? · item # of … in …'
+- label: Stop early
+  value: break, inside the loop
+- label: Floor
+  value: 1.5 m clear to drive a route in
+steps:
+- time: 15′
+  text: Record a route with one deliberate mistake in the middle. Do not re-drive it — you are going
+    to fix the data.
+  expect: A recorded route with one wrong move in the middle, kept on purpose. Nobody re-drives it.
+- time: 25′
+  text: Undo the last move with delete. Then undo three. Notice you never had to know how long the list
+    was.
+  use:
+  - data_deleteoflist
+  expect: The last move gone, then three more gone — and you never had to know how long the list was.
+- time: 25′
+  text: 'Patch the middle: replace the wrong move, and insert the one you forgot. Replay and check.'
+  expect: The wrong move replaced, the forgotten one put back, and a replay that now matches what you
+    meant to drive.
+- time: 25′
+  text: 'Search it: does this route contain a left turn? Where is the first one? Use break so the loop
+    stops when it finds one.'
+  use:
+  - control_break_new
+  - control_if
+  expect: The robot answers “is there a left turn in here, and where is the first one?” without walking
+    the rest of the list.
+- time: 20′
+  text: 'Prove break is doing something: show i on screen and watch the loop stop early instead of running
+    to the end.'
+  expect: i shown on the screen, stopping partway instead of counting to the end — proof that break
+    really stops the loop.
+- time: 10′
+  text: Log the four list operations and one sentence on what each is for.
+  expect: Four list operations in the log, one sentence each on what it is for.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  set  walls  to 0\n  set  speed  to 40\n  delete all of  route\n\
+    \  show label 1  press A to start  at x: 0 y: 0  by small pixel\n  wait until  button  A  pressed?\n\
+    \  forever\n    show label 1  join  walls:   (walls)  at x: 0 y: 0  by small pixel\n    if  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 15  then\n      change  walls  by 1\n      turns right  90 \
+    \ ° until done\n      wait until  (ultrasonic 2 1 distance to an object (cm)) > 25\n    else\n \
+    \     moves forward  at (speed)  RPM\n\nwhen joystick  pulled↑\n  change  speed  by 5\n  if  (speed)\
+    \ > 100  then\n    set  speed  to 100\n\nwhen joystick  pulled↓\n  change  speed  by -5\n  if  (speed)\
+    \ < 10  then\n    set  speed  to 10\n\nwhen joystick  pulled→\n  add  fwd  to  route\n  moves forward\
+    \  10  cm  until done\n\nwhen joystick  pulled←\n  add  left  to  route\n  turns left  90  ° until\
+    \ done\n\nwhen button A pressed\n  set  stop  to  ((length of route) + 1)\n  count with  i  from\
+    \ 1 to (stop) by step 1 repeat\n    if  (item (i) of route) = fwd  then\n      moves forward  10\
+    \  cm  until done\n    else\n      turns left  90  ° until done\n\nwhen joystick  middle pressed\n\
+    \  if  (length of route) > 0  then\n    delete  (length of route)  of  route\n    show label 2 \
+    \ join  undone. left:   (length of route)  at x: 0 y: 20  by small pixel\n  else\n    show label\
+    \ 2  nothing to undo  at x: 0 y: 20  by small pixel\n\nwhen button B pressed\n  if  (route contains\
+    \  left ?)  then\n    set  stop  to  ((length of route) + 1)\n    count with  i  from 1 to (stop)\
+    \ by step 1 repeat\n      if  (item (i) of route) = left  then\n        show label 3  join  first\
+    \ left at:   (i)  at x: 0 y: 40  by small pixel\n        break\n  else\n    show label 3  no left\
+    \ turns at all  at x: 0 y: 40  by small pixel"
+tips:
+- delete (length of) is the undo. Teams who type the number in have not understood it — ask them what
+  happens after two undos.
+- Undo an empty route and the robot stops with a traceback on its screen — deleting item 0 is not a
+  no-op, it is an error. Guard it with <b>if (length of route) &gt; 0</b>, and let a team find that
+  crash before you say so; it is the cheapest lesson in defensive code they will get all year.
+- Without break the loop reports the <i>last</i> match, not the first. Let a team hit that and work
+  out why.
+- Insert shifts everything after it along. Draw the list on the board before and after.
+result:
+  scene: debug
+success:
+- Undo works repeatedly without knowing the list length
+- A middle move is patched with replace and the replay proves it
+- A search finds the first match and stops there
+check:
+- do: mid
+  see: The last move disappears off the end of the list.
+- do: B
+  see: It tells you where the first left turn is.
+- do: see
+  see: Undo with nothing recorded says nothing to undo. It does not crash.
+parts:
+- id: robot_wheel
+- id: tape
+

@@ -1,0 +1,102 @@
+n: 14
+title: Program Structure
+goal: The mission code restructured around a main loop + state variable — and paper-traced first.
+builds_on:
+- S13 · the working mini-pipeline
+teach:
+- 'Session 13’s pipeline was a straight script — fine until something fails mid-mission and the program
+  can’t express ‘go back and retry’. Introduce the <b>state machine</b> pattern: a state variable (SEARCHING
+  / APPROACHING / PICKING / DELIVERING / DONE), a main loop that reads sensors and, depending on the current
+  state, acts and decides transitions. It’s Grade 8’s mood variable wearing a hard hat — say exactly that;
+  the recognition lands.'
+- 'Before running: <b>paper trace</b>. One teammate is the CPU: finger on the current state, walk through
+  a scenario (‘marker seen → state becomes PICKING’), including the nasty ones (‘what if the grip fails
+  in PICKING?’ → they’ll want a retry transition — let them invent it). Tracing catches design holes in
+  minutes that debugging would find in hours; it is also precisely how they’ll explain their code in the
+  capstone review.'
+steps:
+- time: 12′
+  text: Board the state diagram for the S13 mission; agree states and transitions as a class.
+- time: 10′
+  text: Paper trace in pairs, including two failure scenarios; patch the diagram where it breaks.
+- time: 18′
+  text: Restructure the code to the state pattern; behavior should match S13’s (refactor discipline!).
+- time: 5′
+  text: 'On your lesson sheet: your state diagram, photographed or redrawn.'
+code:
+  lang: python
+  source: |-
+    state = 'SEARCHING'
+
+    while state != 'DONE':
+        if state == 'SEARCHING':
+            follow_line_step()
+            if see_marker():
+                state = 'PICKING'
+        elif state == 'PICKING':
+            if pick_ok():
+                state = 'DELIVERING'
+            else:
+                state = 'SEARCHING'  # retry!
+        elif state == 'DELIVERING':
+            carry_to(40); place()
+            state = 'DONE'
+tips:
+- States are NOUNS-in-progress, transitions are events — keep the diagram honest.
+- If the trace can’t answer ‘what happens if X’, the code can’t either; fix the diagram first.
+result:
+  scene: pyeditor
+  params:
+    shape: log
+    caption: the mission as a state machine — retry paths included
+    code_lines:
+    - state = 'SEARCHING'
+    - 'while state != ''DONE'':'
+    - '  if state==''SEARCHING'':'
+    - '    ...'
+    - '  elif state==''PICKING'':'
+    - '    ...retry on fail...'
+success:
+- State diagram covers the mission incl. one retry path
+- Paper trace survived two failure scenarios
+- Restructured code matches S13 behavior
+parts:
+- id: robot_arm
+- id: tablet
+  note: state diagram — deliverable
+- id: cards
+  note: trace scenarios
+long:
+  goal: A state diagram that survives two failure scenarios on paper, and restructured code whose behaviour
+    still matches Session 13.
+  recap:
+    time: 10′
+    text: Be the CPU. One partner puts a finger on the current state and walks a scenario aloud while the
+      other reads the diagram. Do the pleasant scenario first, then the nasty one — the grip fails during
+      PICKING. If the diagram has no answer, the code will not have one either, and the cheapest place to
+      fix that is on paper.
+  extend:
+  - spec: retry path exists
+    text: At least one failure transition that returns the machine to a working state instead of stopping.
+  - spec: 2 scenarios survived
+    text: Two failure traces walked end to end without the diagram breaking.
+  - spec: behaviour unchanged
+    text: The restructured code matches Session 13's behaviour. This is a refactor, and refactors are checkable.
+  log:
+    time: 10′
+    text: The state diagram, photographed or redrawn, with states as nouns-in-progress and transitions as
+      events. Plus the two traces and the patches they forced — the patches are the useful part, because they
+      are the failures caught before they cost a run.
+  review:
+    time: 15′
+    text: Pairs trace another pair's diagram using a scenario of their own choosing. Criteria — did the diagram
+      answer, or did the author have to speak? An author who has to explain their own state machine has found
+      a bug in it.
+  parts:
+  - id: craft
+    note: large paper for the diagram
+  - id: tablet
+  success:
+  - Two failure scenarios traced on paper before any code was changed
+  - Restructured behaviour still matches Session 13's, measured not assumed
+

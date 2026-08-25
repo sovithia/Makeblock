@@ -1,0 +1,90 @@
+n: 9
+stage: B
+stage_title: The robot decides
+kind: step
+title: The first decision
+concept: Conditional — if
+hours: 2
+project: G7-B-decides
+goal: The robot stops itself before the wall, from any starting distance, with nobody touching it.
+build: A robot that will not crash.
+builds_on:
+- Step 8 · sensors give numbers
+- Step 6 · forever
+teach:
+- 'Until now the robot has done what it was told, in order. Today it <b>decides</b>. <b>if (distance
+  &lt; 15) then stop</b>, inside a forever loop, is the robot checking the world many times a second
+  and choosing what to do about it. Point at the panel from Step 8: it was already reading that number
+  — now the number changes its behaviour.'
+- The classic bug is putting the <b>if</b> outside the forever loop. Then the robot checks once, at
+  the start, and never again. If a team's robot drives cheerfully into a wall, that is almost always
+  why, and finding it themselves is worth more than being told.
+guide:
+- label: Shape
+  value: forever → if → act
+- label: Trap
+  value: if outside forever = checks once
+- label: Target
+  value: stop with a gap you can measure
+- label: Floor
+  value: 2 m clear, with a wall or box to drive at
+steps:
+- time: 15′
+  text: 'Predict first: at 50 RPM, how close will it get before it stops? Write a number down. Then
+    build it and find out.'
+  expect: A number written down before building anything, so the robot can prove you right or wrong.
+- time: 25′
+  text: Build stop-if-close. Run it from three different starting distances. Measure the gap each time.
+  use:
+  - control_if_else
+  - mbot2_move_direction_with_rpm
+  - mbot2_encoder_motor_stop
+  expect: The robot drives at a wall and stops itself before touching it, from three different starting
+    distances.
+- time: 25′
+  text: Speed up. Measure again. The gap grows — work out why before anyone explains it.
+  expect: A measured gap that gets bigger as the speed goes up, and a team explanation of why — worked
+    out, not told.
+- time: 25′
+  text: 'Official attempt: ten approaches from anywhere in the room, no wall contact. Count honestly.'
+  expect: Ten approaches from anywhere in the room with no wall contact, counted honestly.
+- time: 20′
+  text: 'Add the sensor''s eyes: calm when far, alarmed when close. The robot now shows what it is thinking.'
+  use:
+  - mbuild_ultrasonic2_show_emotion
+  expect: Calm eyes when the wall is far, alarmed eyes when it is close. A watcher can see what the
+    robot is thinking.
+- time: 10′
+  text: Log the speed-versus-gap numbers. Step 10 uses them.
+  expect: The speed-versus-gap numbers in your log. Step 10 uses them.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  forever\n    show label 1  join  dist:   (ultrasonic 2 1 distance\
+    \ to an object (cm))  at x: 0 y: 0  by small pixel\n    show label 2  join  light:  (ambient light\
+    \ intensity)  at x: 0 y: 20  by small pixel\n    show label 3  join  loud:   (loudness)  at x: 0\
+    \ y: 40  by small pixel\n    line chart, add data  (ultrasonic 2 1 distance to an object (cm))\n\
+    \nwhen button A pressed\n  forever\n    if  (ultrasonic 2 1 distance to an object (cm)) < 15  then\n\
+    \      stop encoder motor  all\n      ultrasonic 2 1 displays emotion  dizzy\n    else\n      moves\
+    \ forward  at 50  RPM\n      ultrasonic 2 1 displays emotion  standby"
+tips:
+- A robot that never stops has its if outside the forever loop. It is the bug of the day, every year.
+- Keep the speed low to start. A fast robot cannot stop in time and the logic looks broken when it is
+  fine.
+- Use a flat box as the wall, not a person's hand — hands move, and the data gets muddy.
+result:
+  scene: sonar
+success:
+- The robot stops itself from any starting distance, ten times running
+- The team measured how the gap changes with speed
+- Nobody caught a robot to save it
+check:
+- do: A
+  see: It drives at the wall and stops before it touches.
+- do: see
+  see: Move the wall anywhere. It still stops.
+parts:
+- id: robot_wheel
+- id: boxes
+  note: the wall
+- id: ruler
+

@@ -1,0 +1,62 @@
+n: 22
+stage: D
+stage_title: The robot is organised
+kind: checkpoint
+title: Checkpoint 4 — function, state
+concept: Catch-up gate
+hours: 1
+project: G7-D-organised
+goal: Every student can name a behaviour, give it an input, and explain what decides which behaviour
+  runs — before the mission is designed.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 16–19
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches add a fourth mode of their own design, update the diagram to match, then hand the robot to another team to try to jam it.'
+- This is the last gate before the mission, and it is the one that matters most. Stage E assembles the
+  Rescue Run out of blocks the students named themselves. A student who cannot yet build or read a function
+  will spend the capstone watching someone else do it.
+- Coaches, hands off, buffer hour where the class needs it — as before.
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: Set up. Say plainly that the mission starts next and this gate is what makes it survivable.
+  expect: A class that knows the mission starts next and that this gate is what makes it survivable.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> define a block with a number input and use it with three different
+    values. <b>(2)</b> explain what one of your own blocks does to someone who did not write it, without
+    showing them the inside. <b>(3)</b> show your mode diagram and answer a "what happens if X while
+    in mode Y?" question from the teacher.'
+  expect: 'Three challenges demonstrated: a block with a number input used three ways, one of your blocks
+    explained without opening it, and a “what if X while in mode Y?” answered from your diagram.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Everyone through all three is coaching someone who is not.
+blocks:
+- My Blocks
+- Variables
+- Control
+tips:
+- Challenge 2 is the real test. A student who can build a function but not explain it will not be able
+  to reuse it under pressure next week.
+- For challenge 3, ask about a transition they did <i>not</i> draw. The good answer is "the diagram
+  does not say — that is a missing arrow".
+- This is the last checkpoint. If a student is still behind here, plan the mission teams so they are
+  paired with a coach rather than carried.
+result:
+  scene: healthcheck
+  params:
+    checks: [block takes a number, block explained to a peer, state transition explained]
+    caption: every student clears the final mission-readiness gate
+success:
+- Every student demonstrated all three challenges
+- Every student explained one of their own blocks to somebody else
+- The class starts the mission together
+parts:
+- id: robot_wheel

@@ -1,0 +1,89 @@
+n: 13
+title: Navigate + Manipulate ✱
+goal: 'The full pipeline in miniature: follow line → detect marker → stop → pick → deliver.'
+builds_on:
+- S8 · the tuned PD follower
+- S12 · the mission verbs pick()/place()/carry_to()
+teach:
+- 'Integration day — the capstone in miniature, and deliberately so: line following (Session 6) + color-marker
+  detection (Grade 7, Session 16’s idea, now in Python) + arm library (Session 12) chained into one mission.
+  The new engineering content is the <i>seams</i>: stopping accurately AT the marker (momentum overshoots
+  — the two-speed approach returns yet again), and positioning the arms relative to a block whose location
+  is only as precise as the stop was. Errors compound down a pipeline; students meet that truth physically
+  today — and Session 9’s measured error budget is the number that predicts how badly.'
+- 'Run it as a milestone session: the pipeline working once, even slowly and inelegantly, is the win.
+  Teams that get a clean run should immediately answer the harder question: how repeatable? Three runs
+  in a row is the real bar — and the gap between ‘worked once’ and ‘works reliably’ is the theme of the
+  entire build-sprint unit ahead.'
+steps:
+- time: 8′
+  text: Whiteboard the pipeline; identify the two seams (stop accuracy, arm alignment).
+- time: 30′
+  text: Build and iterate; markers and blocks on the standard course; one-change discipline at the seams.
+- time: 7′
+  text: 'Milestone attempts: pipeline end-to-end; then repeatability count (n clean of 3).'
+code:
+  lang: python
+  source: |-
+    # the marker is red, under the L1 probe
+    while not at_marker():
+        follow_step()   # the tuned PD loop, S8
+    mbot2.EM_stop()
+
+    pick()
+    mbot2.turn(180)
+    carry_to(40)
+    place()
+    celebrate()        # S2, still earning
+tips:
+- 'at_marker() and follow_step() are the class’s own helpers, not library calls — the top-level mission
+  is nine lines because three sessions of work are hiding behind those two names. Point at that.'
+- Buffer session — a struggling class can pre-place the block at a fixed, known stop point.
+- Slow the BASE speed near expected markers; detection at speed is flaky and that’s a real sensor lesson.
+result:
+  scene: work
+success:
+- Full pipeline ran end-to-end at least once
+- Both seams named with their observed failure mode
+- Repeatability measured (n of 3), whatever the n
+parts:
+- id: robot_arm
+- id: tablet
+- id: map
+- id: patches
+  note: the pick marker
+- id: foam
+- id: tape
+  note: delivery zone
+long:
+  goal: The pipeline measured for repeatability, with both seams named and their failure modes characterised.
+  recap:
+    time: 10′
+    text: Name the seams before building anything. Whiteboard the pipeline and mark the two joins — stopping
+      accurately at the marker, and aligning the arms to the block — then predict which will fail more often.
+      Nearly everything that goes wrong today lives at a seam rather than inside a stage, and predicting which
+      one focuses the hour.
+  extend:
+  - spec: end-to-end once
+    text: The full pipeline completed, however slowly and however inelegantly.
+  - spec: n of 3 measured
+    text: Repeatability counted and recorded, whatever the number turns out to be. Zero of three is data.
+  - spec: both seams characterised
+    text: Each seam's failure mode described with the condition that triggers it.
+  log:
+    time: 10′
+    text: A run ledger recording the phase reached on every attempt, plus the two seam descriptions. "Worked
+      once" and "works" are different claims about the world, and the ledger is the only thing that tells
+      them apart.
+  review:
+    time: 15′
+    text: Teams compare seam failures across the class. Criteria — is the failure attributed to a specific
+      seam with evidence behind it, rather than to the mission simply being hard?
+  parts:
+  - id: patches
+    note: colour markers on the course
+  - id: foam
+  success:
+  - Repeatability measured as n of 3 and recorded honestly
+  - Both seams described with the conditions that trigger them
+

@@ -1,0 +1,88 @@
+n: 18
+stage: D
+stage_title: The robot is organised
+kind: step
+title: Name a behaviour
+concept: Function — My Blocks
+hours: 2
+project: G7-D-organised
+goal: The team's program is built from blocks they named themselves, and another team can read it.
+build: 'Your own blocks: celebrate, scan, park.'
+builds_on:
+- Steps 11–14 · memory
+- Step 5 · loops
+teach:
+- Find a group of blocks you have copied more than once. That is a <b>function</b> waiting to happen.
+  <b>Make a Block</b>, give it a name, put the blocks inside, and now the program says <b>celebrate</b>
+  instead of nine blocks — and changing the celebration means changing it in one place instead of three.
+- 'One honest limitation, worth saying plainly rather than letting them discover it as a disappointment:
+  these blocks are <b>procedures, not answers</b>. There is no "return". A block cannot hand a value
+  back. If <b>scan</b> needs to report whether it found something, it sets a <b>variable</b> and the
+  caller reads it. That is a real pattern, not a workaround.'
+guide:
+- label: Make
+  value: My Blocks → Make a Block
+- label: Name it
+  value: what it does, not how
+- label: No return
+  value: hand answers back through a variable
+- label: Floor
+  value: a clear circle about 60 cm across — it spins
+steps:
+- time: 15′
+  text: Scroll your program and find blocks you have copied. Circle them on paper. Those are your first
+    two functions.
+  expect: Circles on paper around the blocks you have copied. Those circles are your first two functions.
+- time: 25′
+  text: Define <b>celebrate</b> and call it from three different places. Then change the celebration
+    once and watch all three change.
+  use:
+  - my:celebrate
+  expect: One celebration called from three places — change it once, and all three change together.
+- time: 25′
+  text: Define <b>scan</b> — turn all the way round looking for something. Discover it cannot tell you
+    what it found, and use a variable.
+  use:
+  - my:scan
+  - data_setvariableto
+  expect: A scan block that turns all the way round, and a variable holding what it found, because the
+    block alone cannot tell you.
+- time: 20′
+  text: Rename your worst-named block to something that says what it does. Read the main program aloud;
+    it should sound like sentences.
+  expect: The main program read aloud, sounding like sentences rather than a list of settings.
+- time: 20′
+  text: Swap programs with another team and read theirs without asking questions. Whatever you cannot
+    follow is a naming problem.
+  expect: Another team’s program followed without asking them a single question. Anything you cannot
+    follow is a naming problem, not a you problem.
+- time: 10′
+  text: Log your block names and what each does, one line each. Step 23 designs the mission out of these
+    block names — if it is not written down, it is not available to you.
+  expect: Your block names in the log, one line each. Step 23 builds the mission out of these names
+    — unwritten means unavailable.
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\ndefine  scan\n  set  found  to 0\n  repeat 4\n    turns right  90\
+    \  ° until done\n    if  (ultrasonic 2 1 distance to an object (cm)) < 30  then\n      set  found\
+    \  to 1\n\nwhen button A pressed\n  scan\n  if  (found) = 1  then\n    celebrate"
+tips:
+- Name blocks after what they do, never how they do it. <b>celebrate</b> survives being rewritten; <b>spin_and_beep</b>
+  does not.
+- The no-return limitation catches everyone. Teach the variable pattern once, properly, and it will
+  be reused in Steps 17–23.
+- A team whose main program is now five blocks long has understood the whole point. Show it to the class.
+result:
+  scene: myblock
+success:
+- At least two custom blocks, used more than once each
+- One of them reports its result through a variable
+- Another team read the main program without needing it explained
+check:
+- do: A
+  see: It spins to look around, and dances if it finds something.
+parts:
+- id: robot_wheel
+- id: boxes
+

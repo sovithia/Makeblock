@@ -1,0 +1,104 @@
+n: 19
+stage: D
+stage_title: Voice
+kind: step
+title: When it does not understand
+concept: What a machine does when unsure
+hours: 2
+project: G8-D-listens
+goal: The Rover behaves sensibly when it mishears — and the team can say what makes recognition fail.
+build: A robot that admits it did not catch that.
+builds_on:
+- Step 18 · vocabulary
+- Step 17 · the phrases it got wrong
+teach:
+- 'Every recognition system fails, and the interesting question is not <i>whether</i> but <i>what it
+  does about it</i>. If nothing in the list matched, the robot must do something deliberate: say "I
+  didn''t catch that", ask again, and — importantly — <b>not move</b>. A robot that guesses when it
+  is unsure is far more dangerous than one that admits it does not know.'
+- 'Then find out why it fails, with the notes from Step 17. Accents. Background noise. Words that sound
+  alike. Speaking too far away or too fast. None of this is the robot being stupid: it was trained on
+  some voices and not others, and it meets exactly the same limits a human does in a noisy room — except
+  it cannot ask you to repeat yourself unless you build that in.'
+guide:
+- label: No match
+  value: say so, ask again, do not move
+- label: Test
+  value: accents, noise, lookalike words
+- label: Count
+  value: successes per person, written down
+steps:
+- time: 15′
+  text: 'Add the else: nothing matched, so say "I didn''t catch that" and stay still. Test it by saying
+    something nonsensical.'
+  use: [control_if, cyberpi_speak_with_some_language_3, mbot2_encoder_motor_stop]
+  expect: Say something nonsense and the robot says it did not catch that — and does not move.
+- time: 25′
+  text: Break it deliberately with the phrases from Step 17, plus background noise, plus standing far
+    away.
+  expect: The robot broken on purpose with the Step 17 phrases, with noise, and from across the room.
+- time: 25′
+  text: 'Lookalike words: find two commands in your vocabulary that get confused, and change one of
+    them.'
+  expect: Two commands that get confused with each other, found and one of them changed.
+- time: 25′
+  text: 'Measure it: each team member gives the same five commands. Count successes per person and put
+    the numbers on the board.'
+  expect: Success counts per person for the same five commands, on the board as numbers.
+- time: 20′
+  text: 'Class discussion from the board, not from opinion: who does it work best for, and what would
+    you have to change to fix that?'
+  expect: 'A discussion built on the board’s numbers rather than on opinion: who it works best for, and
+    what would have to change.'
+- time: 10′
+  text: Log the per-person table and one sentence on where this would matter outside a classroom.
+  expect: The per-person table in the log, and a sentence on where this would matter outside a classroom.
+code:
+  lang: blocks
+  source: |-
+    when CyberPi starts up
+      connect to Wi-Fi  ssid  password  password
+      wait until  network connected?
+      speak  auto  I am awake
+      delete all of  commands
+      add  forward  to  commands
+      add  stop  to  commands
+      add  fetch  to  commands
+
+    when button A pressed
+      recognize  (4) English  3  secs
+      set  heard  to  (speech recognition result)
+      show label 1  join  heard:   (heard)  at x: 0 y: 0  by small pixel
+      set  matched  to 0
+      set  stop  to  ((length of commands) + 1)
+      count with  i  from 1 to (stop) by step 1 repeat
+        if  ((heard) contains  (item (i) of commands) ?)  then
+          set  job  to  (item (i) of commands)
+          set  matched  to 1
+          speak  auto  join  ok,   (item (i) of commands)
+          break
+      if  (matched) = 0  then
+        stop encoder motor  all
+        speak  auto  I did not catch that
+
+    when button B pressed
+      speak  auto  (translate  (heard)  into  French)
+tips:
+- Showing what it <i>thought</i> it heard is the best debugging tool in this stage. Without it students
+  blame the microphone.
+- Keep the discussion investigative. The system is not being unfair on purpose — it was built from some
+  voices and not others, and that is a fact with consequences.
+- The per-person numbers make this concrete in a way opinions never do. Insist on counting.
+result:
+  scene: debug
+success:
+- An explicit no-match path that speaks and does not move
+- Two lookalike commands found and one of them changed
+- A per-person success table on the board, from counted attempts
+check:
+- do: "A"
+  see: Say nonsense. It stops, says it did not catch that, and shows what it heard.
+parts:
+- id: robot_tank
+- id: router
+

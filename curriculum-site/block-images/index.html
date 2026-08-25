@@ -1,0 +1,355 @@
+<!doctype html><meta charset="utf-8">
+<title>Block images</title>
+<style>
+body { font: 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+       margin: 0; padding: 32px 40px 64px; color: #1e293b; background: #f8fafc; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+p.sub { color: #64748b; margin: 0 0 8px; max-width: 70ch; }
+p.key { color: #64748b; margin: 0 0 28px; font-size: 13px; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+       background: #16a34a; margin-right: 5px; vertical-align: 1px; }
+h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .06em;
+     margin: 34px 0 12px; padding: 0 0 6px 14px; position: relative;
+     border-bottom: 1px solid #e2e8f0; }
+h2::before { content: ""; position: absolute; left: 0; top: 2px; bottom: 8px;
+             width: 5px; border-radius: 3px; background: var(--c, #94a3b8); }
+h2 span { color: #94a3b8; font-weight: 400; letter-spacing: 0; text-transform: none; }
+ul { list-style: none; margin: 0; padding: 0;
+     display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+     gap: 16px; align-items: start; }
+li { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
+     padding: 14px 16px; }
+li.used { border-color: #86efac; box-shadow: 0 0 0 1px #86efac inset; }
+/* the chequerboard is the point: it shows the PNG really is transparent */
+.img { background-image:
+         linear-gradient(45deg, #eef2f7 25%, transparent 25%, transparent 75%, #eef2f7 75%),
+         linear-gradient(45deg, #eef2f7 25%, transparent 25%, transparent 75%, #eef2f7 75%);
+       background-size: 16px 16px; background-position: 0 0, 8px 8px;
+       border-radius: 4px; padding: 8px; }
+img { max-width: 100%; height: auto; display: block; }
+code { display: block; margin-top: 10px; font-size: 12px; color: #64748b;
+       word-break: break-all; }
+li.used code::before { content: ""; display: inline-block; width: 9px; height: 9px;
+       border-radius: 50%; background: #16a34a; margin-right: 5px; }
+</style>
+<h1>Block images</h1>
+<p class="sub">274 blocks &middot; every instruction in the mBlock palette for this classroom&rsquo;s robot, one transparent PNG each, in the order the toolbox lists them. Drag any of them into a slide or a worksheet.</p>
+<p class="key"><span class="dot"></span>49 of them are used by a lesson in Grade 7 or 8.</p>
+<h2 style="--c:#6739B6">Display <span>13</span></h2><ul>
+<li><div class="img"><img src="Display_print-and-move-to-a-newline.png" alt="print and move to a newline" loading="lazy" style="width:285px"></div><code>Display_print-and-move-to-a-newline.png</code></li>
+<li><div class="img"><img src="Display_print.png" alt="print" loading="lazy" style="width:149px"></div><code>Display_print.png</code></li>
+<li><div class="img"><img src="Display_set-print-size-to-small.png" alt="set print size to small" loading="lazy" style="width:191px"></div><code>Display_set-print-size-to-small.png</code></li>
+<li><div class="img"><img src="Display_show-label-1-at-center-of-screen-by-small-pixel.png" alt="show label 1 at center of screen by small pixel" loading="lazy" style="width:497px"></div><code>Display_show-label-1-at-center-of-screen-by-small-pixel.png</code></li>
+<li><div class="img"><img src="Display_show-label-1-at-x-y-by-small-pixel.png" alt="show label 1 at x: y by small pixel" loading="lazy" style="width:461px"></div><code>Display_show-label-1-at-x-y-by-small-pixel.png</code></li>
+<li><div class="img"><img src="Display_line-chart-add-data.png" alt="line chart, add data" loading="lazy" style="width:183px"></div><code>Display_line-chart-add-data.png</code></li>
+<li><div class="img"><img src="Display_line-chart-set-spacing-to-pixel.png" alt="line chart, set spacing to pixel" loading="lazy" style="width:244px"></div><code>Display_line-chart-set-spacing-to-pixel.png</code></li>
+<li><div class="img"><img src="Display_bar-chart-add-data.png" alt="bar chart, add data" loading="lazy" style="width:181px"></div><code>Display_bar-chart-add-data.png</code></li>
+<li><div class="img"><img src="Display_table-input-at-row-1-column-1.png" alt="table, input at row 1 , column 1" loading="lazy" style="width:390px"></div><code>Display_table-input-at-row-1-column-1.png</code></li>
+<li><div class="img"><img src="Display_set-brush-color.png" alt="set brush color" loading="lazy" style="width:167px"></div><code>Display_set-brush-color.png</code></li>
+<li><div class="img"><img src="Display_set-brush-color-to-r-g-b.png" alt="set brush color to R G B" loading="lazy" style="width:315px"></div><code>Display_set-brush-color-to-r-g-b.png</code></li>
+<li><div class="img"><img src="Display_screen-towards-upside-down-90.png" alt="screen towards upside-down(-90°)" loading="lazy" style="width:267px"></div><code>Display_screen-towards-upside-down-90.png</code></li>
+<li><div class="img"><img src="Display_clear-screen.png" alt="clear screen" loading="lazy" style="width:106px"></div><code>Display_clear-screen.png</code></li>
+</ul>
+<h2 style="--c:#AB47BC">Audio <span>17</span></h2><ul>
+<li><div class="img"><img src="Audio_play-hi-until-done.png" alt="play hi until done" loading="lazy" style="width:172px"></div><code>Audio_play-hi-until-done.png</code></li>
+<li><div class="img"><img src="Audio_play-hi.png" alt="play hi" loading="lazy" style="width:107px"></div><code>Audio_play-hi.png</code></li>
+<li><div class="img"><img src="Audio_start-recording.png" alt="start recording" loading="lazy" style="width:121px"></div><code>Audio_start-recording.png</code></li>
+<li><div class="img"><img src="Audio_stop-recording.png" alt="stop recording" loading="lazy" style="width:120px"></div><code>Audio_stop-recording.png</code></li>
+<li><div class="img"><img src="Audio_play-recording-until-done.png" alt="play recording until done" loading="lazy" style="width:179px"></div><code>Audio_play-recording-until-done.png</code></li>
+<li><div class="img"><img src="Audio_play-recording.png" alt="play recording" loading="lazy" style="width:119px"></div><code>Audio_play-recording.png</code></li>
+<li><div class="img"><img src="Audio_play-note-for-beat.png" alt="play note for beat" loading="lazy" style="width:230px"></div><code>Audio_play-note-for-beat.png</code></li>
+<li><div class="img"><img src="Audio_play-snare-for-beat.png" alt="play snare for beat" loading="lazy" style="width:232px"></div><code>Audio_play-snare-for-beat.png</code></li>
+<li><div class="img"><img src="Audio_increase-audio-speed-by.png" alt="increase audio speed by %" loading="lazy" style="width:231px"></div><code>Audio_increase-audio-speed-by.png</code></li>
+<li><div class="img"><img src="Audio_set-audio-speed-to.png" alt="set audio speed to %" loading="lazy" style="width:204px"></div><code>Audio_set-audio-speed-to.png</code></li>
+<li><div class="img"><img src="Audio_audio-speed.png" alt="audio speed" loading="lazy" style="width:98px"></div><code>Audio_audio-speed.png</code></li>
+<li><div class="img"><img src="Audio_increase-volume-by.png" alt="increase volume by %" loading="lazy" style="width:203px"></div><code>Audio_increase-volume-by.png</code></li>
+<li><div class="img"><img src="Audio_set-volume-to.png" alt="set volume to %" loading="lazy" style="width:169px"></div><code>Audio_set-volume-to.png</code></li>
+<li><div class="img"><img src="Audio_volume.png" alt="volume(%)" loading="lazy" style="width:89px"></div><code>Audio_volume.png</code></li>
+<li><div class="img"><img src="Audio_play-sound-at-hz-for-secs.png" alt="play sound at Hz for secs" loading="lazy" style="width:266px"></div><code>Audio_play-sound-at-hz-for-secs.png</code></li>
+<li><div class="img"><img src="Audio_play-sound-at-hz.png" alt="play sound at Hz" loading="lazy" style="width:180px"></div><code>Audio_play-sound-at-hz.png</code></li>
+<li><div class="img"><img src="Audio_stop-all-sounds.png" alt="stop all sounds" loading="lazy" style="width:124px"></div><code>Audio_stop-all-sounds.png</code></li>
+</ul>
+<h2 style="--c:#9300D8">LED <span>11</span></h2><ul>
+<li><div class="img"><img src="LED_play-led-animation-rainbow-until-done.png" alt="play LED animation rainbow until done" loading="lazy" style="width:295px"></div><code>LED_play-led-animation-rainbow-until-done.png</code></li>
+<li><div class="img"><img src="LED_display.png" alt="display" loading="lazy" style="width:265px"></div><code>LED_display.png</code></li>
+<li><div class="img"><img src="LED_roll-leds-rightwards.png" alt="roll LEDs rightwards" loading="lazy" style="width:190px"></div><code>LED_roll-leds-rightwards.png</code></li>
+<li><div class="img"><img src="LED_led-all-displays-for-secs.png" alt="LED all displays for secs" loading="lazy" style="width:300px"></div><code>LED_led-all-displays-for-secs.png</code></li>
+<li><div class="img"><img src="LED_led-all-displays.png" alt="LED all displays" loading="lazy" style="width:209px"></div><code>LED_led-all-displays.png</code></li>
+<li><div class="img"><img src="LED_led-all-displays-r-g-b-for-secs.png" alt="LED all displays R G B for secs" loading="lazy" style="width:410px"></div><code>LED_led-all-displays-r-g-b-for-secs.png</code></li>
+<li><div class="img"><img src="LED_led-all-displays-r-g-b.png" alt="LED all displays R G B" loading="lazy" style="width:319px"></div><code>LED_led-all-displays-r-g-b.png</code></li>
+<li><div class="img"><img src="LED_increase-led-brightness-by.png" alt="increase LED brightness by %" loading="lazy" style="width:250px"></div><code>LED_increase-led-brightness-by.png</code></li>
+<li><div class="img"><img src="LED_set-brightness-to.png" alt="set brightness to %" loading="lazy" style="width:189px"></div><code>LED_set-brightness-to.png</code></li>
+<li><div class="img"><img src="LED_led-brightness.png" alt="LED brightness(%)" loading="lazy" style="width:135px"></div><code>LED_led-brightness.png</code></li>
+<li><div class="img"><img src="LED_turn-off-led-all.png" alt="turn off LED all" loading="lazy" style="width:155px"></div><code>LED_turn-off-led-all.png</code></li>
+</ul>
+<h2 style="--c:#F79226">Sensing <span>13</span></h2><ul>
+<li><div class="img"><img src="Sensing_joystick-pulled.png" alt="joystick pulled↑ ?" loading="lazy" style="width:175px"></div><code>Sensing_joystick-pulled.png</code></li>
+<li><div class="img"><img src="Sensing_joystick-pulled-counts.png" alt="joystick pulled↑ counts" loading="lazy" style="width:199px"></div><code>Sensing_joystick-pulled-counts.png</code></li>
+<li><div class="img"><img src="Sensing_reset-joystick-pulled-counts.png" alt="reset joystick pulled↑ counts" loading="lazy" style="width:239px"></div><code>Sensing_reset-joystick-pulled-counts.png</code></li>
+<li><div class="img"><img src="Sensing_button-a-pressed.png" alt="button A pressed?" loading="lazy" style="width:179px"></div><code>Sensing_button-a-pressed.png</code></li>
+<li><div class="img"><img src="Sensing_button-a-press-counts.png" alt="button A press counts" loading="lazy" style="width:193px"></div><code>Sensing_button-a-press-counts.png</code></li>
+<li><div class="img"><img src="Sensing_reset-button-a-press-counts.png" alt="reset button A press counts" loading="lazy" style="width:233px"></div><code>Sensing_reset-button-a-press-counts.png</code></li>
+<li class="used"><div class="img"><img src="Sensing_loudness.png" alt="loudness" loading="lazy" style="width:81px"></div><code>Sensing_loudness.png</code></li>
+<li class="used"><div class="img"><img src="Sensing_ambient-light-intensity.png" alt="ambient light intensity" loading="lazy" style="width:155px"></div><code>Sensing_ambient-light-intensity.png</code></li>
+<li class="used"><div class="img"><img src="Sensing_timer-s.png" alt="timer(s)" loading="lazy" style="width:72px"></div><code>Sensing_timer-s.png</code></li>
+<li><div class="img"><img src="Sensing_reset-timer.png" alt="reset timer" loading="lazy" style="width:97px"></div><code>Sensing_reset-timer.png</code></li>
+<li><div class="img"><img src="Sensing_hostname.png" alt="hostname" loading="lazy" style="width:85px"></div><code>Sensing_hostname.png</code></li>
+<li><div class="img"><img src="Sensing_battery-level.png" alt="battery level(%)" loading="lazy" style="width:145px"></div><code>Sensing_battery-level.png</code></li>
+<li><div class="img"><img src="Sensing_competition-in-automatic-stage.png" alt="competition in automatic stage" loading="lazy" style="width:245px"></div><code>Sensing_competition-in-automatic-stage.png</code></li>
+</ul>
+<h2 style="--c:#FF6F00">Motion Sensing <span>12</span></h2><ul>
+<li><div class="img"><img src="Motion-Sensing_control-to-follow-cyberpi-with-sensitivity-low-0-2.png" alt="control to follow CyberPi with sensitivity low(0.2)" loading="lazy" style="width:385px"></div><code>Motion-Sensing_control-to-follow-cyberpi-with-sensitivity-low-0-2.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_tilted-forward.png" alt="tilted forward ?" loading="lazy" style="width:155px"></div><code>Motion-Sensing_tilted-forward.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_wave-up-detected.png" alt="wave up detected?" loading="lazy" style="width:176px"></div><code>Motion-Sensing_wave-up-detected.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_shaking-strength.png" alt="shaking strength" loading="lazy" style="width:125px"></div><code>Motion-Sensing_shaking-strength.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_waving-direction.png" alt="waving direction (°)" loading="lazy" style="width:141px"></div><code>Motion-Sensing_waving-direction.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_waving-speed.png" alt="waving speed" loading="lazy" style="width:107px"></div><code>Motion-Sensing_waving-speed.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_tilted-forward-angle.png" alt="tilted forward angle (°)" loading="lazy" style="width:190px"></div><code>Motion-Sensing_tilted-forward-angle.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_motion-sensor-x-acceleration-m-s.png" alt="motion sensor x acceleration(m/s²)" loading="lazy" style="width:267px"></div><code>Motion-Sensing_motion-sensor-x-acceleration-m-s.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_angle-speed-around-x-axis-s.png" alt="angle speed around x axis(°/s)" loading="lazy" style="width:241px"></div><code>Motion-Sensing_angle-speed-around-x-axis-s.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_rotated-angle-around-x-axis.png" alt="rotated angle around x axis (°)" loading="lazy" style="width:240px"></div><code>Motion-Sensing_rotated-angle-around-x-axis.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_reset-rotated-angle-around-all-axis.png" alt="reset rotated angle around all axis" loading="lazy" style="width:268px"></div><code>Motion-Sensing_reset-rotated-angle-around-all-axis.png</code></li>
+<li><div class="img"><img src="Motion-Sensing_reset-yaw-angle.png" alt="reset yaw angle" loading="lazy" style="width:125px"></div><code>Motion-Sensing_reset-yaw-angle.png</code></li>
+</ul>
+<h2 style="--c:#A6D200">AI <span>8</span></h2><ul>
+<li><div class="img"><img src="AI_connect-to-wi-fi-password.png" alt="connect to Wi-Fi password" loading="lazy" style="width:321px"></div><code>AI_connect-to-wi-fi-password.png</code></li>
+<li><div class="img"><img src="AI_network-connected.png" alt="network connected?" loading="lazy" style="width:153px"></div><code>AI_network-connected.png</code></li>
+<li><div class="img"><img src="AI_connect-to-wi-fi-again.png" alt="connect to Wi-Fi again" loading="lazy" style="width:164px"></div><code>AI_connect-to-wi-fi-again.png</code></li>
+<li><div class="img"><img src="AI_disconnect-from-wi-fi.png" alt="disconnect from Wi-Fi" loading="lazy" style="width:162px"></div><code>AI_disconnect-from-wi-fi.png</code></li>
+<li><div class="img"><img src="AI_speak-auto.png" alt="speak auto" loading="lazy" style="width:219px"></div><code>AI_speak-auto.png</code></li>
+<li><div class="img"><img src="AI_recognize-1-chinese-secs.png" alt="recognize (1) Chinese secs" loading="lazy" style="width:259px"></div><code>AI_recognize-1-chinese-secs.png</code></li>
+<li class="used"><div class="img"><img src="AI_speech-recognition-result.png" alt="speech recognition result" loading="lazy" style="width:174px"></div><code>AI_speech-recognition-result.png</code></li>
+<li class="used"><div class="img"><img src="AI_translate-into-chinese.png" alt="translate into Chinese" loading="lazy" style="width:243px"></div><code>AI_translate-into-chinese.png</code></li>
+</ul>
+<h2 style="--c:#A6D200">IoT <span>14</span></h2><ul>
+<li><div class="img"><img src="IoT_connect-to-wi-fi-password.png" alt="connect to Wi-Fi password" loading="lazy" style="width:321px"></div><code>IoT_connect-to-wi-fi-password.png</code></li>
+<li><div class="img"><img src="IoT_network-connected.png" alt="network connected?" loading="lazy" style="width:153px"></div><code>IoT_network-connected.png</code></li>
+<li><div class="img"><img src="IoT_connect-to-wi-fi-again.png" alt="connect to Wi-Fi again" loading="lazy" style="width:164px"></div><code>IoT_connect-to-wi-fi-again.png</code></li>
+<li><div class="img"><img src="IoT_disconnect-from-wi-fi.png" alt="disconnect from Wi-Fi" loading="lazy" style="width:162px"></div><code>IoT_disconnect-from-wi-fi.png</code></li>
+<li><div class="img"><img src="IoT_send-user-cloud-broadcast.png" alt="send user cloud broadcast" loading="lazy" style="width:264px"></div><code>IoT_send-user-cloud-broadcast.png</code></li>
+<li><div class="img"><img src="IoT_send-user-cloud-broadcast-with-value.png" alt="send user cloud broadcast with value" loading="lazy" style="width:362px"></div><code>IoT_send-user-cloud-broadcast-with-value.png</code></li>
+<li><div class="img"><img src="IoT_when-receiving-user-cloud-broadcast.png" alt="when receiving user cloud broadcast" loading="lazy" style="width:323px"></div><code>IoT_when-receiving-user-cloud-broadcast.png</code></li>
+<li><div class="img"><img src="IoT_user-cloud-broadcast-value-received.png" alt="user cloud broadcast value received" loading="lazy" style="width:315px"></div><code>IoT_user-cloud-broadcast-value-received.png</code></li>
+<li><div class="img"><img src="IoT_highest-temperature.png" alt="highest temperature (℃)" loading="lazy" style="width:222px"></div><code>IoT_highest-temperature.png</code></li>
+<li><div class="img"><img src="IoT_air-quality-aqi.png" alt="air quality AQI" loading="lazy" style="width:174px"></div><code>IoT_air-quality-aqi.png</code></li>
+<li><div class="img"><img src="IoT_sunrise-time.png" alt="sunrise time" loading="lazy" style="width:191px"></div><code>IoT_sunrise-time.png</code></li>
+<li><div class="img"><img src="IoT_0-utc-s-year.png" alt="(0) UTC 's year" loading="lazy" style="width:177px"></div><code>IoT_0-utc-s-year.png</code></li>
+<li><div class="img"><img src="IoT_0-utc-s-date-and-time.png" alt="(0) UTC 's date and time" loading="lazy" style="width:197px"></div><code>IoT_0-utc-s-date-and-time.png</code></li>
+<li><div class="img"><img src="IoT_year-of-date-and-time.png" alt="year of date and time" loading="lazy" style="width:181px"></div><code>IoT_year-of-date-and-time.png</code></li>
+</ul>
+<h2 style="--c:#00D7B0">LAN <span>5</span></h2><ul>
+<li><div class="img"><img src="LAN_broadcast-message-on-lan.png" alt="broadcast message on LAN" loading="lazy" style="width:274px"></div><code>LAN_broadcast-message-on-lan.png</code></li>
+<li><div class="img"><img src="LAN_broadcast-message-with-value-on-lan.png" alt="broadcast message with value on LAN" loading="lazy" style="width:372px"></div><code>LAN_broadcast-message-with-value-on-lan.png</code></li>
+<li><div class="img"><img src="LAN_when-receiving-broadcast-on-lan.png" alt="when receiving broadcast on LAN" loading="lazy" style="width:309px"></div><code>LAN_when-receiving-broadcast-on-lan.png</code></li>
+<li class="used"><div class="img"><img src="LAN_lan-broadcast-value-received.png" alt="LAN broadcast value received" loading="lazy" style="width:279px"></div><code>LAN_lan-broadcast-value-received.png</code></li>
+<li><div class="img"><img src="LAN_set-lan-channel-to-1.png" alt="set LAN channel to 1" loading="lazy" style="width:187px"></div><code>LAN_set-lan-channel-to-1.png</code></li>
+</ul>
+<h2 style="--c:#05A6FF">mBot2 Chassis <span>15</span></h2><ul>
+<li><div class="img"><img src="mBot2-Chassis_moves-forward-at-rpm-for-secs.png" alt="moves forward at RPM for secs" loading="lazy" style="width:326px"></div><code>mBot2-Chassis_moves-forward-at-rpm-for-secs.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_moves-forward-at-rpm.png" alt="moves forward at RPM" loading="lazy" style="width:240px"></div><code>mBot2-Chassis_moves-forward-at-rpm.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_moves-forward-cm-until-done.png" alt="moves forward cm until done" loading="lazy" style="width:312px"></div><code>mBot2-Chassis_moves-forward-cm-until-done.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_turns-left-until-done.png" alt="turns left ° until done" loading="lazy" style="width:229px"></div><code>mBot2-Chassis_turns-left-until-done.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-at-rotational-speed-r.png" alt="encoder motor left wheel(EM1) rotates at rotational speed (RPM) for secs" loading="lazy" style="width:600px"></div><code>mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-at-rotational-speed-r.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-at-rotational-speed-r-oder-motor-set.png" alt="encoder motor left wheel(EM1) rotates at rotational speed (RPM)" loading="lazy" style="width:509px"></div><code>mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-at-rotational-speed-r-oder-motor-set.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-by.png" alt="encoder motor left wheel(EM1) rotates by °" loading="lazy" style="width:368px"></div><code>mBot2-Chassis_encoder-motor-left-wheel-em1-rotates-by.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-em1-rotates-at-rpm-encoder-motor-em2-rotates.png" alt="encoder motor EM1 rotates at RPM, encoder motor EM2 rotates at RPM" loading="lazy" style="width:535px"></div><code>mBot2-Chassis_encoder-motor-em1-rotates-at-rpm-encoder-motor-em2-rotates.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-em1-rotates-at-power-encoder-motor-em2-rotat.png" alt="encoder motor EM1 rotates at % power, encoder motor EM2 rotates at % power" loading="lazy" style="width:580px"></div><code>mBot2-Chassis_encoder-motor-em1-rotates-at-power-encoder-motor-em2-rotat.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_stop-encoder-motor-1-em1.png" alt="stop encoder motor (1) EM1" loading="lazy" style="width:227px"></div><code>mBot2-Chassis_stop-encoder-motor-1-em1.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-1-em1-s-rotational-speed-rpm.png" alt="encoder motor (1) EM1 's rotational speed(RPM)" loading="lazy" style="width:372px"></div><code>mBot2-Chassis_encoder-motor-1-em1-s-rotational-speed-rpm.png</code></li>
+<li class="used"><div class="img"><img src="mBot2-Chassis_encoder-motor-1-em1-rotated-angle.png" alt="encoder motor (1) EM1 rotated angle (°)" loading="lazy" style="width:293px"></div><code>mBot2-Chassis_encoder-motor-1-em1-rotated-angle.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_reset-encoder-motor-1-em1-rotated-angle.png" alt="reset encoder motor (1) EM1 rotated angle" loading="lazy" style="width:314px"></div><code>mBot2-Chassis_reset-encoder-motor-1-em1-rotated-angle.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_encoder-motor-1-em1-enables-autolock.png" alt="encoder motor (1) EM1 enables autolock" loading="lazy" style="width:337px"></div><code>mBot2-Chassis_encoder-motor-1-em1-enables-autolock.png</code></li>
+<li><div class="img"><img src="mBot2-Chassis_calibrate-chassis-parameters.png" alt="calibrate chassis parameters" loading="lazy" style="width:233px"></div><code>mBot2-Chassis_calibrate-chassis-parameters.png</code></li>
+</ul>
+<h2 style="--c:#05A6FF">mBot2 Extension Port <span>24</span></h2><ul>
+<li><div class="img"><img src="mBot2-Extension-Port_motor-all-rotates-at-power.png" alt="motor all rotates at % power" loading="lazy" style="width:276px"></div><code>mBot2-Extension-Port_motor-all-rotates-at-power.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_motor-all-rotates-with-power-up.png" alt="motor all rotates with power up %" loading="lazy" style="width:307px"></div><code>mBot2-Extension-Port_motor-all-rotates-with-power-up.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_set-motor-m1-power-to-motor-m2-power-to.png" alt="set motor M1 power to % , motor M2 power to %" loading="lazy" style="width:393px"></div><code>mBot2-Extension-Port_set-motor-m1-power-to-motor-m2-power-to.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_motor-1-m1-rotation-output-power.png" alt="motor (1) M1 rotation output power(%)" loading="lazy" style="width:283px"></div><code>mBot2-Extension-Port_motor-1-m1-rotation-output-power.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_stop-motor-all.png" alt="stop motor all" loading="lazy" style="width:148px"></div><code>mBot2-Extension-Port_stop-motor-all.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_set-servo-all-angle-to.png" alt="set servo all angle to °" loading="lazy" style="width:245px"></div><code>mBot2-Extension-Port_set-servo-all-angle-to.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_increase-servo-all-angle-by.png" alt="increase servo all angle by °" loading="lazy" style="width:279px"></div><code>mBot2-Extension-Port_increase-servo-all-angle-by.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_set-servo-angle-s1-s2-s3-s4.png" alt="set servo angle S1 ° , S2 ° , S3 °, S4 °" loading="lazy" style="width:422px"></div><code>mBot2-Extension-Port_set-servo-angle-s1-s2-s3-s4.png</code></li>
+<li class="used"><div class="img"><img src="mBot2-Extension-Port_servo-1-s1-current-angle.png" alt="servo (1) S1 current angle (°)" loading="lazy" style="width:231px"></div><code>mBot2-Extension-Port_servo-1-s1-current-angle.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_servo-all-release-angle.png" alt="servo all release angle" loading="lazy" style="width:201px"></div><code>mBot2-Extension-Port_servo-all-release-angle.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_servo-all-back-to-zero-position.png" alt="servo all back to zero position" loading="lazy" style="width:245px"></div><code>mBot2-Extension-Port_servo-all-back-to-zero-position.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-all-lights-up.png" alt="LED strip all lights up" loading="lazy" style="width:229px"></div><code>mBot2-Extension-Port_led-strip-all-lights-up.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-all-led-all-displays-color.png" alt="LED strip all LED all displays color" loading="lazy" style="width:353px"></div><code>mBot2-Extension-Port_led-strip-all-led-all-displays-color.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-all-led-all-displays-r-g-b.png" alt="LED strip all LED all displays R: G: B:" loading="lazy" style="width:442px"></div><code>mBot2-Extension-Port_led-strip-all-led-all-displays-r-g-b.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-all-rolls-leds-with-cycle.png" alt="LED strip all rolls LEDs with cycle" loading="lazy" style="width:341px"></div><code>mBot2-Extension-Port_led-strip-all-rolls-leds-with-cycle.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-all-led-all-lights-off.png" alt="LED strip all LED all lights off" loading="lazy" style="width:279px"></div><code>mBot2-Extension-Port_led-strip-all-led-all-lights-off.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_increase-led-strip-all-brightness-by.png" alt="increase LED strip all brightness by %" loading="lazy" style="width:333px"></div><code>mBot2-Extension-Port_increase-led-strip-all-brightness-by.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_set-led-strip-all-brightness-to.png" alt="set LED strip all brightness to %" loading="lazy" style="width:299px"></div><code>mBot2-Extension-Port_set-led-strip-all-brightness-to.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_led-strip-1-s1-brightness.png" alt="LED strip (1) S1 brightness(%)" loading="lazy" style="width:238px"></div><code>mBot2-Extension-Port_led-strip-1-s1-brightness.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_pin-1-s1-on-high-level.png" alt="pin (1) S1 on high level?" loading="lazy" style="width:211px"></div><code>mBot2-Extension-Port_pin-1-s1-on-high-level.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_digital-read-pin-1-s1.png" alt="digital read pin (1) S1" loading="lazy" style="width:182px"></div><code>mBot2-Extension-Port_digital-read-pin-1-s1.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_voltage-read-pin-1-s1-v.png" alt="voltage read pin (1) S1 (V)" loading="lazy" style="width:213px"></div><code>mBot2-Extension-Port_voltage-read-pin-1-s1-v.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_digital-write-to-pin-all.png" alt="digital write to pin all" loading="lazy" style="width:225px"></div><code>mBot2-Extension-Port_digital-write-to-pin-all.png</code></li>
+<li><div class="img"><img src="mBot2-Extension-Port_analog-write-to-pin-all-duty-cycle-frequency-2000-hz.png" alt="analog write to pin all , duty cycle %, frequency 2000 Hz" loading="lazy" style="width:470px"></div><code>mBot2-Extension-Port_analog-write-to-pin-all-duty-cycle-frequency-2000-hz.png</code></li>
+</ul>
+<h2 style="--c:#9300DB">Sprites <span>26</span></h2><ul>
+<li><div class="img"><img src="Sprites_set-backdrop-to.png" alt="set backdrop to" loading="lazy" style="width:169px"></div><code>Sprites_set-backdrop-to.png</code></li>
+<li><div class="img"><img src="Sprites_set-backdrop-to-r-g-b.png" alt="set backdrop to R: G: B:" loading="lazy" style="width:279px"></div><code>Sprites_set-backdrop-to-r-g-b.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-to.png" alt="set sprite show to" loading="lazy" style="width:207px"></div><code>Sprites_set-sprite-show-to.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-to-music.png" alt="set sprite show to music" loading="lazy" style="width:246px"></div><code>Sprites_set-sprite-show-to-music.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-to-rite-draw-text.png" alt="set sprite show to" loading="lazy" style="width:263px"></div><code>Sprites_set-sprite-show-to-rite-draw-text.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-to-qr-code.png" alt="set sprite show to QR code" loading="lazy" style="width:373px"></div><code>Sprites_set-sprite-show-to-qr-code.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-flips-left-right.png" alt="sprite show flips left-right" loading="lazy" style="width:253px"></div><code>Sprites_sprite-show-flips-left-right.png</code></li>
+<li><div class="img"><img src="Sprites_delete-sprite-show.png" alt="delete sprite show" loading="lazy" style="width:173px"></div><code>Sprites_delete-sprite-show.png</code></li>
+<li><div class="img"><img src="Sprites_set-anchor-point-of-sprite-show-to-top-left.png" alt="set anchor point of sprite show to top left" loading="lazy" style="width:342px"></div><code>Sprites_set-anchor-point-of-sprite-show-to-top-left.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-moves-right-x-pixels.png" alt="sprite show moves right (x) pixels" loading="lazy" style="width:336px"></div><code>Sprites_sprite-show-moves-right-x-pixels.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-goes-to-x-y.png" alt="sprite show goes to x y" loading="lazy" style="width:285px"></div><code>Sprites_sprite-show-goes-to-x-y.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-goes-to-random-position.png" alt="sprite show goes to random position" loading="lazy" style="width:283px"></div><code>Sprites_sprite-show-goes-to-random-position.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-rotates-clockwise.png" alt="sprite show rotates ° clockwise" loading="lazy" style="width:296px"></div><code>Sprites_sprite-show-rotates-clockwise.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-points-in-direction.png" alt="sprite show points in direction °" loading="lazy" style="width:300px"></div><code>Sprites_sprite-show-points-in-direction.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-size-to.png" alt="set sprite show size to %" loading="lazy" style="width:264px"></div><code>Sprites_set-sprite-show-size-to.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-color-to.png" alt="set sprite show color to" loading="lazy" style="width:252px"></div><code>Sprites_set-sprite-show-color-to.png</code></li>
+<li><div class="img"><img src="Sprites_set-sprite-show-color-to-r-g-b.png" alt="set sprite show color to R: G: B:" loading="lazy" style="width:398px"></div><code>Sprites_set-sprite-show-color-to-r-g-b.png</code></li>
+<li><div class="img"><img src="Sprites_reset-sprite-show-to-default-color.png" alt="reset sprite show to default color" loading="lazy" style="width:262px"></div><code>Sprites_reset-sprite-show-to-default-color.png</code></li>
+<li><div class="img"><img src="Sprites_show-sprite.png" alt="show sprite" loading="lazy" style="width:167px"></div><code>Sprites_show-sprite.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-goes-to-front-layer.png" alt="sprite show goes to front layer" loading="lazy" style="width:285px"></div><code>Sprites_sprite-show-goes-to-front-layer.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-goes-forward-one-layer.png" alt="sprite show goes forward one layer" loading="lazy" style="width:312px"></div><code>Sprites_sprite-show-goes-forward-one-layer.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-touches-sprite.png" alt="sprite show touches sprite ?" loading="lazy" style="width:273px"></div><code>Sprites_sprite-show-touches-sprite.png</code></li>
+<li><div class="img"><img src="Sprites_sprite-show-on-edge.png" alt="sprite show on edge?" loading="lazy" style="width:197px"></div><code>Sprites_sprite-show-on-edge.png</code></li>
+<li><div class="img"><img src="Sprites_x-position-of-sprite-show.png" alt="x position of sprite show" loading="lazy" style="width:235px"></div><code>Sprites_x-position-of-sprite-show.png</code></li>
+<li><div class="img"><img src="Sprites_color-of-x-y-on-the-display-is-r-g-b.png" alt="color of x: y: on the display is R: G: B:" loading="lazy" style="width:443px"></div><code>Sprites_color-of-x-y-on-the-display-is-r-g-b.png</code></li>
+<li><div class="img"><img src="Sprites_force-rendering.png" alt="force rendering" loading="lazy" style="width:124px"></div><code>Sprites_force-rendering.png</code></li>
+</ul>
+<h2 style="--c:#9300DB">Doodle <span>16</span></h2><ul>
+<li><div class="img"><img src="Doodle_clear-doodles.png" alt="clear doodles" loading="lazy" style="width:113px"></div><code>Doodle_clear-doodles.png</code></li>
+<li><div class="img"><img src="Doodle_start-doodling.png" alt="start doodling" loading="lazy" style="width:116px"></div><code>Doodle_start-doodling.png</code></li>
+<li><div class="img"><img src="Doodle_finish-doodling.png" alt="finish doodling" loading="lazy" style="width:122px"></div><code>Doodle_finish-doodling.png</code></li>
+<li><div class="img"><img src="Doodle_set-airbrush-color-to.png" alt="set airbrush color to" loading="lazy" style="width:196px"></div><code>Doodle_set-airbrush-color-to.png</code></li>
+<li><div class="img"><img src="Doodle_set-airbrush-color-to-r-g-b.png" alt="set airbrush color to R G B" loading="lazy" style="width:330px"></div><code>Doodle_set-airbrush-color-to-r-g-b.png</code></li>
+<li><div class="img"><img src="Doodle_set-doodle-thickness-to-pixels.png" alt="set doodle thickness to pixels" loading="lazy" style="width:243px"></div><code>Doodle_set-doodle-thickness-to-pixels.png</code></li>
+<li><div class="img"><img src="Doodle_set-doodling-speed-to.png" alt="set doodling speed to" loading="lazy" style="width:197px"></div><code>Doodle_set-doodling-speed-to.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-rotates-clockwise.png" alt="airbrush rotates ° clockwise" loading="lazy" style="width:240px"></div><code>Doodle_airbrush-rotates-clockwise.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-points-in-direction.png" alt="airbrush points in direction °" loading="lazy" style="width:244px"></div><code>Doodle_airbrush-points-in-direction.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-moves-pixels.png" alt="airbrush moves pixels" loading="lazy" style="width:199px"></div><code>Doodle_airbrush-moves-pixels.png</code></li>
+<li><div class="img"><img src="Doodle_set-airbrush-to-the-display-centre.png" alt="set airbrush to the display centre" loading="lazy" style="width:225px"></div><code>Doodle_set-airbrush-to-the-display-centre.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-goes-to-x-y.png" alt="airbrush goes to x: y:" loading="lazy" style="width:227px"></div><code>Doodle_airbrush-goes-to-x-y.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-moves-right-x-pixels.png" alt="airbrush moves right (x) pixels" loading="lazy" style="width:285px"></div><code>Doodle_airbrush-moves-right-x-pixels.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-moves-at-radius.png" alt="airbrush moves ° at radius" loading="lazy" style="width:275px"></div><code>Doodle_airbrush-moves-at-radius.png</code></li>
+<li><div class="img"><img src="Doodle_airbrush-x-position.png" alt="airbrush x position" loading="lazy" style="width:169px"></div><code>Doodle_airbrush-x-position.png</code></li>
+<li><div class="img"><img src="Doodle_set-current-doodle-as-sprite-show.png" alt="set current doodle as sprite show" loading="lazy" style="width:260px"></div><code>Doodle_set-current-doodle-as-sprite-show.png</code></li>
+</ul>
+<h2 style="--c:#FFBF00">Events <span>11</span></h2><ul>
+<li><div class="img"><img src="Events_when-cyberpi-starts-up.png" alt="when CyberPi starts up" loading="lazy" style="width:169px"></div><code>Events_when-cyberpi-starts-up.png</code></li>
+<li><div class="img"><img src="Events_when-joystick-pulled.png" alt="when joystick pulled↑" loading="lazy" style="width:193px"></div><code>Events_when-joystick-pulled.png</code></li>
+<li><div class="img"><img src="Events_when-button-a-pressed.png" alt="when button A pressed" loading="lazy" style="width:206px"></div><code>Events_when-button-a-pressed.png</code></li>
+<li><div class="img"><img src="Events_when-cyberpi-tilted-left.png" alt="when CyberPi tilted left" loading="lazy" style="width:201px"></div><code>Events_when-cyberpi-tilted-left.png</code></li>
+<li><div class="img"><img src="Events_when-wave-left-detected.png" alt="when wave left detected" loading="lazy" style="width:211px"></div><code>Events_when-wave-left-detected.png</code></li>
+<li><div class="img"><img src="Events_when-light-value.png" alt="when light value &gt;" loading="lazy" style="width:247px"></div><code>Events_when-light-value.png</code></li>
+<li><div class="img"><img src="Events_when-green-flag-clicked.png" alt="when green flag clicked" loading="lazy" style="width:171px"></div><code>Events_when-green-flag-clicked.png</code></li>
+<li><div class="img"><img src="Events_when-space-key-pressed.png" alt="when space key pressed" loading="lazy" style="width:214px"></div><code>Events_when-space-key-pressed.png</code></li>
+<li><div class="img"><img src="Events_when-i-receive.png" alt="when I receive" loading="lazy" style="width:150px"></div><code>Events_when-i-receive.png</code></li>
+<li><div class="img"><img src="Events_broadcast.png" alt="broadcast" loading="lazy" style="width:125px"></div><code>Events_broadcast.png</code></li>
+<li><div class="img"><img src="Events_broadcast-and-wait.png" alt="broadcast and wait" loading="lazy" style="width:181px"></div><code>Events_broadcast-and-wait.png</code></li>
+</ul>
+<h2 style="--c:#FFAB19">Control <span>13</span></h2><ul>
+<li class="used"><div class="img"><img src="Control_forever.png" alt="forever" loading="lazy" style="width:77px"></div><code>Control_forever.png</code></li>
+<li class="used"><div class="img"><img src="Control_repeat.png" alt="repeat" loading="lazy" style="width:104px"></div><code>Control_repeat.png</code></li>
+<li><div class="img"><img src="Control_restart-cyberpi.png" alt="restart CyberPi" loading="lazy" style="width:122px"></div><code>Control_restart-cyberpi.png</code></li>
+<li class="used"><div class="img"><img src="Control_if-then.png" alt="if then" loading="lazy" style="width:109px"></div><code>Control_if-then.png</code></li>
+<li><div class="img"><img src="Control_insert-code.png" alt="insert code" loading="lazy" style="width:328px"></div><code>Control_insert-code.png</code></li>
+<li class="used"><div class="img"><img src="Control_if-then-else.png" alt="if then" loading="lazy" style="width:109px"></div><code>Control_if-then-else.png</code></li>
+<li class="used"><div class="img"><img src="Control_wait-seconds.png" alt="wait seconds" loading="lazy" style="width:148px"></div><code>Control_wait-seconds.png</code></li>
+<li class="used"><div class="img"><img src="Control_wait-until.png" alt="wait until" loading="lazy" style="width:120px"></div><code>Control_wait-until.png</code></li>
+<li class="used"><div class="img"><img src="Control_repeat-until.png" alt="repeat until" loading="lazy" style="width:133px"></div><code>Control_repeat-until.png</code></li>
+<li class="used"><div class="img"><img src="Control_stop-all.png" alt="stop all" loading="lazy" style="width:111px"></div><code>Control_stop-all.png</code></li>
+<li class="used"><div class="img"><img src="Control_count-with-from-to-by-step-repeat.png" alt="count with from to by step repeat" loading="lazy" style="width:372px"></div><code>Control_count-with-from-to-by-step-repeat.png</code></li>
+<li class="used"><div class="img"><img src="Control_break.png" alt="break" loading="lazy" style="width:68px"></div><code>Control_break.png</code></li>
+<li><div class="img"><img src="Control_continue.png" alt="continue" loading="lazy" style="width:86px"></div><code>Control_continue.png</code></li>
+</ul>
+<h2 style="--c:#59C059">Operators <span>19</span></h2><ul>
+<li><div class="img"><img src="Operators_read-in-integer.png" alt="read in integer" loading="lazy" style="width:180px"></div><code>Operators_read-in-integer.png</code></li>
+<li class="used"><div class="img"><img src="Operators_plus.png" alt="+" loading="lazy" style="width:107px"></div><code>Operators_plus.png</code></li>
+<li class="used"><div class="img"><img src="Operators_minus.png" alt="-" loading="lazy" style="width:104px"></div><code>Operators_minus.png</code></li>
+<li class="used"><div class="img"><img src="Operators_times.png" alt="*" loading="lazy" style="width:105px"></div><code>Operators_times.png</code></li>
+<li class="used"><div class="img"><img src="Operators_divided-by.png" alt="/" loading="lazy" style="width:103px"></div><code>Operators_divided-by.png</code></li>
+<li><div class="img"><img src="Operators_mod.png" alt="mod" loading="lazy" style="width:125px"></div><code>Operators_mod.png</code></li>
+<li><div class="img"><img src="Operators_round.png" alt="round" loading="lazy" style="width:102px"></div><code>Operators_round.png</code></li>
+<li class="used"><div class="img"><img src="Operators_pick-random-to.png" alt="pick random to" loading="lazy" style="width:191px"></div><code>Operators_pick-random-to.png</code></li>
+<li class="used"><div class="img"><img src="Operators_less-than.png" alt="&lt;" loading="lazy" style="width:107px"></div><code>Operators_less-than.png</code></li>
+<li><div class="img"><img src="Operators_greater-than.png" alt="&gt;" loading="lazy" style="width:107px"></div><code>Operators_greater-than.png</code></li>
+<li><div class="img"><img src="Operators_equals.png" alt="=" loading="lazy" style="width:107px"></div><code>Operators_equals.png</code></li>
+<li><div class="img"><img src="Operators_and.png" alt="and" loading="lazy" style="width:121px"></div><code>Operators_and.png</code></li>
+<li><div class="img"><img src="Operators_or.png" alt="or" loading="lazy" style="width:112px"></div><code>Operators_or.png</code></li>
+<li><div class="img"><img src="Operators_not.png" alt="not" loading="lazy" style="width:87px"></div><code>Operators_not.png</code></li>
+<li><div class="img"><img src="Operators_join.png" alt="join" loading="lazy" style="width:121px"></div><code>Operators_join.png</code></li>
+<li><div class="img"><img src="Operators_letter-of.png" alt="letter of" loading="lazy" style="width:149px"></div><code>Operators_letter-of.png</code></li>
+<li class="used"><div class="img"><img src="Operators_length-of.png" alt="length of" loading="lazy" style="width:119px"></div><code>Operators_length-of.png</code></li>
+<li class="used"><div class="img"><img src="Operators_contains.png" alt="contains ?" loading="lazy" style="width:165px"></div><code>Operators_contains.png</code></li>
+<li><div class="img"><img src="Operators_abs-of.png" alt="abs of" loading="lazy" style="width:136px"></div><code>Operators_abs-of.png</code></li>
+</ul>
+<h2 style="--c:#FF8C1A">Variables <span>15</span></h2><ul>
+<li class="used"><div class="img"><img src="Variables_set-my-variable-to.png" alt="set my variable to" loading="lazy" style="width:207px"></div><code>Variables_set-my-variable-to.png</code></li>
+<li class="used"><div class="img"><img src="Variables_change-my-variable-by.png" alt="change my variable by" loading="lazy" style="width:234px"></div><code>Variables_change-my-variable-by.png</code></li>
+<li class="used"><div class="img"><img src="Variables_add-to-my-list.png" alt="add to my list" loading="lazy" style="width:183px"></div><code>Variables_add-to-my-list.png</code></li>
+<li class="used"><div class="img"><img src="Variables_delete-of-my-list.png" alt="delete of my list" loading="lazy" style="width:196px"></div><code>Variables_delete-of-my-list.png</code></li>
+<li class="used"><div class="img"><img src="Variables_delete-all-of-my-list.png" alt="delete all of my list" loading="lazy" style="width:176px"></div><code>Variables_delete-all-of-my-list.png</code></li>
+<li><div class="img"><img src="Variables_insert-at-of-my-list.png" alt="insert at of my list" loading="lazy" style="width:245px"></div><code>Variables_insert-at-of-my-list.png</code></li>
+<li><div class="img"><img src="Variables_replace-item-of-my-list-with.png" alt="replace item of my list with" loading="lazy" style="width:295px"></div><code>Variables_replace-item-of-my-list-with.png</code></li>
+<li class="used"><div class="img"><img src="Variables_item-of-my-list.png" alt="item of my list" loading="lazy" style="width:178px"></div><code>Variables_item-of-my-list.png</code></li>
+<li><div class="img"><img src="Variables_item-of-in-my-list.png" alt="item # of in my list" loading="lazy" style="width:202px"></div><code>Variables_item-of-in-my-list.png</code></li>
+<li><div class="img"><img src="Variables_length-of-my-list.png" alt="length of my list" loading="lazy" style="width:153px"></div><code>Variables_length-of-my-list.png</code></li>
+<li><div class="img"><img src="Variables_my-list-contains.png" alt="my list contains ?" loading="lazy" style="width:207px"></div><code>Variables_my-list-contains.png</code></li>
+<li><div class="img"><img src="Variables_show-variable.png" alt="show variable" loading="lazy" style="width:147px"></div><code>Variables_show-variable.png</code></li>
+<li><div class="img"><img src="Variables_hide-variable.png" alt="hide variable" loading="lazy" style="width:141px"></div><code>Variables_hide-variable.png</code></li>
+<li><div class="img"><img src="Variables_show-list-my-list.png" alt="show list my list" loading="lazy" style="width:161px"></div><code>Variables_show-list-my-list.png</code></li>
+<li><div class="img"><img src="Variables_hide-list-my-list.png" alt="hide list my list" loading="lazy" style="width:155px"></div><code>Variables_hide-list-my-list.png</code></li>
+</ul>
+<h2 style="--c:#FF6680">My Blocks <span>14</span></h2><ul>
+<li><div class="img"><img src="My-Blocks_define.png" alt="define" loading="lazy" style="width:103px"></div><code>My-Blocks_define.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_avoid-and-refind.png" alt="avoid_and_refind" loading="lazy" style="width:135px"></div><code>My-Blocks_avoid-and-refind.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_celebrate.png" alt="celebrate" loading="lazy" style="width:89px"></div><code>My-Blocks_celebrate.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_do-fetch.png" alt="do_fetch" loading="lazy" style="width:86px"></div><code>My-Blocks_do-fetch.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_do-patrol.png" alt="do_patrol" loading="lazy" style="width:91px"></div><code>My-Blocks_do-patrol.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_drive-square.png" alt="drive_square" loading="lazy" style="width:143px"></div><code>My-Blocks_drive-square.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_follow-lap.png" alt="follow_lap" loading="lazy" style="width:95px"></div><code>My-Blocks_follow-lap.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_follow-line.png" alt="follow_line" loading="lazy" style="width:98px"></div><code>My-Blocks_follow-line.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_grip.png" alt="grip" loading="lazy" style="width:68px"></div><code>My-Blocks_grip.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_lift.png" alt="lift" loading="lazy" style="width:83px"></div><code>My-Blocks_lift.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_match-command.png" alt="match_command" loading="lazy" style="width:135px"></div><code>My-Blocks_match-command.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_release.png" alt="release" loading="lazy" style="width:77px"></div><code>My-Blocks_release.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_scan.png" alt="scan" loading="lazy" style="width:68px"></div><code>My-Blocks_scan.png</code></li>
+<li class="used"><div class="img"><img src="My-Blocks_turn-by.png" alt="turn_by" loading="lazy" style="width:112px"></div><code>My-Blocks_turn-by.png</code></li>
+</ul>
+<h2 style="--c:#0AAD80">Quad RGB Sensor <span>12</span></h2><ul>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-l1-r1-s-line-in-status-0-00.png" alt="quad rgb sensor 1 L1, R1's line in status (0) 00 ?" loading="lazy" style="width:423px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-l1-r1-s-line-in-status-0-00.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-l1-r1-s-line-status-0-3.png" alt="quad rgb sensor 1 L1, R1's line status (0~3)" loading="lazy" style="width:350px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-l1-r1-s-line-status-0-3.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-line-in-status-0-0000.png" alt="quad rgb sensor 1 line in status (0) 0000 ？" loading="lazy" style="width:383px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-line-in-status-0-0000.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-line-status-0-15.png" alt="quad rgb sensor 1 line status (0~15)" loading="lazy" style="width:303px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-line-status-0-15.png</code></li>
+<li class="used"><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-probe-1-r2-detects-line.png" alt="quad rgb sensor 1 probe (1) R2 detects line ?" loading="lazy" style="width:405px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-probe-1-r2-detects-line.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-probe-1-r2-detects-object-s-r-value.png" alt="quad rgb sensor 1 probe (1)R2 detects object's R value" loading="lazy" style="width:449px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-probe-1-r2-detects-object-s-r-value.png</code></li>
+<li class="used"><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-deviation-100-100.png" alt="quad rgb sensor 1 deviation (-100~100)" loading="lazy" style="width:288px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-deviation-100-100.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-set-fill-light-color-of-line-following-t.png" alt="quad rgb sensor 1 set fill light color of line-following to red" loading="lazy" style="width:441px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-set-fill-light-color-of-line-following-t.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-turns-off-fill-light.png" alt="quad rgb sensor 1 turns off fill light" loading="lazy" style="width:275px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-turns-off-fill-light.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-define-color-to-r-g-b-with-tolerance.png" alt="quad rgb sensor 1 define color to R G B with tolerance" loading="lazy" style="width:531px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-define-color-to-r-g-b-with-tolerance.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_quad-rgb-sensor-1-performs-calibration.png" alt="quad rgb sensor 1 performs calibration" loading="lazy" style="width:297px"></div><code>Quad-RGB-Sensor_quad-rgb-sensor-1-performs-calibration.png</code></li>
+<li><div class="img"><img src="Quad-RGB-Sensor_sets-color-detection-mode-to-standard.png" alt="sets color detection mode to Standard" loading="lazy" style="width:287px"></div><code>Quad-RGB-Sensor_sets-color-detection-mode-to-standard.png</code></li>
+</ul>
+<h2 style="--c:#0AAD80">Ultrasonic Sensor 2 <span>7</span></h2><ul>
+<li class="used"><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-distance-to-an-object-cm.png" alt="ultrasonic 2 1 distance to an object (cm)" loading="lazy" style="width:294px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-distance-to-an-object-cm.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-out-of-range.png" alt="ultrasonic 2 1 out of range？" loading="lazy" style="width:231px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-out-of-range.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-sets-ambient-light-all-brightness-to.png" alt="ultrasonic 2 1 sets ambient light all brightness to %" loading="lazy" style="width:445px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-sets-ambient-light-all-brightness-to.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-increases-ambient-light-all-brightness-by.png" alt="ultrasonic 2 1 increases ambient light all brightness by %" loading="lazy" style="width:479px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-increases-ambient-light-all-brightness-by.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-ambient-light-1-brightness.png" alt="ultrasonic 2 1 ambient light 1 brightness" loading="lazy" style="width:333px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-ambient-light-1-brightness.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-turns-off-ambient-light-all.png" alt="ultrasonic 2 1 turns off ambient light all" loading="lazy" style="width:330px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-turns-off-ambient-light-all.png</code></li>
+<li><div class="img"><img src="Ultrasonic-Sensor-2_ultrasonic-2-1-displays-emotion-standby.png" alt="ultrasonic 2 1 displays emotion standby" loading="lazy" style="width:334px"></div><code>Ultrasonic-Sensor-2_ultrasonic-2-1-displays-emotion-standby.png</code></li>
+</ul>
+<h2 style="--c:#0AAD80">Bluetooth controller <span>2</span></h2><ul>
+<li class="used"><div class="img"><img src="Bluetooth-controller_joystick-rx.png" alt="joystick RX" loading="lazy" style="width:125px"></div><code>Bluetooth-controller_joystick-rx.png</code></li>
+<li><div class="img"><img src="Bluetooth-controller_button-1-pressed.png" alt="button 1 pressed" loading="lazy" style="width:170px"></div><code>Bluetooth-controller_button-1-pressed.png</code></li>
+</ul>
+<h2 style="--c:#0AAD80">Upload Mode Broadcast <span>4</span></h2><ul>
+<li><div class="img"><img src="Upload-Mode-Broadcast_send-upload-mode-message.png" alt="send upload mode message" loading="lazy" style="width:272px"></div><code>Upload-Mode-Broadcast_send-upload-mode-message.png</code></li>
+<li><div class="img"><img src="Upload-Mode-Broadcast_send-upload-mode-message-with-value.png" alt="send upload mode message with value" loading="lazy" style="width:370px"></div><code>Upload-Mode-Broadcast_send-upload-mode-message-with-value.png</code></li>
+<li><div class="img"><img src="Upload-Mode-Broadcast_when-receiving-upload-mode-message.png" alt="when receiving upload mode message" loading="lazy" style="width:331px"></div><code>Upload-Mode-Broadcast_when-receiving-upload-mode-message.png</code></li>
+<li><div class="img"><img src="Upload-Mode-Broadcast_upload-mode-message-value.png" alt="upload mode message value" loading="lazy" style="width:271px"></div><code>Upload-Mode-Broadcast_upload-mode-message-value.png</code></li>
+</ul>
+<h2 style="--c:#613bb0">Magic emoji <span>3</span></h2><ul>
+<li><div class="img"><img src="Magic-emoji_set-ai-emojis-to.png" alt="Set AI Emojis to" loading="lazy" style="width:159px"></div><code>Magic-emoji_set-ai-emojis-to.png</code></li>
+<li><div class="img"><img src="Magic-emoji_set-animojis-to-cute.png" alt="Set Animojis to Cute" loading="lazy" style="width:186px"></div><code>Magic-emoji_set-animojis-to-cute.png</code></li>
+<li><div class="img"><img src="Magic-emoji_set-diy-emojis-to.png" alt="Set DIY Emojis to" loading="lazy" style="width:167px"></div><code>Magic-emoji_set-diy-emojis-to.png</code></li>
+</ul>

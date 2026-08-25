@@ -1,0 +1,105 @@
+n: 11
+stage: B
+stage_title: The robot decides
+kind: step
+title: Comparing and combining
+concept: Operators
+hours: 2
+project: G7-B-decides
+goal: The robot reacts to two conditions at once, and the team can express "at least" without a greater-or-equal
+  block.
+build: A robot that only wakes up when it is dark AND something is close.
+builds_on:
+- Step 10 · conditions
+- Step 8 · sensor values
+teach:
+- 'Conditions can be built, not just chosen. <b>and</b> needs both to be true, <b>or</b> needs either,
+  <b>not</b> flips it. And numbers can be worked on before you compare them: speed can be a sum, a threshold
+  can be a calculation.'
+- 'There is a gap in the palette worth finding rather than announcing: there is <b>no ≥ and no ≤</b>.
+  Only greater than, less than, equals. So "at least 20" has to be written <b>not (x &lt; 20)</b>. Let
+  a team hit the wall, then let them work it out — that is real logical reasoning, and it is the moment
+  <b>not</b> stops being decoration.'
+guide:
+- label: and
+  value: both must be true
+- label: or
+  value: either will do
+- label: ≥ 20
+  value: not (x < 20) — there is no ≥
+- label: Floor
+  value: 2 m clear, and a way to darken the room
+steps:
+- time: 15′
+  text: Cover the light sensor and watch the panel. Find the number that means "dark in this room, today"
+    — it is not the same room it was yesterday.
+  expect: The actual number that means “dark, in this room, today” — measured now, not remembered from
+    yesterday.
+- time: 25′
+  text: 'Build the guard dog: only react when it is dark <b>and</b> something is close. Test all four
+    combinations deliberately.'
+  use:
+  - control_if_else
+  expect: The robot reacts only when it is dark AND something is close. All four combinations tried
+    on purpose.
+- time: 20′
+  text: The ≥ problem. Ask for "at least 20 cm" and let them look for the block. Then let them build
+    it out of not and <.
+  expect: “At least 20 cm” working, built out of not and < because there is no ≥ block to find.
+- time: 25′
+  text: 'Arithmetic on the way through: make the speed rise as it gets darker instead of switching between
+    two speeds.'
+  use:
+  - mbot2_move_direction_with_rpm
+  expect: The speed rises smoothly as the room darkens, instead of flipping between two settings.
+- time: 20′
+  text: Then show them <b>when light value &gt; 50</b> — one hat block that does what took them three.
+    Both are right; knowing why you would choose each is the point.
+  use:
+  - cyberpi_when_sensor_value_bigger_or_smaller_than
+  expect: One hat block doing what took you three blocks — and you can say when you would still choose
+    the long way.
+- time: 15′
+  text: Log the four-way test table and your thresholds.
+  expect: The four-way test table and your thresholds in the log.
+code:
+  lang: blocks
+  source: "when CyberPi starts up\n  forever\n    show label 1  join  dist:   (ultrasonic 2 1 distance\
+    \ to an object (cm))  at x: 0 y: 0  by small pixel\n    show label 2  join  light:  (ambient light\
+    \ intensity)  at x: 0 y: 20  by small pixel\n    show label 3  join  loud:   (loudness)  at x: 0\
+    \ y: 40  by small pixel\n    line chart, add data  (ultrasonic 2 1 distance to an object (cm))\n\
+    \    if  ((ambient light intensity) < 20)  and  ((ultrasonic 2 1 distance to an object (cm)) < 30)\
+    \  then\n      LED all displays R 255 G 0 B 0\n      play  hi\n    else\n      turn off LED  all\n\
+    \nwhen button A pressed\n  forever\n    if  (ultrasonic 2 1 distance to an object (cm)) < 15  then\n\
+    \      stop encoder motor  all\n      ultrasonic 2 1 displays emotion  dizzy\n    else\n      moves\
+    \ forward  at 50  RPM\n      ultrasonic 2 1 displays emotion  standby\n\nwhen button B pressed\n\
+    \  repeat until  (ultrasonic 2 1 distance to an object (cm)) < 25\n    moves forward  at 60  RPM\n\
+    \    show label 4  approaching  at center of screen  by small pixel\n  repeat until  (ultrasonic\
+    \ 2 1 distance to an object (cm)) < 5\n    moves forward  at 15  RPM\n    show label 4  creeping\
+    \  at center of screen  by small pixel\n  stop encoder motor  all\n  show label 4  arrived  at center\
+    \ of screen  by small pixel\n\nwhen  light  value  >  50\n  show label 5  lights on!  at center\
+    \ of screen  by small pixel"
+tips:
+- Test all four combinations of two conditions on purpose — dark+close, dark+far, light+close, light+far.
+  Teams test one and declare victory.
+- '"Dark" is a number that changes with the weather and the time of day. Re-read it at the start of
+  every session from now on.'
+- The missing ≥ is not a bug in mBlock. Ask what not(x < 20) means in words until someone says "20 or
+  more".
+result:
+  scene: lightdark
+success:
+- A condition using and that behaves correctly in all four cases
+- '"At least" expressed with not and <, derived by the team'
+- One value calculated rather than typed in
+check:
+- do: 'on'
+  see: 'Cover it AND put your hand close: it turns red and beeps.'
+- do: light
+  see: Shine a torch at it and the screen says lights on!
+parts:
+- id: robot_wheel
+- id: torch
+  note: control the light
+- id: boxes
+

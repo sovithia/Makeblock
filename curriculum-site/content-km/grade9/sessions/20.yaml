@@ -1,0 +1,81 @@
+n: 20
+title: Demo Day
+goal: Scored autonomous runs, real pitches, and a three-year retrospective that lands.
+builds_on:
+- S19 · frozen run configuration + rehearsed pitch
+teach:
+- 'Run it as the event three years earned: audience seated (invite classes, teachers, parents if possible),
+  visible scoreboard (phase points per team’s own success criteria + small style bonus), two attempts
+  each with pit time between, pitches delivered from the front. The teacher’s job today is master of ceremonies
+  — the students carry the content, and they can.'
+- 'Close the arc deliberately. The retrospective ritual: the Session 1/Grade 7 question projected (‘what
+  is a robot?’) — let them answer it again, now with three years of hands. Then the pathways talk, concrete
+  and short: what they built maps to real fields — control engineering (their P-controller), ML engineering
+  (their mirror), embedded software (their guard functions), robotics competitions, and the kit’s 30+
+  module ecosystem for a robotics club afterlife. End on the honest sentence: they didn’t learn about
+  robotics — they did robotics, sixty hours of it.'
+steps:
+- time: 8′
+  text: 'Setup: courses rebuilt from photos, scoreboard up, order posted, audience seated.'
+- time: 30′
+  text: 'The event: per team — pitch (5′ incl. live demo) with scored attempts; pit repairs allowed between
+    rounds.'
+- time: 5′
+  text: 'Awards: precision, engineering, comeback, audience choice.'
+- time: 2′
+  text: Retrospective question + pathways + the closing sentence.
+tips:
+- Rebuild courses from the tape-measure photos — ‘the course moved’ is a heartbreak with a known cure.
+- Score against each team’s OWN success criteria — missions differ; fairness lives in the spec they signed.
+result:
+  scene: demo
+success:
+- 'Every team: two scored attempts + a complete 5-minute pitch'
+- Failure stories told and applauded
+- Scoreboard archived; three-year arc closed
+parts:
+- id: robot_arm
+  note: frozen config
+- id: tablet
+- id: foam
+- id: timer
+  note: + scoreboard
+- id: shield
+  note: charged overnight
+- id: phone
+  note: course rebuild photos
+- id: cards
+  note: award certificates
+long:
+  goal: Scored runs against each team's own signed criteria, pitches with the failure story told, and the
+    three-year question answered again.
+  recap:
+    time: 10′
+    text: Rebuild the courses from the photographs, with the tape measure, before anything else happens. "The
+      course moved" is a heartbreak with a known cure, and the cure is fifteen minutes of measuring rather
+      than an argument about scoring in front of an audience.
+  extend:
+  - spec: 2 scored attempts
+    text: Against the team's own signed success criteria — the missions differ, so fairness lives in the spec
+      each team signed in Session 15.
+  - spec: 5-minute pitch, 4 parts
+    text: Including the failure story, which is rubric-weighted and applauded rather than endured.
+  - spec: answer it again
+    text: The Grade 7 Session 1 question — what is a robot? — answered with three years of hands behind it.
+  log:
+    time: 10′
+    text: The scoreboard archived, and each student's final reflection set against the Grade 8 Session 1 prediction
+      of which skill they would reuse most. Three years of printed lesson notes close on this page, and the comparison
+      is worth the two minutes it costs.
+  review:
+    time: 15′
+    text: 'The retrospective. Criteria — is the new answer to "what is a robot?" richer than the Grade 7 one
+      in a way the student can actually point at? Then the pathways talk, concrete and short: control engineering,
+      robotics, data — and what they built maps to each.'
+  parts:
+  - id: cards
+    note: scoreboard and score sheets
+  - id: timer
+  success:
+  - Every team scored against its own signed success criteria
+  - The Grade 7 question answered again, with evidence of how the answer changed

@@ -1,0 +1,94 @@
+n: 14
+stage: C
+stage_title: អន្តរកម្ម
+kind: step
+title: រូបយន្តពីរ ការងារតែមួយ
+concept: សារជាមួយបន្ទុកទិន្នន័យ
+hours: 2
+project: G8-C-connects
+goal: Rover ពីរប្រគល់ការងារគ្នាទៅវិញទៅមក ដោយបញ្ជូនតម្លៃ — ហើយគូពីរដំណើរការក្នុងបន្ទប់តែមួយដោយមិនរំខានគ្នា។
+build: ការបញ្ជូនបន្ត៖ រូបយន្តមួយរកឃើញវា មួយទៀតទៅយក។
+builds_on:
+- ជំហានទី ៩ · ការងារ
+- ជំហានទី ១២ · ម៉ឺនុយ
+teach:
+- រូបយន្តអាចនិយាយគ្នា។ <b>broadcast "found" on LAN</b> បញ្ជូនសារទៅរាល់រូបយន្តដែលកំពុងស្ដាប់ ហើយ <b>when
+  receiving "found" broadcast on LAN</b> ដាស់មួយទៀត។ តែប៉ុណ្ណឹងធ្វើឲ្យការបញ្ជូនបន្តអាចធ្វើបាន៖ A បញ្ចប់
+  B ចាប់ផ្ដើម គ្មាននរណាប៉ះមួយណាទេ។
+- ល្អជាងនេះ សារមួយអាចផ្ទុក <b>តម្លៃ</b>។ <b>broadcast "found" with value 42</b> ហើយអ្នកទទួលអានវាដោយ
+  <b>LAN broadcast value received</b>។ ឥឡូវ A អាចផ្ញើទៅ B នូវចម្ងាយដែលវាវាស់បាន ឬតំបន់ណាត្រូវទៅ។ ឈ្មោះបូកនឹងបន្ទុកទិន្នន័យ
+  គឺជាអ្វីដែល <b>ពិធីការ</b> ជា ហើយក្រុមពីរត្រូវព្រមព្រៀងមួយ មុនណាមួយសរសេរប្លុក។
+- រួចមកបញ្ហាថ្នាក់រៀន៖ ជាមួយអ្នកគ្រប់គ្នានៅលើឆានែលតែមួយ រូបយន្តគ្រប់គ្រឿងឮសារគ្រប់សារ។ <b>set LAN channel</b>
+  ជាដំណោះស្រាយ ហើយការរកឃើញតម្រូវការសម្រាប់វាដោយការប៉ះទង្គិច ល្អជាងការត្រូវគេព្រមានច្រើន។
+guide:
+- label: សាកល្បង
+  value: button B → find it and broadcast
+- label: ផ្ញើ
+  value: broadcast "msg" with value n on LAN
+- label: ទទួល
+  value: when receiving "msg" · value received
+- label: ព្រមព្រៀងជាមុន
+  value: ឈ្មោះសារ សរសេរចុះ
+- label: ឥដ្ឋ
+  value: ផ្លូវទំនេរ ២ ម៉ែត្រ មានបំណះក្រហមនៅចុង
+steps:
+- time: 20′
+  text: ក្រុមពីរព្រមព្រៀងពិធីការលើក្រដាស៖ ឈ្មោះសារ អ្វីដែលនីមួយៗមានន័យ តម្លៃអ្វីធ្វើដំណើរជាមួយវា។ គ្មានប្លុករហូតដល់វាត្រូវបានសរសេរ។
+  expect: ពិធីការសរសេររវាងក្រុមពីរ៖ ឈ្មោះសារ អត្ថន័យ និងតម្លៃដែលធ្វើដំណើរជាមួយនីមួយៗ។ គ្មានប្លុករហូតដល់វាមាន។
+- time: 25′
+  text: កំណែសាមញ្ញបំផុត៖ A ផ្សាយ B បំភ្លឺ។ បញ្ជាក់ថាតំណដំណើរការ មុនបន្ថែមអ្វីផ្សេង។
+  expect: រូបយន្ត A ផ្សាយ រូបយន្ត B ភ្លឺ។ តំណភ្ជាប់បញ្ជាក់មុនពេលសាងសង់អ្វីលើវា។
+- time: 25′
+  text: ឥឡូវបន្ទុកទិន្នន័យ៖ A ផ្ញើលេខដែលវាវាស់បាន B បង្ហាញវាលើអេក្រង់។ ពិនិត្យថាវាជាលេខដដែល។
+  expect: លេខវាស់លើ A លេចឡើងលើអេក្រង់ B — ហើយពិនិត្យថាជាលេខដដែល។
+- time: 25′
+  text: ការបញ្ជូនបន្ត៖ A ស្វែងរក ហើយផ្សាយអ្វីដែលវារកឃើញ; B ទៅយកវា។ គ្មានក្រុមណាប៉ះរូបយន្តរបស់ក្រុមផ្សេងទេ។
+  expect: A រកឃើញអ្វីមួយ ហើយប្រាប់ថារកឃើញអ្វី; B ទៅយកវា។ គ្មានក្រុមណាប៉ះរូបយន្តគ្នាទេ។
+  use:
+  - control_wait_until
+  - cyberpi_timer_reset
+- time: 15′
+  text: គូពីរដំណើរការក្នុងពេលតែមួយ ហើយរកឃើញថាពួកគេឮគ្នាទៅវិញទៅមក។ កែវាដោយឆានែល។
+  expect: គូពីរដំណើរការក្នុងពេលតែមួយដោយមិនលឺគ្នា ព្រោះគូនីមួយៗនៅលើឆានែលរបស់ខ្លួន។
+- time: 10′
+  text: កត់ត្រាតារាងពិធីការ — សារ អត្ថន័យ តម្លៃ។
+  expect: តារាងពិធីការក្នុងកំណត់ហេតុ៖ សារ អត្ថន័យ តម្លៃ។
+code:
+  lang: blocks
+  source: "define  celebrate\n  LED all displays R 0 G 255 B 0\n  play  hi\n  turns right  360  ° until\
+    \ done\n  turn off LED  all\n\nwhen button A pressed\n  forever\n    encoder motor EM1 rotates at\
+    \ ((joystick LY) / 3) RPM, encoder motor EM2 rotates at ((joystick RY) / 3) RPM\n    if  button\
+    \  L1  pressed  then\n      grip\n    if  button  R1  pressed  then\n      release\n    if  button\
+    \  1  pressed  then\n      celebrate\n\nwhen CyberPi starts up\n  set LAN channel to  6 (default)\n\
+    \  delete all of  menu\n  add  fetch  to  menu\n  add  patrol  to  menu\n  add  dance  to  menu\n\
+    \  set  pick  to 1\n  forever\n    clear screen\n    set  stop  to  ((length of menu) + 1)\n   \
+    \ count with  i  from 1 to (stop) by step 1 repeat\n      if  (i) = (pick)  then\n        print\
+    \  join  PICK   (item (i) of menu)  and move to a newline\n      else\n        print  (item (i)\
+    \ of menu)  and move to a newline\n\nwhen joystick  pulled↓\n  change  pick  by 1\n  if  (pick)\
+    \ > (length of menu)  then\n    set  pick  to 1\n\nwhen joystick  middle pressed\n  set  job  to\
+    \  (item (pick) of menu)\n\nwhen button B pressed\n  reset timer\n  moves forward  at 40  RPM\n\
+    \  wait until  (quad rgb sensor 1 probe (3) L1 detects  red ?)\n  stop encoder motor  all\n  broadcast\
+    \ message  found  with value  (timer(s))  on LAN\n\nwhen receiving  found  broadcast on LAN\n  show\
+    \ label 1  join  partner took:   (LAN broadcast  found  value received)  at x: 0 y: 0  by small\
+    \ pixel\n  set  job  to  fetch"
+tips:
+- ធ្វើឲ្យពួកគេសរសេរពិធីការមុនពួកគេសរសេរកូដ។ ក្រុមពីរសរសេរកូដទៅតាមការសន្មតខុសគ្នា គឺជាមេរៀនទាំងមូល ហើយវាថោកជាងលើក្រដាស។
+- ទុកឲ្យការប៉ះទង្គិចឆានែលកើតឡើង។ គូពីរនៅលើឆានែលតែមួយ គឺជាប្រាំនាទីដែលច្រឡំមែនទែន ហើយដំណោះស្រាយមានន័យច្រើនជាងក្រោយមក។
+- ឈ្មោះសារប្រកាន់អក្សរធំតូច និងអក្ខរាវិរុទ្ធ។ "found" និង "Found" ជាសារពីរខុសគ្នា ហើយនោះជារសៀលកែកំហុសពិត
+  បើមិននិយាយមុន។
+result:
+  scene: relay
+success:
+- សារជាមួយតម្លៃបានផ្ញើ និងទទួលបានត្រឹមត្រូវ
+- ការបញ្ជូនបន្តពេញលេញដោយគ្មាននរណាប៉ះរូបយន្តណាមួយ
+- គូពីរដំណើរការក្នុងបន្ទប់តែមួយលើឆានែលដាច់ដោយឡែក
+check:
+- do: B
+  see: រូបយន្ត A បើករហូតដល់រកឃើញបំណះក្រហម ហើយឈប់។
+- do: hear
+  see: រូបយន្ត B ភ្ញាក់ឡើង ហើយបង្ហាញថា A ចំណាយពេលប៉ុន្មានវិនាទីដើម្បីរកឃើញ។
+parts:
+- id: robot_tank
+  note: two of them, paired teams
+- id: cards
+

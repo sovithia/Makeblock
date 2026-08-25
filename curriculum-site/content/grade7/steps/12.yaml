@@ -1,0 +1,64 @@
+n: 12
+stage: B
+stage_title: The robot decides
+kind: checkpoint
+title: Checkpoint 2 — conditional, operator
+concept: Catch-up gate
+hours: 1
+project: G7-B-decides
+goal: Every student can write a decision that reads a sensor and acts on it, and can combine two conditions
+  — before Stage C adds memory.
+build: Nothing new. The class arrives at the same place.
+builds_on:
+- Steps 6–9
+teach:
+- 'A <b>buffer hour</b> is available here and is deliberately not in the timetable above — add it only if the class is not level. The stated hours are what the course takes when nobody needs catching up. If the class <i>is</i> level, spend it on the extension: coaches build a robot whose behaviour changes on three conditions combined, then try to explain it to a team that did not write it.'
+- Stage C gives the robot memory, and memory is only interesting if the robot can already decide. A
+  student who is shaky on <b>if</b> will not survive a variable that changes what the <b>if</b> does.
+- 'Same rules as Checkpoint 1: hands-on challenges, coaches keep their hands off other people''s robots,
+  and the buffer hour is spent on whichever the class needs.'
+guide:
+- label: Pass
+  value: all three challenges, demonstrated
+- label: Coaches
+  value: hands off, questions only
+- label: Buffer
+  value: +1 h, only if the class needs it — not counted in the course hours
+steps:
+- time: 10′
+  text: 'Set up: three stations, one per challenge.'
+  expect: Three stations set up, one per challenge, so nobody queues.
+- time: 30′
+  text: 'The three challenges: <b>(1)</b> make the robot do something different when an object is near
+    than when it is far, and explain where the if must sit relative to the forever. <b>(2)</b> write
+    a condition that is true only when two things are true at once, and demonstrate all four cases.
+    <b>(3)</b> express "at least 30 cm" without a ≥ block.'
+  expect: 'Three challenges demonstrated: near-versus-far behaviour with the if in the right place, a
+    two-part condition shown in all four cases, and “at least 30 cm” without a ≥ block.'
+- time: 20′
+  text: 'Pairing: everyone through all three coaches someone who is not.'
+  expect: Every student through all three is coaching one who is not.
+blocks:
+- Control
+- Operators
+- Sensing
+- Ultrasonic Sensor 2
+tips:
+- Challenge 3 is the one that separates memorising from understanding. Do not accept "x > 29" without
+  asking what happens at 29.5.
+- If a student can make it work but cannot say where the if goes and why, they have not passed challenge
+  1.
+- Keep the same coaching pairs as Checkpoint 1 only if they worked. Rotating is usually better.
+result:
+  scene: healthcheck
+  params:
+    checks: [near / far decision, two conditions combined, at least without a ≥ block]
+    caption: every student clears all three decision challenges
+success:
+- Every student demonstrated all three challenges
+- Every student can say why an if belongs inside the forever loop
+- The class starts Stage C together
+parts:
+- id: robot_wheel
+- id: boxes
+- id: torch

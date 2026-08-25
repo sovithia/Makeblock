@@ -1,0 +1,89 @@
+n: 5
+stage: A
+stage_title: A new machine
+kind: step
+title: Blocks for the arm
+concept: Functions, with inputs
+hours: 1
+project: G8-A-rebuilt
+goal: The arm is driven only through named blocks — never a raw servo command anywhere else in the program.
+build: grip, release, lift(height) — the arm's vocabulary.
+builds_on:
+- Step 4 · servo limits
+- Grade 7 · My Blocks
+teach:
+- You met functions last year; now they earn their keep immediately. <b>grip</b>, <b>release</b> and
+  <b>lift(height)</b> hide the angles and the waiting, so the rest of the program says what it means.
+  From here on, <b>no raw servo block appears anywhere except inside these</b> — one place to change,
+  one place to get the limits right.
+- The <b>wait</b> inside them is not decoration. A servo takes a moment to arrive, and a program that
+  grips and immediately drives away will drop the block. Half a second inside the function means nobody
+  has to remember it at the call site.
+guide:
+- label: Try it
+  value: joystick middle → the whole pick-and-place
+- label: Rule
+  value: raw servo blocks live only inside these
+- label: Wait
+  value: 0.5 s inside — servos need a beat
+- label: Input
+  value: lift(height) — one block, many heights
+- label: Floor
+  value: 1 m clear — it grips, lifts and carries 20 cm
+steps:
+- time: 15′
+  text: Define grip and release out of what you built in Step 4. Call them from the buttons instead
+    of the raw blocks.
+  use:
+  - my:grip
+  - my:release
+  expect: The buttons call grip and release by name. No raw servo blocks left on the buttons.
+- time: 20′
+  text: Add <b>lift(height)</b> with a number input, and use it with three different heights.
+  use:
+  - my:lift
+  expect: One lift block used at three different heights.
+- time: 15′
+  text: Remove the wait from inside grip and watch the robot drop a block. Put it back. Now you know
+    why it is there.
+  use:
+  - control_wait
+  expect: The robot drops the block with the wait removed, and holds it when the wait goes back. Now
+    you know what the wait is for.
+- time: 10′
+  text: Search your program for any remaining raw servo block outside your three functions. Move it
+    inside.
+  use:
+  - mbot2_move_straight_with_cm_and_inch
+  expect: Every raw servo block is inside one of your three functions, and none outside.
+code:
+  lang: blocks
+  source: "define  grip\n  set servo  S1  angle to (ARM_SHUT)  °\n  wait 0.5 seconds\n\ndefine  release\n\
+    \  set servo  S1  angle to (ARM_OPEN)  °\n  wait 0.5 seconds\n\ndefine  lift (height)\n  set servo\
+    \  S2  angle to (height)  °\n  wait 0.5 seconds\n\nwhen CyberPi starts up\n  set  ARM_OPEN  to 20\n\
+    \  set  ARM_SHUT  to 75\n\nwhen button A pressed\n  calibrate  chassis parameters\n\nwhen button\
+    \ B pressed\n  turns right  90  ° until done\n  wait 1 seconds\n  turns left  90  ° until done\n\
+    \nwhen joystick  pulled←\n  set servo  S1  angle to (ARM_SHUT)  °\n\nwhen joystick  pulled→\n  set\
+    \ servo  S1  angle to (ARM_OPEN)  °\n\nwhen joystick  pulled↑\n  increase servo  S1  angle by 5\
+    \  °\n  if  (servo (1) S1 current angle (°)) > (ARM_SHUT)  then\n    set servo  S1  angle to (ARM_SHUT)\
+    \  °\n\nwhen joystick  middle pressed\n  grip\n  lift  60\n  moves forward  20  cm  until done\n\
+    \  lift  20\n  release"
+tips:
+- Removing the wait deliberately is the fastest way to teach why it exists. Let it fail once.
+- Name them after the job, not the mechanism. <b>grip</b> survives a rebuild; <b>servo_to_75</b> does
+  not.
+- These four blocks are the Stage E vocabulary. Anything named badly now will be named badly in the
+  mission.
+result:
+  scene: arm
+  params: {pose: place}
+success:
+- grip, release and lift(height) all working
+- lift used with three different values
+- No raw servo block anywhere outside the three functions
+check:
+- do: mid
+  see: 'One press: it grips, lifts, carries, puts down, lets go.'
+parts:
+- id: robot_tank
+- id: foam
