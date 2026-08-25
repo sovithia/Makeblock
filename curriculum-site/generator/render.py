@@ -194,6 +194,23 @@ table.flow td.t {{ width: 9mm; font-weight: bold; color: {c['dark']}; white-spac
 .result li.xtra {{ color: {c['dark']}; }}
 .vtag {{ display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }}
+.assessment {{ border: 1.5px solid {c['color']}; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }}
+.assessment h4 {{ margin: 0; color: {c['dark']}; font-size: 9.5pt; }}
+.assess-meta {{ display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }}
+.assess-line {{ display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }}
+.assess-help {{ margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }}
+.assess-table {{ width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }}
+.assess-table th, .assess-table td {{ border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }}
+.assess-table th {{ background: {c['light']}; color: {c['dark']}; font-size: 6.7pt; }}
+.assess-table .ac {{ width: 24mm; font-weight: bold; }}
+.assess-table .score {{ width: 7mm; text-align: center; font-size: 9pt; }}
+.assess-foot {{ display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }}
+.assess-note {{ flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }}
 """ + blocks.CSS + blocks.HINT_CSS + (KHMER_CSS if i18n.is_khmer() else "")
 
 
@@ -387,6 +404,47 @@ def check_rows(s):
             f'<span class="ckk">{kind}</span></div>'
             f'<div class="cksee">{esc(r.get("see", ""))}</div></div>')
     return f'<div class="checks">{"".join(out)}</div>' if out else ""
+
+
+def assessment_box():
+    """Compact, evidence-based rubric printed at the end of every lesson."""
+    criteria = (
+        (t("assessment_understanding"), t("assessment_understanding_evidence")),
+        (t("assessment_practical"), t("assessment_practical_evidence")),
+        (t("assessment_collaboration"), t("assessment_collaboration_evidence")),
+        (t("assessment_engagement"), t("assessment_engagement_evidence")),
+    )
+    rows = "".join(
+        f'<tr><td class="ac">{esc(name)}</td><td>{esc(evidence)}</td>'
+        + "".join('<td class="score">&#9633;</td>' for _ in range(1, 5))
+        + '<td class="score">&#9633;</td></tr>'
+        for name, evidence in criteria)
+    levels = " &nbsp; ".join(
+        f'&#9633; {esc(t(key))}' for key in (
+            "assessment_support", "assessment_developing",
+            "assessment_secure", "assessment_strong"))
+    return f'''<section class="assessment">
+      <h4>{esc(t("assessment_title"))}</h4>
+      <div class="assess-meta">
+        <span>{esc(t("assessment_student"))}: <span class="assess-line"></span></span>
+        <span>{esc(t("assessment_team"))}: <span class="assess-line"></span></span>
+        <span>{esc(t("assessment_date"))}: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">{esc(t("assessment_instruction"))}</p>
+      <p class="assess-help"><b>{esc(t("assessment_scale"))}</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">{esc(t("assessment_criterion"))}</th>
+        <th>{esc(t("assessment_evidence"))}</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">{esc(t("assessment_no"))}</th>
+      </tr></thead><tbody>{rows}</tbody></table>
+      <div class="assess-foot">
+        <b>{esc(t("assessment_total"))}: ____ / ____</b>
+        <span>({esc(t("assessment_total_note"))})</span>
+        <span><b>{esc(t("assessment_overall"))}:</b> {levels}</span>
+        <span>{esc(t("assessment_note"))}:</span><span class="assess-note"></span>
+      </div>
+    </section>'''
 
 
 def build_strip(s, img_base):
@@ -624,6 +682,7 @@ def session_page(c, s, img_available=None, img_base="../", show_buildson=False, 
         <ul>{crit}</ul></div></td>
     </tr></table>
   </div>
+  {assessment_box()}
   {nextlesson_html}\n</div>"""
 
 

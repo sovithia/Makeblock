@@ -174,6 +174,23 @@ table.flow td.t { width: 9mm; font-weight: bold; color: #9a4f08; white-space: no
 .result li.xtra { color: #9a4f08; }
 .vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+.assessment { border: 1.5px solid #d97706; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }
+.assessment h4 { margin: 0; color: #9a4f08; font-size: 9.5pt; }
+.assess-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }
+.assess-line { display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }
+.assess-help { margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }
+.assess-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }
+.assess-table th, .assess-table td { border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }
+.assess-table th { background: #fdf0dd; color: #9a4f08; font-size: 6.7pt; }
+.assess-table .ac { width: 24mm; font-weight: bold; }
+.assess-table .score { width: 7mm; text-align: center; font-size: 9pt; }
+.assess-foot { display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }
+.assess-note { flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }
 
 .blockstack { margin-bottom: 3mm; }
 .brow { line-height: 0; }
@@ -374,5 +391,27 @@ while True:
         <ul><li>ផ្ទាំងគ្រប់គ្រងបង្ហាញ offset នៃខ្សែ និងមុំ encoder បន្តផ្ទាល់</li><li>MARKER! លេចឡើងលើដុំក្រហម ហើយគ្មានកន្លែងផ្សេងទេ</li><li>ក្រុមអាចពន្យល់សញ្ញា និងទំហំប្រហាក់ប្រហែលនៃ offset ក្នុងន័យរូបវន្ត</li><li class="xtra">សញ្ញារបស់ offset ត្រូវបានទស្សន៍ទាយត្រឹមត្រូវ មុនពេលរុញរូបយន្ត</li><li class="xtra">អនុសញ្ញាសញ្ញាត្រូវបានសរសេរនៅកន្លែងដែលមេរៀនទី ៦ អាចរកឃើញ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div></body></html>

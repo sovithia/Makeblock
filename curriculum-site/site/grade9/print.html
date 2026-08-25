@@ -174,6 +174,23 @@ table.flow td.t { width: 9mm; font-weight: bold; color: #9a4f08; white-space: no
 .result li.xtra { color: #9a4f08; }
 .vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+.assessment { border: 1.5px solid #d97706; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }
+.assessment h4 { margin: 0; color: #9a4f08; font-size: 9.5pt; }
+.assess-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }
+.assess-line { display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }
+.assess-help { margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }
+.assess-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }
+.assess-table th, .assess-table td { border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }
+.assess-table th { background: #fdf0dd; color: #9a4f08; font-size: 6.7pt; }
+.assess-table .ac { width: 24mm; font-weight: bold; }
+.assess-table .score { width: 7mm; text-align: center; font-size: 9pt; }
+.assess-foot { display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }
+.assess-note { flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }
 
 .blockstack { margin-bottom: 3mm; }
 .brow { line-height: 0; }
@@ -350,6 +367,28 @@ cyberpi.display.show_label(
         <ul><li>Square runs from hand-typed Python</li><li>Pair-programming roles practiced with a swap</li><li>At least one error message read, decoded, and fixed by the pair</li><li class="xtra">The navigator produced working code after the swap</li><li class="xtra">Three error messages explained in the pair's own words</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -397,6 +436,28 @@ celebrate()</div>
         <ul><li>polygon(n, size) draws at least three different shapes</li><li>celebrate() runs as a single call</li><li>Another pair used the library without explanations</li><li class="xtra">Another pair used the library cold, with no explanation</li><li class="xtra">Every function carries a one-line comment aimed at a future reader</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -446,6 +507,28 @@ while True:
         <ul><li>Dashboard shows live line offset and encoder angle</li><li>MARKER! fires on the red patch and nowhere else</li><li>Team can explain offset’s sign and rough magnitude physically</li><li class="xtra">Offset sign predicted correctly before the robot was pushed</li><li class="xtra">The sign convention written where Session 6 can find it</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -502,6 +585,28 @@ while True:
         <ul><li>Python wander roams the arena and turns back at the boundary reliably</li><li>on_edge() and escape() extracted; constants named; behaviour unchanged</li><li>Comments explain why, not what</li><li class="xtra">Behaviour proved unchanged by measurement rather than by claim</li><li class="xtra">No magic numbers survive anywhere in the file</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -537,6 +642,28 @@ while True:
         <ul><li>Class answered the Grade 7 wobble question in control terms</li><li>Teams hand-computed motor speeds from offset × gain correctly</li><li>Both failure predictions (low/high gain) sketched</li><li class="xtra">Four motor-speed computations correct by hand, with no code written all hour</li><li class="xtra">Both failure trajectories sketched in advance of any run</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -581,6 +708,28 @@ while True:
         <ul><li>P-follower completes laps visibly smoother than bang-bang</li><li>Gain table with 5+ tested values, one-change discipline</li><li>Wobble-returns gain found, matching the prediction</li><li class="xtra">Wobble-return gain found and compared against the Session 5 prediction</li><li class="xtra">Champion gain defended from the table rather than from feel</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -625,6 +774,28 @@ print(errors)            # copy out to plot</div>
         <ul><li>Both error-time plots produced from real logged data</li><li>Written conclusion cites numbers from the graphs</li><li>Team can say what the D in PID would add</li><li class="xtra">The written conclusion cites specific figures from the team's own plots</li><li class="xtra">The D-term explained in the team's own words, not recited</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -678,6 +849,28 @@ while True:
         <ul><li>PD follower runs, and KD = 0 reproduces Session 6 exactly</li><li>KD table with 5+ values, KP frozen throughout</li><li>Overshoot compared against the Session 7 trace with numbers</li><li class="xtra">The champion KD chosen from a table with KP frozen in every row</li><li class="xtra">The twitch threshold found, and what the robot was reacting to named</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -730,6 +923,28 @@ for i in range(4):   # the square again
         <ul><li>DEG_PER_CM measured on this robot, not computed or copied</li><li>drive_cm() lands within ±2 cm at 20, 50 and 100 cm</li><li>Three square runs with closing distance and heading error recorded</li><li class="xtra">The closing error stated as a measured range rather than a single lucky run</li><li class="xtra">One mission design the team's own error budget rules out, named</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -793,6 +1008,28 @@ grip_close()</div>
         <ul><li>Both arms move to commanded angles through arm_to() only</li><li>Guard proven by adversarial calls from another pair</li><li>3-pose salute runs with no raw servo call in the file</li><li class="xtra">Another pair failed to break the guard with adversarial calls</li><li class="xtra">The limit constant changed in one place and every call site followed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -828,6 +1065,28 @@ grip_close()</div>
         <ul><li>Rung 2 (carry & release) reached by every team</li><li>Rung 3 attempted with logged one-change attempts</li><li>Grip strengths and weaknesses written down</li><li class="xtra">Rung 2 reached with the carry-and-release complete</li><li class="xtra">The grip's failure stated as a condition, never as "sometimes"</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -879,6 +1138,28 @@ def carry_to(cm):
         <ul><li>pick()/place()/carry_to() pass the swap-test</li><li>20-run failure log with precise descriptions</li><li>A reliability decision made and written down</li><li class="xtra">A reliability percentage measured over 20 runs and stated plainly</li><li class="xtra">A fix-it or design-around-it decision written and justified by the number</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -923,6 +1204,28 @@ celebrate()        # S2, still earning</div>
         <ul><li>Full pipeline ran end-to-end at least once</li><li>Both seams named with their observed failure mode</li><li>Repeatability measured (n of 3), whatever the n</li><li class="xtra">Repeatability measured as n of 3 and recorded honestly</li><li class="xtra">Both seams described with the conditions that trigger them</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -972,6 +1275,28 @@ while state != 'DONE':
         <ul><li>State diagram covers the mission incl. one retry path</li><li>Paper trace survived two failure scenarios</li><li>Restructured code matches S13 behavior</li><li class="xtra">Two failure scenarios traced on paper before any code was changed</li><li class="xtra">Restructured behaviour still matches Session 13's, measured not assumed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1007,6 +1332,28 @@ while state != 'DONE':
         <ul><li>All four artifacts complete; criteria numeric</li><li>Every task maps to a source session</li><li>Cut line written; sign-off passed</li><li class="xtra">Every success criterion contains a number a stranger could check</li><li class="xtra">The cut line written down before any time pressure exists</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1042,6 +1389,28 @@ while state != 'DONE':
         <ul><li>3 consecutive clean navigation runs on the team’s own course</li><li>Standup done in under 2 minutes with a real blocked-list</li><li>Course layout photographed for exact rebuild</li><li class="xtra">Three consecutive clean navigation runs witnessed by another team</li><li class="xtra">The course rebuilt from a photograph with dimensions visible</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1077,6 +1446,28 @@ while state != 'DONE':
         <ul><li>Review exchanged: 2+2 written comments per team</li><li>At least one suggestion applied the same hour</li><li>Manipulation visibly progressed on the mission course</li><li class="xtra">Two strengths and two suggestions written, and the same received</li><li class="xtra">At least one suggestion applied within the hour, not deferred</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1112,6 +1503,28 @@ while state != 'DONE':
         <ul><li>Full mission completed at least once (original or post-cut scope)</li><li>Run log with phase-level failure data</li><li>One drift/seam fix implemented via a single state change</li><li class="xtra">The dominant failure point identified from the log rather than from memory</li><li class="xtra">Every between-run fix was a single logged change</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1147,6 +1560,28 @@ while state != 'DONE':
         <ul><li>One recovery behavior demonstrably triggers and works</li><li>Configuration frozen in writing</li><li>Pitch fits 5:00 with all four parts, twice</li><li class="xtra">The recovery fires when the failure is caused deliberately</li><li class="xtra">The pitch fits 5:00 twice, with all four parts present both times</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1182,5 +1617,27 @@ while state != 'DONE':
         <ul><li>Every team: two scored attempts + a complete 5-minute pitch</li><li>Failure stories told and applauded</li><li>Scoreboard archived; three-year arc closed</li><li class="xtra">Every team scored against its own signed success criteria</li><li class="xtra">The Grade 7 question answered again, with evidence of how the answer changed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div></body></html>

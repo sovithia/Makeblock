@@ -174,6 +174,23 @@ table.flow td.t { width: 9mm; font-weight: bold; color: #9a4f08; white-space: no
 .result li.xtra { color: #9a4f08; }
 .vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+.assessment { border: 1.5px solid #d97706; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }
+.assessment h4 { margin: 0; color: #9a4f08; font-size: 9.5pt; }
+.assess-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }
+.assess-line { display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }
+.assess-help { margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }
+.assess-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }
+.assess-table th, .assess-table td { border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }
+.assess-table th { background: #fdf0dd; color: #9a4f08; font-size: 6.7pt; }
+.assess-table .ac { width: 24mm; font-weight: bold; }
+.assess-table .score { width: 7mm; text-align: center; font-size: 9pt; }
+.assess-foot { display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }
+.assess-note { flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }
 
 .blockstack { margin-bottom: 3mm; }
 .brow { line-height: 0; }
@@ -381,6 +398,28 @@ cyberpi.display.show_label(
         <ul><li>ការ៉េដំណើរការចេញពី Python ដែលវាយដោយដៃ</li><li>តួនាទីសរសេរកូដជាគូបានអនុវត្ត ជាមួយការប្ដូរតួនាទី</li><li>សារកំហុសយ៉ាងតិចមួយ ត្រូវបានអាន ឌិកូដ និងកែដោយគូនោះ</li><li class="xtra">អ្នកនាំផ្លូវបានផលិតកូដដែលដំណើរការ បន្ទាប់ពីការប្ដូរតួនាទី</li><li class="xtra">សារកំហុសបី ពន្យល់ដោយពាក្យរបស់គូខ្លួនឯង</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -428,6 +467,28 @@ celebrate()</div>
         <ul><li>polygon(n, size) គូសបានយ៉ាងតិចរូបរាងបីផ្សេងគ្នា</li><li>celebrate() ដំណើរការជាការហៅតែមួយ</li><li>គូផ្សេងបានប្រើបណ្ណាល័យដោយគ្មានការពន្យល់</li><li class="xtra">គូផ្សេងបានប្រើបណ្ណាល័យភ្លាមៗ ដោយគ្មានការពន្យល់</li><li class="xtra">អនុគមន៍នីមួយៗមានមតិយោបល់មួយបន្ទាត់ សំដៅទៅអ្នកអាននាពេលអនាគត</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -477,6 +538,28 @@ while True:
         <ul><li>ផ្ទាំងគ្រប់គ្រងបង្ហាញ offset នៃខ្សែ និងមុំ encoder បន្តផ្ទាល់</li><li>MARKER! លេចឡើងលើដុំក្រហម ហើយគ្មានកន្លែងផ្សេងទេ</li><li>ក្រុមអាចពន្យល់សញ្ញា និងទំហំប្រហាក់ប្រហែលនៃ offset ក្នុងន័យរូបវន្ត</li><li class="xtra">សញ្ញារបស់ offset ត្រូវបានទស្សន៍ទាយត្រឹមត្រូវ មុនពេលរុញរូបយន្ត</li><li class="xtra">អនុសញ្ញាសញ្ញាត្រូវបានសរសេរនៅកន្លែងដែលមេរៀនទី ៦ អាចរកឃើញ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -533,6 +616,28 @@ while True:
         <ul><li>ការដើរអន្ទោលក្នុង Python ដើរជុំវិញទីលាន ហើយបង្វិលត្រឡប់នៅព្រំដែនដោយជឿជាក់</li><li>on_edge() និង escape() ត្រូវបានស្រង់ចេញ; ថេរមានឈ្មោះ; ឥរិយាបថមិនប្រែប្រួល</li><li>មតិយោបល់ពន្យល់ថាហេតុអ្វី មិនមែនអ្វី</li><li class="xtra">ឥរិយាបថត្រូវបានបញ្ជាក់ថាមិនប្រែប្រួល ដោយការវាស់ មិនមែនដោយការអះអាង</li><li class="xtra">គ្មានលេខវេទមន្តណាមួយនៅសល់ក្នុងឯកសារទេ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -568,6 +673,28 @@ while True:
         <ul><li>ថ្នាក់បានឆ្លើយសំណួរអំពីការយោលពីថ្នាក់ទី ៧ ដោយប្រើពាក្យនៃការគ្រប់គ្រង</li><li>ក្រុមបានគណនាល្បឿនម៉ូទ័រពី offset × gain ដោយដៃបានត្រឹមត្រូវ</li><li>ការទស្សន៍ទាយបរាជ័យទាំងពីរ (gain ទាប/ខ្ពស់) បានគូសរួច</li><li class="xtra">ការគណនាល្បឿនម៉ូទ័របួន ត្រឹមត្រូវដោយដៃ ដោយគ្មានកូដសរសេរពេញមួយម៉ោង</li><li class="xtra">គន្លងបរាជ័យទាំងពីរ គូសទុកមុនដំណើរការណាមួយ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -612,6 +739,28 @@ while True:
         <ul><li>កម្មវិធីដើរតាមខ្សែបែប P បញ្ចប់ជុំដោយរលូនជាង bang-bang ឃើញច្បាស់</li><li>តារាង gain មាន ៥ តម្លៃឡើងទៅ ជាមួយវិន័យប្ដូរម្ដងមួយ</li><li>រកឃើញ gain ដែលការយោលត្រឡប់មកវិញ ត្រូវនឹងការទស្សន៍ទាយ</li><li class="xtra">រកឃើញ gain ដែលការយោលត្រឡប់ ហើយប្រៀបធៀបនឹងការទស្សន៍ទាយពីមេរៀនទី ៥</li><li class="xtra">gain ជើងឯកត្រូវបានការពារដោយផ្អែកលើតារាង មិនមែនលើអារម្មណ៍</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -656,6 +805,28 @@ print(errors)            # copy out to plot</div>
         <ul><li>ក្រាហ្វកំហុស-ពេលវេលាទាំងពីរ ផលិតចេញពីទិន្នន័យកត់ត្រាពិត</li><li>សេចក្ដីសន្និដ្ឋានសរសេរ យោងលេខចេញពីក្រាហ្វ</li><li>ក្រុមអាចប្រាប់ថាតួ D ក្នុង PID នឹងបន្ថែមអ្វី</li><li class="xtra">សេចក្ដីសន្និដ្ឋានសរសេរ យោងតួលេខជាក់លាក់ចេញពីក្រាហ្វផ្ទាល់ខ្លួនរបស់ក្រុម</li><li class="xtra">តួ D ពន្យល់ដោយពាក្យរបស់ក្រុមខ្លួនឯង មិនមែនសូត្រតាមគេ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -709,6 +880,28 @@ while True:
         <ul><li>PD follower runs, and KD = 0 reproduces Session 6 exactly</li><li>KD table with 5+ values, KP frozen throughout</li><li>Overshoot compared against the Session 7 trace with numbers</li><li class="xtra">The champion KD chosen from a table with KP frozen in every row</li><li class="xtra">The twitch threshold found, and what the robot was reacting to named</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -761,6 +954,28 @@ for i in range(4):   # the square again
         <ul><li>DEG_PER_CM measured on this robot, not computed or copied</li><li>drive_cm() lands within ±2 cm at 20, 50 and 100 cm</li><li>Three square runs with closing distance and heading error recorded</li><li class="xtra">The closing error stated as a measured range rather than a single lucky run</li><li class="xtra">One mission design the team's own error budget rules out, named</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -824,6 +1039,28 @@ grip_close()</div>
         <ul><li>Both arms move to commanded angles through arm_to() only</li><li>Guard proven by adversarial calls from another pair</li><li>3-pose salute runs with no raw servo call in the file</li><li class="xtra">Another pair failed to break the guard with adversarial calls</li><li class="xtra">The limit constant changed in one place and every call site followed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -859,6 +1096,28 @@ grip_close()</div>
         <ul><li>Rung 2 (carry & release) reached by every team</li><li>Rung 3 attempted with logged one-change attempts</li><li>Grip strengths and weaknesses written down</li><li class="xtra">Rung 2 reached with the carry-and-release complete</li><li class="xtra">The grip's failure stated as a condition, never as "sometimes"</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -910,6 +1169,28 @@ def carry_to(cm):
         <ul><li>pick()/place()/carry_to() pass the swap-test</li><li>20-run failure log with precise descriptions</li><li>A reliability decision made and written down</li><li class="xtra">A reliability percentage measured over 20 runs and stated plainly</li><li class="xtra">A fix-it or design-around-it decision written and justified by the number</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -954,6 +1235,28 @@ celebrate()        # S2, still earning</div>
         <ul><li>Full pipeline ran end-to-end at least once</li><li>Both seams named with their observed failure mode</li><li>Repeatability measured (n of 3), whatever the n</li><li class="xtra">Repeatability measured as n of 3 and recorded honestly</li><li class="xtra">Both seams described with the conditions that trigger them</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1003,6 +1306,28 @@ while state != 'DONE':
         <ul><li>State diagram covers the mission incl. one retry path</li><li>Paper trace survived two failure scenarios</li><li>Restructured code matches S13 behavior</li><li class="xtra">Two failure scenarios traced on paper before any code was changed</li><li class="xtra">Restructured behaviour still matches Session 13's, measured not assumed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1038,6 +1363,28 @@ while state != 'DONE':
         <ul><li>All four artifacts complete; criteria numeric</li><li>Every task maps to a source session</li><li>Cut line written; sign-off passed</li><li class="xtra">Every success criterion contains a number a stranger could check</li><li class="xtra">The cut line written down before any time pressure exists</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1073,6 +1420,28 @@ while state != 'DONE':
         <ul><li>3 consecutive clean navigation runs on the team’s own course</li><li>Standup done in under 2 minutes with a real blocked-list</li><li>Course layout photographed for exact rebuild</li><li class="xtra">Three consecutive clean navigation runs witnessed by another team</li><li class="xtra">The course rebuilt from a photograph with dimensions visible</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1108,6 +1477,28 @@ while state != 'DONE':
         <ul><li>Review exchanged: 2+2 written comments per team</li><li>At least one suggestion applied the same hour</li><li>Manipulation visibly progressed on the mission course</li><li class="xtra">Two strengths and two suggestions written, and the same received</li><li class="xtra">At least one suggestion applied within the hour, not deferred</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1143,6 +1534,28 @@ while state != 'DONE':
         <ul><li>Full mission completed at least once (original or post-cut scope)</li><li>Run log with phase-level failure data</li><li>One drift/seam fix implemented via a single state change</li><li class="xtra">The dominant failure point identified from the log rather than from memory</li><li class="xtra">Every between-run fix was a single logged change</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1178,6 +1591,28 @@ while state != 'DONE':
         <ul><li>One recovery behavior demonstrably triggers and works</li><li>Configuration frozen in writing</li><li>Pitch fits 5:00 with all four parts, twice</li><li class="xtra">The recovery fires when the failure is caused deliberately</li><li class="xtra">The pitch fits 5:00 twice, with all four parts present both times</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div>
 <div class="sess">
@@ -1213,5 +1648,27 @@ while state != 'DONE':
         <ul><li>Every team: two scored attempts + a complete 5-minute pitch</li><li>Failure stories told and applauded</li><li>Scoreboard archived; three-year arc closed</li><li class="xtra">Every team scored against its own signed success criteria</li><li class="xtra">The Grade 7 question answered again, with evidence of how the answer changed</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   
 </div></body></html>

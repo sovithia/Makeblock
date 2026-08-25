@@ -266,6 +266,13 @@ COURSE_HOME = {
             "End with an open discussion. Everyone should be free to ask questions and explain what they understood, attempted, or found difficult.",
             "The teacher checks each student’s progress and notes who may need support in the next session.",
         ],
+        "assessment_h": "Lesson assessment",
+        "assessment": [
+            "Complete one rubric for each student, even when the robot was built by a group. A group result is evidence, but it is not automatically every member’s grade.",
+            "Score only behavior observed in that lesson: understanding, practical problem-solving, helpful collaboration, and engagement and attitude.",
+            "Use N/O when absence, equipment failure, or the assigned role gave no fair opportunity to observe a criterion. Do not convert N/O into zero.",
+            "Write one short piece of evidence and one useful next step. Compare a student with their earlier work as well as the lesson standard.",
+        ],
     },
     "km": {
         "head": "របៀបដំណើរការវគ្គសិក្សានេះ",
@@ -301,6 +308,13 @@ COURSE_HOME = {
             "បញ្ចប់ដោយការពិភាក្សាបើកចំហ។ គ្រប់គ្នាគួរអាចសួរសំណួរ និងពន្យល់អ្វីដែលពួកគេយល់ បានសាកល្បង ឬជួបការលំបាក។",
             "គ្រូពិនិត្យវឌ្ឍនភាពរបស់សិស្សម្នាក់ៗ និងកំណត់ថានរណាត្រូវការជំនួយនៅមេរៀនបន្ទាប់។",
         ],
+        "assessment_h": "ការវាយតម្លៃមេរៀន",
+        "assessment": [
+            "បំពេញ rubric មួយសម្រាប់សិស្សម្នាក់ៗ ទោះបីរូបយន្តត្រូវបានសាងសង់ជាក្រុមក៏ដោយ។ លទ្ធផលក្រុមជាភស្តុតាង ប៉ុន្តែមិនមែនជាពិន្ទុរបស់សមាជិកគ្រប់គ្នាដោយស្វ័យប្រវត្តិទេ។",
+            "ដាក់ពិន្ទុតែអាកប្បកិរិយាដែលបានសង្កេតក្នុងមេរៀននោះ៖ ការយល់ដឹង ការដោះស្រាយបញ្ហាជាក់ស្តែង ការសហការជួយគ្នា និងការចូលរួមនិងឥរិយាបថ។",
+            "ប្រើ N/O នៅពេលអវត្តមាន ឧបករណ៍ខូច ឬតួនាទីដែលបានចាត់ឲ្យមិនផ្តល់ឱកាសសមរម្យដើម្បីសង្កេតលក្ខណៈវិនិច្ឆ័យ។ កុំប្តូរ N/O ទៅជាសូន្យ។",
+            "សរសេរភស្តុតាងខ្លីមួយ និងជំហានបន្ទាប់ដែលមានប្រយោជន៍មួយ។ ប្រៀបធៀបសិស្សជាមួយការងារមុនរបស់ខ្លួន និងស្តង់ដារមេរៀន។",
+        ],
     },
 }
 
@@ -311,6 +325,7 @@ def course_home_html():
     prep = "".join(f"<li>{x}</li>" for x in d["prep"])
     flow = "".join(f"<li><b>{h}</b><small>{p}</small></li>" for h, p in d["structure"])
     wrap = "".join(f"<li>{x}</li>" for x in d["wrap"])
+    assessment = "".join(f"<li>{x}</li>" for x in d["assessment"])
     return f'''<section class="course-intro">
 <h2>{d["head"]}</h2><p class="intro-lede">{d["lede"]}</p>
 <div class="orient-grid">
@@ -319,6 +334,7 @@ def course_home_html():
   <div class="orient-card wide"><h3>{d["rules_h"]}</h3><ul>{rules}</ul></div>
   <div class="orient-card wide"><h3>{d["structure_h"]}</h3><ol class="session-flow">{flow}</ol></div>
   <div class="orient-card wide"><h3>{d["wrap_h"]}</h3><ul>{wrap}</ul></div>
+  <div class="orient-card wide"><h3>{d["assessment_h"]}</h3><ul>{assessment}</ul></div>
 </div></section>'''
 
 

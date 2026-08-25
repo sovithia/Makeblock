@@ -174,6 +174,23 @@ table.flow td.t { width: 9mm; font-weight: bold; color: #5f2b8a; white-space: no
 .result li.xtra { color: #5f2b8a; }
 .vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+.assessment { border: 1.5px solid #8b3fc6; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }
+.assessment h4 { margin: 0; color: #5f2b8a; font-size: 9.5pt; }
+.assess-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }
+.assess-line { display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }
+.assess-help { margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }
+.assess-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }
+.assess-table th, .assess-table td { border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }
+.assess-table th { background: #f2e8fa; color: #5f2b8a; font-size: 6.7pt; }
+.assess-table .ac { width: 24mm; font-weight: bold; }
+.assess-table .score { width: 7mm; text-align: center; font-size: 9pt; }
+.assess-foot { display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }
+.assess-note { flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }
 
 .blockstack { margin-bottom: 3mm; }
 .brow { line-height: 0; }
@@ -427,5 +444,27 @@ window.addEventListener('afterprint', function () {
         <ul><li>ការបង្វិល 90° បីដងជាប់គ្នាក្នុងរង្វង់ 5° វាស់ដោយឧបករណ៍វាស់មុំ</li><li>ការក្រិតតួបានដំណើរការ ហើយឥទ្ធិពលរបស់វាត្រូវបានសង្កេត</li><li>ការជួញដូររវាងខ្សែក្រវាត់និងកង់ បញ្ជាក់ដោយលេខមួយក្នុងម្ខាងៗ</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>ការវាយតម្លៃរបស់គ្រូ — ក្រោយមេរៀន</h4>
+      <div class="assess-meta">
+        <span>សិស្ស: <span class="assess-line"></span></span>
+        <span>ក្រុម: <span class="assess-line"></span></span>
+        <span>កាលបរិច្ឆេទ: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">គូសរង្វង់ពិន្ទុមួយក្នុងមួយជួរ ដោយផ្អែកលើភស្តុតាងដែលបានឃើញថ្ងៃនេះ។ ប្រើ N/O បើគ្មានឱកាសសមរម្យដើម្បីសង្កេត។</p>
+      <p class="assess-help"><b>១ = ត្រូវការជំនួយញឹកញាប់ · ២ = កំពុងអភិវឌ្ឍដោយមានជំនួយខ្លះ · ៣ = យល់ច្បាស់ និងធ្វើដោយឯករាជ្យ · ៤ = អនុវត្តទៅស្ថានភាពថ្មី ឬជួយអ្នកដទៃ</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">លក្ខណៈវិនិច្ឆ័យ</th>
+        <th>អ្វីដែលត្រូវមើល</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">ការយល់ដឹង</td><td>ពន្យល់គំនិតសំខាន់ ទស្សន៍ទាយអាកប្បកិរិយា និងឆ្លើយថាហេតុអ្វី មិនមែនតែអ្វី។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការដោះស្រាយបញ្ហាជាក់ស្ដែង</td><td>សាងសង់ ឬសរសេរកូដដោយប្រុងប្រយ័ត្ន សាកល្បង ប្រើភស្តុតាង និងកែលម្អក្រោយមានបញ្ហា។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការជួយ និងសហការ</td><td>ស្ដាប់ ចែករំលែកការងារ សួរសំណួរមានប្រយោជន៍ និងជួយដោយមិនដណ្ដើមធ្វើទាំងអស់។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">ការចូលរួម និងឥរិយាបថ</td><td>ចាប់ផ្ដើម ព្យាយាមបន្ត ទទួលយកមតិយោបល់ និងគោរពមនុស្សនិងឧបករណ៍។</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>ពិន្ទុសរុប: ____ / ____</b>
+        <span>(៤ ពិន្ទុសម្រាប់លក្ខណៈវិនិច្ឆ័យនីមួយៗដែលបានសង្កេត)</span>
+        <span><b>កម្រិតសរុប:</b> &#9633; ត្រូវការជំនួយ &nbsp; &#9633; កំពុងអភិវឌ្ឍ &nbsp; &#9633; យល់ច្បាស់ &nbsp; &#9633; ល្អខ្លាំង</span>
+        <span>ភស្តុតាង / ជំហានបន្ទាប់មួយ:</span><span class="assess-note"></span>
+      </div>
+    </section>
   <div class="nextlesson"><span class="nlk">មេរៀនបន្ទាប់</span><a href="step-04.html">ជំហានទី ៤ · ដៃចាប់ផ្លាស់ទី &nbsp;→</a></div>
 </div><section class="inline-solution"><div class="solution-head"><h2>ចម្លើយសម្រាប់គ្រូ</h2><p>បោះពុម្ពច្បាប់ពេញលេញមួយសម្រាប់គ្រូ។ ប្រើ «បោះពុម្ពតែមេរៀន» សម្រាប់ច្បាប់សិស្ស។</p></div><table class="tsheet"><thead><tr><td><div class="thead"><span class="tno" style="color:#5f2b8a">ជំហានទី ៣</span><span class="tti">Rover បើកបរ</span><span class="tno">G8-A-03</span></div></td></tr></thead><tbody><tr><td><div class="tmeta">ការបង្វិលដោយរអិល · ការក្រិតឡើងវិញ</div><div class="trow noprint"><a class="tdl" style="color:#5f2b8a" href="../assets/projects/G8-A-03.mblock">ទាញយក .mblock</a></div><p class="tnew"><b>ថ្មី</b> <code>when button A pressed</code> — Waits for button A or B on the robot and runs what is under it. Several of these can sit in one project, each on a different button. · <code>calibrate chassis parameters</code> — Makes the robot measure its own wheels and geometry. Run it once on the surface you are working on, before you trust any turn. · <code>turns left ° until done</code> — Turns by an angle and waits until it is finished. The angle it reaches depends on the floor, which is why it needs calibrating. · <code>wait seconds</code> — Stops this script for a set time. It does not stop the robot's other scripts.</p><div class="blockstack"><svg class="bsvg" width="45.28mm" height="19.40mm" viewBox="0 0 233 100"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">A</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 225.41199999999998 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="77.4" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">calibrate</text><path class="bc" d="M 81.4,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="101.4" y="20.0">chassis parameters</text></g></svg><svg class="bsvg" width="46.02mm" height="34.92mm" viewBox="0 0 237 180"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">B</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 229.216 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="88.0" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns right</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="112.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="126.7" y="20.0">90</text><text class="bl" x="149.3" y="20.0">° until done</text></g><g transform="translate(1.0,97.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 140.024 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FFAB19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">wait</text><rect class="bf" x="47.3" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="59.3" y="20.0">1</text><text class="bl" x="79.3" y="20.0">seconds</text></g><g transform="translate(1.0,137.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 220.55200000000002 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="79.3" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns left</text><path class="bc" d="M 83.3,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="103.3" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="118.0" y="20.0">90</text><text class="bl" x="140.7" y="20.0">° until done</text></g></svg></div></td></tr></tbody></table></section></body></html>

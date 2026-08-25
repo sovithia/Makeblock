@@ -174,6 +174,23 @@ table.flow td.t { width: 9mm; font-weight: bold; color: #5f2b8a; white-space: no
 .result li.xtra { color: #5f2b8a; }
 .vtag { display: inline-block; border-radius: 20px; padding: 0.6mm 2.6mm; font-size: 7.4pt;
   font-weight: bold; letter-spacing: 0.6px; text-transform: uppercase; }
+.assessment { border: 1.5px solid #8b3fc6; border-radius: 8px; padding: 2.5mm 3mm;
+  margin-top: 3mm; break-inside: avoid; page-break-inside: avoid; background: #fff; }
+.assessment h4 { margin: 0; color: #5f2b8a; font-size: 9.5pt; }
+.assess-meta { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4mm;
+  margin: 1.5mm 0; font-size: 7.8pt; }
+.assess-line { display: inline-block; min-width: 20mm; height: 3.5mm;
+  border-bottom: 1px solid #64748b; vertical-align: bottom; }
+.assess-help { margin: 0.8mm 0; color: #475569; font-size: 6.9pt; line-height: 1.3; }
+.assess-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.1pt; }
+.assess-table th, .assess-table td { border: 1px solid #cbd5e1; padding: 1mm 1.3mm;
+  vertical-align: middle; }
+.assess-table th { background: #f2e8fa; color: #5f2b8a; font-size: 6.7pt; }
+.assess-table .ac { width: 24mm; font-weight: bold; }
+.assess-table .score { width: 7mm; text-align: center; font-size: 9pt; }
+.assess-foot { display: flex; flex-wrap: wrap; gap: 2mm 5mm; align-items: center;
+  margin-top: 1.5mm; font-size: 7.2pt; }
+.assess-note { flex: 1 1 70mm; border-bottom: 1px solid #64748b; min-height: 4mm; }
 
 .blockstack { margin-bottom: 3mm; }
 .brow { line-height: 0; }
@@ -396,5 +413,27 @@ window.addEventListener('afterprint', function () {
         <ul><li>Three consecutive 90° turns within 5°, measured with a protractor</li><li>Chassis calibration run and its effect observed</li><li>The tracks-versus-wheels trade-off stated with a number on each side</li></ul></div></td>
     </tr></table>
   </div>
+  <section class="assessment">
+      <h4>Teacher assessment — after the lesson</h4>
+      <div class="assess-meta">
+        <span>Student: <span class="assess-line"></span></span>
+        <span>Team: <span class="assess-line"></span></span>
+        <span>Date: <span class="assess-line"></span></span>
+      </div>
+      <p class="assess-help">Circle one score per row from today’s observable evidence. Use N/O when there was no fair opportunity to observe it.</p>
+      <p class="assess-help"><b>1 = needs frequent support · 2 = developing with some support · 3 = secure and independent · 4 = transfers learning or supports others</b></p>
+      <table class="assess-table"><thead><tr>
+        <th class="ac">Criterion</th>
+        <th>What to look for</th>
+        <th class="score">1</th><th class="score">2</th><th class="score">3</th>
+        <th class="score">4</th><th class="score">N/O</th>
+      </tr></thead><tbody><tr><td class="ac">Understanding</td><td>Explains the main idea, predicts behavior, and answers why—not only what.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Practical problem-solving</td><td>Builds or codes carefully, tests, uses evidence, and improves after a problem.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Helpfulness &amp; collaboration</td><td>Listens, shares work, asks useful questions, and helps without taking over.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr><tr><td class="ac">Engagement &amp; attitude</td><td>Starts, persists, responds to feedback, and treats people and equipment responsibly.</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td><td class="score">&#9633;</td></tr></tbody></table>
+      <div class="assess-foot">
+        <b>Total: ____ / ____</b>
+        <span>(4 points per observed criterion)</span>
+        <span><b>Overall:</b> &#9633; needs support &nbsp; &#9633; developing &nbsp; &#9633; secure &nbsp; &#9633; strong</span>
+        <span>Evidence / one next step:</span><span class="assess-note"></span>
+      </div>
+    </section>
   <div class="nextlesson"><span class="nlk">Next lesson</span><a href="step-04.html">Step 4 · The arms move &nbsp;→</a></div>
 </div><section class="inline-solution"><div class="solution-head"><h2>Teacher solution</h2><p>Print one complete copy for the teacher. Use “Print lesson only” for student copies.</p></div><table class="tsheet"><thead><tr><td><div class="thead"><span class="tno" style="color:#5f2b8a">Step 3</span><span class="tti">The Rover drives</span><span class="tno">G8-A-03</span></div></td></tr></thead><tbody><tr><td><div class="tmeta">Skid steering · recalibration</div><div class="trow noprint"><a class="tdl" style="color:#5f2b8a" href="../assets/projects/G8-A-03.mblock">download .mblock</a></div><p class="tnew"><b>new</b> <code>when button A pressed</code> — Waits for button A or B on the robot and runs what is under it. Several of these can sit in one project, each on a different button. · <code>calibrate chassis parameters</code> — Makes the robot measure its own wheels and geometry. Run it once on the surface you are working on, before you trust any turn. · <code>turns left ° until done</code> — Turns by an angle and waits until it is finished. The angle it reaches depends on the floor, which is why it needs calibrating. · <code>wait seconds</code> — Stops this script for a set time. It does not stop the robot's other scripts.</p><div class="blockstack"><svg class="bsvg" width="45.28mm" height="19.40mm" viewBox="0 0 233 100"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">A</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 225.41199999999998 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="77.4" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">calibrate</text><path class="bc" d="M 81.4,18.0 l 8,0 l -4,5 Z"/><text class="bl" x="101.4" y="20.0">chassis parameters</text></g></svg><svg class="bsvg" width="46.02mm" height="34.92mm" viewBox="0 0 237 180"><g transform="translate(1.0,1.0)"><path d="M 0,16 c 25,-22 71,-22 96,0 H 198.012 a 4,4 0 0 1 4,4 V 52 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 20 Z" fill="#FFBF00" stroke="#cc9800"/><text class="bl" x="16.0" y="36.0">when button</text><rect class="bm" x="95.3" y="24.0" width="36.7" height="24" rx="4"/><text class="bl" x="103.3" y="36.0">B</text><path class="bc" d="M 120.0,34.0 l 8,0 l -4,5 Z"/><text class="bl" x="140.0" y="36.0">pressed</text></g><g transform="translate(1.0,57.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 229.216 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="88.0" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns right</text><path class="bc" d="M 92.0,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="112.0" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="126.7" y="20.0">90</text><text class="bl" x="149.3" y="20.0">° until done</text></g><g transform="translate(1.0,97.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 140.024 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#FFAB19" stroke="#cc8814"/><text class="bl" x="16.0" y="20.0">wait</text><rect class="bf" x="47.3" y="8.0" width="24.0" height="24" rx="12.0"/><text class="bft" x="59.3" y="20.0">1</text><text class="bl" x="79.3" y="20.0">seconds</text></g><g transform="translate(1.0,137.0)"><path d="M 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 220.55200000000002 a 4,4 0 0 1 4,4 V 36 a 4,4 0 0 1 -4,4 H 48 c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0 1 -4,-4 V 4 a 4,4 0 0 1 4,-4 Z" fill="#05A6FF" stroke="#0484cc"/><rect class="bm" x="16.0" y="8.0" width="79.3" height="24" rx="4"/><text class="bl" x="24.0" y="20.0">turns left</text><path class="bc" d="M 83.3,18.0 l 8,0 l -4,5 Z"/><rect class="bf" x="103.3" y="8.0" width="29.3" height="24" rx="12.0"/><text class="bft" x="118.0" y="20.0">90</text><text class="bl" x="140.7" y="20.0">° until done</text></g></svg></div></td></tr></tbody></table></section></body></html>
